@@ -28,6 +28,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "usart.h"
+
+#include "temperature_sensor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -37,7 +39,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+TempSensorHandle_t tempSensors;
 
+uint16_t adc_buf_temp[MAX_TEMP_SENSORS];
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -81,7 +85,8 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
-
+  TempSensor_Init(&tempSensors, &hadc1, MAX_TEMP_SENSORS, adc_buf_temp, 3.3f);
+  TempSensor_Start(&tempSensors);
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -145,15 +150,17 @@ void StartDefaultTask(void *argument)
 void start_usart_com(void *argument)
 {
   /* USER CODE BEGIN start_usart_com */
-  const char msg[] = "UART Task started!\r\n";
-  HAL_UART_Transmit(&huart2, (uint8_t*)msg, strlen(msg), 1000);
-  uint32_t counter = 0;
   /* Infinite loop */
   for(;;)
   {
 	char buf[50];
-	snprintf(buf,sizeof(buf), "Counter: %lu\r\n",counter++);
+	float t1 = TempSensor_GetTemperature(&tempSensors, 0);
+	float t2 = TempSensor_GetTemperature(&tempSensors, 1);
+
+	snprintf(buf, sizeof(buf),
+	           "T1: %.2f C | T2: %.2f C\r\n", t1, t2);
 	HAL_UART_Transmit(&huart2, (uint8_t*)buf, strlen(buf), 1000);
+
     osDelay(1000);
   }
   /* USER CODE END start_usart_com */
