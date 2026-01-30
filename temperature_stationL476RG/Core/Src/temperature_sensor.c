@@ -43,3 +43,18 @@ float TempSensor_GetTemperature(TempSensorHandle_t *htemp, uint8_t index)
     float voltage = TempSensor_GetVoltage(htemp, index);
     return voltage * 100.0f;
 }
+
+float TempSensor_GetAverageTemperature(TempSensorHandle_t *htemp)
+{
+    if (htemp->sensor_count == 0)
+        return 0.0f;
+
+    float sum = 0.0f;
+
+    for (uint8_t i = 0; i < htemp->sensor_count; i++)
+    {
+        sum += TempSensor_GetTemperature(htemp, i);
+    }
+
+    return sum / htemp->sensor_count;
+}

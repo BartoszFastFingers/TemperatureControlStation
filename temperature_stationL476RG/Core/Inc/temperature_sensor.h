@@ -36,5 +36,6 @@ void TempSensor_Start(TempSensorHandle_t *htemp);
 
 float TempSensor_GetVoltage(TempSensorHandle_t *htemp, uint8_t index);
 float TempSensor_GetTemperature(TempSensorHandle_t *htemp, uint8_t index);
+float TempSensor_GetAverageTemperature(TempSensorHandle_t *htemp);
 
 #endif /* CORE_INC_TEMPERATURE_SENSOR_H_ */

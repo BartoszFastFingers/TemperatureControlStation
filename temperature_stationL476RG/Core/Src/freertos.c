@@ -67,6 +67,11 @@ const osThreadAttr_t tcp_com_attributes = {
   .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
+/* Definitions for temp_meas */
+osTimerId_t temp_measHandle;
+const osTimerAttr_t temp_meas_attributes = {
+  .name = "temp_meas"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -75,6 +80,7 @@ const osThreadAttr_t tcp_com_attributes = {
 
 void StartDefaultTask(void *argument);
 void start_usart_com(void *argument);
+void temp_callback(void *argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -97,8 +103,13 @@ void MX_FREERTOS_Init(void) {
   /* add semaphores, ... */
   /* USER CODE END RTOS_SEMAPHORES */
 
+  /* Create the timer(s) */
+  /* creation of temp_meas */
+  temp_measHandle = osTimerNew(temp_callback, osTimerPeriodic, NULL, &temp_meas_attributes);
+
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
+  osTimerStart(temp_measHandle, 100);
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
@@ -153,17 +164,22 @@ void start_usart_com(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	char buf[50];
-	float t1 = TempSensor_GetTemperature(&tempSensors, 0);
-	float t2 = TempSensor_GetTemperature(&tempSensors, 1);
-
-	snprintf(buf, sizeof(buf),
-	           "T1: %.2f C | T2: %.2f C\r\n", t1, t2);
-	HAL_UART_Transmit(&huart2, (uint8_t*)buf, strlen(buf), 1000);
-
-    osDelay(1000);
+	  osDelay(1000);
   }
   /* USER CODE END start_usart_com */
+}
+
+/* temp_callback function */
+void temp_callback(void *argument)
+{
+  /* USER CODE BEGIN temp_callback */
+  char buf[30];
+  float t_avg = TempSensor_GetAverageTemperature(&tempSensors);
+  snprintf(buf, sizeof(buf),
+	           "T: %.2f CC\r\n", t_avg);
+  HAL_UART_Transmit(&huart2, (uint8_t*)buf, strlen(buf), 1000);
+
+  /* USER CODE END temp_callback */
 }
 
 /* Private application code --------------------------------------------------*/
