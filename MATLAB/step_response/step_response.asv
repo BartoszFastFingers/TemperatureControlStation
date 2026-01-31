@@ -1,0 +1,112 @@
+clear all;
+close all;
+clc;
+
+portName = 'COM3';  
+baudRate = 115200;  
+
+
+
+
+csvFileName = 'temperature_data.csv';
+maxSamples = 1000;  % Maksymalna liczba próbek do zapisania
+
+%% Utworzenie obiektu portu szeregowego
+try
+    % Dla nowszych wersji MATLAB (R2019b+)
+    s = serialport(portName, baudRate);
+    configureTerminator(s, "CR/LF");
+    flush(s);
+    useNewAPI = true;
+catch
+    % Dla starszych wersji MATLAB
+    s = serial(portName, 'BaudRate', baudRate, 'Terminator', 'CR/LF');
+    fopen(s);
+    useNewAPI = false;
+end
+
+fprintf('Połączono z portem %s\n', portName);
+
+%% Przygotowanie struktury danych
+dataTable = table();
+timestamp = [];
+temperature = [];
+time_ms = [];
+
+% Licznik próbek
+sampleCount = 0;
+
+%% Odczyt danych
+fprintf('Rozpoczynam odczyt danych... (Naciśnij Ctrl+C aby zatrzymać)\n');
+
+try
+    while sampleCount < maxSamples
+        % Odczyt linii z portu
+        if useNewAPI
+            data = readline(s);
+        else
+            data = fgetl(s);
+        end
+        
+        % Parsowanie danych w formacie: "T: 25.50 CC, CCR: 1000 time_ms"
+        tokens = regexp(data, 'T:\s*([\d.]+)\s*CC,\s*CCR:\s*(\d+)\s*time_ms', 'tokens');
+        
+        if ~isempty(tokens)
+            sampleCount = sampleCount + 1;
+            
+            % Wydobycie wartości
+            temp = str2double(tokens{1}{1});
+            time_val = str2double(tokens{1}{2});
+            current_time = datetime('now');
+            
+            % Dodanie do tabeli
+            timestamp = [timestamp; current_time];
+            temperature = [temperature; temp];
+            time_ms = [time_ms; time_val];
+            
+            % Wyświetlenie na konsoli
+            fprintf('[%d] Czas: %s, Temperatura: %.2f°C, Time_ms: %d\n', ...
+                    sampleCount, datestr(current_time, 'HH:MM:SS'), temp, time_val);
+        end
+        
+        % Krótkie opóźnienie
+        pause(0.01);
+    end
+catch ME
+    fprintf('Przerwano odczyt: %s\n', ME.message);
+end
+
+%% Zamknięcie portu
+if useNewAPI
+    clear s;
+else
+    fclose(s);
+    delete(s);
+    clear s;
+end
+fprintf('Port zamknięty.\n');
+
+%% Zapis do pliku CSV
+if ~isempty(temperature)
+    dataTable = table(timestamp, temperature, time_ms, ...
+        'VariableNames', {'Timestamp', 'Temperature_C', 'Time_ms'});
+    writetable(dataTable, csvFileName);
+    fprintf('Zapisano %d próbek do pliku: %s\n', sampleCount, csvFileName);
+    
+    % Wyświetlenie wykresu
+    figure;
+    subplot(2,1,1);
+    plot(timestamp, temperature, 'b-o', 'LineWidth', 1.5);
+    ylabel('Temperatura [°C]');
+    title('Pomiar temperatury w czasie');
+    grid on;
+    
+    subplot(2,1,2);
+    plot(time_ms/1000, temperature, 'r-o', 'LineWidth', 1.5);
+    ylabel('Temperatura [°C]');
+    xlabel('Czas [s]');
+    title('Temperatura vs. Time_ms z STM32');
+    grid on;
+else
+    fprintf('Brak danych do zapisania.\n');
+end

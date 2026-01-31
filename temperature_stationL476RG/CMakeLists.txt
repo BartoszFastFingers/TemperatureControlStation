@@ -46,6 +46,8 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     Core/Src/temperature_sensor.c
+    Core/Src/heater_control.c
+    Components/Src/SMA1_fir.c
 )
 
 # Add include paths

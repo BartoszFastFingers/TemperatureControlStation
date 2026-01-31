@@ -30,6 +30,7 @@
 #include "usart.h"
 
 #include "temperature_sensor.h"
+#include "heater_control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -40,6 +41,7 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 TempSensorHandle_t tempSensors;
+HeaterHandle_t heater;
 
 uint16_t adc_buf_temp[MAX_TEMP_SENSORS];
 /* USER CODE END PD */
@@ -91,8 +93,16 @@ void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
   */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
+  HAL_Delay(5000);
   TempSensor_Init(&tempSensors, &hadc1, MAX_TEMP_SENSORS, adc_buf_temp, 3.3f);
+  Heater_Init(&heater, &htim1, TIM_CHANNEL_1, 999);
+
+  Heater_Start(&heater);
   TempSensor_Start(&tempSensors);
+
+  Heater_SetPower(&heater, 100);
+
+
   /* USER CODE END Init */
 
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -109,7 +119,7 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_TIMERS */
   /* start timers, add new ones, ... */
-  osTimerStart(temp_measHandle, 100);
+  osTimerStart(temp_measHandle, 500);
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
@@ -173,11 +183,16 @@ void start_usart_com(void *argument)
 void temp_callback(void *argument)
 {
   /* USER CODE BEGIN temp_callback */
-  char buf[30];
+  static uint32_t timestamp_ms = 0;
+  char buf[50];
   float t_avg = TempSensor_GetAverageTemperature(&tempSensors);
+
+
+
   snprintf(buf, sizeof(buf),
-	           "T: %.2f CC\r\n", t_avg);
+	           "T: %.2f CC, CCR: %lu time_ms\r\n", t_avg, timestamp_ms);
   HAL_UART_Transmit(&huart2, (uint8_t*)buf, strlen(buf), 1000);
+  timestamp_ms+=500;
 
   /* USER CODE END temp_callback */
 }

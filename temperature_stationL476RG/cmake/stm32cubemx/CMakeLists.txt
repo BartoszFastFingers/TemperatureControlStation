@@ -18,6 +18,9 @@ set(MX_Include_Dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Device/ST/STM32L4xx/Include
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/PrivateInclude/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Include
 )
 
 # STM32CubeMX generated application sources
@@ -27,6 +30,7 @@ set(MX_Application_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/freertos.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/adc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/dma.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/tim.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/usart.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/stm32l4xx_it.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/stm32l4xx_hal_msp.c
@@ -77,6 +81,37 @@ set(FreeRTOS_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
 )
+set(CMSIS-DSP_Src
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/BasicMathFunctions/BasicMathFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/QuaternionMathFunctions/QuaternionMathFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/BayesFunctions/BayesFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/CommonTables/CommonTables.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/ComplexMathFunctions/ComplexMathFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/ControllerFunctions/ControllerFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/DistanceFunctions/DistanceFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/FastMathFunctions/FastMathFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/FilteringFunctions/FilteringFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/MatrixFunctions/MatrixFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/StatisticsFunctions/StatisticsFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/SupportFunctions/SupportFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/SVMFunctions/SVMFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/TransformFunctions/TransformFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/InterpolationFunctions/InterpolationFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/WindowFunctions/WindowFunctions.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/BasicMathFunctions/BasicMathFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/ComplexMathFunctions/ComplexMathFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/FilteringFunctions/FilteringFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/CommonTables/CommonTablesF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/TransformFunctions/TransformFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/MatrixFunctions/MatrixFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/InterpolationFunctions/InterpolationFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/StatisticsFunctions/StatisticsFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/SupportFunctions/SupportFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/FastMathFunctions/FastMathFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/DistanceFunctions/DistanceFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/BayesFunctions/BayesFunctionsF16.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Middlewares/Third_Party/ARM_CMSIS/Source/SVMFunctions/SVMFunctionsF16.c
+)
 
 # Link directories setup
 set(MX_LINK_DIRS
@@ -86,7 +121,7 @@ set(MX_LINK_DIRS
 set(MX_LINK_LIBS 
     STM32_Drivers
     ${TOOLCHAIN_LINK_LIBRARIES}
-    FreeRTOS	
+    FreeRTOS	CMSIS-DSP	
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)
@@ -103,6 +138,11 @@ target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 add_library(FreeRTOS OBJECT)
 target_sources(FreeRTOS PRIVATE ${FreeRTOS_Src})
 target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
+
+# Create CMSIS-DSP static library
+add_library(CMSIS-DSP OBJECT)
+target_sources(CMSIS-DSP PRIVATE ${CMSIS-DSP_Src})
+target_link_libraries(CMSIS-DSP PUBLIC stm32cubemx)
 
 # Add STM32CubeMX generated application sources to the project
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MX_Application_Src})
