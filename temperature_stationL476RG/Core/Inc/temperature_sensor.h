@@ -9,14 +9,19 @@
 #define CORE_INC_TEMPERATURE_SENSOR_H_
 
 
-
-
-
-#include "adc.h"
 #include <stdint.h>
+#include "adc.h"
+#include "arm_math.h"
+#include "SMA1_fir.h"
 
 #define MAX_TEMP_SENSORS 2
 
+
+typedef struct
+{
+	arm_fir_instance_f32 fir;
+	float32_t state[SMA1_NUM_TAPS + SMA1_BLOCK_SIZE - 1];
+}TempSensorHandle_filter_t;
 
 typedef struct
 {
@@ -24,6 +29,8 @@ typedef struct
     uint8_t sensor_count;
     uint16_t *adc_buffer;
     float vref;
+
+    TempSensorHandle_filter_t filter;
 } TempSensorHandle_t;
 
 void TempSensor_Init(TempSensorHandle_t *htemp,

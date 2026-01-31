@@ -19,6 +19,8 @@ void TempSensor_Init(TempSensorHandle_t *htemp,
     htemp->sensor_count = sensor_count;
     htemp->adc_buffer = adc_buffer;
     htemp->vref = vref;
+
+    arm_fir_init_f32(&htemp->filter.fir, SMA1_NUM_TAPS, SMA1_COEFFS, htemp->filter.state, SMA1_BLOCK_SIZE);
 }
 
 void TempSensor_Start(TempSensorHandle_t *htemp)
@@ -56,5 +58,10 @@ float TempSensor_GetAverageTemperature(TempSensorHandle_t *htemp)
         sum += TempSensor_GetTemperature(htemp, i);
     }
 
-    return sum / htemp->sensor_count;
+    float raw_average = sum / htemp->sensor_count;
+    float filtered_average = 0.0f;
+
+    arm_fir_f32(&htemp->filter.fir, &raw_average, &filtered_average, 1);
+
+    return filtered_average;
 }

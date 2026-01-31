@@ -1,12 +1,11 @@
 clear all;
 clc;
 
-%% Parametry
 portName = 'COM9';  
 baudRate = 115200;  
 
-time_duration_of_test = 25 *60;  % czas testu w sekundach
-ts = 0.5;                      % okres próbkowania w s
+time_duration_of_test = 15 *60;  
+ts = 0.5;                      
 
 outputFolder = 'data';
 if ~exist(outputFolder, 'dir')
@@ -14,17 +13,15 @@ if ~exist(outputFolder, 'dir')
 end
 
 
-csvFileName = fullfile(outputFolder, 'temperature_data.csv');
+csvFileName = fullfile(outputFolder, 'temperature_data_filtered.csv');
 maxSamples = floor(time_duration_of_test / ts);  
 
-%% Inicjalizacja portu szeregowego
 s = serialport(portName, baudRate);
 configureTerminator(s, "CR/LF");
 flush(s);
 
 fprintf('Połączono z portem %s\n', portName);
 
-%% Przygotowanie buforów
 timestamp = datetime.empty(0,1);
 temperature = [];
 time_ms = [];
@@ -33,7 +30,6 @@ sampleCount = 0;
 
 fprintf('Rozpoczynam odczyt danych...\n');
 
-%% Pętla odczytu
 while sampleCount < maxSamples
     % Odczytaj linię
     dataLine = readline(s); 
@@ -59,17 +55,14 @@ while sampleCount < maxSamples
     pause(ts);
 end
 
-%% Zamknięcie portu
 clear s;
 fprintf('Port zamknięty.\n');
 
-%% Zapis do CSV
 dataTable = table(timestamp, temperature, time_ms, ...
     'VariableNames', {'Timestamp', 'Temperature_C', 'Time_ms'});
 writetable(dataTable, csvFileName);
 fprintf('Zapisano %d próbek do pliku: %s\n', sampleCount, csvFileName);
 
-%% Rysowanie wykresów
 figure;
 
 subplot(2,1,1);

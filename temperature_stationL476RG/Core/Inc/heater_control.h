@@ -8,9 +8,9 @@
 #ifndef CORE_INC_HEATER_CONTROL_H_
 #define CORE_INC_HEATER_CONTROL_H_
 
-#include "tim.h"
-#include <stdint.h>
 
+#include <stdint.h>
+#include "tim.h"
 
 typedef struct
 {
