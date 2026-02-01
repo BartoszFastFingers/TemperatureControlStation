@@ -1,4 +1,4 @@
-clear all;
+ clear all;
 clc;
 
 portName = 'COM9';  
@@ -9,11 +9,11 @@ ts = 0.5;
 
 outputFolder = 'data';
 if ~exist(outputFolder, 'dir')
-    mkdir(outputFolder);
+    mkdir (outputFolder);
 end
 
 
-csvFileName = fullfile(outputFolder, 'temperature_data_filtered.csv');
+csvFileName = fullfile(outputFolder, 'temperature_fan30_heater70_ data_filtered.csv');
 maxSamples = floor(time_duration_of_test / ts);  
 
 s = serialport(portName, baudRate);

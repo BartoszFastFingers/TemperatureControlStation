@@ -47,7 +47,12 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     Core/Src/temperature_sensor.c
     Core/Src/heater_control.c
+    Core/Src/fan_control.c
+    Core/Src/St7735s.c
+    Core/Src/uart_protocol.c
     Components/Src/SMA1_fir.c
+    Components/Src/pid_lookup.c
+    Components/Src/PID_controller.c
 )
 
 # Add include paths

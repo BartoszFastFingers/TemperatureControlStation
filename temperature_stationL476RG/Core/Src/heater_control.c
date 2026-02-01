@@ -9,12 +9,10 @@
 
 void Heater_Init(HeaterHandle_t *hheater,
                  TIM_HandleTypeDef *htim,
-                 uint32_t channel,
-                 uint16_t max_duty)
+                 uint32_t channel)
 {
     hheater->htim = htim;
     hheater->channel = channel;
-    hheater->max_duty = max_duty;
     hheater->current_power = 0;
 }
 
@@ -29,28 +27,17 @@ void Heater_Stop(HeaterHandle_t *hheater)
     hheater->current_power = 0;
 }
 
-void Heater_SetPower(HeaterHandle_t *hheater, uint8_t power_percent)
+void Heater_SetPower(HeaterHandle_t *hheater, uint16_t power)
 {
-    if (power_percent > 100)
-        power_percent = 100;
-    uint16_t ccr_value = (power_percent * hheater->max_duty) / 100;
+    if (power > 999)
+        power = 999;
 
-    __HAL_TIM_SET_COMPARE(hheater->htim, hheater->channel, ccr_value);
+    __HAL_TIM_SET_COMPARE(hheater->htim, hheater->channel, power);
 
-    hheater->current_power = power_percent;
+    hheater->current_power = power;
 }
 
-void Heater_SetDuty(HeaterHandle_t *hheater, uint16_t duty_value)
-{
-    if (duty_value > hheater->max_duty)
-        duty_value = hheater->max_duty;
-
-    __HAL_TIM_SET_COMPARE(hheater->htim, hheater->channel, duty_value);
-
-    hheater->current_power = (duty_value * 100) / hheater->max_duty;
-}
-
-uint8_t Heater_GetPower(HeaterHandle_t *hheater)
+uint16_t Heater_GetPower(HeaterHandle_t *hheater)
 {
     return hheater->current_power;
 }

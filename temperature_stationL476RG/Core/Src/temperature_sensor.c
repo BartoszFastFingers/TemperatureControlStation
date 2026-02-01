@@ -61,7 +61,7 @@ float TempSensor_GetAverageTemperature(TempSensorHandle_t *htemp)
     float raw_average = sum / htemp->sensor_count;
     float filtered_average = 0.0f;
 
-    arm_fir_f32(&htemp->filter.fir, &raw_average, &filtered_average, 1);
+    arm_fir_f32(&htemp->filter.fir, &raw_average, &filtered_average, SMA1_BLOCK_SIZE);
 
     return filtered_average;
 }
