@@ -60,6 +60,8 @@ volatile uint16_t g_heater_pwm = 0;
 volatile uint16_t g_fan_pwm = 0;
 volatile uint32_t g_timestamp = 0;
 volatile uint8_t g_data_ready = 0;
+volatile uint8_t uart_rx_byte;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -92,6 +94,11 @@ const osThreadAttr_t myTask03_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityBelowNormal,
 };
+/* Definitions for uartRxQueue */
+osMessageQueueId_t uartRxQueueHandle;
+const osMessageQueueAttr_t uartRxQueue_attributes = {
+  .name = "uartRxQueue"
+};
 /* Definitions for temp_meas */
 osTimerId_t temp_measHandle;
 const osTimerAttr_t temp_meas_attributes = {
@@ -123,6 +130,7 @@ void MX_FREERTOS_Init(void) {
   Fan_Init(&fan, &htim1, TIM_CHANNEL_2);
   ST7735_Init(&lcd, &hspi2);
   UartProtocol_Init(&protocol, &huart2);
+  HAL_UART_Receive_IT(&huart2, (uint8_t*)&uart_rx_byte, 1);
 
   Heater_Start(&heater);
   TempSensor_Start(&tempSensors);
@@ -151,6 +159,10 @@ void MX_FREERTOS_Init(void) {
   /* start timers, add new ones, ... */
   osTimerStart(temp_measHandle, 1000);
   /* USER CODE END RTOS_TIMERS */
+
+  /* Create the queue(s) */
+  /* creation of uartRxQueue */
+  uartRxQueueHandle = osMessageQueueNew (64, sizeof(uint8_t), &uartRxQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -208,23 +220,40 @@ void start_usart_com(void *argument)
   /* Infinite loop */
   for(;;)
   {
-	  if (HAL_UART_Receive(&huart2, &rx_byte, 1, 10) == HAL_OK) {
+	    while (osMessageQueueGet(uartRxQueueHandle, &rx_byte, NULL, 10) == osOK) {
 	      UartProtocol_ReceiveByte(&protocol, rx_byte);
-	  }
+	    }
 
-	          UartCommand_t cmd = UartProtocol_Parse(&protocol);
-	  if (cmd == CMD_SET_TEMP) {
-	      float new_setpoint = UartProtocol_GetArg(&protocol);
-	      Temperature_Control_SetTarget(new_setpoint);
-	  }
+	    UartCommand_t cmd = UartProtocol_Parse(&protocol);
 
-	   if (g_data_ready) {
-	   UartProtocol_SendData(&protocol, g_temperature, g_setpoint,
-	                         g_heater_pwm, g_fan_pwm, g_timestamp);
-	   g_data_ready = 0;
-	  }
+	    switch (cmd) {
+	      case CMD_SET_TEMP: {
+	        float new_setpoint = UartProtocol_GetArg(&protocol);
+	        Temperature_Control_SetTarget(new_setpoint);
+	        g_setpoint = new_setpoint;
+	        break;
+	      }
+	      case CMD_START:
+	        osTimerStart(temp_measHandle, 1000);
+	        break;
+	      case CMD_STOP:
+	        osTimerStop(temp_measHandle);
+	        Heater_SetPower(&heater, 0);
+	        Fan_SetSpeed(&fan, 0);
+	        g_heater_pwm = 0;
+	        g_fan_pwm = 0;
+	        break;
+	      default:
+	        break;
+	    }
 
-	  osDelay(50);
+	    if (g_data_ready) {
+	      UartProtocol_SendData(&protocol, g_temperature, g_setpoint,
+	                            g_heater_pwm, g_fan_pwm, g_timestamp);
+	      g_data_ready = 0;
+	    }
+
+	    osDelay(10);
   }
   /* USER CODE END start_usart_com */
 }
@@ -279,6 +308,12 @@ void temp_callback(void *argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart == &huart2) {
+        osMessageQueuePut(uartRxQueueHandle, (void*)&uart_rx_byte, 0, 0);
+        HAL_UART_Receive_IT(&huart2, (uint8_t*)&uart_rx_byte, 1);
+    }
+}
 /* USER CODE END Application */
 

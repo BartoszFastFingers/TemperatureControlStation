@@ -20,7 +20,7 @@ static const uint16_t op_fan[NUM_OPERATING_POINTS] = {0, 499, 299};
 
 // Parametry PID (forma ciągła)
 static const float pid_Kp[NUM_OPERATING_POINTS] = {0.5f, 0.5f, 0.5f};
-static const float pid_Ki[NUM_OPERATING_POINTS] = {0.1f, 0.1f, 0.1f};
+static const float pid_Ki[NUM_OPERATING_POINTS] = {0.05f, 0.05f, 0.05f};
 static const float pid_Kd[NUM_OPERATING_POINTS] = {0.0f, 0.0f, 0.0f};
 
 

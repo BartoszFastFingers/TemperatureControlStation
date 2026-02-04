@@ -121,7 +121,7 @@ void Temperature_Control_SetTarget(float target_temp)
         pid_cool.state[1] = 0.0f;
         pid_cool.state[2] = 0.0f;
     }
-    temperature_setpoint = target_temp + 1.0f;
+    temperature_setpoint = target_temp;
 }
 
 void Temperature_Control_SetFanPWM(uint16_t pwm)
