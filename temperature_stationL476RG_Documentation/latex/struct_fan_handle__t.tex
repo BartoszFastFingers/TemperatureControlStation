@@ -1,0 +1,51 @@
+\doxysection{Dokumentacja struktury Fan\+Handle\+\_\+t}
+\hypertarget{struct_fan_handle__t}{}\label{struct_fan_handle__t}\index{FanHandle\_t@{FanHandle\_t}}
+
+
+Struktura reprezentująca wentylator sterowany PWM.  
+
+
+
+
+{\ttfamily \+\#include $<$fan\+\_\+control.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_fan_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486}{htim}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_fan_handle__t_a0c72dd5e18823aef187a34137983c9a6}{channel}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{struct_fan_handle__t_a5ec138df72bc035a0253131ce61c909c}{current\+\_\+speed}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura reprezentująca wentylator sterowany PWM. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_fan_handle__t_doc-variable-members}
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_fan_handle__t_a0c72dd5e18823aef187a34137983c9a6}\index{FanHandle\_t@{FanHandle\_t}!channel@{channel}}
+\index{channel@{channel}!FanHandle\_t@{FanHandle\_t}}
+\doxysubsubsection{\texorpdfstring{channel}{channel}}
+{\footnotesize\ttfamily \label{struct_fan_handle__t_a0c72dd5e18823aef187a34137983c9a6} 
+uint32\+\_\+t channel}
+
+Kanał timera dla PWM \Hypertarget{struct_fan_handle__t_a5ec138df72bc035a0253131ce61c909c}\index{FanHandle\_t@{FanHandle\_t}!current\_speed@{current\_speed}}
+\index{current\_speed@{current\_speed}!FanHandle\_t@{FanHandle\_t}}
+\doxysubsubsection{\texorpdfstring{current\_speed}{current\_speed}}
+{\footnotesize\ttfamily \label{struct_fan_handle__t_a5ec138df72bc035a0253131ce61c909c} 
+uint16\+\_\+t current\+\_\+speed}
+
+Aktualna prędkość wentylatora (0-\/999) \Hypertarget{struct_fan_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486}\index{FanHandle\_t@{FanHandle\_t}!htim@{htim}}
+\index{htim@{htim}!FanHandle\_t@{FanHandle\_t}}
+\doxysubsubsection{\texorpdfstring{htim}{htim}}
+{\footnotesize\ttfamily \label{struct_fan_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486} 
+TIM\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} htim}
+
+Wskaźnik na strukturę timera STM32 używanego do PWM 
+
+Dokumentacja dla tej struktury została wygenerowana z pliku:\+\begin{DoxyCompactItemize}
+\item 
+Core/\+\+Inc/\+\doxymbox{\hyperlink{fan__control_8h}{fan\+\_\+control.\+h}}\end{DoxyCompactItemize}

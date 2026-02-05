@@ -1,0 +1,88 @@
+\doxysubsection{Sine }
+\hypertarget{group__sin}{}\label{group__sin}\index{Sine@{Sine}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group__sin_ga0482660c99ca5ee91103d6f26f2733dc}{arm\+\_\+sin\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} x)
+\begin{DoxyCompactList}\small\item\em Fast approximation to the trigonometric sine function for floating-\/point data. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \doxymbox{\hyperlink{group__sin_gadc7fe8619c0fe68aa4ef685683591837}{arm\+\_\+sin\+\_\+q15}} (\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} x)
+\begin{DoxyCompactList}\small\item\em Fast approximation to the trigonometric sine function for Q15 data. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \doxymbox{\hyperlink{group__sin_ga169fd1471182d1ab9e805333df016ca0}{arm\+\_\+sin\+\_\+q31}} (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} x)
+\begin{DoxyCompactList}\small\item\em Fast approximation to the trigonometric sine function for Q31 data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the trigonometric sine function using a combination of table lookup and linear interpolation. There are separate functions for Q15, Q31, and floating-\/point data types. The input to the floating-\/point version is in radians while the fixed-\/point Q15 and Q31 have a scaled input with the range \+[0 +0.\+9999]\+ mapping to \+[0 2\texorpdfstring{$\ast$}{*}pi). The fixed-\/point range is chosen so that a value of 2\texorpdfstring{$\ast$}{*}pi wraps around to 0.
+
+The implementation is based on table lookup using 512 values together with linear interpolation. The steps used are:\+
+\begin{DoxyEnumerate}
+\item Calculation of the nearest integer table index
+\item Compute the fractional portion (fract) of the table index.
+\item The final result equals {\ttfamily (1.\+0f-\/fract)\texorpdfstring{$\ast$}{*}a + fract\texorpdfstring{$\ast$}{*}b;}
+\end{DoxyEnumerate}
+
+where 
+\begin{DoxyPre}
+   b = Table[index];
+   c = Table[index+1];
+\end{DoxyPre}
+
+
+\label{doc-func-members}
+\Hypertarget{group__sin_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__sin_ga0482660c99ca5ee91103d6f26f2733dc}\index{Sine@{Sine}!arm\_sin\_f32@{arm\_sin\_f32}}
+\index{arm\_sin\_f32@{arm\_sin\_f32}!Sine@{Sine}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sin\_f32()}{arm\_sin\_f32()}}
+{\footnotesize\ttfamily \label{group__sin_ga0482660c99ca5ee91103d6f26f2733dc} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+sin\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Fast approximation to the trigonometric sine function for floating-\/point data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em x} & input value in radians. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sin(x) 
+\end{DoxyReturn}
+\Hypertarget{group__sin_gadc7fe8619c0fe68aa4ef685683591837}\index{Sine@{Sine}!arm\_sin\_q15@{arm\_sin\_q15}}
+\index{arm\_sin\_q15@{arm\_sin\_q15}!Sine@{Sine}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sin\_q15()}{arm\_sin\_q15()}}
+{\footnotesize\ttfamily \label{group__sin_gadc7fe8619c0fe68aa4ef685683591837} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} arm\+\_\+sin\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Fast approximation to the trigonometric sine function for Q15 data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em x} & Scaled input value in radians \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sin(x)
+\end{DoxyReturn}
+The Q15 input value is in the range \+[0 +0.\+9999]\+ and is mapped to a radian value in the range \+[0 2\texorpdfstring{$\ast$}{*}\+PI). \Hypertarget{group__sin_ga169fd1471182d1ab9e805333df016ca0}\index{Sine@{Sine}!arm\_sin\_q31@{arm\_sin\_q31}}
+\index{arm\_sin\_q31@{arm\_sin\_q31}!Sine@{Sine}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sin\_q31()}{arm\_sin\_q31()}}
+{\footnotesize\ttfamily \label{group__sin_ga169fd1471182d1ab9e805333df016ca0} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} arm\+\_\+sin\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Fast approximation to the trigonometric sine function for Q31 data. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em x} & Scaled input value in radians \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sin(x)
+\end{DoxyReturn}
+The Q31 input value is in the range \+[0 +0.\+9999]\+ and is mapped to a radian value in the range \+[0 2\texorpdfstring{$\ast$}{*}\+PI). 

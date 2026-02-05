@@ -1,0 +1,59 @@
+\doxysection{arm\+\_\+cfft\+\_\+instance\+\_\+q15 Struct Reference}
+\hypertarget{structarm__cfft__instance__q15}{}\label{structarm__cfft__instance__q15}\index{arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}}
+
+
+Instance structure for the fixed-\/point CFFT/\+\+CIFFT function.  
+
+
+
+
+{\ttfamily \+\#include $<$transform\+\_\+functions.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{structarm__cfft__instance__q15_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fft\+Len}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__cfft__instance__q15_a7f19217cfa0370f9e518caa882265386}{p\+Twiddle}}
+\item 
+const uint16\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__cfft__instance__q15_a3b229432d381b0a511a9cdbe3aa74e78}{p\+Bit\+Rev\+Table}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{structarm__cfft__instance__q15_a65e1b3e327b8fab9404287ed8f347cc8}{bit\+Rev\+Length}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the fixed-\/point CFFT/\+\+CIFFT function. 
+
+\label{doc-variable-members}
+\Hypertarget{structarm__cfft__instance__q15_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structarm__cfft__instance__q15_a65e1b3e327b8fab9404287ed8f347cc8}\index{arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}!bitRevLength@{bitRevLength}}
+\index{bitRevLength@{bitRevLength}!arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{bitRevLength}{bitRevLength}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__q15_a65e1b3e327b8fab9404287ed8f347cc8} 
+uint16\+\_\+t bit\+Rev\+Length}
+
+bit reversal table length. \Hypertarget{structarm__cfft__instance__q15_ab8db3bbe7c61e6bb8ca2a55e3446e11a}\index{arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}!fftLen@{fftLen}}
+\index{fftLen@{fftLen}!arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{fftLen}{fftLen}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__q15_ab8db3bbe7c61e6bb8ca2a55e3446e11a} 
+uint16\+\_\+t fft\+Len}
+
+length of the FFT. \Hypertarget{structarm__cfft__instance__q15_a3b229432d381b0a511a9cdbe3aa74e78}\index{arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}!pBitRevTable@{pBitRevTable}}
+\index{pBitRevTable@{pBitRevTable}!arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pBitRevTable}{pBitRevTable}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__q15_a3b229432d381b0a511a9cdbe3aa74e78} 
+const uint16\+\_\+t\texorpdfstring{$\ast$}{*} p\+Bit\+Rev\+Table}
+
+points to the bit reversal table. \Hypertarget{structarm__cfft__instance__q15_a7f19217cfa0370f9e518caa882265386}\index{arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}!pTwiddle@{pTwiddle}}
+\index{pTwiddle@{pTwiddle}!arm\_cfft\_instance\_q15@{arm\_cfft\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{pTwiddle}{pTwiddle}}
+{\footnotesize\ttfamily \label{structarm__cfft__instance__q15_a7f19217cfa0370f9e518caa882265386} 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} p\+Twiddle}
+
+points to the Twiddle factor table. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Middlewares/\+\+Third\+\_\+\+Party/\+\+ARM\+\_\+\+CMSIS/\+\+Include/\+dsp/\+transform\+\_\+functions.\+h\end{DoxyCompactItemize}

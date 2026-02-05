@@ -1,0 +1,151 @@
+\doxysection{arm\+\_\+cfft\+\_\+radix2\+\_\+init\+\_\+q31.\+c}
+\hypertarget{arm__cfft__radix2__init__q31_8c_source}{}\label{arm__cfft__radix2__init__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_cfft\_radix2\_init\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_cfft\_radix2\_init\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_cfft\_radix2\_init\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Radix-\/2\ Decimation\ in\ Frequency\ Fixed-\/point\ CFFT\ \&\ CIFFT\ Initialization\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_common\_tables.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___complex_f_f_t_deprecated_gaeb24f3ff002fc8b965db0ea095a0a148}{arm\_cfft\_radix2\_init\_q31}}(}
+\DoxyCodeLine{00065\ \ \ \doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31}{arm\_cfft\_radix2\_instance\_q31}}\ *\ S,}
+\DoxyCodeLine{00066\ \ \ uint16\_t\ fftLen,}
+\DoxyCodeLine{00067\ \ \ uint8\_t\ ifftFlag,}
+\DoxyCodeLine{00068\ \ \ uint8\_t\ bitReverseFlag)}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ default\ arm\ status\ */}}
+\DoxyCodeLine{00071\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ default\ arm\ status\ */}}
+\DoxyCodeLine{00074\ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ FFT\ length\ */}}
+\DoxyCodeLine{00077\ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ fftLen;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ Twiddle\ coefficient\ pointer\ */}}
+\DoxyCodeLine{00080\ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}}\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_gaa64a1333435ad99eef1e927854e14408}{twiddleCoef\_4096\_q31}};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ Flag\ for\ selection\ of\ CFFT\ or\ CIFFT\ */}}
+\DoxyCodeLine{00083\ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_ad6ca6e223f986ebfd94c5ee1e410aa73}{ifftFlag}}\ =\ ifftFlag;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ Flag\ for\ calculation\ Bit\ reversal\ or\ not\ */}}
+\DoxyCodeLine{00086\ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a09a221a818c6d0e064557a99e2fe9a8b}{bitReverseFlag}}\ =\ bitReverseFlag;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ Instance\ structure\ depending\ on\ the\ FFT\ length\ */}}
+\DoxyCodeLine{00089\ \ \ \textcolor{keywordflow}{switch}\ (S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}})}
+\DoxyCodeLine{00090\ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 4096\ point\ FFT\ */}}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{case}\ 4096U:}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ twiddle\ coef\ modifier\ value\ */}}
+\DoxyCodeLine{00094\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 1U;}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ modifier\ */}}
+\DoxyCodeLine{00096\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 1U;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ pointer\ */}}
+\DoxyCodeLine{00098\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ armBitRevTable;}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 2048\ point\ FFT\ */}}
+\DoxyCodeLine{00102\ \ \ \textcolor{keywordflow}{case}\ 2048U:}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ twiddle\ coef\ modifier\ value\ */}}
+\DoxyCodeLine{00104\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 2U;}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ modifier\ */}}
+\DoxyCodeLine{00106\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 2U;}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ pointer\ */}}
+\DoxyCodeLine{00108\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[1];}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 1024\ point\ FFT\ */}}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{case}\ 1024U:}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ twiddle\ coef\ modifier\ value\ */}}
+\DoxyCodeLine{00114\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 4U;}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ modifier\ */}}
+\DoxyCodeLine{00116\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 4U;}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ pointer\ */}}
+\DoxyCodeLine{00118\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[3];}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 512\ point\ FFT\ */}}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{case}\ 512U:}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ twiddle\ coef\ modifier\ value\ */}}
+\DoxyCodeLine{00124\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 8U;}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ modifier\ */}}
+\DoxyCodeLine{00126\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 8U;}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ bit\ reversal\ table\ pointer\ */}}
+\DoxyCodeLine{00128\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[7];}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordflow}{case}\ 256U:}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 256\ point\ FFT\ */}}
+\DoxyCodeLine{00133\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 16U;}
+\DoxyCodeLine{00134\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 16U;}
+\DoxyCodeLine{00135\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[15];}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \textcolor{keywordflow}{case}\ 128U:}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 128\ point\ FFT\ */}}
+\DoxyCodeLine{00140\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 32U;}
+\DoxyCodeLine{00141\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 32U;}
+\DoxyCodeLine{00142\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[31];}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \textcolor{keywordflow}{case}\ 64U:}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 64\ point\ FFT\ */}}
+\DoxyCodeLine{00147\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 64U;}
+\DoxyCodeLine{00148\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 64U;}
+\DoxyCodeLine{00149\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[63];}
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordflow}{case}\ 32U:}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 32\ point\ FFT\ */}}
+\DoxyCodeLine{00154\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 128U;}
+\DoxyCodeLine{00155\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 128U;}
+\DoxyCodeLine{00156\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[127];}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \textcolor{keywordflow}{case}\ 16U:}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{comment}{/*\ \ Initializations\ of\ structure\ parameters\ for\ 16\ point\ FFT\ */}}
+\DoxyCodeLine{00161\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}}\ =\ 256U;}
+\DoxyCodeLine{00162\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}}\ =\ 256U;}
+\DoxyCodeLine{00163\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__cfft__radix2__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)\ \&\ armBitRevTable[255];}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{comment}{/*\ \ Reporting\ argument\ error\ if\ fftSize\ is\ not\ valid\ value\ */}}
+\DoxyCodeLine{00169\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00171\ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+
+\end{DoxyCode}

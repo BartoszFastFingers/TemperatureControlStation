@@ -1,0 +1,278 @@
+\doxysection{arm\+\_\+rfft\+\_\+f32.\+c}
+\hypertarget{arm__rfft__f32_8c_source}{}\label{arm__rfft__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_rfft\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_rfft\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_rfft\_f32.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ RFFT\ \&\ RIFFT\ Floating\ point\ process\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ *\ Internal\ functions\ prototypes}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ arm\_radix4\_butterfly\_f32(}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ uint16\_t\ fftLen,}
+\DoxyCodeLine{00038\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pCoef,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ uint16\_t\ twidCoefModifier);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ arm\_radix4\_butterfly\_inverse\_f32(}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ uint16\_t\ fftLen,}
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pCoef,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ uint16\_t\ twidCoefModifier,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ onebyfftLen);}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_f32(}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ uint16\_t\ fftSize,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_split\_rfft\_f32(}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pATable,}
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pBTable,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ uint32\_t\ modifier);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_split\_rifft\_f32(}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pATable,}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pBTable,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ uint32\_t\ modifier);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___deprecated_real_f_f_t_ga592726e37f1dffc41948e56624e91ab1}{arm\_rfft\_f32}}(}
+\DoxyCodeLine{00089\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\_rfft\_instance\_f32}}\ *\ S,}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst)}
+\DoxyCodeLine{00092\ \{}
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32}{arm\_cfft\_radix4\_instance\_f32}}\ *S\_CFFT\ =\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_ab7bd4d374a1780dea50efd3e7ac220be}{pCfft}};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{comment}{/*\ Calculation\ of\ Real\ IFFT\ of\ input\ */}}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordflow}{if}\ (S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a787d72055c89e4d62b188d6bd646341c}{ifftFlagR}}\ ==\ 1U)}
+\DoxyCodeLine{00097\ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \textcolor{comment}{/*\ \ Real\ IFFT\ core\ process\ */}}
+\DoxyCodeLine{00099\ \ \ \ \ \ arm\_split\_rifft\_f32\ (pSrc,\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a206b7cd92c35fde3432e5b9a0650c42c}{fftLenBy2}},\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a9242c2e59819701cb99429b0dc9f3796}{pTwiddleAReal}},\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a5cebe2c6994199d1c89a87105f8b4351}{pTwiddleBReal}},\ pDst,\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a5b06f7f76c018db993fe6acc5708c589}{twidCoefRModifier}});}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \textcolor{comment}{/*\ Complex\ radix-\/4\ IFFT\ process\ */}}
+\DoxyCodeLine{00103\ \ \ \ \ \ arm\_radix4\_butterfly\_inverse\_f32\ (pDst,\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_a8292d9775f5c5472f59915649fe3b378}{pTwiddle}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_acf295a7b97b7d48a9cae4d1ab5ed00f6}{onebyfftLen}});}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{comment}{/*\ Bit\ reversal\ process\ */}}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{if}\ (S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_ad56ec2425e2422108b8767b43d944591}{bitReverseFlagR}}\ ==\ 1U)}
+\DoxyCodeLine{00107\ \ \ \ \ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ arm\_bitreversal\_f32\ (pDst,\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}});}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00112\ \ \ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{/*\ Calculation\ of\ RFFT\ of\ input\ */}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{/*\ Complex\ radix-\/4\ FFT\ process\ */}}
+\DoxyCodeLine{00116\ \ \ \ \ arm\_radix4\_butterfly\_f32\ (pSrc,\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_a8292d9775f5c5472f59915649fe3b378}{pTwiddle}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_afe772e5b5001c9d8e85032115a8df5bf}{twidCoefModifier}});}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{/*\ Bit\ reversal\ process\ */}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{if}\ (S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_ad56ec2425e2422108b8767b43d944591}{bitReverseFlagR}}\ ==\ 1U)}
+\DoxyCodeLine{00120\ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ arm\_bitreversal\_f32\ (pSrc,\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_a33386d95319dc3ee7097b3a8e52e01ec}{bitRevFactor}},\ S\_CFFT-\/>\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}});}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{/*\ \ Real\ FFT\ core\ process\ */}}
+\DoxyCodeLine{00125\ \ \ \ \ arm\_split\_rfft\_f32\ (pSrc,\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a206b7cd92c35fde3432e5b9a0650c42c}{fftLenBy2}},\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a9242c2e59819701cb99429b0dc9f3796}{pTwiddleAReal}},\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a5cebe2c6994199d1c89a87105f8b4351}{pTwiddleBReal}},\ pDst,\ S-\/>\doxymbox{\hyperlink{structarm__rfft__instance__f32_a5b06f7f76c018db993fe6acc5708c589}{twidCoefRModifier}});}
+\DoxyCodeLine{00126\ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_split\_rfft\_f32(}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00147\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pATable,}
+\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pBTable,}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ uint32\_t\ modifier)}
+\DoxyCodeLine{00151\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ uint32\_t\ i;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ Counter\ */}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ outR,\ outI;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variables\ for\ output\ */}}
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pCoefA,\ *pCoefB;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ pointers\ for\ twiddle\ factors\ */}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ CoefA1,\ CoefA2,\ CoefB1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variables\ for\ twiddle\ coefficients\ */}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pDst1\ =\ \&pDst[2],\ *pDst2\ =\ \&pDst[(4U\ *\ fftLen)\ -\/\ 1U];\ \ \ \ \ \ \textcolor{comment}{/*\ temp\ pointers\ for\ output\ buffer\ */}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pSrc1\ =\ \&pSrc[2],\ *pSrc2\ =\ \&pSrc[(2U\ *\ fftLen)\ -\/\ 1U];\ \ \ \ \ \ \textcolor{comment}{/*\ temp\ pointers\ for\ input\ buffer\ */}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \textcolor{comment}{/*\ Init\ coefficient\ pointers\ */}}
+\DoxyCodeLine{00160\ \ \ pCoefA\ =\ \&pATable[modifier\ *\ 2];}
+\DoxyCodeLine{00161\ \ \ pCoefB\ =\ \&pBTable[modifier\ *\ 2];}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ i\ =\ fftLen\ -\/\ 1U;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordflow}{while}\ (i\ >\ 0U)}
+\DoxyCodeLine{00166\ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ \ \ outR\ =\ (\ \ pSrc[2\ *\ i]\ \ \ \ \ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i]}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ pSrc[2\ *\ i\ +\ 1]\ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i\ +\ 1]}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ pSrc[2\ *\ n\ -\/\ 2\ *\ i]\ \ \ \ \ *\ pBTable[2\ *\ i]}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ pSrc[2\ *\ n\ -\/\ 2\ *\ i\ +\ 1]\ *\ pBTable[2\ *\ i\ +\ 1]);}}
+\DoxyCodeLine{00172\ \textcolor{comment}{}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ \ \ outI\ =\ (\ \ pIn[2\ *\ i\ +\ 1]\ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i]}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ pIn[2\ *\ i]\ \ \ \ \ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i\ +\ 1]}}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ pIn[2\ *\ n\ -\/\ 2\ *\ i]\ \ \ \ \ *\ pBTable[2\ *\ i\ +\ 1]}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ pIn[2\ *\ n\ -\/\ 2\ *\ i\ +\ 1]\ *\ pBTable[2\ *\ i]);}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ \ */}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{comment}{/*\ read\ pATable[2\ *\ i]\ */}}
+\DoxyCodeLine{00180\ \ \ \ \ CoefA1\ =\ *pCoefA++;}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{/*\ pATable[2\ *\ i\ +\ 1]\ */}}
+\DoxyCodeLine{00182\ \ \ \ \ CoefA2\ =\ *pCoefA;}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ i]\ *\ pATable[2\ *\ i]\ */}}
+\DoxyCodeLine{00185\ \ \ \ \ outR\ =\ *pSrc1\ *\ CoefA1;}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ i]\ *\ CoefA2\ */}}
+\DoxyCodeLine{00187\ \ \ \ \ outI\ =\ *pSrc1++\ *\ CoefA2;}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{comment}{/*\ (pSrc[2\ *\ i\ +\ 1]\ +\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i\ +\ 1])\ *\ CoefA2\ */}}
+\DoxyCodeLine{00190\ \ \ \ \ outR\ -\/=\ (*pSrc1\ +\ *pSrc2)\ *\ CoefA2;}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ i\ +\ 1]\ *\ CoefA1\ */}}
+\DoxyCodeLine{00192\ \ \ \ \ outI\ +=\ *pSrc1++\ *\ CoefA1;}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ CoefB1\ =\ *pCoefB;}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i\ +\ 1]\ *\ CoefB1\ */}}
+\DoxyCodeLine{00197\ \ \ \ \ outI\ -\/=\ *pSrc2-\/-\/\ *\ CoefB1;}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i]\ *\ CoefA2\ */}}
+\DoxyCodeLine{00199\ \ \ \ \ outI\ -\/=\ *pSrc2\ *\ CoefA2;}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i]\ *\ CoefB1\ */}}
+\DoxyCodeLine{00202\ \ \ \ \ outR\ +=\ *pSrc2-\/-\/\ *\ CoefB1;}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{comment}{/*\ write\ output\ */}}
+\DoxyCodeLine{00205\ \ \ \ \ *pDst1++\ =\ outR;}
+\DoxyCodeLine{00206\ \ \ \ \ *pDst1++\ =\ outI;}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{/*\ write\ complex\ conjugate\ output\ */}}
+\DoxyCodeLine{00209\ \ \ \ \ *pDst2-\/-\/\ =\ -\/outI;}
+\DoxyCodeLine{00210\ \ \ \ \ *pDst2-\/-\/\ =\ outR;}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{/*\ update\ coefficient\ pointer\ */}}
+\DoxyCodeLine{00213\ \ \ \ \ pCoefB\ =\ pCoefB\ +\ (modifier\ *\ 2U);}
+\DoxyCodeLine{00214\ \ \ \ \ pCoefA\ =\ pCoefA\ +\ ((modifier\ *\ 2U)\ -\/\ 1U);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ i-\/-\/;}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ pDst[2U\ *\ fftLen]\ =\ pSrc[0]\ -\/\ pSrc[1];}
+\DoxyCodeLine{00221\ \ \ pDst[(2U\ *\ fftLen)\ +\ 1U]\ =\ 0.0f;}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ pDst[0]\ =\ pSrc[0]\ +\ pSrc[1];}
+\DoxyCodeLine{00224\ \ \ pDst[1]\ =\ 0.0f;}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_split\_rifft\_f32(}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00242\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pATable,}
+\DoxyCodeLine{00243\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pBTable,}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ uint32\_t\ modifier)}
+\DoxyCodeLine{00246\ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ outR,\ outI;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variables\ for\ output\ */}}
+\DoxyCodeLine{00248\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pCoefA,\ *pCoefB;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ pointers\ for\ twiddle\ factors\ */}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ CoefA1,\ CoefA2,\ CoefB1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variables\ for\ twiddle\ coefficients\ */}}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pSrc1\ =\ \&pSrc[0],\ *pSrc2\ =\ \&pSrc[(2U\ *\ fftLen)\ +\ 1U];}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ pCoefA\ =\ \&pATable[0];}
+\DoxyCodeLine{00253\ \ \ pCoefB\ =\ \&pBTable[0];}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \textcolor{keywordflow}{while}\ (fftLen\ >\ 0U)}
+\DoxyCodeLine{00256\ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00258\ \textcolor{comment}{\ \ \ \ \ \ \ outR\ =\ (\ \ pIn[2\ *\ i]\ \ \ \ \ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i]}}
+\DoxyCodeLine{00259\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ pIn[2\ *\ i\ +\ 1]\ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i\ +\ 1]}}
+\DoxyCodeLine{00260\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ +\ pIn[2\ *\ n\ -\/\ 2\ *\ i]\ \ \ \ \ *\ pBTable[2\ *\ i]}}
+\DoxyCodeLine{00261\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ pIn[2\ *\ n\ -\/\ 2\ *\ i\ +\ 1]\ *\ pBTable[2\ *\ i\ +\ 1]);}}
+\DoxyCodeLine{00262\ \textcolor{comment}{}}
+\DoxyCodeLine{00263\ \textcolor{comment}{\ \ \ \ \ \ \ outI\ =\ (\ \ pIn[2\ *\ i\ +\ 1]\ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i]}}
+\DoxyCodeLine{00264\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ pIn[2\ *\ i]\ \ \ \ \ \ \ \ \ \ \ \ \ *\ pATable[2\ *\ i\ +\ 1]}}
+\DoxyCodeLine{00265\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ pIn[2\ *\ n\ -\/\ 2\ *\ i]\ \ \ \ \ *\ pBTable[2\ *\ i\ +\ 1]}}
+\DoxyCodeLine{00266\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/\ pIn[2\ *\ n\ -\/\ 2\ *\ i\ +\ 1]\ *\ pBTable[2\ *\ i]);}}
+\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ \ \ \ */}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \ CoefA1\ =\ *pCoefA++;}
+\DoxyCodeLine{00270\ \ \ \ \ \ CoefA2\ =\ *pCoefA;}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ \ \ \ \textcolor{comment}{/*\ outR\ =\ (pSrc[2\ *\ i]\ *\ CoefA1\ */}}
+\DoxyCodeLine{00273\ \ \ \ \ \ outR\ =\ *pSrc1\ *\ CoefA1;}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \ \textcolor{comment}{/*\ -\/\ pSrc[2\ *\ i]\ *\ CoefA2\ */}}
+\DoxyCodeLine{00276\ \ \ \ \ \ outI\ =\ -\/(*pSrc1++)\ *\ CoefA2;}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \ \ \ \textcolor{comment}{/*\ (pSrc[2\ *\ i\ +\ 1]\ +\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i\ +\ 1])\ *\ CoefA2\ */}}
+\DoxyCodeLine{00279\ \ \ \ \ \ outR\ +=\ (*pSrc1\ +\ *pSrc2)\ *\ CoefA2;}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ i\ +\ 1]\ *\ CoefA1\ */}}
+\DoxyCodeLine{00282\ \ \ \ \ \ outI\ +=\ (*pSrc1++)\ *\ CoefA1;}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \ CoefB1\ =\ *pCoefB;}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \ \ \ \textcolor{comment}{/*\ -\/\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i\ +\ 1]\ *\ CoefB1\ */}}
+\DoxyCodeLine{00287\ \ \ \ \ \ outI\ -\/=\ *pSrc2-\/-\/\ *\ CoefB1;}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i]\ *\ CoefB1\ */}}
+\DoxyCodeLine{00290\ \ \ \ \ \ outR\ +=\ *pSrc2\ *\ CoefB1;}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \textcolor{comment}{/*\ pSrc[2\ *\ fftLen\ -\/\ 2\ *\ i]\ *\ CoefA2\ */}}
+\DoxyCodeLine{00293\ \ \ \ \ \ outI\ +=\ *pSrc2-\/-\/\ *\ CoefA2;}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \textcolor{comment}{/*\ write\ output\ */}}
+\DoxyCodeLine{00296\ \ \ \ \ \ *pDst++\ =\ outR;}
+\DoxyCodeLine{00297\ \ \ \ \ \ *pDst++\ =\ outI;}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \ \textcolor{comment}{/*\ update\ coefficient\ pointer\ */}}
+\DoxyCodeLine{00300\ \ \ \ \ \ pCoefB\ =\ pCoefB\ +\ (modifier\ *\ 2);}
+\DoxyCodeLine{00301\ \ \ \ \ \ pCoefA\ =\ pCoefA\ +\ (modifier\ *\ 2\ -\/\ 1);}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ count\ */}}
+\DoxyCodeLine{00304\ \ \ \ \ \ fftLen-\/-\/;}
+\DoxyCodeLine{00305\ \ \ \}}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \}}
+
+\end{DoxyCode}

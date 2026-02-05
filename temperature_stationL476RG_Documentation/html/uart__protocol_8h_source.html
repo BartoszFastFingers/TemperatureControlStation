@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Plik źródłowy Core/Inc/uart_protocol.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('uart__protocol_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">uart_protocol.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="uart__protocol_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#ifndef CORE_INC_UART_PROTOCOL_H_</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define CORE_INC_UART_PROTOCOL_H_</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;main.h&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;usart.h&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define UART_PROTOCOL_HANDLE    huart2</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#define UART_RX_BUFFER_SIZE     128</span><span class="preprocessor"></span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#define UART_TX_BUFFER_SIZE     128</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4c">   33</a></span><span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc">   34</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc">CMD_NONE</a> = 0,       </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0">   35</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0">CMD_PING</a>,           </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa">   36</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa">CMD_SET_TEMP</a>,       </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a">   37</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a">CMD_GET_STATUS</a>,     </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287">   38</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287">CMD_START</a>,          </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc">   39</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc">CMD_STOP</a>,           </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee">   40</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee">CMD_SET_KP</a>,         </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5">   41</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5">CMD_SET_KI</a>,         </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4">   42</a></span>    <a class="code hl_enumvalue" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4">CMD_SET_KD</a>,         </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>} <a class="code hl_enumeration" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a>;</div>
+</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html">   48</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#a1ed7dab212fde0a3a4600d33399c67b6">   49</a></span>    UART_HandleTypeDef *<a class="code hl_variable" href="struct_uart_protocol__t.html#a1ed7dab212fde0a3a4600d33399c67b6">huart</a>; </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">// Bufor odbiorczy</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#ab84155a3d2305e59a6fb6f3d3791c5c7">   52</a></span>    uint8_t <a class="code hl_variable" href="struct_uart_protocol__t.html#ab84155a3d2305e59a6fb6f3d3791c5c7">rx_buffer</a>[UART_RX_BUFFER_SIZE]; </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#a988968c6b1632f9d4f6495ecee2637af">   53</a></span>    uint16_t <a class="code hl_variable" href="struct_uart_protocol__t.html#a988968c6b1632f9d4f6495ecee2637af">rx_index</a>;                       </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#adce096d92c984f1a29ccbf9e39637a32">   54</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="struct_uart_protocol__t.html#adce096d92c984f1a29ccbf9e39637a32">rx_complete</a>;                        </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// Bufor nadawczy</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#ab89d038143f0aa00291e71359700143d">   57</a></span>    uint8_t <a class="code hl_variable" href="struct_uart_protocol__t.html#ab89d038143f0aa00291e71359700143d">tx_buffer</a>[UART_TX_BUFFER_SIZE]; </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="comment">// Parsowana komenda</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#af67745864eca4102e2b7a7fc4043904c">   60</a></span>    <a class="code hl_enumeration" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a> <a class="code hl_variable" href="struct_uart_protocol__t.html#af67745864eca4102e2b7a7fc4043904c">last_command</a>; </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#afe171074bb73207a41f3eaa186d9966a">   61</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_uart_protocol__t.html#afe171074bb73207a41f3eaa186d9966a">command_arg</a>;           </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="comment">// Status</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="struct_uart_protocol__t.html#a36f7b6be7108281af77939ceaec42fd6">   64</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="struct_uart_protocol__t.html#a36f7b6be7108281af77939ceaec42fd6">running</a>;                </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>} <a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a>;</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="comment">/* ===================== FUNKCJE ===================== */</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span><span class="keywordtype">void</span> <a class="code hl_function" href="uart__protocol_8h.html#a2d4f0a942a590f196fd1938653b66afa">UartProtocol_Init</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, UART_HandleTypeDef *huart);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>uint8_t <a class="code hl_function" href="uart__protocol_8h.html#a831c58270ed17ca8eb212f15c978d6af">UartProtocol_CRC8</a>(<span class="keyword">const</span> uint8_t *data, uint16_t len);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span><span class="keywordtype">void</span> <a class="code hl_function" href="uart__protocol_8h.html#a5822a9405798f726be1fc5599ec62b07">UartProtocol_SendData</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                           <span class="keywordtype">float</span> temp, <span class="keywordtype">float</span> setpoint,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                           uint16_t heater_pwm, uint16_t fan_pwm,</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                           uint32_t timestamp);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span><span class="keywordtype">void</span> <a class="code hl_function" href="uart__protocol_8h.html#a9889efbc1aea520f5391598c9cc376cd">UartProtocol_SendPong</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span></div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><span class="keywordtype">void</span> <a class="code hl_function" href="uart__protocol_8h.html#a5d200d74cfd471744a7a6e0f5d483c29">UartProtocol_SendAck</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, <span class="keyword">const</span> <span class="keywordtype">char</span> *cmd);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="keywordtype">void</span> <a class="code hl_function" href="uart__protocol_8h.html#acc5c9ff2b950033f51e777da1797a19e">UartProtocol_SendNak</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, <span class="keyword">const</span> <span class="keywordtype">char</span> *error);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="keywordtype">void</span> <a class="code hl_function" href="uart__protocol_8h.html#af4660451142b88c9667023983c48e40b">UartProtocol_ReceiveByte</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, uint8_t <span class="keywordtype">byte</span>);</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><a class="code hl_enumeration" href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a> <a class="code hl_function" href="uart__protocol_8h.html#a55c32246f566464d452b9cedc08e631a">UartProtocol_Parse</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span></div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span><span class="keywordtype">float</span> <a class="code hl_function" href="uart__protocol_8h.html#a2dd16492ef96e47733d20666fc19443e">UartProtocol_GetArg</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto);</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span><span class="keywordtype">bool</span> <a class="code hl_function" href="uart__protocol_8h.html#af9f317c0cf4c353b4c70219b92021b78">UartProtocol_VerifyCRC</a>(<a class="code hl_struct" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto);</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="preprocessor">#endif </span><span class="comment">/* CORE_INC_UART_PROTOCOL_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="astruct_uart_protocol__t_html"><div class="ttname"><a href="struct_uart_protocol__t.html">UartProtocol_t</a></div><div class="ttdoc">Struktura protokołu UART.</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:48</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_a1ed7dab212fde0a3a4600d33399c67b6"><div class="ttname"><a href="struct_uart_protocol__t.html#a1ed7dab212fde0a3a4600d33399c67b6">UartProtocol_t::huart</a></div><div class="ttdeci">UART_HandleTypeDef * huart</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:49</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_a36f7b6be7108281af77939ceaec42fd6"><div class="ttname"><a href="struct_uart_protocol__t.html#a36f7b6be7108281af77939ceaec42fd6">UartProtocol_t::running</a></div><div class="ttdeci">bool running</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:64</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_a988968c6b1632f9d4f6495ecee2637af"><div class="ttname"><a href="struct_uart_protocol__t.html#a988968c6b1632f9d4f6495ecee2637af">UartProtocol_t::rx_index</a></div><div class="ttdeci">uint16_t rx_index</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:53</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_ab84155a3d2305e59a6fb6f3d3791c5c7"><div class="ttname"><a href="struct_uart_protocol__t.html#ab84155a3d2305e59a6fb6f3d3791c5c7">UartProtocol_t::rx_buffer</a></div><div class="ttdeci">uint8_t rx_buffer[UART_RX_BUFFER_SIZE]</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:52</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_ab89d038143f0aa00291e71359700143d"><div class="ttname"><a href="struct_uart_protocol__t.html#ab89d038143f0aa00291e71359700143d">UartProtocol_t::tx_buffer</a></div><div class="ttdeci">uint8_t tx_buffer[UART_TX_BUFFER_SIZE]</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:57</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_adce096d92c984f1a29ccbf9e39637a32"><div class="ttname"><a href="struct_uart_protocol__t.html#adce096d92c984f1a29ccbf9e39637a32">UartProtocol_t::rx_complete</a></div><div class="ttdeci">bool rx_complete</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:54</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_af67745864eca4102e2b7a7fc4043904c"><div class="ttname"><a href="struct_uart_protocol__t.html#af67745864eca4102e2b7a7fc4043904c">UartProtocol_t::last_command</a></div><div class="ttdeci">UartCommand_t last_command</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:60</div></div>
+<div class="ttc" id="astruct_uart_protocol__t_html_afe171074bb73207a41f3eaa186d9966a"><div class="ttname"><a href="struct_uart_protocol__t.html#afe171074bb73207a41f3eaa186d9966a">UartProtocol_t::command_arg</a></div><div class="ttdeci">float command_arg</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:61</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a2d4f0a942a590f196fd1938653b66afa"><div class="ttname"><a href="uart__protocol_8h.html#a2d4f0a942a590f196fd1938653b66afa">UartProtocol_Init</a></div><div class="ttdeci">void UartProtocol_Init(UartProtocol_t *proto, UART_HandleTypeDef *huart)</div><div class="ttdoc">Inicjalizacja protokołu UART.</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:65</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a2dd16492ef96e47733d20666fc19443e"><div class="ttname"><a href="uart__protocol_8h.html#a2dd16492ef96e47733d20666fc19443e">UartProtocol_GetArg</a></div><div class="ttdeci">float UartProtocol_GetArg(UartProtocol_t *proto)</div><div class="ttdoc">Pobranie argumentu ostatniej komendy.</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:231</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a55c32246f566464d452b9cedc08e631a"><div class="ttname"><a href="uart__protocol_8h.html#a55c32246f566464d452b9cedc08e631a">UartProtocol_Parse</a></div><div class="ttdeci">UartCommand_t UartProtocol_Parse(UartProtocol_t *proto)</div><div class="ttdoc">Parsowanie odebranej komendy (wywoływane z głównej pętli).</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:172</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a5822a9405798f726be1fc5599ec62b07"><div class="ttname"><a href="uart__protocol_8h.html#a5822a9405798f726be1fc5599ec62b07">UartProtocol_SendData</a></div><div class="ttdeci">void UartProtocol_SendData(UartProtocol_t *proto, float temp, float setpoint, uint16_t heater_pwm, uint16_t fan_pwm, uint32_t timestamp)</div><div class="ttdoc">Wysłanie danych pomiarowych.</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:87</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a5d200d74cfd471744a7a6e0f5d483c29"><div class="ttname"><a href="uart__protocol_8h.html#a5d200d74cfd471744a7a6e0f5d483c29">UartProtocol_SendAck</a></div><div class="ttdeci">void UartProtocol_SendAck(UartProtocol_t *proto, const char *cmd)</div><div class="ttdoc">Wysłanie potwierdzenia (ACK).</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:120</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a831c58270ed17ca8eb212f15c978d6af"><div class="ttname"><a href="uart__protocol_8h.html#a831c58270ed17ca8eb212f15c978d6af">UartProtocol_CRC8</a></div><div class="ttdeci">uint8_t UartProtocol_CRC8(const uint8_t *data, uint16_t len)</div><div class="ttdoc">Obliczenie CRC8 (polynomial 0x07).</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:77</div></div>
+<div class="ttc" id="auart__protocol_8h_html_a9889efbc1aea520f5391598c9cc376cd"><div class="ttname"><a href="uart__protocol_8h.html#a9889efbc1aea520f5391598c9cc376cd">UartProtocol_SendPong</a></div><div class="ttdeci">void UartProtocol_SendPong(UartProtocol_t *proto)</div><div class="ttdoc">Wysłanie odpowiedzi PONG.</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:108</div></div>
+<div class="ttc" id="auart__protocol_8h_html_acc5c9ff2b950033f51e777da1797a19e"><div class="ttname"><a href="uart__protocol_8h.html#acc5c9ff2b950033f51e777da1797a19e">UartProtocol_SendNak</a></div><div class="ttdeci">void UartProtocol_SendNak(UartProtocol_t *proto, const char *error)</div><div class="ttdoc">Wysłanie błędu (NAK).</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:133</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4c"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a></div><div class="ttdeci">UartCommand_t</div><div class="ttdoc">Lista dostępnych komend UART.</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:33</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0">CMD_PING</a></div><div class="ttdeci">@ CMD_PING</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:35</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc">CMD_STOP</a></div><div class="ttdeci">@ CMD_STOP</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:39</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa">CMD_SET_TEMP</a></div><div class="ttdeci">@ CMD_SET_TEMP</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:36</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee">CMD_SET_KP</a></div><div class="ttdeci">@ CMD_SET_KP</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:40</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4">CMD_SET_KD</a></div><div class="ttdeci">@ CMD_SET_KD</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:42</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc">CMD_NONE</a></div><div class="ttdeci">@ CMD_NONE</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:34</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a">CMD_GET_STATUS</a></div><div class="ttdeci">@ CMD_GET_STATUS</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:37</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5">CMD_SET_KI</a></div><div class="ttdeci">@ CMD_SET_KI</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:41</div></div>
+<div class="ttc" id="auart__protocol_8h_html_add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287"><div class="ttname"><a href="uart__protocol_8h.html#add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287">CMD_START</a></div><div class="ttdeci">@ CMD_START</div><div class="ttdef"><b>Definicja</b> uart_protocol.h:38</div></div>
+<div class="ttc" id="auart__protocol_8h_html_af4660451142b88c9667023983c48e40b"><div class="ttname"><a href="uart__protocol_8h.html#af4660451142b88c9667023983c48e40b">UartProtocol_ReceiveByte</a></div><div class="ttdeci">void UartProtocol_ReceiveByte(UartProtocol_t *proto, uint8_t byte)</div><div class="ttdoc">Przetworzenie odebranego bajtu (wywoływane z przerwania).</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:146</div></div>
+<div class="ttc" id="auart__protocol_8h_html_af9f317c0cf4c353b4c70219b92021b78"><div class="ttname"><a href="uart__protocol_8h.html#af9f317c0cf4c353b4c70219b92021b78">UartProtocol_VerifyCRC</a></div><div class="ttdeci">bool UartProtocol_VerifyCRC(UartProtocol_t *proto)</div><div class="ttdoc">Weryfikacja CRC odebranej wiadomości.</div><div class="ttdef"><b>Definicja</b> uart_protocol.c:160</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="uart__protocol_8h.html">uart_protocol.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

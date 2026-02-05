@@ -1,0 +1,157 @@
+\doxysubsection{QR decomposition of a Matrix }
+\hypertarget{group___matrix_q_r}{}\label{group___matrix_q_r}\index{QR decomposition of a Matrix@{QR decomposition of a Matrix}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_q_r_ga020173e1b30e288084647dea7259fba4}{arm\+\_\+mat\+\_\+qr\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Src, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} threshold, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+OutR, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+OutQ, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out\+Tau, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+TmpA, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+TmpB)
+\begin{DoxyCompactList}\small\item\em QR decomposition of a m x n floating point matrix with m \texorpdfstring{$>$}{>}= n. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_q_r_gaa56b5e49d38a791a3bcca5309fa7feba}{arm\+\_\+mat\+\_\+qr\+\_\+f64}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Src, const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} threshold, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+OutR, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+OutQ, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out\+Tau, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+TmpA, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+TmpB)
+\begin{DoxyCompactList}\small\item\em QR decomposition of a m x n double floating point matrix with m \texorpdfstring{$>$}{>}= n. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the QR decomposition of a matrix M using Householder algorithm.
+
+\[      M = Q R
+\]
+
+where Q is an orthogonal matrix and R is upper triangular. No pivoting strategy is used.
+
+The returned value for R is using a format a bit similar to LAPACK :\+ it is not just containing the matrix R but also the Householder reflectors.
+
+The function is also returning a vector $\tau$ that is containing the scaling factor for the reflectors.
+
+Returned value R has the structure:\+
+
+\[  \begin{pmatrix}
+  r_{11} & r_{12}     & \dots  & r_{1n} \\
+  v_{12} & r_{22}     & \dots  & r_{2n} \\
+  v_{13} & v_{22}     & \dots  & r_{3n} \\
+  \vdots & \vdots     & \ddots & \vdots   \\
+  v_{1m} & v_{2(m-1)} & \dots  & r_{mn} \\
+  \end{pmatrix}
+\]
+
+where
+
+\[  v_1 = 
+  \begin{pmatrix}
+  1       \\
+  v_{12}  \\
+  \vdots  \\
+  v_{1m}  \\
+  \end{pmatrix}
+\]
+
+is the first householder reflector.
+
+The Householder Matrix is given by $H_1$
+
+\[  H_1 = I - \tau_1 v_1 v_1^T
+\]
+
+The Matrix Q is the product of the Householder matrices:\+
+
+\[  Q = H_1 H_2 \dots H_n
+\]
+
+The computation of the matrix Q by this function is optional.
+
+And the matrix R, would be the returned value R without the householder reflectors:\+
+
+\[  \begin{pmatrix}
+  r_{11} & r_{12} & \dots  & r_{1n} \\
+  0      & r_{22} & \dots  & r_{2n} \\
+  0      & 0      & \dots  & r_{3n} \\
+  \vdots & \vdots & \ddots & \vdots   \\
+  0      & 0      & \dots  & r_{mn} \\
+  \end{pmatrix}
+\]
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_q_r_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_q_r_ga020173e1b30e288084647dea7259fba4}\index{QR decomposition of a Matrix@{QR decomposition of a Matrix}!arm\_mat\_qr\_f32@{arm\_mat\_qr\_f32}}
+\index{arm\_mat\_qr\_f32@{arm\_mat\_qr\_f32}!QR decomposition of a Matrix@{QR decomposition of a Matrix}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_qr\_f32()}{arm\_mat\_qr\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_q_r_ga020173e1b30e288084647dea7259fba4} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+qr\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{threshold}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+OutR}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+OutQ}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out\+Tau}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+TmpA}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+TmpB}{}\end{DoxyParamCaption})}
+
+
+
+QR decomposition of a m x n floating point matrix with m \texorpdfstring{$>$}{>}= n. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix structure. The source matrix is modified by the function. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em threshold} & norm2 threshold. ~\newline
+ \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+OutR} & points to output R matrix structure of dimension m x n \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+OutQ} & points to output Q matrix structure of dimension m x m (can be NULL) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out\+Tau} & points to Householder scaling factors of dimension n \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p\+TmpA} & points to a temporary vector of dimension m. \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p\+TmpB} & points to a temporary vector of dimension m. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{p\+OutQ is optional:\+}
+p\+OutQ can be a NULL pointer. In this case, the argument will be ignored and the output Q matrix won\textquotesingle{}t be computed.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Norm2 threshold }
+For the meaning of this argument please refer to the \doxylink{group___matrix_householder}{Householder transform of a vector} documentation 
+\end{DoxyParagraph}
+\Hypertarget{group___matrix_q_r_gaa56b5e49d38a791a3bcca5309fa7feba}\index{QR decomposition of a Matrix@{QR decomposition of a Matrix}!arm\_mat\_qr\_f64@{arm\_mat\_qr\_f64}}
+\index{arm\_mat\_qr\_f64@{arm\_mat\_qr\_f64}!QR decomposition of a Matrix@{QR decomposition of a Matrix}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_qr\_f64()}{arm\_mat\_qr\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_q_r_gaa56b5e49d38a791a3bcca5309fa7feba} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+qr\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}}}]{threshold}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+OutR}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+OutQ}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out\+Tau}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+TmpA}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+TmpB}{}\end{DoxyParamCaption})}
+
+
+
+QR decomposition of a m x n double floating point matrix with m \texorpdfstring{$>$}{>}= n. 
+
+QR decomposition of a m x n floating point matrix with m \texorpdfstring{$>$}{>}= n.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix structure. The source matrix is modified by the function. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em threshold} & norm2 threshold. ~\newline
+ \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+OutR} & points to output R matrix structure of dimension m x n \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+OutQ} & points to output Q matrix structure of dimension m x m (can be NULL) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out\+Tau} & points to Householder scaling factors of dimension n \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p\+TmpA} & points to a temporary vector of dimension m. \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p\+TmpB} & points to a temporary vector of dimension m. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{p\+OutQ is optional:\+}
+p\+OutQ can be a NULL pointer. In this case, the argument will be ignored and the output Q matrix won\textquotesingle{}t be computed.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Norm2 threshold }
+For the meaning of this argument please refer to the \doxylink{group___matrix_householder}{Householder transform of a vector} documentation 
+\end{DoxyParagraph}

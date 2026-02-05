@@ -1,0 +1,94 @@
+\doxysection{arm\+\_\+mfcc\+\_\+instance\+\_\+f32 Struct Reference}
+\hypertarget{structarm__mfcc__instance__f32}{}\label{structarm__mfcc__instance__f32}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+
+
+Instance structure for the Floating-\/point MFCC function.  
+
+
+
+
+{\ttfamily \+\#include $<$transform\+\_\+functions.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a8026013bc0810af2b1db606041228cca}{dct\+Coefs}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a5dfb2cf763294de0b95c7a3a2cf8fbe1}{filter\+Coefs}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a4a698086e918a056cb7175569c59cb61}{window\+Coefs}}
+\item 
+const uint32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a4bf2fc236988cf1e39f7b3efbd0a1797}{filter\+Pos}}
+\item 
+const uint32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a92fa17569af954a83e7d76d88693ecc6}{filter\+Lengths}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a13e9ec26f0771670bc9e3802b8d774d3}{fft\+Len}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structarm__mfcc__instance__f32_a8ac2a63296ee4e08bb019bf75f66f7d0}{nb\+Mel\+Filters}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structarm__mfcc__instance__f32_acfacbcf8d50f063823b8097880bc9485}{nb\+Dct\+Outputs}}
+\item 
+\Hypertarget{structarm__mfcc__instance__f32_a489f76388c886ac258175e4d27970b0c}\label{structarm__mfcc__instance__f32_a489f76388c886ac258175e4d27970b0c} 
+\doxymbox{\hyperlink{structarm__rfft__fast__instance__f32}{arm\+\_\+rfft\+\_\+fast\+\_\+instance\+\_\+f32}} {\bfseries rfft}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Floating-\/point MFCC function. 
+
+\label{doc-variable-members}
+\Hypertarget{structarm__mfcc__instance__f32_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structarm__mfcc__instance__f32_a8026013bc0810af2b1db606041228cca}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!dctCoefs@{dctCoefs}}
+\index{dctCoefs@{dctCoefs}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{dctCoefs}{dctCoefs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a8026013bc0810af2b1db606041228cca} 
+const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}\texorpdfstring{$\ast$}{*} dct\+Coefs}
+
+Internal DCT coefficients \Hypertarget{structarm__mfcc__instance__f32_a13e9ec26f0771670bc9e3802b8d774d3}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!fftLen@{fftLen}}
+\index{fftLen@{fftLen}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{fftLen}{fftLen}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a13e9ec26f0771670bc9e3802b8d774d3} 
+uint32\+\_\+t fft\+Len}
+
+FFT length \Hypertarget{structarm__mfcc__instance__f32_a5dfb2cf763294de0b95c7a3a2cf8fbe1}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!filterCoefs@{filterCoefs}}
+\index{filterCoefs@{filterCoefs}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{filterCoefs}{filterCoefs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a5dfb2cf763294de0b95c7a3a2cf8fbe1} 
+const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}\texorpdfstring{$\ast$}{*} filter\+Coefs}
+
+Internal Mel filter coefficients \Hypertarget{structarm__mfcc__instance__f32_a92fa17569af954a83e7d76d88693ecc6}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!filterLengths@{filterLengths}}
+\index{filterLengths@{filterLengths}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{filterLengths}{filterLengths}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a92fa17569af954a83e7d76d88693ecc6} 
+const uint32\+\_\+t\texorpdfstring{$\ast$}{*} filter\+Lengths}
+
+Internal Mel filter lengths \Hypertarget{structarm__mfcc__instance__f32_a4bf2fc236988cf1e39f7b3efbd0a1797}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!filterPos@{filterPos}}
+\index{filterPos@{filterPos}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{filterPos}{filterPos}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a4bf2fc236988cf1e39f7b3efbd0a1797} 
+const uint32\+\_\+t\texorpdfstring{$\ast$}{*} filter\+Pos}
+
+Internal Mel filter positions in spectrum \Hypertarget{structarm__mfcc__instance__f32_acfacbcf8d50f063823b8097880bc9485}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!nbDctOutputs@{nbDctOutputs}}
+\index{nbDctOutputs@{nbDctOutputs}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{nbDctOutputs}{nbDctOutputs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_acfacbcf8d50f063823b8097880bc9485} 
+uint32\+\_\+t nb\+Dct\+Outputs}
+
+Number of DCT outputs \Hypertarget{structarm__mfcc__instance__f32_a8ac2a63296ee4e08bb019bf75f66f7d0}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!nbMelFilters@{nbMelFilters}}
+\index{nbMelFilters@{nbMelFilters}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{nbMelFilters}{nbMelFilters}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a8ac2a63296ee4e08bb019bf75f66f7d0} 
+uint32\+\_\+t nb\+Mel\+Filters}
+
+Number of Mel filters \Hypertarget{structarm__mfcc__instance__f32_a4a698086e918a056cb7175569c59cb61}\index{arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}!windowCoefs@{windowCoefs}}
+\index{windowCoefs@{windowCoefs}!arm\_mfcc\_instance\_f32@{arm\_mfcc\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{windowCoefs}{windowCoefs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__f32_a4a698086e918a056cb7175569c59cb61} 
+const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}\texorpdfstring{$\ast$}{*} window\+Coefs}
+
+Windowing coefficients 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Middlewares/\+\+Third\+\_\+\+Party/\+\+ARM\+\_\+\+CMSIS/\+\+Include/\+dsp/\+transform\+\_\+functions.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,90 @@
+\doxysubsubsection{Deprecated Real FFT Functions }
+\hypertarget{group___deprecated_real_f_f_t}{}\label{group___deprecated_real_f_f_t}\index{Deprecated Real FFT Functions@{Deprecated Real FFT Functions}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___deprecated_real_f_f_t_ga592726e37f1dffc41948e56624e91ab1}{arm\+\_\+rfft\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\+\_\+rfft\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Processing function for the floating-\/point RFFT/\+\+RIFFT. Source buffer is modified by this function. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___deprecated_real_f_f_t_ga3eb28d0ca4ac6a1350e5f01b7c30a676}{arm\+\_\+rfft\+\_\+init\+\_\+f32}} (\doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\+\_\+rfft\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32}{arm\+\_\+cfft\+\_\+radix4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S\+\_\+\+CFFT, uint32\+\_\+t fft\+Len\+Real, uint32\+\_\+t ifft\+FlagR, uint32\+\_\+t bit\+Reverse\+Flag)
+\begin{DoxyCompactList}\small\item\em Initialization function for the floating-\/point RFFT/\+\+RIFFT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___deprecated_real_f_f_t_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___deprecated_real_f_f_t_ga592726e37f1dffc41948e56624e91ab1}\index{Deprecated Real FFT Functions@{Deprecated Real FFT Functions}!arm\_rfft\_f32@{arm\_rfft\_f32}}
+\index{arm\_rfft\_f32@{arm\_rfft\_f32}!Deprecated Real FFT Functions@{Deprecated Real FFT Functions}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_rfft\_f32()}{arm\_rfft\_f32()}}
+{\footnotesize\ttfamily \label{group___deprecated_real_f_f_t_ga592726e37f1dffc41948e56624e91ab1} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+rfft\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\+\_\+rfft\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Processing function for the floating-\/point RFFT/\+\+RIFFT. Source buffer is modified by this function. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\doxymbox{\hyperlink{deprecated__deprecated000024}{Deprecated}}]Do not use this function. It has been superceded by \doxylink{group___real_f_f_t_f32_gafc85e6d6359a6d21c3554428c74258c9}{arm\+\_\+rfft\+\_\+fast\+\_\+f32} and will be removed in the future. \end{DoxyRefDesc}
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & points to an instance of the floating-\/point RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input buffer \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output buffer \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___deprecated_real_f_f_t_ga3eb28d0ca4ac6a1350e5f01b7c30a676}\index{Deprecated Real FFT Functions@{Deprecated Real FFT Functions}!arm\_rfft\_init\_f32@{arm\_rfft\_init\_f32}}
+\index{arm\_rfft\_init\_f32@{arm\_rfft\_init\_f32}!Deprecated Real FFT Functions@{Deprecated Real FFT Functions}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_rfft\_init\_f32()}{arm\_rfft\_init\_f32()}}
+{\footnotesize\ttfamily \label{group___deprecated_real_f_f_t_ga3eb28d0ca4ac6a1350e5f01b7c30a676} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+rfft\+\_\+init\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\+\_\+rfft\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32}{arm\+\_\+cfft\+\_\+radix4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S\+\_\+\+CFFT}{, }\item[{uint32\+\_\+t}]{fft\+Len\+Real}{, }\item[{uint32\+\_\+t}]{ifft\+FlagR}{, }\item[{uint32\+\_\+t}]{bit\+Reverse\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the floating-\/point RFFT/\+\+RIFFT. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\doxymbox{\hyperlink{deprecated__deprecated000025}{Deprecated}}]Do not use this function. It has been superceded by \doxylink{group___real_f_f_t_f32_ga25c9f75d32ba9871b2705b3dcc7372c0}{arm\+\_\+rfft\+\_\+fast\+\_\+init\+\_\+f32} and will be removed in the future. \end{DoxyRefDesc}
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em S\+\_\+\+CFFT} & points to an instance of the floating-\/point CFFT/\+\+CIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em fft\+Len\+Real} & length of the FFT. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Description}
+The parameter {\ttfamily fft\+Len\+Real}specifies length of RFFT/\+\+RIFFT Process. Supported FFT Lengths are 128, 512, 2048. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table. 
+\end{DoxyParagraph}

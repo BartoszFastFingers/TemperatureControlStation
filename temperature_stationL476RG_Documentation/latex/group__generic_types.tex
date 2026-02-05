@@ -1,0 +1,106 @@
+\doxysection{Generic Types }
+\hypertarget{group__generic_types}{}\label{group__generic_types}\index{Generic Types@{Generic Types}}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__generic_types_gae541b6f232c305361e9b416fc9eed263}\label{group__generic_types_gae541b6f232c305361e9b416fc9eed263} 
+typedef int8\+\_\+t {\bfseries q7\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 8-\/bit fractional data type in 1.\+7 format. \end{DoxyCompactList}\item 
+\Hypertarget{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}\label{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea} 
+typedef int16\+\_\+t {\bfseries q15\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 16-\/bit fractional data type in 1.\+15 format. \end{DoxyCompactList}\item 
+\Hypertarget{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}\label{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0} 
+typedef int32\+\_\+t {\bfseries q31\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 32-\/bit fractional data type in 1.\+31 format. \end{DoxyCompactList}\item 
+\Hypertarget{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}\label{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6} 
+typedef int64\+\_\+t {\bfseries q63\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 64-\/bit fractional data type in 1.\+63 format. \end{DoxyCompactList}\item 
+\Hypertarget{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}\label{group__generic_types_ga4611b605e45ab401f02cab15c5e38715} 
+typedef float {\bfseries float32\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 32-\/bit floating-\/point type definition. \end{DoxyCompactList}\item 
+\Hypertarget{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}\label{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4} 
+typedef double {\bfseries float64\+\_\+t}
+\begin{DoxyCompactList}\small\item\em 64-\/bit floating-\/point type definition. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \{ \newline
+\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS}} = 0
+, \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR}} = -\/1
+, \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9ae74d7f8a53aec0512ae8f0a421e0e1}{ARM\+\_\+\+MATH\+\_\+\+LENGTH\+\_\+\+ERROR}} = -\/2
+, \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH}} = -\/3
+, \newline
+\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6ac55996aaf19245238a8f57a91aeaefcc}{ARM\+\_\+\+MATH\+\_\+\+NANINF}} = -\/4
+, \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a91509ea9c819dbd592ac13a6b05382dc}{ARM\+\_\+\+MATH\+\_\+\+SINGULAR}} = -\/5
+, \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a09457f2be656b35015fd6d36202fa376}{ARM\+\_\+\+MATH\+\_\+\+TEST\+\_\+\+FAILURE}} = -\/6
+, \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE}} = -\/7
+ \}
+\begin{DoxyCompactList}\small\item\em vector types \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-enum-members}
+\Hypertarget{group__generic_types_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}\index{Generic Types@{Generic Types}!arm\_status@{arm\_status}}
+\index{arm\_status@{arm\_status}!Generic Types@{Generic Types}}
+\doxysubsubsection{\texorpdfstring{arm\_status}{arm\_status}}
+{\footnotesize\ttfamily \label{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6} 
+enum \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}}}
+
+
+
+vector types 
+
+Error status returned by some functions in the library. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_SUCCESS@{ARM\_MATH\_SUCCESS}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_SUCCESS@{ARM\_MATH\_SUCCESS}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0} 
+ARM\+\_\+\+MATH\+\_\+\+SUCCESS&No error \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_ARGUMENT\_ERROR@{ARM\_MATH\_ARGUMENT\_ERROR}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_ARGUMENT\_ERROR@{ARM\_MATH\_ARGUMENT\_ERROR}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35} 
+ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR&One or more arguments are incorrect \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_LENGTH\_ERROR@{ARM\_MATH\_LENGTH\_ERROR}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_LENGTH\_ERROR@{ARM\_MATH\_LENGTH\_ERROR}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9ae74d7f8a53aec0512ae8f0a421e0e1}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9ae74d7f8a53aec0512ae8f0a421e0e1} 
+ARM\+\_\+\+MATH\+\_\+\+LENGTH\+\_\+\+ERROR&Length of data buffer is incorrect \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_SIZE\_MISMATCH@{ARM\_MATH\_SIZE\_MISMATCH}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_SIZE\_MISMATCH@{ARM\_MATH\_SIZE\_MISMATCH}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b} 
+ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH&Size of matrices is not compatible with the operation \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_NANINF@{ARM\_MATH\_NANINF}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_NANINF@{ARM\_MATH\_NANINF}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6ac55996aaf19245238a8f57a91aeaefcc}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6ac55996aaf19245238a8f57a91aeaefcc} 
+ARM\+\_\+\+MATH\+\_\+\+NANINF&Not-\/a-\/number (NaN) or infinity is generated \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_SINGULAR@{ARM\_MATH\_SINGULAR}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_SINGULAR@{ARM\_MATH\_SINGULAR}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a91509ea9c819dbd592ac13a6b05382dc}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a91509ea9c819dbd592ac13a6b05382dc} 
+ARM\+\_\+\+MATH\+\_\+\+SINGULAR&Input matrix is singular and cannot be inverted \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_TEST\_FAILURE@{ARM\_MATH\_TEST\_FAILURE}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_TEST\_FAILURE@{ARM\_MATH\_TEST\_FAILURE}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a09457f2be656b35015fd6d36202fa376}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a09457f2be656b35015fd6d36202fa376} 
+ARM\+\_\+\+MATH\+\_\+\+TEST\+\_\+\+FAILURE&Test Failed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ARM\_MATH\_DECOMPOSITION\_FAILURE@{ARM\_MATH\_DECOMPOSITION\_FAILURE}!Generic Types@{Generic Types}}
+\index{Generic Types@{Generic Types}!ARM\_MATH\_DECOMPOSITION\_FAILURE@{ARM\_MATH\_DECOMPOSITION\_FAILURE}}
+}\Hypertarget{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}\label{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31} 
+ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE&Decomposition Failed \\
+\hline
+
+\end{DoxyEnumFields}

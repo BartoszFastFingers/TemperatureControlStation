@@ -1,0 +1,197 @@
+\doxysection{complex\+\_\+math\+\_\+functions.\+h}
+\hypertarget{complex__math__functions_8h_source}{}\label{complex__math__functions_8h_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Include/dsp/complex\_math\_functions.h@{Middlewares/Third\_Party/ARM\_CMSIS/Include/dsp/complex\_math\_functions.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ @file\ \ \ \ \ complex\_math\_functions.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ @brief\ \ \ \ Public\ header\ file\ for\ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ @version\ \ V1.10.0}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ @date\ \ \ \ \ 08\ July\ 2021}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2010-\/2020\ Arm\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#ifndef\ COMPLEX\_MATH\_FUNCTIONS\_H\_}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ COMPLEX\_MATH\_FUNCTIONS\_H\_}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_types.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_memory.h"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}dsp/none.h"{}}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}dsp/utils.h"{}}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ "{}dsp/fast\_math\_functions.h"{}}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00038\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__conj_gab9f51cec2124ff7ffa2d22a21fbbd2fd}{arm\_cmplx\_conj\_f32}}(}
+\DoxyCodeLine{00059\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__conj_ga9ea2b7b0eea967ca5335ff03a6def835}{arm\_cmplx\_conj\_q31}}(}
+\DoxyCodeLine{00070\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pDst,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__conj_gafc95174a12b9935960a1b24dcbd3e77b}{arm\_cmplx\_conj\_q15}}(}
+\DoxyCodeLine{00082\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pDst,}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag__squared_ga93c7b993232c30c08ea103ba6795abb9}{arm\_cmplx\_mag\_squared\_f32}}(}
+\DoxyCodeLine{00094\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00105\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag__squared_gad5e0cac62bb1001b9ed482d809072196}{arm\_cmplx\_mag\_squared\_f64}}(}
+\DoxyCodeLine{00106\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pDst,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag__squared_ga4ee7a0ff1ec086dde3e85ceae496734a}{arm\_cmplx\_mag\_squared\_q31}}(}
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pDst,}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00129\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag__squared_ga2bd7afebefbdcbeb645f7790704586fe}{arm\_cmplx\_mag\_squared\_q15}}(}
+\DoxyCodeLine{00130\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pDst,}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag_ga0a85ce170660e5e46fc387ab718be8ca}{arm\_cmplx\_mag\_f32}}(}
+\DoxyCodeLine{00142\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00153\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag_gafb89f5a9c9ab2cbfd21bcb8f86b47c07}{arm\_cmplx\_mag\_f64}}(}
+\DoxyCodeLine{00154\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pDst,}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag_ga3b3e06e7d513f4681e02d57760e2d88f}{arm\_cmplx\_mag\_q31}}(}
+\DoxyCodeLine{00166\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pDst,}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag_ga83166a483dbb0c9578a576822204c099}{arm\_cmplx\_mag\_q15}}(}
+\DoxyCodeLine{00178\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pDst,}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00188\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__mag_ga78ba2ffd717b0430952d4c23132e1656}{arm\_cmplx\_mag\_fast\_q15}}(}
+\DoxyCodeLine{00189\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pDst,}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__dot__prod_ga4740ed5a1a0837d5837aca3a95b35be3}{arm\_cmplx\_dot\_prod\_q15}}(}
+\DoxyCodeLine{00203\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00204\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples,}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ realResult,}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ imagResult);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00218\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__dot__prod_gad3362383e1f0cb1a72b838305381f7c5}{arm\_cmplx\_dot\_prod\_q31}}(}
+\DoxyCodeLine{00219\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00220\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples,}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ *\ realResult,}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ *\ imagResult);}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00234\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group__cmplx__dot__prod_ga2da5c4f297fd2772c7a18b2a1a3332d0}{arm\_cmplx\_dot\_prod\_f32}}(}
+\DoxyCodeLine{00235\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00236\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples,}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ realResult,}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ imagResult);}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00249\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_real_mult_ga6cde0b06bbbf228f0896671863d48c43}{arm\_cmplx\_mult\_real\_q15}}(}
+\DoxyCodeLine{00250\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrcCmplx,}
+\DoxyCodeLine{00251\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrcReal,}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pCmplxDst,}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00263\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_real_mult_gab999dce5741986017ddaddf173796961}{arm\_cmplx\_mult\_real\_q31}}(}
+\DoxyCodeLine{00264\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcCmplx,}
+\DoxyCodeLine{00265\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcReal,}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCmplxDst,}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00277\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_real_mult_ga0afec909c3e6ff03d58e531fd4bc8cd5}{arm\_cmplx\_mult\_real\_f32}}(}
+\DoxyCodeLine{00278\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrcCmplx,}
+\DoxyCodeLine{00279\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrcReal,}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pCmplxDst,}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00290\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_ga60f5c2d9b6192b39394d6974f0bedf9e}{arm\_cmplx\_mult\_cmplx\_q15}}(}
+\DoxyCodeLine{00291\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00292\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pDst,}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00304\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_gae7192ac48ea1e8b6494c40bfe5d71597}{arm\_cmplx\_mult\_cmplx\_q31}}(}
+\DoxyCodeLine{00305\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00306\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pDst,}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00318\ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_ga8d82cf92ce4f920c8660804098071d9e}{arm\_cmplx\_mult\_cmplx\_f32}}(}
+\DoxyCodeLine{00319\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00320\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00333\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_ga63c13cf06221e463ec6451cb8250fddb}{arm\_cmplx\_mult\_cmplx\_f64}}(}
+\DoxyCodeLine{00334\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00335\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pDst,}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ uint32\_t\ numSamples);}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00342\ \}}
+\DoxyCodeLine{00343\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \_COMPLEX\_MATH\_FUNCTIONS\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

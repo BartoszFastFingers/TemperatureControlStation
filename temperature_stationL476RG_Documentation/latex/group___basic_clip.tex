@@ -1,0 +1,117 @@
+\doxysubsection{Elementwise clipping }
+\hypertarget{group___basic_clip}{}\label{group___basic_clip}\index{Elementwise clipping@{Elementwise clipping}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_clip_ga660092cdca0bfba422b32e2714753fd8}{arm\+\_\+clip\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} low, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} high, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Elementwise floating-\/point clipping. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_clip_ga786bb1e2051ff362f21fd46371ce8695}{arm\+\_\+clip\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} low, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} high, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Elementwise fixed-\/point clipping. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_clip_gae150f6a278c37c86b079cb41c71ec135}{arm\+\_\+clip\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} low, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} high, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Elementwise fixed-\/point clipping. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_clip_gae5e7c2922fb6872cf3c780df364fb685}{arm\+\_\+clip\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} low, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} high, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Elementwise fixed-\/point clipping. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Element-\/by-\/element clipping of a value.
+
+The value is constrained between 2 bounds.
+
+There are separate functions for floating-\/point, Q7, Q15, and Q31 data types.
+
+\label{doc-func-members}
+\Hypertarget{group___basic_clip_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___basic_clip_ga660092cdca0bfba422b32e2714753fd8}\index{Elementwise clipping@{Elementwise clipping}!arm\_clip\_f32@{arm\_clip\_f32}}
+\index{arm\_clip\_f32@{arm\_clip\_f32}!Elementwise clipping@{Elementwise clipping}}
+\doxysubsubsubsection{\texorpdfstring{arm\_clip\_f32()}{arm\_clip\_f32()}}
+{\footnotesize\ttfamily \label{group___basic_clip_ga660092cdca0bfba422b32e2714753fd8} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+clip\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{low}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{high}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Elementwise floating-\/point clipping. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input values \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output clipped values \\
+\hline
+\doxymbox{\texttt{in}}  & {\em low} & lower bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em high} & higher bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples to clip \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_clip_ga786bb1e2051ff362f21fd46371ce8695}\index{Elementwise clipping@{Elementwise clipping}!arm\_clip\_q15@{arm\_clip\_q15}}
+\index{arm\_clip\_q15@{arm\_clip\_q15}!Elementwise clipping@{Elementwise clipping}}
+\doxysubsubsubsection{\texorpdfstring{arm\_clip\_q15()}{arm\_clip\_q15()}}
+{\footnotesize\ttfamily \label{group___basic_clip_ga786bb1e2051ff362f21fd46371ce8695} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+clip\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{low}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{high}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Elementwise fixed-\/point clipping. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input values \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output clipped values \\
+\hline
+\doxymbox{\texttt{in}}  & {\em low} & lower bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em high} & higher bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples to clip \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_clip_gae150f6a278c37c86b079cb41c71ec135}\index{Elementwise clipping@{Elementwise clipping}!arm\_clip\_q31@{arm\_clip\_q31}}
+\index{arm\_clip\_q31@{arm\_clip\_q31}!Elementwise clipping@{Elementwise clipping}}
+\doxysubsubsubsection{\texorpdfstring{arm\_clip\_q31()}{arm\_clip\_q31()}}
+{\footnotesize\ttfamily \label{group___basic_clip_gae150f6a278c37c86b079cb41c71ec135} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+clip\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{low}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{high}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Elementwise fixed-\/point clipping. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input values \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output clipped values \\
+\hline
+\doxymbox{\texttt{in}}  & {\em low} & lower bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em high} & higher bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples to clip \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_clip_gae5e7c2922fb6872cf3c780df364fb685}\index{Elementwise clipping@{Elementwise clipping}!arm\_clip\_q7@{arm\_clip\_q7}}
+\index{arm\_clip\_q7@{arm\_clip\_q7}!Elementwise clipping@{Elementwise clipping}}
+\doxysubsubsubsection{\texorpdfstring{arm\_clip\_q7()}{arm\_clip\_q7()}}
+{\footnotesize\ttfamily \label{group___basic_clip_gae5e7c2922fb6872cf3c780df364fb685} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+clip\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}}}]{low}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}}}]{high}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Elementwise fixed-\/point clipping. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input values \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output clipped values \\
+\hline
+\doxymbox{\texttt{in}}  & {\em low} & lower bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em high} & higher bound \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples to clip \\
+\hline
+\end{DoxyParams}

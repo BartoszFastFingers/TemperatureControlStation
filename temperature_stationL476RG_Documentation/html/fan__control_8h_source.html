@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Plik źródłowy Core/Inc/fan_control.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('fan__control_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">fan_control.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="fan__control_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef CORE_INC_FAN_CONTROL_H_</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define CORE_INC_FAN_CONTROL_H_</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;tim.h&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="struct_fan_handle__t.html">   21</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="struct_fan_handle__t.html#a5dc7d1c65997ccaed48a93a3f4ffc486">   23</a></span>    TIM_HandleTypeDef *<a class="code hl_variable" href="struct_fan_handle__t.html#a5dc7d1c65997ccaed48a93a3f4ffc486">htim</a>; </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="struct_fan_handle__t.html#a0c72dd5e18823aef187a34137983c9a6">   24</a></span>    uint32_t <a class="code hl_variable" href="struct_fan_handle__t.html#a0c72dd5e18823aef187a34137983c9a6">channel</a>;         </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="struct_fan_handle__t.html#a5ec138df72bc035a0253131ce61c909c">   25</a></span>    uint16_t <a class="code hl_variable" href="struct_fan_handle__t.html#a5ec138df72bc035a0253131ce61c909c">current_speed</a>;   </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>} <a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a>;</div>
+</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="fan__control_8h.html#a865768af54e01dd30b57068422c73b3a">Fan_Init</a>(<a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>              TIM_HandleTypeDef *htim,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>              uint32_t channel);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">void</span> <a class="code hl_function" href="fan__control_8h.html#a099f3902bd4ef8121d21f8a5bd095ccb">Fan_Start</a>(<a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">void</span> <a class="code hl_function" href="fan__control_8h.html#aa9d94379024a9af4c65de7e6c36c2362">Fan_Stop</a>(<a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">void</span> <a class="code hl_function" href="fan__control_8h.html#ada8d607109150b07dfa4da24a6491d3e">Fan_SetSpeed</a>(<a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan, uint16_t speed);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>uint16_t <a class="code hl_function" href="fan__control_8h.html#a84a14bde9d1dcabb514394668ad98550">Fan_GetSpeed</a>(<a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keywordtype">void</span> <a class="code hl_function" href="fan__control_8h.html#a35d619930662823894ac77077897eefc">Fan_Off</a>(<a class="code hl_struct" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">/* CORE_INC_FAN_CONTROL_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="afan__control_8h_html_a099f3902bd4ef8121d21f8a5bd095ccb"><div class="ttname"><a href="fan__control_8h.html#a099f3902bd4ef8121d21f8a5bd095ccb">Fan_Start</a></div><div class="ttdeci">void Fan_Start(FanHandle_t *hfan)</div><div class="ttdoc">Uruchamia PWM wentylatora.</div><div class="ttdef"><b>Definicja</b> fan_control.c:19</div></div>
+<div class="ttc" id="afan__control_8h_html_a35d619930662823894ac77077897eefc"><div class="ttname"><a href="fan__control_8h.html#a35d619930662823894ac77077897eefc">Fan_Off</a></div><div class="ttdeci">void Fan_Off(FanHandle_t *hfan)</div><div class="ttdoc">Wyłącza wentylator (ustawia prędkość na 0).</div><div class="ttdef"><b>Definicja</b> fan_control.c:45</div></div>
+<div class="ttc" id="afan__control_8h_html_a84a14bde9d1dcabb514394668ad98550"><div class="ttname"><a href="fan__control_8h.html#a84a14bde9d1dcabb514394668ad98550">Fan_GetSpeed</a></div><div class="ttdeci">uint16_t Fan_GetSpeed(FanHandle_t *hfan)</div><div class="ttdoc">Pobiera aktualną prędkość wentylatora.</div><div class="ttdef"><b>Definicja</b> fan_control.c:40</div></div>
+<div class="ttc" id="afan__control_8h_html_a865768af54e01dd30b57068422c73b3a"><div class="ttname"><a href="fan__control_8h.html#a865768af54e01dd30b57068422c73b3a">Fan_Init</a></div><div class="ttdeci">void Fan_Init(FanHandle_t *hfan, TIM_HandleTypeDef *htim, uint32_t channel)</div><div class="ttdoc">Inicjalizuje strukturę wentylatora.</div><div class="ttdef"><b>Definicja</b> fan_control.c:10</div></div>
+<div class="ttc" id="afan__control_8h_html_aa9d94379024a9af4c65de7e6c36c2362"><div class="ttname"><a href="fan__control_8h.html#aa9d94379024a9af4c65de7e6c36c2362">Fan_Stop</a></div><div class="ttdeci">void Fan_Stop(FanHandle_t *hfan)</div><div class="ttdoc">Zatrzymuje PWM wentylatora i ustawia prędkość na 0.</div><div class="ttdef"><b>Definicja</b> fan_control.c:24</div></div>
+<div class="ttc" id="afan__control_8h_html_ada8d607109150b07dfa4da24a6491d3e"><div class="ttname"><a href="fan__control_8h.html#ada8d607109150b07dfa4da24a6491d3e">Fan_SetSpeed</a></div><div class="ttdeci">void Fan_SetSpeed(FanHandle_t *hfan, uint16_t speed)</div><div class="ttdoc">Ustawia prędkość wentylatora.</div><div class="ttdef"><b>Definicja</b> fan_control.c:31</div></div>
+<div class="ttc" id="astruct_fan_handle__t_html"><div class="ttname"><a href="struct_fan_handle__t.html">FanHandle_t</a></div><div class="ttdoc">Struktura reprezentująca wentylator sterowany PWM.</div><div class="ttdef"><b>Definicja</b> fan_control.h:22</div></div>
+<div class="ttc" id="astruct_fan_handle__t_html_a0c72dd5e18823aef187a34137983c9a6"><div class="ttname"><a href="struct_fan_handle__t.html#a0c72dd5e18823aef187a34137983c9a6">FanHandle_t::channel</a></div><div class="ttdeci">uint32_t channel</div><div class="ttdef"><b>Definicja</b> fan_control.h:24</div></div>
+<div class="ttc" id="astruct_fan_handle__t_html_a5dc7d1c65997ccaed48a93a3f4ffc486"><div class="ttname"><a href="struct_fan_handle__t.html#a5dc7d1c65997ccaed48a93a3f4ffc486">FanHandle_t::htim</a></div><div class="ttdeci">TIM_HandleTypeDef * htim</div><div class="ttdef"><b>Definicja</b> fan_control.h:23</div></div>
+<div class="ttc" id="astruct_fan_handle__t_html_a5ec138df72bc035a0253131ce61c909c"><div class="ttname"><a href="struct_fan_handle__t.html#a5ec138df72bc035a0253131ce61c909c">FanHandle_t::current_speed</a></div><div class="ttdeci">uint16_t current_speed</div><div class="ttdef"><b>Definicja</b> fan_control.h:25</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="fan__control_8h.html">fan_control.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

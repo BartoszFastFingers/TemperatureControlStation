@@ -1,0 +1,238 @@
+\doxysection{arm\+\_\+rfft\+\_\+fast\+\_\+init\+\_\+f64.\+c}
+\hypertarget{arm__rfft__fast__init__f64_8c_source}{}\label{arm__rfft__fast__init__f64_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_rfft\_fast\_init\_f64.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_rfft\_fast\_init\_f64.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_rfft\_fast\_init\_f64.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Split\ Radix\ Decimation\ in\ Frequency\ CFFT\ Double\ Precision\ Floating\ point\ processing\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_common\_tables.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga646da21400d503ccaf8182085eb5848a}{arm\_rfft\_fast\_init\_32\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00057\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 16U;}
+\DoxyCodeLine{00058\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 32U;}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_16\_TABLE\_LENGTH;}
+\DoxyCodeLine{00061\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_16;}
+\DoxyCodeLine{00062\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_gab321798a5513dd898c6eb487e2284814}{twiddleCoefF64\_16}};}
+\DoxyCodeLine{00063\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_32;}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00066\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga9259768f7d2c3ae5cc906d40a1859e6e}{arm\_rfft\_fast\_init\_64\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00084\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 32U;}
+\DoxyCodeLine{00085\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 64U;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_32\_TABLE\_LENGTH;}
+\DoxyCodeLine{00088\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_32;}
+\DoxyCodeLine{00089\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_ga188f5727ff912cf9dfe15459d4f74f11}{twiddleCoefF64\_32}};}
+\DoxyCodeLine{00090\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_64;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga65cf347a8e5ff37a57c966bfed05227f}{arm\_rfft\_fast\_init\_128\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00111\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 64U;}
+\DoxyCodeLine{00112\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 128U;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_64\_TABLE\_LENGTH;}
+\DoxyCodeLine{00115\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_64;}
+\DoxyCodeLine{00116\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_ga8f72684ee1f78a89e10034366607baef}{twiddleCoefF64\_64}};}
+\DoxyCodeLine{00117\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_128;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00120\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaaa4a9b9ac752eb64f674a8a65494c8bd}{arm\_rfft\_fast\_init\_256\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00138\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 128U;}
+\DoxyCodeLine{00139\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 256U;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_128\_TABLE\_LENGTH;}
+\DoxyCodeLine{00142\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_128;}
+\DoxyCodeLine{00143\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_ga193d7b0c43830c9d001fa4baa35bd1d7}{twiddleCoefF64\_128}};}
+\DoxyCodeLine{00144\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_256;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00147\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gad54acde5c38a408c031887792fc408ad}{arm\_rfft\_fast\_init\_512\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00165\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 256U;}
+\DoxyCodeLine{00166\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 512U;}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_256\_TABLE\_LENGTH;}
+\DoxyCodeLine{00169\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_256;}
+\DoxyCodeLine{00170\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_gaa87d984cdf2bcf7a25b2edb9786d60e8}{twiddleCoefF64\_256}};}
+\DoxyCodeLine{00171\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_512;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00174\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga643b00dabf2a49824f47983e9119e8f1}{arm\_rfft\_fast\_init\_1024\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00191\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 512U;}
+\DoxyCodeLine{00192\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 1024U;}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_512\_TABLE\_LENGTH;}
+\DoxyCodeLine{00195\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_512;}
+\DoxyCodeLine{00196\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_ga7c056a6fcdfd73de4df4bdcb11769ce5}{twiddleCoefF64\_512}};}
+\DoxyCodeLine{00197\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_1024;}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00200\ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00209\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaf98bdfe7bf79ae659503653f7e647c59}{arm\_rfft\_fast\_init\_2048\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00216\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 1024U;}
+\DoxyCodeLine{00217\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 2048U;}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_1024\_TABLE\_LENGTH;}
+\DoxyCodeLine{00220\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_1024;}
+\DoxyCodeLine{00221\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_gab9dc5f4ac234571eec295af3e2ed4b14}{twiddleCoefF64\_1024}};}
+\DoxyCodeLine{00222\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_2048;}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00225\ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaba48bc2a2e7212048375024ea27479f3}{arm\_rfft\_fast\_init\_4096\_f64}}(\ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S\ )\ \{}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \doxymbox{\hyperlink{structarm__cfft__instance__f64}{arm\_cfft\_instance\_f64}}\ *\ Sint;}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ Sint\ =\ \&(S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a0915e69281e9037d7a7508a2a04dea61}{Sint}});}
+\DoxyCodeLine{00242\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}}\ =\ 2048U;}
+\DoxyCodeLine{00243\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_a174f8c72d545034e19ba4ced52b31353}{fftLenRFFT}}\ =\ 4096U;}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}}\ =\ ARMBITREVINDEXTABLEF64\_2048\_TABLE\_LENGTH;}
+\DoxyCodeLine{00246\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}}\ =\ (uint16\_t\ *)armBitRevIndexTableF64\_2048;}
+\DoxyCodeLine{00247\ \ \ Sint-\/>\doxymbox{\hyperlink{structarm__cfft__instance__f64_a8a6eddea3385b1fca85ccb9b956ec1a3}{pTwiddle}}\ \ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ \doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t_ga263e3c1c4daac1622622439fc21e05f7}{twiddleCoefF64\_2048}};}
+\DoxyCodeLine{00248\ \ \ S-\/>\doxymbox{\hyperlink{structarm__rfft__fast__instance__f64_ae1f4aa2eb9bde099d9df8eba28670c31}{pTwiddleRFFT}}\ \ \ \ =\ (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *)\ twiddleCoefF64\_rfft\_4096;}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00251\ \}}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaee919dd59461ca2d76d4c505a1f85111}{arm\_rfft\_fast\_init\_f64}}(}
+\DoxyCodeLine{00282\ \ \ \doxymbox{\hyperlink{structarm__rfft__fast__instance__f64}{arm\_rfft\_fast\_instance\_f64}}\ *\ S,}
+\DoxyCodeLine{00283\ \ \ uint16\_t\ fftLen)}
+\DoxyCodeLine{00284\ \{}
+\DoxyCodeLine{00285\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \textcolor{keywordflow}{switch}\ (fftLen)}
+\DoxyCodeLine{00289\ \ \ \{}
+\DoxyCodeLine{00290\ \ \ \textcolor{keywordflow}{case}\ 4096U:}
+\DoxyCodeLine{00291\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaba48bc2a2e7212048375024ea27479f3}{arm\_rfft\_fast\_init\_4096\_f64}}(S);}
+\DoxyCodeLine{00292\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00293\ \ \ \textcolor{keywordflow}{case}\ 2048U:}
+\DoxyCodeLine{00294\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaf98bdfe7bf79ae659503653f7e647c59}{arm\_rfft\_fast\_init\_2048\_f64}}(S);}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00296\ \ \ \textcolor{keywordflow}{case}\ 1024U:}
+\DoxyCodeLine{00297\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga643b00dabf2a49824f47983e9119e8f1}{arm\_rfft\_fast\_init\_1024\_f64}}(S);}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00299\ \ \ \textcolor{keywordflow}{case}\ 512U:}
+\DoxyCodeLine{00300\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gad54acde5c38a408c031887792fc408ad}{arm\_rfft\_fast\_init\_512\_f64}}(S);}
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00302\ \ \ \textcolor{keywordflow}{case}\ 256U:}
+\DoxyCodeLine{00303\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_gaaa4a9b9ac752eb64f674a8a65494c8bd}{arm\_rfft\_fast\_init\_256\_f64}}(S);}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00305\ \ \ \textcolor{keywordflow}{case}\ 128U:}
+\DoxyCodeLine{00306\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga65cf347a8e5ff37a57c966bfed05227f}{arm\_rfft\_fast\_init\_128\_f64}}(S);}
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00308\ \ \ \textcolor{keywordflow}{case}\ 64U:}
+\DoxyCodeLine{00309\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga9259768f7d2c3ae5cc906d40a1859e6e}{arm\_rfft\_fast\_init\_64\_f64}}(S);}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00311\ \ \ \textcolor{keywordflow}{case}\ 32U:}
+\DoxyCodeLine{00312\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group___real_f_f_t_f64_ga646da21400d503ccaf8182085eb5848a}{arm\_rfft\_fast\_init\_32\_f64}}(S);}
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00314\ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}});}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00317\ \ \ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \}}
+\DoxyCodeLine{00322\ }
+
+\end{DoxyCode}

@@ -1,0 +1,31 @@
+\doxysection{PID\+\_\+controller.\+h}
+\hypertarget{_p_i_d__controller_8h_source}{}\label{_p_i_d__controller_8h_source}\index{Components/Inc/PID\_controller.h@{Components/Inc/PID\_controller.h}}
+\doxymbox{\hyperlink{_p_i_d__controller_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ COMPONENTS\_INC\_PID\_CONTROLLER\_H\_}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ COMPONENTS\_INC\_PID\_CONTROLLER\_H\_}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{pid__lookup_8h}{pid\_lookup.h}}"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{extern}\ arm\_pid\_instance\_f32\ pid\_heat;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{extern}\ arm\_pid\_instance\_f32\ pid\_cool;}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{_p_i_d__controller_8h_af954b68bbb88675895f708171956bfab}{Temperature\_Control\_Init}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{_p_i_d__controller_8h_aaebf3c30971f2d15dbdcd025ef33d8f3}{Temperature\_Control\_Update}}(\textcolor{keywordtype}{float}\ current\_temp);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{_p_i_d__controller_8h_ae7db9a0aeca973149ece62b383bfbc3d}{Temperature\_Control\_SetTarget}}(\textcolor{keywordtype}{float}\ target\_temp);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{_p_i_d__controller_8h_a1253cbfe4f4d878bceaa1aad9f46c318}{Temperature\_Control\_SetFanPWM}}(uint16\_t\ pwm);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ uint16\_t\ \doxymbox{\hyperlink{_p_i_d__controller_8h_a5e8472f2a9154007c945ecc2db846335}{Temperature\_Control\_GetHeaterPWM}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ uint16\_t\ \doxymbox{\hyperlink{_p_i_d__controller_8h_aaa96ca99ed06c6bb6a3e189ab77e220b}{Temperature\_Control\_GetFanPWM}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{_p_i_d__controller_8h_acad27418364639a2d8e318ec29a88b32}{Temperature\_Control\_GetSetpoint}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ COMPONENTS\_INC\_PID\_CONTROLLER\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

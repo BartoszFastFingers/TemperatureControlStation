@@ -1,0 +1,70 @@
+\doxysubsection{Vector Clarke Transform }
+\hypertarget{group__clarke}{}\label{group__clarke}\index{Vector Clarke Transform@{Vector Clarke Transform}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE void \doxymbox{\hyperlink{group__clarke_ga82d40c62bb48ef4d613f1f2f685b4084}{arm\+\_\+clarke\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Ia, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Ib, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Ialpha, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Ibeta)
+\begin{DoxyCompactList}\small\item\em Floating-\/point Clarke transform. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE void \doxymbox{\hyperlink{group__clarke_ga8d68db2a6e26e1caab677f5ab293c068}{arm\+\_\+clarke\+\_\+q31}} (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} Ia, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} Ib, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Ialpha, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Ibeta)
+\begin{DoxyCompactList}\small\item\em Clarke transform for Q31 version. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Forward Clarke transform converts the instantaneous stator phases into a two-\/coordinate time invariant vector. Generally the Clarke transform uses three-\/phase currents {\ttfamily Ia, Ib and Ic} to calculate currents in the two-\/phase orthogonal stator axis {\ttfamily Ialpha} and {\ttfamily Ibeta}. When {\ttfamily Ialpha} is superposed with {\ttfamily Ia} as shown in the figure below  and {\ttfamily Ia + Ib + Ic = 0}, in this condition {\ttfamily Ialpha} and {\ttfamily Ibeta} can be calculated using only {\ttfamily Ia} and {\ttfamily Ib}.
+
+The function operates on a single sample of data and each call to the function returns the processed output. The library provides separate functions for Q31 and floating-\/point data types. \begin{DoxyParagraph}{Algorithm}
+ where {\ttfamily Ia} and {\ttfamily Ib} are the instantaneous stator phases and {\ttfamily p\+Ialpha} and {\ttfamily p\+Ibeta} are the two coordinates of time invariant vector. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Fixed-\/\+Point Behavior}
+Care must be taken when using the Q31 version of the Clarke transform. In particular, the overflow and saturation behavior of the accumulator used must be considered. Refer to the function specific documentation below for usage guidelines. 
+\end{DoxyParagraph}
+
+
+\label{doc-func-members}
+\Hypertarget{group__clarke_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__clarke_ga82d40c62bb48ef4d613f1f2f685b4084}\index{Vector Clarke Transform@{Vector Clarke Transform}!arm\_clarke\_f32@{arm\_clarke\_f32}}
+\index{arm\_clarke\_f32@{arm\_clarke\_f32}!Vector Clarke Transform@{Vector Clarke Transform}}
+\doxysubsubsubsection{\texorpdfstring{arm\_clarke\_f32()}{arm\_clarke\_f32()}}
+{\footnotesize\ttfamily \label{group__clarke_ga82d40c62bb48ef4d613f1f2f685b4084} 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE void arm\+\_\+clarke\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{Ia}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{Ib}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Ialpha}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Ibeta}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point Clarke transform. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em Ia} & input three-\/phase coordinate {\ttfamily a} \\
+\hline
+\doxymbox{\texttt{in}}  & {\em Ib} & input three-\/phase coordinate {\ttfamily b} \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Ialpha} & points to output two-\/phase orthogonal vector axis alpha \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Ibeta} & points to output two-\/phase orthogonal vector axis beta \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__clarke_ga8d68db2a6e26e1caab677f5ab293c068}\index{Vector Clarke Transform@{Vector Clarke Transform}!arm\_clarke\_q31@{arm\_clarke\_q31}}
+\index{arm\_clarke\_q31@{arm\_clarke\_q31}!Vector Clarke Transform@{Vector Clarke Transform}}
+\doxysubsubsubsection{\texorpdfstring{arm\_clarke\_q31()}{arm\_clarke\_q31()}}
+{\footnotesize\ttfamily \label{group__clarke_ga8d68db2a6e26e1caab677f5ab293c068} 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE void arm\+\_\+clarke\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{Ia}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{Ib}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Ialpha}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Ibeta}{}\end{DoxyParamCaption})}
+
+
+
+Clarke transform for Q31 version. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em Ia} & input three-\/phase coordinate {\ttfamily a} \\
+\hline
+\doxymbox{\texttt{in}}  & {\em Ib} & input three-\/phase coordinate {\ttfamily b} \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Ialpha} & points to output two-\/phase orthogonal vector axis alpha \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Ibeta} & points to output two-\/phase orthogonal vector axis beta\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using an internal 32-\/bit accumulator. The accumulator maintains 1.\+31 format by truncating lower 31 bits of the intermediate multiplication in 2.\+62 format. There is saturation on the addition, hence there is no risk of overflow. 
+\end{DoxyParagraph}

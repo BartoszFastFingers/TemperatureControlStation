@@ -1,0 +1,176 @@
+\doxysubsection{Cubic Spline Interpolation }
+\hypertarget{group___spline_interpolate}{}\label{group___spline_interpolate}\index{Cubic Spline Interpolation@{Cubic Spline Interpolation}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___spline_interpolate_ga8916035e20d14ab28b34e7a19fe357fc}{arm\+\_\+spline\+\_\+f32}} (\doxymbox{\hyperlink{structarm__spline__instance__f32}{arm\+\_\+spline\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}xq, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Processing function for the floating-\/point cubic spline interpolation. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___spline_interpolate_gaa1819dc3662cb1c315b99d84f383b684}{arm\+\_\+spline\+\_\+init\+\_\+f32}} (\doxymbox{\hyperlink{structarm__spline__instance__f32}{arm\+\_\+spline\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, arm\+\_\+spline\+\_\+type type, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}x, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}y, uint32\+\_\+t n, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}coeffs, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}temp\+Buffer)
+\begin{DoxyCompactList}\small\item\em Initialization function for the floating-\/point cubic spline interpolation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Spline interpolation is a method of interpolation where the interpolant is a piecewise-\/defined polynomial called "{}spline"{}.
+
+\begin{DoxyParagraph}{Introduction}
+
+\end{DoxyParagraph}
+Given a function f defined on the interval \+[a,b]\+, a set of n nodes x(i) where a=x(1)\texorpdfstring{$<$}{<}x(2)\texorpdfstring{$<$}{<}...\texorpdfstring{$<$}{<}x(n)=b and a set of n values y(i) = f(x(i)), a cubic spline interpolant S(x) is defined as:\+
+
+
+\begin{DoxyPre}
+         S1(x)       x(1) < x < x(2)
+ S(x) =   ...         
+         Sn-\/1(x)   x(n-\/1) < x < x(n)
+ \end{DoxyPre}
+
+
+where
+
+
+\begin{DoxyPre} 
+ Si(x) = a\_i+b\_i(x-\/xi)+c\_i(x-\/xi)^2+d\_i(x-\/xi)^3    i=1, ..., n-\/1
+ \end{DoxyPre}
+
+
+\begin{DoxyParagraph}{Algorithm}
+
+\end{DoxyParagraph}
+Having defined h(i) = x(i+1) -\/ x(i)
+
+
+\begin{DoxyPre}
+ h(i-\/1)c(i-\/1)+2[h(i-\/1)+h(i)]c(i)+h(i)c(i+1) = 3/h(i)*[a(i+1)-\/a(i)]-\/3/h(i-\/1)*[a(i)-\/a(i-\/1)]    i=2, ..., n-\/1
+ \end{DoxyPre}
+
+
+It is possible to write the previous conditions in matrix form (Ax=B). In order to solve the system two boundary conidtions are needed.
+\begin{DoxyItemize}
+\item Natural spline:\+ S1\textquotesingle{}\textquotesingle{}(x1)=2\texorpdfstring{$\ast$}{*}c(1)=0 ; Sn\textquotesingle{}\textquotesingle{}(xn)=2\texorpdfstring{$\ast$}{*}c(n)=0 In matrix form:\+
+\end{DoxyItemize}
+
+
+\begin{DoxyPre}
+ |  1        0         0  ...    0         0           0     ||  c(1)  | |                        0                        |
+ | h(0) 2[h(0)+h(1)] h(1) ...    0         0           0     ||  c(2)  | |      3/h(2)*[a(3)-\/a(2)]-\/3/h(1)*[a(2)-\/a(1)]      |
+ | ...      ...       ... ...   ...       ...         ...    ||  ...   |=|                       ...                       |
+ |  0        0         0  ... h(n-\/2) 2[h(n-\/2)+h(n-\/1)] h(n-\/1) || c(n-\/1) | | 3/h(n-\/1)*[a(n)-\/a(n-\/1)]-\/3/h(n-\/2)*[a(n-\/1)-\/a(n-\/2)] |
+ |  0        0         0  ...    0         0           1     ||  c(n)  | |                        0                        |
+ \end{DoxyPre}
+
+
+
+\begin{DoxyItemize}
+\item Parabolic runout spline:\+ S1\textquotesingle{}\textquotesingle{}(x1)=2\texorpdfstring{$\ast$}{*}c(1)=S2\textquotesingle{}\textquotesingle{}(x2)=2\texorpdfstring{$\ast$}{*}c(2) ; Sn-\/1\textquotesingle{}\textquotesingle{}(xn-\/1)=2\texorpdfstring{$\ast$}{*}c(n-\/1)=Sn\textquotesingle{}\textquotesingle{}(xn)=2\texorpdfstring{$\ast$}{*}c(n) In matrix form:\+
+\end{DoxyItemize}
+
+
+\begin{DoxyPre}
+ |  1       -\/1         0  ...    0         0           0     ||  c(1)  | |                        0                        |
+ | h(0) 2[h(0)+h(1)] h(1) ...    0         0           0     ||  c(2)  | |      3/h(2)*[a(3)-\/a(2)]-\/3/h(1)*[a(2)-\/a(1)]      |
+ | ...      ...       ... ...   ...       ...         ...    ||  ...   |=|                       ...                       |
+ |  0        0         0  ... h(n-\/2) 2[h(n-\/2)+h(n-\/1)] h(n-\/1) || c(n-\/1) | | 3/h(n-\/1)*[a(n)-\/a(n-\/1)]-\/3/h(n-\/2)*[a(n-\/1)-\/a(n-\/2)] |
+ |  0        0         0  ...    0        -\/1           1     ||  c(n)  | |                        0                        |
+ \end{DoxyPre}
+
+
+A is a tridiagonal matrix (a band matrix of bandwidth 3) of size N=n+1. The factorization algorithms (A=LU) can be simplified considerably because a large number of zeros appear in regular patterns. The Crout method has been used:\+ 1) Solve LZ=B
+
+
+\begin{DoxyPre}
+ u(1,2) = A(1,2)/A(1,1)
+ z(1)   = B(1)/l(11)
+
+ FOR i=2, ..., N-\/1
+   l(i,i)   = A(i,i)-\/A(i,i-\/1)u(i-\/1,i)
+   u(i,i+1) = a(i,i+1)/l(i,i)
+   z(i)     = [B(i)-\/A(i,i-\/1)z(i-\/1)]/l(i,i)
+
+ l(N,N) = A(N,N)-\/A(N,N-\/1)u(N-\/1,N)
+ z(N)   = [B(N)-\/A(N,N-\/1)z(N-\/1)]/l(N,N)
+ \end{DoxyPre}
+
+
+2) Solve UX=Z
+
+
+\begin{DoxyPre}
+ c(N)=z(N)
+
+ FOR i=N-\/1, ..., 1
+   c(i)=z(i)-\/u(i,i+1)c(i+1) 
+ \end{DoxyPre}
+
+
+c(i) for i=1, ..., n-\/1 are needed to compute the n-\/1 polynomials. b(i) and d(i) are computed as:\+
+\begin{DoxyItemize}
+\item b(i) = \+[y(i+1)-\/y(i)]\+/\+h(i)-\/h(i)\texorpdfstring{$\ast$}{*}\+[c(i+1)+2\texorpdfstring{$\ast$}{*}c(i)]\+/\+3
+\item d(i) = \+[c(i+1)-\/c(i)]\+/\+\+[3\texorpdfstring{$\ast$}{*}h(i)]\+ Moreover, a(i)=y(i).
+\end{DoxyItemize}
+
+\begin{DoxyParagraph}{Behaviour outside the given intervals}
+
+\end{DoxyParagraph}
+It is possible to compute the interpolated vector for x values outside the input range (xq\texorpdfstring{$<$}{<}x(1); xq\texorpdfstring{$>$}{>}x(n)). The coefficients used to compute the y values for xq$<$x(1) are going to be the ones used for the first interval, while for xq$>$x(n) the coefficients used for the last interval.
+
+\begin{DoxyParagraph}{Initialization function}
+
+\end{DoxyParagraph}
+The initialization function takes as input two arrays that the user has to allocate:\+ {\ttfamily coeffs} will contain the b, c, and d coefficients for the (n-\/1) intervals (n is the number of known points), hence its size must be 3\texorpdfstring{$\ast$}{*}(n-\/1); {\ttfamily temp\+Buffer} is temporally used for internal computations and its size is n+n-\/1.
+
+\begin{DoxyParagraph}{}
+
+\end{DoxyParagraph}
+The x input array must be strictly sorted in ascending order and it must not contain twice the same value (x(i)\texorpdfstring{$<$}{<}x(i+1)). 
+
+\label{doc-func-members}
+\Hypertarget{group___spline_interpolate_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___spline_interpolate_ga8916035e20d14ab28b34e7a19fe357fc}\index{Cubic Spline Interpolation@{Cubic Spline Interpolation}!arm\_spline\_f32@{arm\_spline\_f32}}
+\index{arm\_spline\_f32@{arm\_spline\_f32}!Cubic Spline Interpolation@{Cubic Spline Interpolation}}
+\doxysubsubsubsection{\texorpdfstring{arm\_spline\_f32()}{arm\_spline\_f32()}}
+{\footnotesize\ttfamily \label{group___spline_interpolate_ga8916035e20d14ab28b34e7a19fe357fc} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+spline\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__spline__instance__f32}{arm\+\_\+spline\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{xq}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Processing function for the floating-\/point cubic spline interpolation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & points to an instance of the floating-\/point spline structure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em xq} & points to the x values of the interpolated data points. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the block of output data. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples of output data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___spline_interpolate_gaa1819dc3662cb1c315b99d84f383b684}\index{Cubic Spline Interpolation@{Cubic Spline Interpolation}!arm\_spline\_init\_f32@{arm\_spline\_init\_f32}}
+\index{arm\_spline\_init\_f32@{arm\_spline\_init\_f32}!Cubic Spline Interpolation@{Cubic Spline Interpolation}}
+\doxysubsubsubsection{\texorpdfstring{arm\_spline\_init\_f32()}{arm\_spline\_init\_f32()}}
+{\footnotesize\ttfamily \label{group___spline_interpolate_gaa1819dc3662cb1c315b99d84f383b684} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+spline\+\_\+init\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__spline__instance__f32}{arm\+\_\+spline\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{arm\+\_\+spline\+\_\+type}]{type}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{x}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{y}{, }\item[{uint32\+\_\+t}]{n}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{coeffs}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{temp\+Buffer}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the floating-\/point cubic spline interpolation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point spline structure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em type} & type of cubic spline interpolation (boundary conditions) \\
+\hline
+\doxymbox{\texttt{in}}  & {\em x} & points to the x values of the known data points. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em y} & points to the y values of the known data points. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n} & number of known data points. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em coeffs} & coefficients array for b, c, and d \\
+\hline
+\doxymbox{\texttt{in}}  & {\em temp\+Buffer} & buffer array for internal computations \\
+\hline
+\end{DoxyParams}

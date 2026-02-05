@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Core/Inc/fan_control.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('fan__control_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku fan_control.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Sterowanie wentylatorem za pomocą TIM PWM na mikrokontrolerach STM32.  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;tim.h&quot;</code><br />
+</div>
+<p><a href="fan__control_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Struktury danych</h2></td></tr>
+<tr class="memitem:FanHandle_5Ft" id="r_FanHandle_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura reprezentująca wentylator sterowany PWM.  <a href="struct_fan_handle__t.html#details">Więcej...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a865768af54e01dd30b57068422c73b3a" id="r_a865768af54e01dd30b57068422c73b3a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a865768af54e01dd30b57068422c73b3a">Fan_Init</a> (<a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan, TIM_HandleTypeDef *htim, uint32_t channel)</td></tr>
+<tr class="memdesc:a865768af54e01dd30b57068422c73b3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizuje strukturę wentylatora.  <br /></td></tr>
+<tr class="memitem:a099f3902bd4ef8121d21f8a5bd095ccb" id="r_a099f3902bd4ef8121d21f8a5bd095ccb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a099f3902bd4ef8121d21f8a5bd095ccb">Fan_Start</a> (<a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan)</td></tr>
+<tr class="memdesc:a099f3902bd4ef8121d21f8a5bd095ccb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uruchamia PWM wentylatora.  <br /></td></tr>
+<tr class="memitem:aa9d94379024a9af4c65de7e6c36c2362" id="r_aa9d94379024a9af4c65de7e6c36c2362"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa9d94379024a9af4c65de7e6c36c2362">Fan_Stop</a> (<a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan)</td></tr>
+<tr class="memdesc:aa9d94379024a9af4c65de7e6c36c2362"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zatrzymuje PWM wentylatora i ustawia prędkość na 0.  <br /></td></tr>
+<tr class="memitem:ada8d607109150b07dfa4da24a6491d3e" id="r_ada8d607109150b07dfa4da24a6491d3e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ada8d607109150b07dfa4da24a6491d3e">Fan_SetSpeed</a> (<a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan, uint16_t speed)</td></tr>
+<tr class="memdesc:ada8d607109150b07dfa4da24a6491d3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ustawia prędkość wentylatora.  <br /></td></tr>
+<tr class="memitem:a84a14bde9d1dcabb514394668ad98550" id="r_a84a14bde9d1dcabb514394668ad98550"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a84a14bde9d1dcabb514394668ad98550">Fan_GetSpeed</a> (<a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan)</td></tr>
+<tr class="memdesc:a84a14bde9d1dcabb514394668ad98550"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobiera aktualną prędkość wentylatora.  <br /></td></tr>
+<tr class="memitem:a35d619930662823894ac77077897eefc" id="r_a35d619930662823894ac77077897eefc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a35d619930662823894ac77077897eefc">Fan_Off</a> (<a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *hfan)</td></tr>
+<tr class="memdesc:a35d619930662823894ac77077897eefc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyłącza wentylator (ustawia prędkość na 0).  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Sterowanie wentylatorem za pomocą TIM PWM na mikrokontrolerach STM32. </p>
+<p>Zawiera deklaracje funkcji i struktur dla inicjalizacji, uruchamiania, zatrzymywania i ustawiania prędkości wentylatora.</p>
+<dl class="section author"><dt>Autor</dt><dd>00ary </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>31-Jan-2026 </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji</h2>
+<a id="a84a14bde9d1dcabb514394668ad98550" name="a84a14bde9d1dcabb514394668ad98550"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84a14bde9d1dcabb514394668ad98550">&#9670;&#160;</a></span>Fan_GetSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Fan_GetSpeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hfan</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pobiera aktualną prędkość wentylatora. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hfan</td><td>Wskaźnik na strukturę <a class="el" href="struct_fan_handle__t.html" title="Struktura reprezentująca wentylator sterowany PWM.">FanHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Aktualna prędkość PWM </dd></dl>
+
+</div>
+</div>
+<a id="a865768af54e01dd30b57068422c73b3a" name="a865768af54e01dd30b57068422c73b3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a865768af54e01dd30b57068422c73b3a">&#9670;&#160;</a></span>Fan_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Fan_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hfan</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TIM_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>htim</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>channel</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicjalizuje strukturę wentylatora. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hfan</td><td>Wskaźnik na strukturę <a class="el" href="struct_fan_handle__t.html" title="Struktura reprezentująca wentylator sterowany PWM.">FanHandle_t</a> </td></tr>
+    <tr><td class="paramname">htim</td><td>Wskaźnik na strukturę timera STM32 </td></tr>
+    <tr><td class="paramname">channel</td><td>Kanał timera dla PWM </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a35d619930662823894ac77077897eefc" name="a35d619930662823894ac77077897eefc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35d619930662823894ac77077897eefc">&#9670;&#160;</a></span>Fan_Off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Fan_Off </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hfan</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wyłącza wentylator (ustawia prędkość na 0). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hfan</td><td>Wskaźnik na strukturę <a class="el" href="struct_fan_handle__t.html" title="Struktura reprezentująca wentylator sterowany PWM.">FanHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ada8d607109150b07dfa4da24a6491d3e" name="ada8d607109150b07dfa4da24a6491d3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada8d607109150b07dfa4da24a6491d3e">&#9670;&#160;</a></span>Fan_SetSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Fan_SetSpeed </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hfan</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>speed</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ustawia prędkość wentylatora. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hfan</td><td>Wskaźnik na strukturę <a class="el" href="struct_fan_handle__t.html" title="Struktura reprezentująca wentylator sterowany PWM.">FanHandle_t</a> </td></tr>
+    <tr><td class="paramname">speed</td><td>Prędkość PWM w zakresie 0-999 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a099f3902bd4ef8121d21f8a5bd095ccb" name="a099f3902bd4ef8121d21f8a5bd095ccb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a099f3902bd4ef8121d21f8a5bd095ccb">&#9670;&#160;</a></span>Fan_Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Fan_Start </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hfan</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uruchamia PWM wentylatora. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hfan</td><td>Wskaźnik na strukturę <a class="el" href="struct_fan_handle__t.html" title="Struktura reprezentująca wentylator sterowany PWM.">FanHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa9d94379024a9af4c65de7e6c36c2362" name="aa9d94379024a9af4c65de7e6c36c2362"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9d94379024a9af4c65de7e6c36c2362">&#9670;&#160;</a></span>Fan_Stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Fan_Stop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_fan_handle__t.html">FanHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hfan</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zatrzymuje PWM wentylatora i ustawia prędkość na 0. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hfan</td><td>Wskaźnik na strukturę <a class="el" href="struct_fan_handle__t.html" title="Struktura reprezentująca wentylator sterowany PWM.">FanHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="fan__control_8h.html">fan_control.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

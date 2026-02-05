@@ -1,0 +1,102 @@
+\doxysection{Dokumentacja pliku Components/\+\+Inc/\+\+PID\+\_\+controller.h}
+\hypertarget{_p_i_d__controller_8h}{}\label{_p_i_d__controller_8h}\index{Components/Inc/PID\_controller.h@{Components/Inc/PID\_controller.h}}
+
+
+Regulator PID temperatury.  
+
+
+{\ttfamily \+\#include "{}pid\+\_\+lookup.\+h"{}}\newline
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_p_i_d__controller_8h_af954b68bbb88675895f708171956bfab}\label{_p_i_d__controller_8h_af954b68bbb88675895f708171956bfab} 
+void {\bfseries Temperature\+\_\+\+Control\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Inicjalizacja regulatora temperatury. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{_p_i_d__controller_8h_aaebf3c30971f2d15dbdcd025ef33d8f3}{Temperature\+\_\+\+Control\+\_\+\+Update}} (float current\+\_\+temp)
+\begin{DoxyCompactList}\small\item\em Aktualizacja regulatora (wywoływać co 500ms). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{_p_i_d__controller_8h_ae7db9a0aeca973149ece62b383bfbc3d}{Temperature\+\_\+\+Control\+\_\+\+Set\+Target}} (float target\+\_\+temp)
+\begin{DoxyCompactList}\small\item\em Ustawienie temperatury zadanej. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{_p_i_d__controller_8h_a1253cbfe4f4d878bceaa1aad9f46c318}{Temperature\+\_\+\+Control\+\_\+\+Set\+Fan\+PWM}} (uint16\+\_\+t pwm)
+\begin{DoxyCompactList}\small\item\em Ręczne ustawienie PWM wentylatora (override). \end{DoxyCompactList}\item 
+\Hypertarget{_p_i_d__controller_8h_a5e8472f2a9154007c945ecc2db846335}\label{_p_i_d__controller_8h_a5e8472f2a9154007c945ecc2db846335} 
+uint16\+\_\+t {\bfseries Temperature\+\_\+\+Control\+\_\+\+Get\+Heater\+PWM} (void)
+\begin{DoxyCompactList}\small\item\em Pobierz aktualne PWM grzałki. \end{DoxyCompactList}\item 
+\Hypertarget{_p_i_d__controller_8h_aaa96ca99ed06c6bb6a3e189ab77e220b}\label{_p_i_d__controller_8h_aaa96ca99ed06c6bb6a3e189ab77e220b} 
+uint16\+\_\+t {\bfseries Temperature\+\_\+\+Control\+\_\+\+Get\+Fan\+PWM} (void)
+\begin{DoxyCompactList}\small\item\em Pobierz aktualne PWM wentylatora. \end{DoxyCompactList}\item 
+\Hypertarget{_p_i_d__controller_8h_acad27418364639a2d8e318ec29a88b32}\label{_p_i_d__controller_8h_acad27418364639a2d8e318ec29a88b32} 
+float {\bfseries Temperature\+\_\+\+Control\+\_\+\+Get\+Setpoint} (void)
+\begin{DoxyCompactList}\small\item\em Pobierz aktualny setpoint. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_p_i_d__controller_8h_a8d17d2b15e3a5fe6dfa8d5f6b9512597}\label{_p_i_d__controller_8h_a8d17d2b15e3a5fe6dfa8d5f6b9512597} 
+arm\+\_\+pid\+\_\+instance\+\_\+f32 {\bfseries pid\+\_\+heat}
+\item 
+\Hypertarget{_p_i_d__controller_8h_a3e783fdd7f7536ecc5f30a5075d4bdac}\label{_p_i_d__controller_8h_a3e783fdd7f7536ecc5f30a5075d4bdac} 
+arm\+\_\+pid\+\_\+instance\+\_\+f32 {\bfseries pid\+\_\+cool}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Regulator PID temperatury. 
+
+\begin{DoxyAuthor}{Autor}
+00ary 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+2026-\/02-\/01 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{_p_i_d__controller_8h_doc-func-members}
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{_p_i_d__controller_8h_a1253cbfe4f4d878bceaa1aad9f46c318}\index{PID\_controller.h@{PID\_controller.h}!Temperature\_Control\_SetFanPWM@{Temperature\_Control\_SetFanPWM}}
+\index{Temperature\_Control\_SetFanPWM@{Temperature\_Control\_SetFanPWM}!PID\_controller.h@{PID\_controller.h}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_SetFanPWM()}{Temperature\_Control\_SetFanPWM()}}
+{\footnotesize\ttfamily \label{_p_i_d__controller_8h_a1253cbfe4f4d878bceaa1aad9f46c318} 
+void Temperature\+\_\+\+Control\+\_\+\+Set\+Fan\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pwm}{}\end{DoxyParamCaption})}
+
+
+
+Ręczne ustawienie PWM wentylatora (override). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em pwm} & Wartość PWM \+[0-\/999]\+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_p_i_d__controller_8h_ae7db9a0aeca973149ece62b383bfbc3d}\index{PID\_controller.h@{PID\_controller.h}!Temperature\_Control\_SetTarget@{Temperature\_Control\_SetTarget}}
+\index{Temperature\_Control\_SetTarget@{Temperature\_Control\_SetTarget}!PID\_controller.h@{PID\_controller.h}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_SetTarget()}{Temperature\_Control\_SetTarget()}}
+{\footnotesize\ttfamily \label{_p_i_d__controller_8h_ae7db9a0aeca973149ece62b383bfbc3d} 
+void Temperature\+\_\+\+Control\+\_\+\+Set\+Target (\begin{DoxyParamCaption}\item[{float}]{target\+\_\+temp}{}\end{DoxyParamCaption})}
+
+
+
+Ustawienie temperatury zadanej. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em target\+\_\+temp} & Temperatura zadana \+[°C]\+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_p_i_d__controller_8h_aaebf3c30971f2d15dbdcd025ef33d8f3}\index{PID\_controller.h@{PID\_controller.h}!Temperature\_Control\_Update@{Temperature\_Control\_Update}}
+\index{Temperature\_Control\_Update@{Temperature\_Control\_Update}!PID\_controller.h@{PID\_controller.h}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_Update()}{Temperature\_Control\_Update()}}
+{\footnotesize\ttfamily \label{_p_i_d__controller_8h_aaebf3c30971f2d15dbdcd025ef33d8f3} 
+float Temperature\+\_\+\+Control\+\_\+\+Update (\begin{DoxyParamCaption}\item[{float}]{current\+\_\+temp}{}\end{DoxyParamCaption})}
+
+
+
+Aktualizacja regulatora (wywoływać co 500ms). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em current\+\_\+temp} & Aktualna temperatura \+[°C]\+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+PWM grzałki \+[0-\/999]\+ 
+\end{DoxyReturn}

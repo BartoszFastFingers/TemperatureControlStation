@@ -4,7 +4,7 @@ close all;
 
 %% Wczytanie danych
 dataFolder = '../step_response/data';
-filename = fullfile(dataFolder, 'temperature_data_unfiltered.csv');
+filename = fullfile(dataFolder, 'temperature_heater_data_unfiltered.csv');
 
 if ~isfile(filename)
     error('Plik CSV nie istnieje: %s', filename);

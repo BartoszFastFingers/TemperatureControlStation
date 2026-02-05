@@ -1,0 +1,131 @@
+\doxysubsection{Matrix Scale }
+\hypertarget{group___matrix_scale}{}\label{group___matrix_scale}\index{Matrix Scale@{Matrix Scale}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_scale_ga58ac73c4406d441cdd9b85f06d3b2328}{arm\+\_\+mat\+\_\+scale\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} scale, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix scaling. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_scale_gadace9e0311efde63a4f5622bc9b07b27}{arm\+\_\+mat\+\_\+scale\+\_\+q15}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} scale\+Fract, int32\+\_\+t shift, \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q15 matrix scaling. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_scale_gac150db920c4186b1466026ed0ad29db8}{arm\+\_\+mat\+\_\+scale\+\_\+q31}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} scale\+Fract, int32\+\_\+t shift, \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q31 matrix scaling. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Multiplies a matrix by a scalar. This is accomplished by multiplying each element in the matrix by the scalar. For example:\+
+
+\begin{DoxyParagraph}{Matrix Scaling of a 3 x 3 matrix }
+
+\end{DoxyParagraph}
+\[\begin{pmatrix}
+a_{1,1} & a_{1,2} & a_{1,3} \\
+a_{2,1} & a_{2,2} & a_{2,3} \\
+a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}
+  K = 
+\begin{pmatrix}
+ K a_{1,1} & K a_{1,2} & K a_{1,3} \\
+ K a_{2,1} & K a_{2,2} & K a_{2,3} \\
+ K a_{3,1} & K a_{3,2} & K a_{3,3} \\
+\end{pmatrix}
+\]
+
+The function checks to make sure that the input and output matrices are of the same size.
+
+In the fixed-\/point Q15 and Q31 functions, {\ttfamily scale} is represented by a fractional multiplication {\ttfamily scale\+Fract} and an arithmetic shift {\ttfamily shift}. The shift allows the gain of the scaling operation to exceed 1.\+0. The overall scale factor applied to the fixed-\/point data is 
+\begin{DoxyPre}
+    scale = scaleFract * 2^shift.
+\end{DoxyPre}
+
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_scale_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_scale_ga58ac73c4406d441cdd9b85f06d3b2328}\index{Matrix Scale@{Matrix Scale}!arm\_mat\_scale\_f32@{arm\_mat\_scale\_f32}}
+\index{arm\_mat\_scale\_f32@{arm\_mat\_scale\_f32}!Matrix Scale@{Matrix Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_scale\_f32()}{arm\_mat\_scale\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_scale_ga58ac73c4406d441cdd9b85f06d3b2328} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+scale\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{scale}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix scaling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale} & scale factor to be applied \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_scale_gadace9e0311efde63a4f5622bc9b07b27}\index{Matrix Scale@{Matrix Scale}!arm\_mat\_scale\_q15@{arm\_mat\_scale\_q15}}
+\index{arm\_mat\_scale\_q15@{arm\_mat\_scale\_q15}!Matrix Scale@{Matrix Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_scale\_q15()}{arm\_mat\_scale\_q15()}}
+{\footnotesize\ttfamily \label{group___matrix_scale_gadace9e0311efde63a4f5622bc9b07b27} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+scale\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{scale\+Fract}{, }\item[{int32\+\_\+t}]{shift}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q15 matrix scaling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale\+Fract} & fractional portion of the scale factor \\
+\hline
+\doxymbox{\texttt{in}}  & {\em shift} & number of bits to shift the result by \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The input data {\ttfamily \texorpdfstring{$\ast$}{*}p\+Src} and {\ttfamily scale\+Fract} are in 1.\+15 format. These are multiplied to yield a 2.\+30 intermediate result and this is shifted with saturation to 1.\+15 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___matrix_scale_gac150db920c4186b1466026ed0ad29db8}\index{Matrix Scale@{Matrix Scale}!arm\_mat\_scale\_q31@{arm\_mat\_scale\_q31}}
+\index{arm\_mat\_scale\_q31@{arm\_mat\_scale\_q31}!Matrix Scale@{Matrix Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_scale\_q31()}{arm\_mat\_scale\_q31()}}
+{\footnotesize\ttfamily \label{group___matrix_scale_gac150db920c4186b1466026ed0ad29db8} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+scale\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{scale\+Fract}{, }\item[{int32\+\_\+t}]{shift}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q31 matrix scaling. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale\+Fract} & fractional portion of the scale factor \\
+\hline
+\doxymbox{\texttt{in}}  & {\em shift} & number of bits to shift the result by \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The input data {\ttfamily \texorpdfstring{$\ast$}{*}p\+Src} and {\ttfamily scale\+Fract} are in 1.\+31 format. These are multiplied to yield a 2.\+62 intermediate result which is shifted with saturation to 1.\+31 format. 
+\end{DoxyParagraph}

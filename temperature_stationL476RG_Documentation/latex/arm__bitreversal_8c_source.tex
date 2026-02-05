@@ -1,0 +1,227 @@
+\doxysection{arm\+\_\+bitreversal.\+c}
+\hypertarget{arm__bitreversal_8c_source}{}\label{arm__bitreversal_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_bitreversal.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_bitreversal.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_bitreversal.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Bitreversal\ functions}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_common\_tables.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_f32(}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ uint16\_t\ fftSize,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_f32(}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ uint16\_t\ fftSize,}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00050\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab)}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ uint16\_t\ fftLenBy2,\ fftLenBy2p1;}
+\DoxyCodeLine{00053\ \ \ \ uint16\_t\ i,\ j;}
+\DoxyCodeLine{00054\ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ in;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \textcolor{comment}{/*\ \ Initializations\ */}}
+\DoxyCodeLine{00057\ \ \ \ j\ =\ 0U;}
+\DoxyCodeLine{00058\ \ \ \ fftLenBy2\ =\ fftSize\ >>\ 1U;}
+\DoxyCodeLine{00059\ \ \ \ fftLenBy2p1\ =\ (fftSize\ >>\ 1U)\ +\ 1U;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \textcolor{comment}{/*\ Bit\ Reversal\ Implementation\ */}}
+\DoxyCodeLine{00062\ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <=\ (fftLenBy2\ -\/\ 2U);\ i\ +=\ 2U)}
+\DoxyCodeLine{00063\ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ j)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i]\ <-\/>\ pSrc[j];\ */}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[2U\ *\ i];}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ i]\ =\ pSrc[2U\ *\ j];}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ j]\ =\ in;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+1U]\ <-\/>\ pSrc[j+1U]\ */}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[(2U\ *\ i)\ +\ 1U];}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ i)\ +\ 1U]\ =\ pSrc[(2U\ *\ j)\ +\ 1U];}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ j)\ +\ 1U]\ =\ in;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+fftLenBy2p1]\ <-\/>\ pSrc[j+fftLenBy2p1]\ */}}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[2U\ *\ (i\ +\ fftLenBy2p1)];}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ (i\ +\ fftLenBy2p1)]\ =\ pSrc[2U\ *\ (j\ +\ fftLenBy2p1)];}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ (j\ +\ fftLenBy2p1)]\ =\ in;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+fftLenBy2p1+1U]\ <-\/>\ pSrc[j+fftLenBy2p1+1U]\ */}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[(2U\ *\ (i\ +\ fftLenBy2p1))\ +\ 1U];}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ (i\ +\ fftLenBy2p1))\ +\ 1U]\ =}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ (j\ +\ fftLenBy2p1))\ +\ 1U];}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ (j\ +\ fftLenBy2p1))\ +\ 1U]\ =\ in;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+1U]\ <-\/>\ pSrc[j+1U]\ */}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ in\ =\ pSrc[2U\ *\ (i\ +\ 1U)];}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ pSrc[2U\ *\ (i\ +\ 1U)]\ =\ pSrc[2U\ *\ (j\ +\ fftLenBy2)];}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ pSrc[2U\ *\ (j\ +\ fftLenBy2)]\ =\ in;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+2U]\ <-\/>\ pSrc[j+2U]\ */}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ in\ =\ pSrc[(2U\ *\ (i\ +\ 1U))\ +\ 1U];}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ pSrc[(2U\ *\ (i\ +\ 1U))\ +\ 1U]\ =\ pSrc[(2U\ *\ (j\ +\ fftLenBy2))\ +\ 1U];}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ pSrc[(2U\ *\ (j\ +\ fftLenBy2))\ +\ 1U]\ =\ in;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Reading\ the\ index\ for\ the\ bit\ reversal\ */}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ j\ =\ *pBitRevTab;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Updating\ the\ bit\ reversal\ index\ depending\ on\ the\ fft\ length\ \ */}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ pBitRevTab\ +=\ bitRevFactor;}
+\DoxyCodeLine{00104\ \ \ \ \}}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_q31(}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00111\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_q31(}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00125\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab)}
+\DoxyCodeLine{00126\ \{}
+\DoxyCodeLine{00127\ \ \ \ uint32\_t\ fftLenBy2,\ fftLenBy2p1,\ i,\ j;}
+\DoxyCodeLine{00128\ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ in;}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \textcolor{comment}{/*\ \ Initializations\ \ \ \ \ \ */}}
+\DoxyCodeLine{00131\ \ \ \ j\ =\ 0U;}
+\DoxyCodeLine{00132\ \ \ \ fftLenBy2\ =\ fftLen\ /\ 2U;}
+\DoxyCodeLine{00133\ \ \ \ fftLenBy2p1\ =\ (fftLen\ /\ 2U)\ +\ 1U;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \textcolor{comment}{/*\ Bit\ Reversal\ Implementation\ */}}
+\DoxyCodeLine{00136\ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <=\ (fftLenBy2\ -\/\ 2U);\ i\ +=\ 2U)}
+\DoxyCodeLine{00137\ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ j)}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i]\ <-\/>\ pSrc[j];\ */}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[2U\ *\ i];}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ i]\ =\ pSrc[2U\ *\ j];}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ j]\ =\ in;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+1U]\ <-\/>\ pSrc[j+1U]\ */}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[(2U\ *\ i)\ +\ 1U];}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ i)\ +\ 1U]\ =\ pSrc[(2U\ *\ j)\ +\ 1U];}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ j)\ +\ 1U]\ =\ in;}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+fftLenBy2p1]\ <-\/>\ pSrc[j+fftLenBy2p1]\ */}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[2U\ *\ (i\ +\ fftLenBy2p1)];}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ (i\ +\ fftLenBy2p1)]\ =\ pSrc[2U\ *\ (j\ +\ fftLenBy2p1)];}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ pSrc[2U\ *\ (j\ +\ fftLenBy2p1)]\ =\ in;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+fftLenBy2p1+1U]\ <-\/>\ pSrc[j+fftLenBy2p1+1U]\ */}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[(2U\ *\ (i\ +\ fftLenBy2p1))\ +\ 1U];}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ (i\ +\ fftLenBy2p1))\ +\ 1U]\ =}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ (j\ +\ fftLenBy2p1))\ +\ 1U];}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ pSrc[(2U\ *\ (j\ +\ fftLenBy2p1))\ +\ 1U]\ =\ in;}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+1U]\ <-\/>\ pSrc[j+1U]\ */}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ in\ =\ pSrc[2U\ *\ (i\ +\ 1U)];}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ pSrc[2U\ *\ (i\ +\ 1U)]\ =\ pSrc[2U\ *\ (j\ +\ fftLenBy2)];}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ pSrc[2U\ *\ (j\ +\ fftLenBy2)]\ =\ in;}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+2U]\ <-\/>\ pSrc[j+2U]\ */}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ in\ =\ pSrc[(2U\ *\ (i\ +\ 1U))\ +\ 1U];}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ pSrc[(2U\ *\ (i\ +\ 1U))\ +\ 1U]\ =\ pSrc[(2U\ *\ (j\ +\ fftLenBy2))\ +\ 1U];}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ pSrc[(2U\ *\ (j\ +\ fftLenBy2))\ +\ 1U]\ =\ in;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Reading\ the\ index\ for\ the\ bit\ reversal\ */}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ j\ =\ *pBitRevTab;}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Updating\ the\ bit\ reversal\ index\ depending\ on\ the\ fft\ length\ */}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ pBitRevTab\ +=\ bitRevFactor;}
+\DoxyCodeLine{00178\ \ \ \ \}}
+\DoxyCodeLine{00179\ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_q15(}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrc16,}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00185\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_q15(}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pSrc16,}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ uint16\_t\ bitRevFactor,}
+\DoxyCodeLine{00200\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTab)}
+\DoxyCodeLine{00201\ \{}
+\DoxyCodeLine{00202\ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pSrc\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *)\ pSrc16;}
+\DoxyCodeLine{00203\ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ in;}
+\DoxyCodeLine{00204\ \ \ \ uint32\_t\ fftLenBy2,\ fftLenBy2p1;}
+\DoxyCodeLine{00205\ \ \ \ uint32\_t\ i,\ j;}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \textcolor{comment}{/*\ \ Initializations\ */}}
+\DoxyCodeLine{00208\ \ \ \ j\ =\ 0U;}
+\DoxyCodeLine{00209\ \ \ \ fftLenBy2\ =\ fftLen\ /\ 2U;}
+\DoxyCodeLine{00210\ \ \ \ fftLenBy2p1\ =\ (fftLen\ /\ 2U)\ +\ 1U;}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \textcolor{comment}{/*\ Bit\ Reversal\ Implementation\ */}}
+\DoxyCodeLine{00213\ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <=\ (fftLenBy2\ -\/\ 2U);\ i\ +=\ 2U)}
+\DoxyCodeLine{00214\ \ \ \ \{}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ <\ j)}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i]\ <-\/>\ pSrc[j];\ */}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+1U]\ <-\/>\ pSrc[j+1U]\ */}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[i];}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ pSrc[i]\ =\ pSrc[j];}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ pSrc[j]\ =\ in;}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i\ +\ fftLenBy2p1]\ <-\/>\ pSrc[j\ +\ fftLenBy2p1];\ \ */}}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i\ +\ fftLenBy2p1+1U]\ <-\/>\ pSrc[j\ +\ fftLenBy2p1+1U]\ */}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ in\ =\ pSrc[i\ +\ fftLenBy2p1];}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ pSrc[i\ +\ fftLenBy2p1]\ =\ pSrc[j\ +\ fftLenBy2p1];}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ pSrc[j\ +\ fftLenBy2p1]\ =\ in;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+1U]\ <-\/>\ pSrc[j+fftLenBy2];\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ pSrc[i+2]\ <-\/>\ pSrc[j+fftLenBy2+1U]\ \ */}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ in\ =\ pSrc[i\ +\ 1U];}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ pSrc[i\ +\ 1U]\ =\ pSrc[j\ +\ fftLenBy2];}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ pSrc[j\ +\ fftLenBy2]\ =\ in;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Reading\ the\ index\ for\ the\ bit\ reversal\ */}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ j\ =\ *pBitRevTab;}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Updating\ the\ bit\ reversal\ index\ depending\ on\ the\ fft\ length\ \ */}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ pBitRevTab\ +=\ bitRevFactor;}
+\DoxyCodeLine{00241\ \ \ \ \}}
+\DoxyCodeLine{00242\ \}}
+
+\end{DoxyCode}

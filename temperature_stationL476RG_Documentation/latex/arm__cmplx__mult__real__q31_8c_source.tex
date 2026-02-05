@@ -1,0 +1,188 @@
+\doxysection{arm\+\_\+cmplx\+\_\+mult\+\_\+real\+\_\+q31.\+c}
+\hypertarget{arm__cmplx__mult__real__q31_8c_source}{}\label{arm__cmplx__mult__real__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/ComplexMathFunctions/arm\_cmplx\_mult\_real\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/ComplexMathFunctions/arm\_cmplx\_mult\_real\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_cmplx\_mult\_real\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Q31\ complex\ by\ real\ multiplication}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/complex\_math\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEI)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00053\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_real_mult_gab999dce5741986017ddaddf173796961}{arm\_cmplx\_mult\_real\_q31}}(}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcCmplx,}
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcReal,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCmplxDst,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples)}
+\DoxyCodeLine{00058\ \{}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\_t\ stride\_cmplx\_x\_real\_32[4]\ =\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ 0,\ 0,\ 1,\ 1}
+\DoxyCodeLine{00062\ \ \ \ \ \};}
+\DoxyCodeLine{00063\ \ \ \ \ q31x4\_t\ rVec;}
+\DoxyCodeLine{00064\ \ \ \ \ q31x4\_t\ cmplxVec;}
+\DoxyCodeLine{00065\ \ \ \ \ q31x4\_t\ dstVec;}
+\DoxyCodeLine{00066\ \ \ \ \ uint32x4\_t\ strideVec;}
+\DoxyCodeLine{00067\ \ \ \ \ uint32\_t\ blockSizeC\ =\ numSamples\ *\ CMPLX\_DIM;\ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00068\ \ \ \ \ uint32\_t\ blkCnt;}
+\DoxyCodeLine{00069\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ in;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ \ *\ stride\ vector\ for\ pairs\ of\ real\ generation}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00074\ \ \ \ \ strideVec\ =\ vld1q(stride\_cmplx\_x\_real\_32);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{/*\ Compute\ 4\ complex\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00077\ \ \ \ \ blkCnt\ =\ blockSizeC\ >>\ 2;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)\ }
+\DoxyCodeLine{00079\ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ cmplxVec\ =\ vld1q(pSrcCmplx);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ rVec\ =\ vldrwq\_gather\_shifted\_offset\_s32(pSrcReal,\ strideVec);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ dstVec\ =\ vqdmulhq(cmplxVec,\ rVec);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ vst1q(pCmplxDst,\ dstVec);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ pSrcReal\ +=\ 2;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ pSrcCmplx\ +=\ 4;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ pCmplxDst\ +=\ 4;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ blkCnt\ -\/-\/;}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ blkCnt\ =\ (blockSizeC\ \&\ 3)\ >>\ 1;\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00093\ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \textcolor{comment}{/*\ C[2\ *\ i\ \ \ \ ]\ =\ A[2\ *\ i\ \ \ \ ]\ *\ B[i].\ */}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \textcolor{comment}{/*\ C[2\ *\ i\ +\ 1]\ =\ A[2\ *\ i\ +\ 1]\ *\ B[i].\ */}}
+\DoxyCodeLine{00096\ \ \ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ in\ =\ *pSrcReal++;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \textcolor{comment}{/*\ store\ saturated\ result\ in\ 1.31\ format\ to\ destination\ buffer\ */}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00101\ \ \ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00107\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___cmplx_by_real_mult_gab999dce5741986017ddaddf173796961}{arm\_cmplx\_mult\_real\_q31}}(}
+\DoxyCodeLine{00108\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcCmplx,}
+\DoxyCodeLine{00109\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcReal,}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCmplxDst,}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ uint32\_t\ numSamples)}
+\DoxyCodeLine{00112\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ uint32\_t\ blkCnt;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ counter\ */}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ in;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variable\ */}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00119\ \ \ blkCnt\ =\ numSamples\ >>\ 2U;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00122\ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{comment}{/*\ C[2\ *\ i\ \ \ \ ]\ =\ A[2\ *\ i\ \ \ \ ]\ *\ B[i].\ */}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{/*\ C[2\ *\ i\ +\ 1]\ =\ A[2\ *\ i\ +\ 1]\ *\ B[i].\ */}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ in\ =\ *pSrcReal++;}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_DSP)}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{/*\ store\ saturated\ result\ in\ 1.31\ format\ to\ destination\ buffer\ */}}
+\DoxyCodeLine{00129\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00130\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{/*\ store\ result\ in\ destination\ buffer.\ */}}
+\DoxyCodeLine{00133\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00134\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ in\ =\ *pSrcReal++;}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_DSP)}}
+\DoxyCodeLine{00139\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00140\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00142\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00143\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ in\ =\ *pSrcReal++;}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_DSP)}}
+\DoxyCodeLine{00148\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00149\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00151\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00152\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ in\ =\ *pSrcReal++;}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_DSP)}}
+\DoxyCodeLine{00157\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00158\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00160\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00161\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00165\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00166\ \ \ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00169\ \ \ blkCnt\ =\ numSamples\ \%\ 0x4U;}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00174\ \ \ blkCnt\ =\ numSamples;}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00179\ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{comment}{/*\ C[2\ *\ i\ \ \ \ ]\ =\ A[2\ *\ i\ \ \ \ ]\ *\ B[i].\ */}}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{/*\ C[2\ *\ i\ +\ 1]\ =\ A[2\ *\ i\ +\ 1]\ *\ B[i].\ */}}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ in\ =\ *pSrcReal++;}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_DSP)}}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{comment}{/*\ store\ saturated\ result\ in\ 1.31\ format\ to\ destination\ buffer\ */}}
+\DoxyCodeLine{00186\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00187\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group___c_m_s_i_s___core___instruction_interface_ga372c0535573dde3e37f0f08c774a3487}{\_\_SSAT}}((\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 32),\ 31)\ <<\ 1);}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{comment}{/*\ store\ result\ in\ destination\ buffer.\ */}}
+\DoxyCodeLine{00190\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00191\ \ \ \ \ *pCmplxDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ clip\_q63\_to\_q31(((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *pSrcCmplx++\ *\ in)\ >>\ 31);}
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00195\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00196\ \ \ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEI)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00200\ }
+
+\end{DoxyCode}

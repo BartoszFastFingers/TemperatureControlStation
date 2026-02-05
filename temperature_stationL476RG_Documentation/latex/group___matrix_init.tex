@@ -1,0 +1,105 @@
+\doxysubsection{Matrix Initialization }
+\hypertarget{group___matrix_init}{}\label{group___matrix_init}\index{Matrix Initialization@{Matrix Initialization}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___matrix_init_ga750a582d71f582c699207c2743e127d3}{arm\+\_\+mat\+\_\+init\+\_\+f32}} (\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, uint16\+\_\+t n\+Rows, uint16\+\_\+t n\+Columns, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Data)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix initialization. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___matrix_init_ga2c6ac166fa9103939784dc7dcc67b114}{arm\+\_\+mat\+\_\+init\+\_\+f64}} (\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}S, uint16\+\_\+t n\+Rows, uint16\+\_\+t n\+Columns, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Data)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix initialization. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___matrix_init_ga4d0c635ae70b3a26230c31b943b4d26a}{arm\+\_\+mat\+\_\+init\+\_\+q15}} (\doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, uint16\+\_\+t n\+Rows, uint16\+\_\+t n\+Columns, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Data)
+\begin{DoxyCompactList}\small\item\em Q15 matrix initialization. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___matrix_init_gad865daa574c1ac8f69d21b2124c59ea4}{arm\+\_\+mat\+\_\+init\+\_\+q31}} (\doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}S, uint16\+\_\+t n\+Rows, uint16\+\_\+t n\+Columns, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Data)
+\begin{DoxyCompactList}\small\item\em Q31 matrix initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Initializes the underlying matrix data structure. The functions set the {\ttfamily num\+Rows}, {\ttfamily num\+Cols}, and {\ttfamily p\+Data} fields of the matrix data structure.
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_init_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_init_ga750a582d71f582c699207c2743e127d3}\index{Matrix Initialization@{Matrix Initialization}!arm\_mat\_init\_f32@{arm\_mat\_init\_f32}}
+\index{arm\_mat\_init\_f32@{arm\_mat\_init\_f32}!Matrix Initialization@{Matrix Initialization}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_init\_f32()}{arm\_mat\_init\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_init_ga750a582d71f582c699207c2743e127d3} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+mat\+\_\+init\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint16\+\_\+t}]{n\+Rows}{, }\item[{uint16\+\_\+t}]{n\+Columns}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Rows} & number of rows in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Columns} & number of columns in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Data} & points to the matrix data array \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___matrix_init_ga2c6ac166fa9103939784dc7dcc67b114}\index{Matrix Initialization@{Matrix Initialization}!arm\_mat\_init\_f64@{arm\_mat\_init\_f64}}
+\index{arm\_mat\_init\_f64@{arm\_mat\_init\_f64}!Matrix Initialization@{Matrix Initialization}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_init\_f64()}{arm\_mat\_init\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_init_ga2c6ac166fa9103939784dc7dcc67b114} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+mat\+\_\+init\+\_\+f64 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint16\+\_\+t}]{n\+Rows}{, }\item[{uint16\+\_\+t}]{n\+Columns}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Rows} & number of rows in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Columns} & number of columns in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Data} & points to the matrix data array \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___matrix_init_ga4d0c635ae70b3a26230c31b943b4d26a}\index{Matrix Initialization@{Matrix Initialization}!arm\_mat\_init\_q15@{arm\_mat\_init\_q15}}
+\index{arm\_mat\_init\_q15@{arm\_mat\_init\_q15}!Matrix Initialization@{Matrix Initialization}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_init\_q15()}{arm\_mat\_init\_q15()}}
+{\footnotesize\ttfamily \label{group___matrix_init_ga4d0c635ae70b3a26230c31b943b4d26a} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+mat\+\_\+init\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint16\+\_\+t}]{n\+Rows}{, }\item[{uint16\+\_\+t}]{n\+Columns}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Q15 matrix initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Rows} & number of rows in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Columns} & number of columns in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Data} & points to the matrix data array \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___matrix_init_gad865daa574c1ac8f69d21b2124c59ea4}\index{Matrix Initialization@{Matrix Initialization}!arm\_mat\_init\_q31@{arm\_mat\_init\_q31}}
+\index{arm\_mat\_init\_q31@{arm\_mat\_init\_q31}!Matrix Initialization@{Matrix Initialization}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_init\_q31()}{arm\_mat\_init\_q31()}}
+{\footnotesize\ttfamily \label{group___matrix_init_gad865daa574c1ac8f69d21b2124c59ea4} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+mat\+\_\+init\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint16\+\_\+t}]{n\+Rows}{, }\item[{uint16\+\_\+t}]{n\+Columns}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Data}{}\end{DoxyParamCaption})}
+
+
+
+Q31 matrix initialization. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q31 matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Rows} & number of rows in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em n\+Columns} & number of columns in the matrix \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Data} & points to the matrix data array \\
+\hline
+\end{DoxyParams}

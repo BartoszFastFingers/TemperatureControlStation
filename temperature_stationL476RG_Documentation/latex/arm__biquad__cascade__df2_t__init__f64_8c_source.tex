@@ -1,0 +1,58 @@
+\doxysection{arm\+\_\+biquad\+\_\+cascade\+\_\+df2\+T\+\_\+init\+\_\+f64.\+c}
+\hypertarget{arm__biquad__cascade__df2_t__init__f64_8c_source}{}\label{arm__biquad__cascade__df2_t__init__f64_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_biquad\_cascade\_df2T\_init\_f64.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_biquad\_cascade\_df2T\_init\_f64.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_biquad\_cascade\_df2T\_init\_f64.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Initialization\ function\ for\ floating-\/point\ transposed\ direct\ form\ II\ Biquad\ cascade\ filter}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/filtering\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___biquad_cascade_d_f2_t_gaf9633c3b8d13b7f1253a62aa62113a5e}{arm\_biquad\_cascade\_df2T\_init\_f64}}(}
+\DoxyCodeLine{00065\ \ \ \ \ \doxymbox{\hyperlink{structarm__biquad__cascade__df2_t__instance__f64}{arm\_biquad\_cascade\_df2T\_instance\_f64}}\ *\ S,}
+\DoxyCodeLine{00066\ \ \ \ \ uint8\_t\ numStages,}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pCoeffs,}
+\DoxyCodeLine{00068\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pState)}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{/*\ Assign\ filter\ stages\ */}}
+\DoxyCodeLine{00071\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__df2_t__instance__f64_a3615af038f56917909e0370c11bc2ec7}{numStages}}\ =\ numStages;}
+\DoxyCodeLine{00072\ \ \ \ \ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{/*\ Assign\ coefficient\ pointer\ */}}
+\DoxyCodeLine{00074\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__df2_t__instance__f64_adad49a8a7b229bd2c63e4fe53ce53d5c}{pCoeffs}}\ =\ pCoeffs;}
+\DoxyCodeLine{00075\ \ \ \ \ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{/*\ Clear\ state\ buffer\ and\ size\ is\ always\ 2\ *\ numStages\ */}}
+\DoxyCodeLine{00077\ \ \ \ \ memset(pState,\ 0,\ (2U\ *\ (uint32\_t)\ numStages)\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}));}
+\DoxyCodeLine{00078\ \ \ \ \ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{/*\ Assign\ state\ pointer\ */}}
+\DoxyCodeLine{00080\ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__df2_t__instance__f64_ae97c926a7e3a4bfe26fcdd0a3cc2f5c6}{pState}}\ =\ pState;}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ }
+
+\end{DoxyCode}

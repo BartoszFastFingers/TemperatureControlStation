@@ -1,0 +1,126 @@
+\doxysubsection{Vector Fill }
+\hypertarget{group___fill}{}\label{group___fill}\index{Vector Fill@{Vector Fill}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___fill_ga361552dc88133d2c7c1721f374c4a798}{arm\+\_\+fill\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} value, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Fills a constant value into a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___fill_gaf644346c03157ebd2dfdcc830be69813}{arm\+\_\+fill\+\_\+f64}} (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} value, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Fills a constant value into a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___fill_ga97cd043caedc0637eae2ce8d43c3d862}{arm\+\_\+fill\+\_\+q15}} (\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} value, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Fills a constant value into a Q15 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___fill_ga258cd98b51db7375220e58df064bfbc1}{arm\+\_\+fill\+\_\+q31}} (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} value, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Fills a constant value into a Q31 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___fill_ga106a8f82908f575ed5baf4094c40a604}{arm\+\_\+fill\+\_\+q7}} (\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} value, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Fills a constant value into a Q7 vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Fills the destination vector with a constant value.
+
+
+\begin{DoxyPre}
+    pDst[n] = value;   0 <= n < blockSize.
+\end{DoxyPre}
+
+
+There are separate functions for floating point, Q31, Q15, and Q7 data types.
+
+\label{doc-func-members}
+\Hypertarget{group___fill_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___fill_ga361552dc88133d2c7c1721f374c4a798}\index{Vector Fill@{Vector Fill}!arm\_fill\_f32@{arm\_fill\_f32}}
+\index{arm\_fill\_f32@{arm\_fill\_f32}!Vector Fill@{Vector Fill}}
+\doxysubsubsubsection{\texorpdfstring{arm\_fill\_f32()}{arm\_fill\_f32()}}
+{\footnotesize\ttfamily \label{group___fill_ga361552dc88133d2c7c1721f374c4a798} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+fill\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Fills a constant value into a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em value} & input value to be filled \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___fill_gaf644346c03157ebd2dfdcc830be69813}\index{Vector Fill@{Vector Fill}!arm\_fill\_f64@{arm\_fill\_f64}}
+\index{arm\_fill\_f64@{arm\_fill\_f64}!Vector Fill@{Vector Fill}}
+\doxysubsubsubsection{\texorpdfstring{arm\_fill\_f64()}{arm\_fill\_f64()}}
+{\footnotesize\ttfamily \label{group___fill_gaf644346c03157ebd2dfdcc830be69813} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+fill\+\_\+f64 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Fills a constant value into a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em value} & input value to be filled \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___fill_ga97cd043caedc0637eae2ce8d43c3d862}\index{Vector Fill@{Vector Fill}!arm\_fill\_q15@{arm\_fill\_q15}}
+\index{arm\_fill\_q15@{arm\_fill\_q15}!Vector Fill@{Vector Fill}}
+\doxysubsubsubsection{\texorpdfstring{arm\_fill\_q15()}{arm\_fill\_q15()}}
+{\footnotesize\ttfamily \label{group___fill_ga97cd043caedc0637eae2ce8d43c3d862} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+fill\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Fills a constant value into a Q15 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em value} & input value to be filled \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___fill_ga258cd98b51db7375220e58df064bfbc1}\index{Vector Fill@{Vector Fill}!arm\_fill\_q31@{arm\_fill\_q31}}
+\index{arm\_fill\_q31@{arm\_fill\_q31}!Vector Fill@{Vector Fill}}
+\doxysubsubsubsection{\texorpdfstring{arm\_fill\_q31()}{arm\_fill\_q31()}}
+{\footnotesize\ttfamily \label{group___fill_ga258cd98b51db7375220e58df064bfbc1} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+fill\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Fills a constant value into a Q31 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em value} & input value to be filled \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___fill_ga106a8f82908f575ed5baf4094c40a604}\index{Vector Fill@{Vector Fill}!arm\_fill\_q7@{arm\_fill\_q7}}
+\index{arm\_fill\_q7@{arm\_fill\_q7}!Vector Fill@{Vector Fill}}
+\doxysubsubsubsection{\texorpdfstring{arm\_fill\_q7()}{arm\_fill\_q7()}}
+{\footnotesize\ttfamily \label{group___fill_ga106a8f82908f575ed5baf4094c40a604} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+fill\+\_\+q7 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}}}]{value}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Fills a constant value into a Q7 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em value} & input value to be filled \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,71 @@
+\doxysubsection{Polynomial SVM }
+\hypertarget{group__polysvm}{}\label{group__polysvm}\index{Polynomial SVM@{Polynomial SVM}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__polysvm_ga0e777fbdea19a7f49976a65a22c6671d}{arm\+\_\+svm\+\_\+polynomial\+\_\+init\+\_\+f32}} (\doxymbox{\hyperlink{structarm__svm__polynomial__instance__f32}{arm\+\_\+svm\+\_\+polynomial\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, uint32\+\_\+t nb\+Of\+Support\+Vectors, uint32\+\_\+t vector\+Dimension, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} intercept, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}dual\+Coefficients, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}support\+Vectors, const int32\+\_\+t \texorpdfstring{$\ast$}{*}classes, int32\+\_\+t degree, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} coef0, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} gamma)
+\begin{DoxyCompactList}\small\item\em SVM polynomial instance init function. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__polysvm_ga81c3bbc577a9c610ac7f3731f95533f3}{arm\+\_\+svm\+\_\+polynomial\+\_\+predict\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__svm__polynomial__instance__f32}{arm\+\_\+svm\+\_\+polynomial\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}in, int32\+\_\+t \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em SVM polynomial prediction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Polynomial SVM classifier
+
+\label{doc-func-members}
+\Hypertarget{group__polysvm_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__polysvm_ga0e777fbdea19a7f49976a65a22c6671d}\index{Polynomial SVM@{Polynomial SVM}!arm\_svm\_polynomial\_init\_f32@{arm\_svm\_polynomial\_init\_f32}}
+\index{arm\_svm\_polynomial\_init\_f32@{arm\_svm\_polynomial\_init\_f32}!Polynomial SVM@{Polynomial SVM}}
+\doxysubsubsubsection{\texorpdfstring{arm\_svm\_polynomial\_init\_f32()}{arm\_svm\_polynomial\_init\_f32()}}
+{\footnotesize\ttfamily \label{group__polysvm_ga0e777fbdea19a7f49976a65a22c6671d} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+svm\+\_\+polynomial\+\_\+init\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__svm__polynomial__instance__f32}{arm\+\_\+svm\+\_\+polynomial\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint32\+\_\+t}]{nb\+Of\+Support\+Vectors}{, }\item[{uint32\+\_\+t}]{vector\+Dimension}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{intercept}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{dual\+Coefficients}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{support\+Vectors}{, }\item[{const int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{classes}{, }\item[{int32\+\_\+t}]{degree}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{coef0}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{gamma}{}\end{DoxyParamCaption})}
+
+
+
+SVM polynomial instance init function. 
+
+Classes are integer used as output of the function (instead of having -\/1,1 as class values).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & points to an instance of the polynomial SVM structure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em nb\+Of\+Support\+Vectors} & Number of support vectors \\
+\hline
+\doxymbox{\texttt{in}}  & {\em vector\+Dimension} & Dimension of vector space \\
+\hline
+\doxymbox{\texttt{in}}  & {\em intercept} & Intercept \\
+\hline
+\doxymbox{\texttt{in}}  & {\em dual\+Coefficients} & Array of dual coefficients \\
+\hline
+\doxymbox{\texttt{in}}  & {\em support\+Vectors} & Array of support vectors \\
+\hline
+\doxymbox{\texttt{in}}  & {\em classes} & Array of 2 classes ID \\
+\hline
+\doxymbox{\texttt{in}}  & {\em degree} & Polynomial degree \\
+\hline
+\doxymbox{\texttt{in}}  & {\em coef0} & coeff0 (scikit-\/learn terminology) \\
+\hline
+\doxymbox{\texttt{in}}  & {\em gamma} & gamma (scikit-\/learn terminology) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__polysvm_ga81c3bbc577a9c610ac7f3731f95533f3}\index{Polynomial SVM@{Polynomial SVM}!arm\_svm\_polynomial\_predict\_f32@{arm\_svm\_polynomial\_predict\_f32}}
+\index{arm\_svm\_polynomial\_predict\_f32@{arm\_svm\_polynomial\_predict\_f32}!Polynomial SVM@{Polynomial SVM}}
+\doxysubsubsubsection{\texorpdfstring{arm\_svm\_polynomial\_predict\_f32()}{arm\_svm\_polynomial\_predict\_f32()}}
+{\footnotesize\ttfamily \label{group__polysvm_ga81c3bbc577a9c610ac7f3731f95533f3} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+svm\+\_\+polynomial\+\_\+predict\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__svm__polynomial__instance__f32}{arm\+\_\+svm\+\_\+polynomial\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{in}{, }\item[{int32\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+SVM polynomial prediction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & Pointer to an instance of the polynomial SVM structure. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em in} & Pointer to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & Decision value \\
+\hline
+\end{DoxyParams}

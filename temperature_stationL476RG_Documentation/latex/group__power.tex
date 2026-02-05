@@ -1,0 +1,137 @@
+\doxysubsection{Power }
+\hypertarget{group__power}{}\label{group__power}\index{Power@{Power}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__power_ga74c15ebadbb8dae792f85b1ce74be121}{arm\+\_\+power\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Sum of the squares of the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__power_ga1664bd633be7cd24cc9e3c77e575b0c8}{arm\+\_\+power\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Sum of the squares of the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__power_ga321a1d09fc788f451d1af38242254762}{arm\+\_\+power\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Sum of the squares of the elements of a Q15 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__power_ga2a382499448e5c34c34a3138b2ac00d2}{arm\+\_\+power\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Sum of the squares of the elements of a Q31 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__power_ga5294d273a2064bad32d7c482f11b2aab}{arm\+\_\+power\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Sum of the squares of the elements of a Q7 vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Calculates the sum of the squares of the elements in the input vector. The underlying algorithm is used:\+
+
+
+\begin{DoxyPre}
+    Result = pSrc[0] * pSrc[0] + pSrc[1] * pSrc[1] + pSrc[2] * pSrc[2] + ... + pSrc[blockSize-\/1] * pSrc[blockSize-\/1];
+\end{DoxyPre}
+
+
+There are separate functions for floating point, Q31, Q15, and Q7 data types.
+
+Since the result is not divided by the length, those functions are in fact computing something which is more an energy than a power.
+
+\label{doc-func-members}
+\Hypertarget{group__power_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__power_ga74c15ebadbb8dae792f85b1ce74be121}\index{Power@{Power}!arm\_power\_f32@{arm\_power\_f32}}
+\index{arm\_power\_f32@{arm\_power\_f32}!Power@{Power}}
+\doxysubsubsubsection{\texorpdfstring{arm\_power\_f32()}{arm\_power\_f32()}}
+{\footnotesize\ttfamily \label{group__power_ga74c15ebadbb8dae792f85b1ce74be121} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+power\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Sum of the squares of the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & sum of the squares value returned here \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__power_ga1664bd633be7cd24cc9e3c77e575b0c8}\index{Power@{Power}!arm\_power\_f64@{arm\_power\_f64}}
+\index{arm\_power\_f64@{arm\_power\_f64}!Power@{Power}}
+\doxysubsubsubsection{\texorpdfstring{arm\_power\_f64()}{arm\_power\_f64()}}
+{\footnotesize\ttfamily \label{group__power_ga1664bd633be7cd24cc9e3c77e575b0c8} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+power\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Sum of the squares of the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & sum of the squares value returned here \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__power_ga321a1d09fc788f451d1af38242254762}\index{Power@{Power}!arm\_power\_q15@{arm\_power\_q15}}
+\index{arm\_power\_q15@{arm\_power\_q15}!Power@{Power}}
+\doxysubsubsubsection{\texorpdfstring{arm\_power\_q15()}{arm\_power\_q15()}}
+{\footnotesize\ttfamily \label{group__power_ga321a1d09fc788f451d1af38242254762} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+power\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Sum of the squares of the elements of a Q15 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & sum of the squares value returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using a 64-\/bit internal accumulator. The input is represented in 1.\+15 format. Intermediate multiplication yields a 2.\+30 format, and this result is added without saturation to a 64-\/bit accumulator in 34.\+30 format. With 33 guard bits in the accumulator, there is no risk of overflow, and the full precision of the intermediate multiplication is preserved. Finally, the return result is in 34.\+30 format. 
+\end{DoxyParagraph}
+\Hypertarget{group__power_ga2a382499448e5c34c34a3138b2ac00d2}\index{Power@{Power}!arm\_power\_q31@{arm\_power\_q31}}
+\index{arm\_power\_q31@{arm\_power\_q31}!Power@{Power}}
+\doxysubsubsubsection{\texorpdfstring{arm\_power\_q31()}{arm\_power\_q31()}}
+{\footnotesize\ttfamily \label{group__power_ga2a382499448e5c34c34a3138b2ac00d2} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+power\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Sum of the squares of the elements of a Q31 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & sum of the squares value returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using a 64-\/bit internal accumulator. The input is represented in 1.\+31 format. Intermediate multiplication yields a 2.\+62 format, and this result is truncated to 2.\+48 format by discarding the lower 14 bits. The 2.\+48 result is then added without saturation to a 64-\/bit accumulator in 16.\+48 format. With 15 guard bits in the accumulator, there is no risk of overflow, and the full precision of the intermediate multiplication is preserved. Finally, the return result is in 16.\+48 format. 
+\end{DoxyParagraph}
+\Hypertarget{group__power_ga5294d273a2064bad32d7c482f11b2aab}\index{Power@{Power}!arm\_power\_q7@{arm\_power\_q7}}
+\index{arm\_power\_q7@{arm\_power\_q7}!Power@{Power}}
+\doxysubsubsubsection{\texorpdfstring{arm\_power\_q7()}{arm\_power\_q7()}}
+{\footnotesize\ttfamily \label{group__power_ga5294d273a2064bad32d7c482f11b2aab} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+power\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Sum of the squares of the elements of a Q7 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & sum of the squares value returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using a 32-\/bit internal accumulator. The input is represented in 1.\+7 format. Intermediate multiplication yields a 2.\+14 format, and this result is added without saturation to an accumulator in 18.\+14 format. With 17 guard bits in the accumulator, there is no risk of overflow, and the full precision of the intermediate multiplication is preserved. Finally, the return result is in 18.\+14 format. 
+\end{DoxyParagraph}

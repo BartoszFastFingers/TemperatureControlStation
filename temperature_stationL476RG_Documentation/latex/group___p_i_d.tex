@@ -1,0 +1,277 @@
+\doxysubsection{PID Motor Control }
+\hypertarget{group___p_i_d}{}\label{group___p_i_d}\index{PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}}
+\begin{DoxyCompactList}\small\item\em Instance structure for the Q15 PID Control. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}}
+\begin{DoxyCompactList}\small\item\em Instance structure for the Q31 PID Control. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}}
+\begin{DoxyCompactList}\small\item\em Instance structure for the floating-\/point PID Control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___p_i_d_ga5a6865ed706b7dd969ef0bd58a61f306}{arm\+\_\+pid\+\_\+f32}} (\doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} in)
+\begin{DoxyCompactList}\small\item\em Process function for the floating-\/point PID Control. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \doxymbox{\hyperlink{group___p_i_d_ga9ead8b3180125fb42879389477b99dc8}{arm\+\_\+pid\+\_\+q31}} (\doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} in)
+\begin{DoxyCompactList}\small\item\em Process function for the Q31 PID Control. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \doxymbox{\hyperlink{group___p_i_d_ga7ecc87208cb297fb9a31cec4f18bb54e}{arm\+\_\+pid\+\_\+q15}} (\doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} in)
+\begin{DoxyCompactList}\small\item\em Process function for the Q15 PID Control. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___p_i_d_ga2d4e4aac5dd17c861388b799dc8d8b8f}{arm\+\_\+pid\+\_\+init\+\_\+f32}} (\doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, int32\+\_\+t reset\+State\+Flag)
+\begin{DoxyCompactList}\small\item\em Initialization function for the floating-\/point PID Control. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___p_i_d_ga1c39027589a35392391c73aab841851c}{arm\+\_\+pid\+\_\+init\+\_\+q15}} (\doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, int32\+\_\+t reset\+State\+Flag)
+\begin{DoxyCompactList}\small\item\em Initialization function for the Q15 PID Control. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___p_i_d_ga99984e72419f23ddc171ca4c6070694b}{arm\+\_\+pid\+\_\+init\+\_\+q31}} (\doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}S, int32\+\_\+t reset\+State\+Flag)
+\begin{DoxyCompactList}\small\item\em Initialization function for the Q31 PID Control. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___p_i_d_ga36100cfd13521e2a6d8ff515d0057be6}{arm\+\_\+pid\+\_\+reset\+\_\+f32}} (\doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S)
+\begin{DoxyCompactList}\small\item\em Reset function for the floating-\/point PID Control. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___p_i_d_ga1cf58d7ed03d63ce3fec0b391d5b592f}{arm\+\_\+pid\+\_\+reset\+\_\+q15}} (\doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S)
+\begin{DoxyCompactList}\small\item\em Reset function for the Q15 PID Control. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___p_i_d_ga4d057b0fc8c76967d41952208dce7693}{arm\+\_\+pid\+\_\+reset\+\_\+q31}} (\doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}S)
+\begin{DoxyCompactList}\small\item\em Reset function for the Q31 PID Control. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+A Proportional Integral Derivative (PID) controller is a generic feedback control loop mechanism widely used in industrial control systems. A PID controller is the most commonly used type of feedback controller.
+
+This set of functions implements (PID) controllers for Q15, Q31, and floating-\/point data types. The functions operate on a single sample of data and each call to the function returns a single processed value. {\ttfamily S} points to an instance of the PID control data structure. {\ttfamily in} is the input sample value. The functions return the output value.
+
+\begin{DoxyParagraph}{Algorithm:\+}
+
+\begin{DoxyPre}
+   y[n] = y[n-\/1] + A0 * x[n] + A1 * x[n-\/1] + A2 * x[n-\/2]
+   A0 = Kp + Ki + Kd
+   A1 = (-\/Kp ) -\/ (2 * Kd )
+   A2 = Kd
+\end{DoxyPre}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+where {\ttfamily Kp} is proportional constant, {\ttfamily Ki} is Integral constant and {\ttfamily Kd} is Derivative constant
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The PID controller calculates an "{}error"{} value as the difference between the measured output and the reference input. The controller attempts to minimize the error by adjusting the process control inputs. The proportional value determines the reaction to the current error, the integral value determines the reaction based on the sum of recent errors, and the derivative value determines the reaction based on the rate at which the error has been changing.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Instance Structure}
+The Gains A0, A1, A2 and state variables for a PID controller are stored together in an instance data structure. A separate instance structure must be defined for each PID Controller. There are separate instance structure declarations for each of the 3 supported data types.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Reset Functions}
+There is also an associated reset function for each data type which clears the state array.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Initialization Functions}
+There is also an associated initialization function for each data type. The initialization function performs the following operations:\+
+\begin{DoxyItemize}
+\item Initializes the Gains A0, A1, A2 from Kp,Ki, Kd gains.
+\item Zeros out the values in the state buffer.
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Instance structure cannot be placed into a const data section and it is recommended to use the initialization function.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Fixed-\/\+Point Behavior}
+Care must be taken when using the fixed-\/point versions of the PID Controller functions. In particular, the overflow and saturation behavior of the accumulator used in each function must be considered. Refer to the function specific documentation below for usage guidelines.
+\end{DoxyParagraph}
+
+
+\label{doc-func-members}
+\Hypertarget{group___p_i_d_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___p_i_d_ga5a6865ed706b7dd969ef0bd58a61f306}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_f32@{arm\_pid\_f32}}
+\index{arm\_pid\_f32@{arm\_pid\_f32}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_f32()}{arm\_pid\_f32()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga5a6865ed706b7dd969ef0bd58a61f306} 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+pid\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{in}{}\end{DoxyParamCaption})}
+
+
+
+Process function for the floating-\/point PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & is an instance of the floating-\/point PID Control structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em in} & input sample to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+processed output sample. 
+\end{DoxyReturn}
+\Hypertarget{group___p_i_d_ga2d4e4aac5dd17c861388b799dc8d8b8f}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_init\_f32@{arm\_pid\_init\_f32}}
+\index{arm\_pid\_init\_f32@{arm\_pid\_init\_f32}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_init\_f32()}{arm\_pid\_init\_f32()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga2d4e4aac5dd17c861388b799dc8d8b8f} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+pid\+\_\+init\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{int32\+\_\+t}]{reset\+State\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the floating-\/point PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the PID structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em reset\+State\+Flag} & 
+\begin{DoxyItemize}
+\item value = 0:\+ no change in state
+\item value = 1:\+ reset state
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The {\ttfamily reset\+State\+Flag} specifies whether to set state to zero or not. ~\newline
+ The function computes the structure fields:\+ {\ttfamily A0}, {\ttfamily A1} {\ttfamily A2} using the proportional gain( {\ttfamily Kp}), integral gain( {\ttfamily Ki}) and derivative gain( {\ttfamily Kd}) also sets the state variables to all zeros. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga1c39027589a35392391c73aab841851c}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_init\_q15@{arm\_pid\_init\_q15}}
+\index{arm\_pid\_init\_q15@{arm\_pid\_init\_q15}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_init\_q15()}{arm\_pid\_init\_q15()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga1c39027589a35392391c73aab841851c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+pid\+\_\+init\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{int32\+\_\+t}]{reset\+State\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the Q15 PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 PID structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em reset\+State\+Flag} & 
+\begin{DoxyItemize}
+\item value = 0:\+ no change in state
+\item value = 1:\+ reset state
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The {\ttfamily reset\+State\+Flag} specifies whether to set state to zero or not. ~\newline
+ The function computes the structure fields:\+ {\ttfamily A0}, {\ttfamily A1} {\ttfamily A2} using the proportional gain( {\ttfamily Kp}), integral gain( {\ttfamily Ki}) and derivative gain( {\ttfamily Kd}) also sets the state variables to all zeros. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga99984e72419f23ddc171ca4c6070694b}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_init\_q31@{arm\_pid\_init\_q31}}
+\index{arm\_pid\_init\_q31@{arm\_pid\_init\_q31}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_init\_q31()}{arm\_pid\_init\_q31()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga99984e72419f23ddc171ca4c6070694b} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+pid\+\_\+init\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{int32\+\_\+t}]{reset\+State\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the Q31 PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q31 PID structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em reset\+State\+Flag} & 
+\begin{DoxyItemize}
+\item value = 0:\+ no change in state
+\item value = 1:\+ reset state
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The {\ttfamily reset\+State\+Flag} specifies whether to set state to zero or not. ~\newline
+ The function computes the structure fields:\+ {\ttfamily A0}, {\ttfamily A1} {\ttfamily A2} using the proportional gain( {\ttfamily Kp}), integral gain( {\ttfamily Ki}) and derivative gain( {\ttfamily Kd}) also sets the state variables to all zeros. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga7ecc87208cb297fb9a31cec4f18bb54e}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_q15@{arm\_pid\_q15}}
+\index{arm\_pid\_q15@{arm\_pid\_q15}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_q15()}{arm\_pid\_q15()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga7ecc87208cb297fb9a31cec4f18bb54e} 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} arm\+\_\+pid\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{in}{}\end{DoxyParamCaption})}
+
+
+
+Process function for the Q15 PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 PID Control structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em in} & input sample to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+processed output sample.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using a 64-\/bit internal accumulator. Both Gains and state variables are represented in 1.\+15 format and multiplications yield a 2.\+30 result. The 2.\+30 intermediate results are accumulated in a 64-\/bit accumulator in 34.\+30 format. There is no risk of internal overflow with this approach and the full precision of intermediate multiplications is preserved. After all additions have been performed, the accumulator is truncated to 34.\+15 format by discarding low 15 bits. Lastly, the accumulator is saturated to yield a result in 1.\+15 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga9ead8b3180125fb42879389477b99dc8}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_q31@{arm\_pid\_q31}}
+\index{arm\_pid\_q31@{arm\_pid\_q31}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_q31()}{arm\_pid\_q31()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga9ead8b3180125fb42879389477b99dc8} 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} arm\+\_\+pid\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{in}{}\end{DoxyParamCaption})}
+
+
+
+Process function for the Q31 PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q31 PID Control structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em in} & input sample to process \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+processed output sample.
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using an internal 64-\/bit accumulator. The accumulator has a 2.\+62 format and maintains full precision of the intermediate multiplication results but provides only a single guard bit. Thus, if the accumulator result overflows it wraps around rather than clip. In order to avoid overflows completely the input signal must be scaled down by 2 bits as there are four additions. After all multiply-\/accumulates are performed, the 2.\+62 accumulator is truncated to 1.\+32 format and then saturated to 1.\+31 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga36100cfd13521e2a6d8ff515d0057be6}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_reset\_f32@{arm\_pid\_reset\_f32}}
+\index{arm\_pid\_reset\_f32@{arm\_pid\_reset\_f32}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_reset\_f32()}{arm\_pid\_reset\_f32()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga36100cfd13521e2a6d8ff515d0057be6} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+pid\+\_\+reset\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\+\_\+pid\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{}\end{DoxyParamCaption})}
+
+
+
+Reset function for the floating-\/point PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point PID structure\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The function resets the state buffer to zeros. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga1cf58d7ed03d63ce3fec0b391d5b592f}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_reset\_q15@{arm\_pid\_reset\_q15}}
+\index{arm\_pid\_reset\_q15@{arm\_pid\_reset\_q15}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_reset\_q15()}{arm\_pid\_reset\_q15()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga1cf58d7ed03d63ce3fec0b391d5b592f} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+pid\+\_\+reset\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__q15}{arm\+\_\+pid\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{}\end{DoxyParamCaption})}
+
+
+
+Reset function for the Q15 PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 PID structure\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The function resets the state buffer to zeros. 
+\end{DoxyParagraph}
+\Hypertarget{group___p_i_d_ga4d057b0fc8c76967d41952208dce7693}\index{PID Motor Control@{PID Motor Control}!arm\_pid\_reset\_q31@{arm\_pid\_reset\_q31}}
+\index{arm\_pid\_reset\_q31@{arm\_pid\_reset\_q31}!PID Motor Control@{PID Motor Control}}
+\doxysubsubsubsection{\texorpdfstring{arm\_pid\_reset\_q31()}{arm\_pid\_reset\_q31()}}
+{\footnotesize\ttfamily \label{group___p_i_d_ga4d057b0fc8c76967d41952208dce7693} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+pid\+\_\+reset\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__pid__instance__q31}{arm\+\_\+pid\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{S}{}\end{DoxyParamCaption})}
+
+
+
+Reset function for the Q31 PID Control. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q31 PID structure\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The function resets the state buffer to zeros. 
+\end{DoxyParagraph}

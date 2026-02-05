@@ -1,0 +1,331 @@
+\doxysection{Dokumentacja pliku Core/\+\+Inc/\+uart\+\_\+protocol.h}
+\hypertarget{uart__protocol_8h}{}\label{uart__protocol_8h}\index{Core/Inc/uart\_protocol.h@{Core/Inc/uart\_protocol.h}}
+
+
+Protokół UART dla komunikacji z PC/\+innym urządzeniem (komendy, odczyt temperatury, PWM).  
+
+
+{\ttfamily \+\#include "{}main.\+h"{}}\newline
+{\ttfamily \+\#include "{}usart.\+h"{}}\newline
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struktura protokołu UART. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{uart__protocol_8h_a29c21478896e442b65f6f46268d0f8a7}\label{uart__protocol_8h_a29c21478896e442b65f6f46268d0f8a7} 
+\+\#define {\bfseries UART\+\_\+\+PROTOCOL\+\_\+\+HANDLE}~huart2
+\item 
+\Hypertarget{uart__protocol_8h_a5bdd6772c246436bb14377095de79b31}\label{uart__protocol_8h_a5bdd6772c246436bb14377095de79b31} 
+\+\#define {\bfseries UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE}~128
+\item 
+\Hypertarget{uart__protocol_8h_a05f5d709605c6317c97e4974bec3402a}\label{uart__protocol_8h_a05f5d709605c6317c97e4974bec3402a} 
+\+\#define {\bfseries UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE}~128
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Wyliczenia}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{Uart\+Command\+\_\+t}} \{ \newline
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc}{CMD\+\_\+\+NONE}} = 0
+, \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0}{CMD\+\_\+\+PING}}
+, \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa}{CMD\+\_\+\+SET\+\_\+\+TEMP}}
+, \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a}{CMD\+\_\+\+GET\+\_\+\+STATUS}}
+, \newline
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287}{CMD\+\_\+\+START}}
+, \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc}{CMD\+\_\+\+STOP}}
+, \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee}{CMD\+\_\+\+SET\+\_\+\+KP}}
+, \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5}{CMD\+\_\+\+SET\+\_\+\+KI}}
+, \newline
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4}{CMD\+\_\+\+SET\+\_\+\+KD}}
+ \}
+\begin{DoxyCompactList}\small\item\em Lista dostępnych komend UART. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{uart__protocol_8h_a2d4f0a942a590f196fd1938653b66afa}{Uart\+Protocol\+\_\+\+Init}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto, UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}huart)
+\begin{DoxyCompactList}\small\item\em Inicjalizacja protokołu UART. \end{DoxyCompactList}\item 
+uint8\+\_\+t \doxymbox{\hyperlink{uart__protocol_8h_a831c58270ed17ca8eb212f15c978d6af}{Uart\+Protocol\+\_\+\+CRC8}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, uint16\+\_\+t len)
+\begin{DoxyCompactList}\small\item\em Obliczenie CRC8 (polynomial 0x07). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{uart__protocol_8h_a5822a9405798f726be1fc5599ec62b07}{Uart\+Protocol\+\_\+\+Send\+Data}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto, float temp, float setpoint, uint16\+\_\+t heater\+\_\+pwm, uint16\+\_\+t fan\+\_\+pwm, uint32\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Wysłanie danych pomiarowych. \end{DoxyCompactList}\item 
+\Hypertarget{uart__protocol_8h_a9889efbc1aea520f5391598c9cc376cd}\label{uart__protocol_8h_a9889efbc1aea520f5391598c9cc376cd} 
+void {\bfseries Uart\+Protocol\+\_\+\+Send\+Pong} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto)
+\begin{DoxyCompactList}\small\item\em Wysłanie odpowiedzi PONG. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{uart__protocol_8h_a5d200d74cfd471744a7a6e0f5d483c29}{Uart\+Protocol\+\_\+\+Send\+Ack}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto, const char \texorpdfstring{$\ast$}{*}cmd)
+\begin{DoxyCompactList}\small\item\em Wysłanie potwierdzenia (ACK). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{uart__protocol_8h_acc5c9ff2b950033f51e777da1797a19e}{Uart\+Protocol\+\_\+\+Send\+Nak}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto, const char \texorpdfstring{$\ast$}{*}error)
+\begin{DoxyCompactList}\small\item\em Wysłanie błędu (NAK). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{uart__protocol_8h_af4660451142b88c9667023983c48e40b}{Uart\+Protocol\+\_\+\+Receive\+Byte}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto, uint8\+\_\+t byte)
+\begin{DoxyCompactList}\small\item\em Przetworzenie odebranego bajtu (wywoływane z przerwania). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{Uart\+Command\+\_\+t}} \doxymbox{\hyperlink{uart__protocol_8h_a55c32246f566464d452b9cedc08e631a}{Uart\+Protocol\+\_\+\+Parse}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto)
+\begin{DoxyCompactList}\small\item\em Parsowanie odebranej komendy (wywoływane z głównej pętli). \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{uart__protocol_8h_a2dd16492ef96e47733d20666fc19443e}{Uart\+Protocol\+\_\+\+Get\+Arg}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto)
+\begin{DoxyCompactList}\small\item\em Pobranie argumentu ostatniej komendy. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{uart__protocol_8h_af9f317c0cf4c353b4c70219b92021b78}{Uart\+Protocol\+\_\+\+Verify\+CRC}} (\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}proto)
+\begin{DoxyCompactList}\small\item\em Weryfikacja CRC odebranej wiadomości. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Protokół UART dla komunikacji z PC/\+innym urządzeniem (komendy, odczyt temperatury, PWM). 
+
+Plik definiuje struktury, komendy i funkcje obsługujące protokół UART:\+
+\begin{DoxyItemize}
+\item obsługa komend (PING, SET TEMP, START/\+\+STOP, PID),
+\item wysyłanie danych pomiarowych,
+\item obliczanie CRC8,
+\item parsowanie odebranych bajtów.
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Autor}
+00ary 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+01-\/Feb-\/2026 
+\end{DoxyDate}
+
+
+\label{doc-enum-members}
+\Hypertarget{uart__protocol_8h_doc-enum-members}
+\doxysubsection{Dokumentacja typów wyliczanych}
+\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}\index{uart\_protocol.h@{uart\_protocol.h}!UartCommand\_t@{UartCommand\_t}}
+\index{UartCommand\_t@{UartCommand\_t}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartCommand\_t}{UartCommand\_t}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c} 
+enum \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{Uart\+Command\+\_\+t}}}
+
+
+
+Lista dostępnych komend UART. 
+
+\begin{DoxyEnumFields}[2]{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_NONE@{CMD\_NONE}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_NONE@{CMD\_NONE}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc} 
+CMD\+\_\+\+NONE&Brak komendy \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_PING@{CMD\_PING}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_PING@{CMD\_PING}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0} 
+CMD\+\_\+\+PING&\$\+PING\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_SET\_TEMP@{CMD\_SET\_TEMP}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_SET\_TEMP@{CMD\_SET\_TEMP}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa} 
+CMD\+\_\+\+SET\+\_\+\+TEMP&\$\+SETP,40.\+0\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_GET\_STATUS@{CMD\_GET\_STATUS}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_GET\_STATUS@{CMD\_GET\_STATUS}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a} 
+CMD\+\_\+\+GET\+\_\+\+STATUS&\$\+STAT\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_START@{CMD\_START}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_START@{CMD\_START}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287} 
+CMD\+\_\+\+START&\$\+START\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_STOP@{CMD\_STOP}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_STOP@{CMD\_STOP}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc} 
+CMD\+\_\+\+STOP&\$\+STOP\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_SET\_KP@{CMD\_SET\_KP}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_SET\_KP@{CMD\_SET\_KP}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee} 
+CMD\+\_\+\+SET\+\_\+\+KP&\$\+SEKP,10.\+5\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_SET\_KI@{CMD\_SET\_KI}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_SET\_KI@{CMD\_SET\_KI}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5} 
+CMD\+\_\+\+SET\+\_\+\+KI&\$\+SEKI,0.\+5\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CMD\_SET\_KD@{CMD\_SET\_KD}!uart\_protocol.h@{uart\_protocol.h}}
+\index{uart\_protocol.h@{uart\_protocol.h}!CMD\_SET\_KD@{CMD\_SET\_KD}}
+}\Hypertarget{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4}\label{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4} 
+CMD\+\_\+\+SET\+\_\+\+KD&\$\+SEKD,0.\+0\texorpdfstring{$\ast$}{*}\+XX \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{uart__protocol_8h_doc-func-members}
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{uart__protocol_8h_a831c58270ed17ca8eb212f15c978d6af}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_CRC8@{UartProtocol\_CRC8}}
+\index{UartProtocol\_CRC8@{UartProtocol\_CRC8}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_CRC8()}{UartProtocol\_CRC8()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_a831c58270ed17ca8eb212f15c978d6af} 
+uint8\+\_\+t Uart\+Protocol\+\_\+\+CRC8 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{uint16\+\_\+t}]{len}{}\end{DoxyParamCaption})}
+
+
+
+Obliczenie CRC8 (polynomial 0x07). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em data} & Dane wejściowe \\
+\hline
+{\em len} & Długość danych \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartość CRC8 
+\end{DoxyReturn}
+\Hypertarget{uart__protocol_8h_a2dd16492ef96e47733d20666fc19443e}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_GetArg@{UartProtocol\_GetArg}}
+\index{UartProtocol\_GetArg@{UartProtocol\_GetArg}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_GetArg()}{UartProtocol\_GetArg()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_a2dd16492ef96e47733d20666fc19443e} 
+float Uart\+Protocol\+\_\+\+Get\+Arg (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{}\end{DoxyParamCaption})}
+
+
+
+Pobranie argumentu ostatniej komendy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Argument jako float 
+\end{DoxyReturn}
+\Hypertarget{uart__protocol_8h_a2d4f0a942a590f196fd1938653b66afa}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_Init@{UartProtocol\_Init}}
+\index{UartProtocol\_Init@{UartProtocol\_Init}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_Init()}{UartProtocol\_Init()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_a2d4f0a942a590f196fd1938653b66afa} 
+void Uart\+Protocol\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{, }\item[{UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{huart}{}\end{DoxyParamCaption})}
+
+
+
+Inicjalizacja protokołu UART. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+{\em huart} & Uchwyt UART \\
+\hline
+\end{DoxyParams}
+\Hypertarget{uart__protocol_8h_a55c32246f566464d452b9cedc08e631a}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_Parse@{UartProtocol\_Parse}}
+\index{UartProtocol\_Parse@{UartProtocol\_Parse}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_Parse()}{UartProtocol\_Parse()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_a55c32246f566464d452b9cedc08e631a} 
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{Uart\+Command\+\_\+t}} Uart\+Protocol\+\_\+\+Parse (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{}\end{DoxyParamCaption})}
+
+
+
+Parsowanie odebranej komendy (wywoływane z głównej pętli). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Typ odebranej komendy (CMD\+\_\+\+NONE jeśli brak) 
+\end{DoxyReturn}
+\Hypertarget{uart__protocol_8h_af4660451142b88c9667023983c48e40b}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_ReceiveByte@{UartProtocol\_ReceiveByte}}
+\index{UartProtocol\_ReceiveByte@{UartProtocol\_ReceiveByte}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_ReceiveByte()}{UartProtocol\_ReceiveByte()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_af4660451142b88c9667023983c48e40b} 
+void Uart\+Protocol\+\_\+\+Receive\+Byte (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{, }\item[{uint8\+\_\+t}]{byte}{}\end{DoxyParamCaption})}
+
+
+
+Przetworzenie odebranego bajtu (wywoływane z przerwania). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+{\em byte} & Odebrany bajt \\
+\hline
+\end{DoxyParams}
+\Hypertarget{uart__protocol_8h_a5d200d74cfd471744a7a6e0f5d483c29}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_SendAck@{UartProtocol\_SendAck}}
+\index{UartProtocol\_SendAck@{UartProtocol\_SendAck}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_SendAck()}{UartProtocol\_SendAck()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_a5d200d74cfd471744a7a6e0f5d483c29} 
+void Uart\+Protocol\+\_\+\+Send\+Ack (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{cmd}{}\end{DoxyParamCaption})}
+
+
+
+Wysłanie potwierdzenia (ACK). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+{\em cmd} & Komenda która została potwierdzona \\
+\hline
+\end{DoxyParams}
+\Hypertarget{uart__protocol_8h_a5822a9405798f726be1fc5599ec62b07}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_SendData@{UartProtocol\_SendData}}
+\index{UartProtocol\_SendData@{UartProtocol\_SendData}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_SendData()}{UartProtocol\_SendData()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_a5822a9405798f726be1fc5599ec62b07} 
+void Uart\+Protocol\+\_\+\+Send\+Data (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{, }\item[{float}]{temp}{, }\item[{float}]{setpoint}{, }\item[{uint16\+\_\+t}]{heater\+\_\+pwm}{, }\item[{uint16\+\_\+t}]{fan\+\_\+pwm}{, }\item[{uint32\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})}
+
+
+
+Wysłanie danych pomiarowych. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+{\em temp} & Aktualna temperatura \\
+\hline
+{\em setpoint} & Temperatura zadana \\
+\hline
+{\em heater\+\_\+pwm} & PWM grzałki \\
+\hline
+{\em fan\+\_\+pwm} & PWM wentylatora \\
+\hline
+{\em timestamp} & Znacznik czasu \+[ms]\+ \\
+\hline
+\end{DoxyParams}
+\Hypertarget{uart__protocol_8h_acc5c9ff2b950033f51e777da1797a19e}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_SendNak@{UartProtocol\_SendNak}}
+\index{UartProtocol\_SendNak@{UartProtocol\_SendNak}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_SendNak()}{UartProtocol\_SendNak()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_acc5c9ff2b950033f51e777da1797a19e} 
+void Uart\+Protocol\+\_\+\+Send\+Nak (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{error}{}\end{DoxyParamCaption})}
+
+
+
+Wysłanie błędu (NAK). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+{\em error} & Kod błędu \\
+\hline
+\end{DoxyParams}
+\Hypertarget{uart__protocol_8h_af9f317c0cf4c353b4c70219b92021b78}\index{uart\_protocol.h@{uart\_protocol.h}!UartProtocol\_VerifyCRC@{UartProtocol\_VerifyCRC}}
+\index{UartProtocol\_VerifyCRC@{UartProtocol\_VerifyCRC}!uart\_protocol.h@{uart\_protocol.h}}
+\doxysubsubsection{\texorpdfstring{UartProtocol\_VerifyCRC()}{UartProtocol\_VerifyCRC()}}
+{\footnotesize\ttfamily \label{uart__protocol_8h_af9f317c0cf4c353b4c70219b92021b78} 
+bool Uart\+Protocol\+\_\+\+Verify\+CRC (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_uart_protocol__t}{Uart\+Protocol\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{proto}{}\end{DoxyParamCaption})}
+
+
+
+Weryfikacja CRC odebranej wiadomości. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em proto} & Wskaźnik na strukturę protokołu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+true jeśli CRC poprawne 
+\end{DoxyReturn}

@@ -1,0 +1,190 @@
+\doxysection{arm\+\_\+max\+\_\+q31.\+c}
+\hypertarget{arm__max__q31_8c_source}{}\label{arm__max__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/StatisticsFunctions/arm\_max\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/StatisticsFunctions/arm\_max\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_max\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Maximum\ value\ of\ a\ Q31\ vector}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/statistics\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEI)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___max_gaf41f5201ba59f68106011c26d60d4c21}{arm\_max\_q31}}(}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00053\ \ \ \ \ uint32\_t\ blockSize,}
+\DoxyCodeLine{00054\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pResult,}
+\DoxyCodeLine{00055\ \ \ \ \ uint32\_t\ *\ pIndex)}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \ int32\_t\ \ \ \ \ \ \ \ \ blkCnt;\ \ \ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00058\ \ \ \ \ q31x4\_t\ \ \ \ \ \ \ \ \ extremValVec\ =\ vdupq\_n\_s32(Q31\_MIN);}
+\DoxyCodeLine{00059\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ \ \ \ \ \ \ \ maxValue\ =\ Q31\_MIN;}
+\DoxyCodeLine{00060\ \ \ \ \ uint32x4\_t\ \ \ \ \ \ indexVec;}
+\DoxyCodeLine{00061\ \ \ \ \ uint32x4\_t\ \ \ \ \ \ extremIdxVec;}
+\DoxyCodeLine{00062\ \ \ \ \ mve\_pred16\_t\ \ \ \ p0;}
+\DoxyCodeLine{00063\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ extremIdxArr[4];}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ indexVec\ =\ vidupq\_u32(0U,\ 1);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ blkCnt\ =\ blockSize;}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ mve\_pred16\_t\ \ \ \ p\ =\ vctp32q(blkCnt);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ q31x4\_t\ \ \ \ \ \ \ \ \ extremIdxVal\ =\ vld1q\_z\_s32(pSrc,\ p);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00072\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Get\ current\ max\ per\ lane\ and\ current\ index\ per\ lane}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ when\ a\ max\ is\ selected}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ p0\ =\ vcmpgeq\_m(extremIdxVal,\ extremValVec,\ p);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ extremValVec\ =\ vorrq\_m(extremValVec,\ extremIdxVal,\ extremIdxVal,\ p0);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ store\ per-\/lane\ extrema\ indexes\ */}}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ vst1q\_p\_u32(extremIdxArr,\ indexVec,\ p0);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ indexVec\ +=\ 4;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ pSrc\ +=\ 4;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ blkCnt\ -\/=\ 4;}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{/*\ Get\ max\ value\ across\ the\ vector\ \ \ */}}
+\DoxyCodeLine{00089\ \ \ \ \ maxValue\ =\ vmaxvq(maxValue,\ extremValVec);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{/*\ set\ index\ for\ lower\ values\ to\ max\ possible\ index\ \ \ */}}
+\DoxyCodeLine{00092\ \ \ \ \ p0\ =\ vcmpgeq(extremValVec,\ maxValue);}
+\DoxyCodeLine{00093\ \ \ \ \ extremIdxVec\ =\ vld1q\_u32(extremIdxArr);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ indexVec\ =\ vpselq(extremIdxVec,\ vdupq\_n\_u32(blockSize\ -\/\ 1),\ p0);}
+\DoxyCodeLine{00096\ \ \ \ \ *pIndex\ =\ vminvq(blockSize\ -\/\ 1,\ indexVec);}
+\DoxyCodeLine{00097\ \ \ \ \ *pResult\ =\ maxValue;}
+\DoxyCodeLine{00098\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00101\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___max_gaf41f5201ba59f68106011c26d60d4c21}{arm\_max\_q31}}(}
+\DoxyCodeLine{00102\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ uint32\_t\ blockSize,}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pResult,}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ uint32\_t\ *\ pIndex)}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ maxVal,\ out;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variables\ to\ store\ the\ output\ value.\ */}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ uint32\_t\ blkCnt,\ outIndex;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ counter\ */}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ uint32\_t\ index;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ index\ of\ maximum\ value\ */}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \textcolor{comment}{/*\ Initialise\ index\ value\ to\ zero.\ */}}
+\DoxyCodeLine{00115\ \ \ outIndex\ =\ 0U;}
+\DoxyCodeLine{00116\ \ \ \textcolor{comment}{/*\ Load\ first\ input\ value\ that\ act\ as\ reference\ value\ for\ comparision\ */}}
+\DoxyCodeLine{00117\ \ \ out\ =\ *pSrc++;}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00120\ \ \ \textcolor{comment}{/*\ Initialise\ index\ of\ maximum\ value.\ */}}
+\DoxyCodeLine{00121\ \ \ index\ =\ 0U;}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00124\ \ \ blkCnt\ =\ (blockSize\ -\/\ 1U)\ >>\ 2U;}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00127\ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ maxVal\ to\ next\ consecutive\ values\ one\ by\ one\ */}}
+\DoxyCodeLine{00129\ \ \ \ \ maxVal\ =\ *pSrc++;}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{comment}{/*\ compare\ for\ the\ maximum\ value\ */}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{if}\ (out\ <\ maxVal)}
+\DoxyCodeLine{00133\ \ \ \ \ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ maximum\ value\ and\ it's\ index\ */}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ out\ =\ maxVal;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ outIndex\ =\ index\ +\ 1U;}
+\DoxyCodeLine{00137\ \ \ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ maxVal\ =\ *pSrc++;}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{if}\ (out\ <\ maxVal)}
+\DoxyCodeLine{00141\ \ \ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ out\ =\ maxVal;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ outIndex\ =\ index\ +\ 2U;}
+\DoxyCodeLine{00144\ \ \ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ maxVal\ =\ *pSrc++;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{if}\ (out\ <\ maxVal)}
+\DoxyCodeLine{00148\ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ out\ =\ maxVal;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ outIndex\ =\ index\ +\ 3U;}
+\DoxyCodeLine{00151\ \ \ \ \ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ maxVal\ =\ *pSrc++;}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordflow}{if}\ (out\ <\ maxVal)}
+\DoxyCodeLine{00155\ \ \ \ \ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ out\ =\ maxVal;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ outIndex\ =\ index\ +\ 4U;}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ index\ +=\ 4U;}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00163\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00164\ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00167\ \ \ blkCnt\ =\ (blockSize\ -\/\ 1U)\ \%\ 4U;}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00172\ \ \ blkCnt\ =\ (blockSize\ -\/\ 1U);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00177\ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ maxVal\ to\ the\ next\ consecutive\ values\ one\ by\ one\ */}}
+\DoxyCodeLine{00179\ \ \ \ \ maxVal\ =\ *pSrc++;}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{/*\ compare\ for\ the\ maximum\ value\ */}}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (out\ <\ maxVal)}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ maximum\ value\ and\ it's\ index\ */}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ out\ =\ maxVal;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ outIndex\ =\ blockSize\ -\/\ blkCnt;}
+\DoxyCodeLine{00187\ \ \ \ \ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00190\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00191\ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \textcolor{comment}{/*\ Store\ the\ maximum\ value\ and\ it's\ index\ into\ destination\ pointers\ */}}
+\DoxyCodeLine{00194\ \ \ *pResult\ =\ out;}
+\DoxyCodeLine{00195\ \ \ *pIndex\ =\ outIndex;}
+\DoxyCodeLine{00196\ \}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEI)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00198\ }
+
+\end{DoxyCode}

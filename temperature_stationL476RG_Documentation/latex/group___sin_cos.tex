@@ -1,0 +1,70 @@
+\doxysubsection{Sine Cosine }
+\hypertarget{group___sin_cos}{}\label{group___sin_cos}\index{Sine Cosine@{Sine Cosine}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___sin_cos_gab650b185927a9d44c0df7bf030359caa}{arm\+\_\+sin\+\_\+cos\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} theta, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sin\+Val, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Cos\+Val)
+\begin{DoxyCompactList}\small\item\em Floating-\/point sin\+\_\+cos function. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___sin_cos_ga3ba532fabe0de13fdaa88e9e17ffb52c}{arm\+\_\+sin\+\_\+cos\+\_\+q31}} (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} theta, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Sin\+Val, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Cos\+Val)
+\begin{DoxyCompactList}\small\item\em Q31 sin\+\_\+cos function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the trigonometric sine and cosine values using a combination of table lookup and linear interpolation. There are separate functions for Q31 and floating-\/point data types. The input to the floating-\/point version is in degrees while the fixed-\/point Q31 have a scaled input with the range \+[-\/1 0.\+9999]\+ mapping to \+[-\/180 +180]\+ degrees.
+
+The floating point function also allows values that are out of the usual range. When this happens, the function will take extra time to adjust the input value to the range of \+[-\/180 180]\+.
+
+The result is accurate to 5 digits after the decimal point.
+
+The implementation is based on table lookup using 360 values together with linear interpolation. The steps used are:\+
+\begin{DoxyEnumerate}
+\item Calculation of the nearest integer table index.
+\item Compute the fractional portion (fract) of the input.
+\item Fetch the value corresponding to {\ttfamily index} from sine table to {\ttfamily y0} and also value from {\ttfamily index+1} to {\ttfamily y1}.
+\item Sine value is computed as {\ttfamily  \texorpdfstring{$\ast$}{*}psin\+Val = y0 + (fract \texorpdfstring{$\ast$}{*} (y1 -\/ y0))}.
+\item Fetch the value corresponding to {\ttfamily index} from cosine table to {\ttfamily y0} and also value from {\ttfamily index+1} to {\ttfamily y1}.
+\item Cosine value is computed as {\ttfamily  \texorpdfstring{$\ast$}{*}pcos\+Val = y0 + (fract \texorpdfstring{$\ast$}{*} (y1 -\/ y0))}.
+\end{DoxyEnumerate}
+
+\label{doc-func-members}
+\Hypertarget{group___sin_cos_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___sin_cos_gab650b185927a9d44c0df7bf030359caa}\index{Sine Cosine@{Sine Cosine}!arm\_sin\_cos\_f32@{arm\_sin\_cos\_f32}}
+\index{arm\_sin\_cos\_f32@{arm\_sin\_cos\_f32}!Sine Cosine@{Sine Cosine}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sin\_cos\_f32()}{arm\_sin\_cos\_f32()}}
+{\footnotesize\ttfamily \label{group___sin_cos_gab650b185927a9d44c0df7bf030359caa} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+sin\+\_\+cos\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{theta}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sin\+Val}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Cos\+Val}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point sin\+\_\+cos function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em theta} & input value in degrees \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Sin\+Val} & points to processed sine output \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Cos\+Val} & points to processed cosine output \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___sin_cos_ga3ba532fabe0de13fdaa88e9e17ffb52c}\index{Sine Cosine@{Sine Cosine}!arm\_sin\_cos\_q31@{arm\_sin\_cos\_q31}}
+\index{arm\_sin\_cos\_q31@{arm\_sin\_cos\_q31}!Sine Cosine@{Sine Cosine}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sin\_cos\_q31()}{arm\_sin\_cos\_q31()}}
+{\footnotesize\ttfamily \label{group___sin_cos_ga3ba532fabe0de13fdaa88e9e17ffb52c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+sin\+\_\+cos\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{theta}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Sin\+Val}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Cos\+Val}{}\end{DoxyParamCaption})}
+
+
+
+Q31 sin\+\_\+cos function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em theta} & scaled input value in degrees \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Sin\+Val} & points to processed sine output \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Cos\+Val} & points to processed cosine output\\
+\hline
+\end{DoxyParams}
+The Q31 input value is in the range \+[-\/1 0.\+999999]\+ and is mapped to a degree value in the range \+[-\/180 179]\+. 

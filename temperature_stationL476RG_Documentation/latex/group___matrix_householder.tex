@@ -1,0 +1,119 @@
+\doxysubsection{Householder transform of a vector }
+\hypertarget{group___matrix_householder}{}\label{group___matrix_householder}\index{Householder transform of a vector@{Householder transform of a vector}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___matrix_householder_ga90414f58dc2c669a3e3da94b71d55e93}{arm\+\_\+householder\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} threshold, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out)
+\begin{DoxyCompactList}\small\item\em Householder transform of a floating point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \doxymbox{\hyperlink{group___matrix_householder_ga4f061148bcbd3aae2714133944568525}{arm\+\_\+householder\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} threshold, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out)
+\begin{DoxyCompactList}\small\item\em Householder transform of a double floating point vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the Householder transform of a vector x.
+
+The Householder transform of x is a vector v with
+
+\[      v_0 = 1
+\]
+
+and a scalar $\beta$ such that:\+
+
+\[  P = I - \beta v v^T 
+\]
+
+is an orthogonal matrix and
+
+\[  P x = ||x||_2 e_1
+\]
+
+So P is an hyperplane reflection such that the image of x is proportional to $e_1$.
+
+$e_1$ is the vector of coordinates:\+
+
+\[  \begin{pmatrix}
+      1       \\
+      0       \\
+      \vdots  \\
+  \end{pmatrix}
+\]
+
+If x is already proportional to $e_1$ then the matrix P should be the identity.
+
+Thus, $\beta$ should be 0 and in this case the vector v can also be null.
+
+But how do we detect that x is already proportional to $e_1$.
+
+If x       \[  x =
+  \begin{pmatrix}
+      x_0     \\
+      xr      \\
+  \end{pmatrix}
+\]
+
+where $xr$ is a vector.
+
+The algorithm is computing the norm squared of this vector:\+
+
+\[      ||xr||^2
+\]
+
+and this value is compared to a {\ttfamily threshold}. If the value is smaller than the {\ttfamily threshold}, the algorithm is returning 0 for $\beta$ and the householder vector.
+
+This {\ttfamily threshold} is an argument of the function.
+
+Default values are provided in the header {\ttfamily \doxylink{matrix__functions_8h_source}{dsp/\+matrix\+\_\+functions.\+h}} like for instance {\ttfamily DEFAULT\+\_\+\+HOUSEHOLDER\+\_\+\+THRESHOLD\+\_\+\+F32}
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_householder_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_householder_ga90414f58dc2c669a3e3da94b71d55e93}\index{Householder transform of a vector@{Householder transform of a vector}!arm\_householder\_f32@{arm\_householder\_f32}}
+\index{arm\_householder\_f32@{arm\_householder\_f32}!Householder transform of a vector@{Householder transform of a vector}}
+\doxysubsubsubsection{\texorpdfstring{arm\_householder\_f32()}{arm\_householder\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_householder_ga90414f58dc2c669a3e3da94b71d55e93} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+householder\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{threshold}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out}{}\end{DoxyParamCaption})}
+
+
+
+Householder transform of a floating point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em threshold} & norm2 threshold. ~\newline
+ \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & dimension of the vector space. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out} & points to the output vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+beta return the scaling factor beta 
+\end{DoxyReturn}
+\Hypertarget{group___matrix_householder_ga4f061148bcbd3aae2714133944568525}\index{Householder transform of a vector@{Householder transform of a vector}!arm\_householder\_f64@{arm\_householder\_f64}}
+\index{arm\_householder\_f64@{arm\_householder\_f64}!Householder transform of a vector@{Householder transform of a vector}}
+\doxysubsubsubsection{\texorpdfstring{arm\_householder\_f64()}{arm\_householder\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_householder_ga4f061148bcbd3aae2714133944568525} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} arm\+\_\+householder\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}}}]{threshold}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out}{}\end{DoxyParamCaption})}
+
+
+
+Householder transform of a double floating point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em threshold} & norm2 threshold. ~\newline
+ \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & dimension of the vector space. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out} & points to the output vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+beta return the scaling factor beta 
+\end{DoxyReturn}

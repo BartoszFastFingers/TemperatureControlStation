@@ -1,0 +1,66 @@
+\doxysubsection{Fixed point division }
+\hypertarget{group__divide}{}\label{group__divide}\index{Fixed point division@{Fixed point division}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group__divide_ga3b61a30b32ec85bca22ffc2974dde7a8}{arm\+\_\+divide\+\_\+q15}} (\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} numerator, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} denominator, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}quotient, int16\+\_\+t \texorpdfstring{$\ast$}{*}shift)
+\begin{DoxyCompactList}\small\item\em Fixed point division. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group__divide_gaf02c0a420ea315dba5d0d4a7274b53c2}{arm\+\_\+divide\+\_\+q31}} (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} numerator, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} denominator, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}quotient, int16\+\_\+t \texorpdfstring{$\ast$}{*}shift)
+\begin{DoxyCompactList}\small\item\em Fixed point division. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group__divide_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__divide_ga3b61a30b32ec85bca22ffc2974dde7a8}\index{Fixed point division@{Fixed point division}!arm\_divide\_q15@{arm\_divide\_q15}}
+\index{arm\_divide\_q15@{arm\_divide\_q15}!Fixed point division@{Fixed point division}}
+\doxysubsubsubsection{\texorpdfstring{arm\_divide\_q15()}{arm\_divide\_q15()}}
+{\footnotesize\ttfamily \label{group__divide_ga3b61a30b32ec85bca22ffc2974dde7a8} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+divide\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{numerator}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{denominator}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{quotient}{, }\item[{int16\+\_\+t \texorpdfstring{$\ast$}{*}}]{shift}{}\end{DoxyParamCaption})}
+
+
+
+Fixed point division. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em numerator} & Numerator \\
+\hline
+\doxymbox{\texttt{in}}  & {\em denominator} & Denominator \\
+\hline
+\doxymbox{\texttt{out}}  & {\em quotient} & Quotient value normalized between -\/1.\+0 and 1.\+0 \\
+\hline
+\doxymbox{\texttt{out}}  & {\em shift} & Shift left value to get the unnormalized quotient \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+error status
+\end{DoxyReturn}
+When dividing by 0, an error ARM\+\_\+\+MATH\+\_\+\+NANINF is returned. And the quotient is forced to the saturated negative or positive value. \Hypertarget{group__divide_gaf02c0a420ea315dba5d0d4a7274b53c2}\index{Fixed point division@{Fixed point division}!arm\_divide\_q31@{arm\_divide\_q31}}
+\index{arm\_divide\_q31@{arm\_divide\_q31}!Fixed point division@{Fixed point division}}
+\doxysubsubsubsection{\texorpdfstring{arm\_divide\_q31()}{arm\_divide\_q31()}}
+{\footnotesize\ttfamily \label{group__divide_gaf02c0a420ea315dba5d0d4a7274b53c2} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+divide\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{numerator}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{denominator}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{quotient}{, }\item[{int16\+\_\+t \texorpdfstring{$\ast$}{*}}]{shift}{}\end{DoxyParamCaption})}
+
+
+
+Fixed point division. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em numerator} & Numerator \\
+\hline
+\doxymbox{\texttt{in}}  & {\em denominator} & Denominator \\
+\hline
+\doxymbox{\texttt{out}}  & {\em quotient} & Quotient value normalized between -\/1.\+0 and 1.\+0 \\
+\hline
+\doxymbox{\texttt{out}}  & {\em shift} & Shift left value to get the unnormalized quotient \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+error status
+\end{DoxyReturn}
+When dividing by 0, an error ARM\+\_\+\+MATH\+\_\+\+NANINF is returned. And the quotient is forced to the saturated negative or positive value. 

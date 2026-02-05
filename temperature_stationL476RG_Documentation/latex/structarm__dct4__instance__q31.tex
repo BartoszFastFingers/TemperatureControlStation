@@ -1,0 +1,83 @@
+\doxysection{arm\+\_\+dct4\+\_\+instance\+\_\+q31 Struct Reference}
+\hypertarget{structarm__dct4__instance__q31}{}\label{structarm__dct4__instance__q31}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+
+
+Instance structure for the Q31 DCT4/\+\+IDCT4 function.  
+
+
+
+
+{\ttfamily \+\#include $<$transform\+\_\+functions.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{structarm__dct4__instance__q31_a37d49571fe35012087153c093705cd11}{N}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{structarm__dct4__instance__q31_afa64b1618089e35c2b55cff71cb29715}{Nby2}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \doxymbox{\hyperlink{structarm__dct4__instance__q31_a3a2f571658a202a38fa508098001b47c}{normalize}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__dct4__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{p\+Twiddle}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__dct4__instance__q31_aa974df00a55867c29876179e57f2ac7f}{p\+Cos\+Factor}}
+\item 
+\doxymbox{\hyperlink{structarm__rfft__instance__q31}{arm\+\_\+rfft\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__dct4__instance__q31_a16c74f8496e1691e62da3c57e0c676eb}{p\+Rfft}}
+\item 
+\doxymbox{\hyperlink{structarm__cfft__radix4__instance__q31}{arm\+\_\+cfft\+\_\+radix4\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__dct4__instance__q31_a0b1f4a05c1824bab3b9bd837a260232a}{p\+Cfft}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q31 DCT4/\+\+IDCT4 function. 
+
+\label{doc-variable-members}
+\Hypertarget{structarm__dct4__instance__q31_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structarm__dct4__instance__q31_a37d49571fe35012087153c093705cd11}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!N@{N}}
+\index{N@{N}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_a37d49571fe35012087153c093705cd11} 
+uint16\+\_\+t N}
+
+length of the DCT4. \Hypertarget{structarm__dct4__instance__q31_afa64b1618089e35c2b55cff71cb29715}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!Nby2@{Nby2}}
+\index{Nby2@{Nby2}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{Nby2}{Nby2}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_afa64b1618089e35c2b55cff71cb29715} 
+uint16\+\_\+t Nby2}
+
+half of the length of the DCT4. \Hypertarget{structarm__dct4__instance__q31_a3a2f571658a202a38fa508098001b47c}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!normalize@{normalize}}
+\index{normalize@{normalize}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{normalize}{normalize}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_a3a2f571658a202a38fa508098001b47c} 
+\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} normalize}
+
+normalizing factor. \Hypertarget{structarm__dct4__instance__q31_a0b1f4a05c1824bab3b9bd837a260232a}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!pCfft@{pCfft}}
+\index{pCfft@{pCfft}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pCfft}{pCfft}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_a0b1f4a05c1824bab3b9bd837a260232a} 
+\doxymbox{\hyperlink{structarm__cfft__radix4__instance__q31}{arm\+\_\+cfft\+\_\+radix4\+\_\+instance\+\_\+q31}}\texorpdfstring{$\ast$}{*} p\+Cfft}
+
+points to the complex FFT instance. \Hypertarget{structarm__dct4__instance__q31_aa974df00a55867c29876179e57f2ac7f}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!pCosFactor@{pCosFactor}}
+\index{pCosFactor@{pCosFactor}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pCosFactor}{pCosFactor}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_aa974df00a55867c29876179e57f2ac7f} 
+const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} p\+Cos\+Factor}
+
+points to the cos\+Factor table. \Hypertarget{structarm__dct4__instance__q31_a16c74f8496e1691e62da3c57e0c676eb}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!pRfft@{pRfft}}
+\index{pRfft@{pRfft}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pRfft}{pRfft}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_a16c74f8496e1691e62da3c57e0c676eb} 
+\doxymbox{\hyperlink{structarm__rfft__instance__q31}{arm\+\_\+rfft\+\_\+instance\+\_\+q31}}\texorpdfstring{$\ast$}{*} p\+Rfft}
+
+points to the real FFT instance. \Hypertarget{structarm__dct4__instance__q31_a9760c603af5d85652496dbffd63a8a2e}\index{arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}!pTwiddle@{pTwiddle}}
+\index{pTwiddle@{pTwiddle}!arm\_dct4\_instance\_q31@{arm\_dct4\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pTwiddle}{pTwiddle}}
+{\footnotesize\ttfamily \label{structarm__dct4__instance__q31_a9760c603af5d85652496dbffd63a8a2e} 
+const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} p\+Twiddle}
+
+points to the twiddle factor table. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Middlewares/\+\+Third\+\_\+\+Party/\+\+ARM\+\_\+\+CMSIS/\+\+Include/\+dsp/\+transform\+\_\+functions.\+h\end{DoxyCompactItemize}

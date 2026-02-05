@@ -1,0 +1,146 @@
+\doxysection{Dokumentacja pliku Core/\+\+Inc/\+fan\+\_\+control.h}
+\hypertarget{fan__control_8h}{}\label{fan__control_8h}\index{Core/Inc/fan\_control.h@{Core/Inc/fan\_control.h}}
+
+
+Sterowanie wentylatorem za pomocą TIM PWM na mikrokontrolerach STM32.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}tim.\+h"{}}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struktura reprezentująca wentylator sterowany PWM. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{fan__control_8h_a865768af54e01dd30b57068422c73b3a}{Fan\+\_\+\+Init}} (\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hfan, TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}htim, uint32\+\_\+t channel)
+\begin{DoxyCompactList}\small\item\em Inicjalizuje strukturę wentylatora. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{fan__control_8h_a099f3902bd4ef8121d21f8a5bd095ccb}{Fan\+\_\+\+Start}} (\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hfan)
+\begin{DoxyCompactList}\small\item\em Uruchamia PWM wentylatora. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{fan__control_8h_aa9d94379024a9af4c65de7e6c36c2362}{Fan\+\_\+\+Stop}} (\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hfan)
+\begin{DoxyCompactList}\small\item\em Zatrzymuje PWM wentylatora i ustawia prędkość na 0. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{fan__control_8h_ada8d607109150b07dfa4da24a6491d3e}{Fan\+\_\+\+Set\+Speed}} (\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hfan, uint16\+\_\+t speed)
+\begin{DoxyCompactList}\small\item\em Ustawia prędkość wentylatora. \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{fan__control_8h_a84a14bde9d1dcabb514394668ad98550}{Fan\+\_\+\+Get\+Speed}} (\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hfan)
+\begin{DoxyCompactList}\small\item\em Pobiera aktualną prędkość wentylatora. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{fan__control_8h_a35d619930662823894ac77077897eefc}{Fan\+\_\+\+Off}} (\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hfan)
+\begin{DoxyCompactList}\small\item\em Wyłącza wentylator (ustawia prędkość na 0). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Sterowanie wentylatorem za pomocą TIM PWM na mikrokontrolerach STM32. 
+
+Zawiera deklaracje funkcji i struktur dla inicjalizacji, uruchamiania, zatrzymywania i ustawiania prędkości wentylatora.
+
+\begin{DoxyAuthor}{Autor}
+00ary 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+31-\/Jan-\/2026 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{fan__control_8h_doc-func-members}
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{fan__control_8h_a84a14bde9d1dcabb514394668ad98550}\index{fan\_control.h@{fan\_control.h}!Fan\_GetSpeed@{Fan\_GetSpeed}}
+\index{Fan\_GetSpeed@{Fan\_GetSpeed}!fan\_control.h@{fan\_control.h}}
+\doxysubsubsection{\texorpdfstring{Fan\_GetSpeed()}{Fan\_GetSpeed()}}
+{\footnotesize\ttfamily \label{fan__control_8h_a84a14bde9d1dcabb514394668ad98550} 
+uint16\+\_\+t Fan\+\_\+\+Get\+Speed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hfan}{}\end{DoxyParamCaption})}
+
+
+
+Pobiera aktualną prędkość wentylatora. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hfan} & Wskaźnik na strukturę \doxylink{struct_fan_handle__t}{Fan\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Aktualna prędkość PWM 
+\end{DoxyReturn}
+\Hypertarget{fan__control_8h_a865768af54e01dd30b57068422c73b3a}\index{fan\_control.h@{fan\_control.h}!Fan\_Init@{Fan\_Init}}
+\index{Fan\_Init@{Fan\_Init}!fan\_control.h@{fan\_control.h}}
+\doxysubsubsection{\texorpdfstring{Fan\_Init()}{Fan\_Init()}}
+{\footnotesize\ttfamily \label{fan__control_8h_a865768af54e01dd30b57068422c73b3a} 
+void Fan\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hfan}{, }\item[{TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{htim}{, }\item[{uint32\+\_\+t}]{channel}{}\end{DoxyParamCaption})}
+
+
+
+Inicjalizuje strukturę wentylatora. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hfan} & Wskaźnik na strukturę \doxylink{struct_fan_handle__t}{Fan\+Handle\+\_\+t} \\
+\hline
+{\em htim} & Wskaźnik na strukturę timera STM32 \\
+\hline
+{\em channel} & Kanał timera dla PWM \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fan__control_8h_a35d619930662823894ac77077897eefc}\index{fan\_control.h@{fan\_control.h}!Fan\_Off@{Fan\_Off}}
+\index{Fan\_Off@{Fan\_Off}!fan\_control.h@{fan\_control.h}}
+\doxysubsubsection{\texorpdfstring{Fan\_Off()}{Fan\_Off()}}
+{\footnotesize\ttfamily \label{fan__control_8h_a35d619930662823894ac77077897eefc} 
+void Fan\+\_\+\+Off (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hfan}{}\end{DoxyParamCaption})}
+
+
+
+Wyłącza wentylator (ustawia prędkość na 0). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hfan} & Wskaźnik na strukturę \doxylink{struct_fan_handle__t}{Fan\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fan__control_8h_ada8d607109150b07dfa4da24a6491d3e}\index{fan\_control.h@{fan\_control.h}!Fan\_SetSpeed@{Fan\_SetSpeed}}
+\index{Fan\_SetSpeed@{Fan\_SetSpeed}!fan\_control.h@{fan\_control.h}}
+\doxysubsubsection{\texorpdfstring{Fan\_SetSpeed()}{Fan\_SetSpeed()}}
+{\footnotesize\ttfamily \label{fan__control_8h_ada8d607109150b07dfa4da24a6491d3e} 
+void Fan\+\_\+\+Set\+Speed (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hfan}{, }\item[{uint16\+\_\+t}]{speed}{}\end{DoxyParamCaption})}
+
+
+
+Ustawia prędkość wentylatora. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hfan} & Wskaźnik na strukturę \doxylink{struct_fan_handle__t}{Fan\+Handle\+\_\+t} \\
+\hline
+{\em speed} & Prędkość PWM w zakresie 0-\/999 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fan__control_8h_a099f3902bd4ef8121d21f8a5bd095ccb}\index{fan\_control.h@{fan\_control.h}!Fan\_Start@{Fan\_Start}}
+\index{Fan\_Start@{Fan\_Start}!fan\_control.h@{fan\_control.h}}
+\doxysubsubsection{\texorpdfstring{Fan\_Start()}{Fan\_Start()}}
+{\footnotesize\ttfamily \label{fan__control_8h_a099f3902bd4ef8121d21f8a5bd095ccb} 
+void Fan\+\_\+\+Start (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hfan}{}\end{DoxyParamCaption})}
+
+
+
+Uruchamia PWM wentylatora. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hfan} & Wskaźnik na strukturę \doxylink{struct_fan_handle__t}{Fan\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\Hypertarget{fan__control_8h_aa9d94379024a9af4c65de7e6c36c2362}\index{fan\_control.h@{fan\_control.h}!Fan\_Stop@{Fan\_Stop}}
+\index{Fan\_Stop@{Fan\_Stop}!fan\_control.h@{fan\_control.h}}
+\doxysubsubsection{\texorpdfstring{Fan\_Stop()}{Fan\_Stop()}}
+{\footnotesize\ttfamily \label{fan__control_8h_aa9d94379024a9af4c65de7e6c36c2362} 
+void Fan\+\_\+\+Stop (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_fan_handle__t}{Fan\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hfan}{}\end{DoxyParamCaption})}
+
+
+
+Zatrzymuje PWM wentylatora i ustawia prędkość na 0. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hfan} & Wskaźnik na strukturę \doxylink{struct_fan_handle__t}{Fan\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}

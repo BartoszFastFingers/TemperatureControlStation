@@ -1,0 +1,488 @@
+\doxysection{arm\+\_\+math\+\_\+types.\+h}
+\hypertarget{arm__math__types_8h_source}{}\label{arm__math__types_8h_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Include/arm\_math\_types.h@{Middlewares/Third\_Party/ARM\_CMSIS/Include/arm\_math\_types.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ @file\ \ \ \ \ arm\_math\_types.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ @brief\ \ \ \ Public\ header\ file\ for\ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ @version\ \ V1.10.0}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ @date\ \ \ \ \ 08\ July\ 2021}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2010-\/2021\ Arm\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#ifndef\ ARM\_MATH\_TYPES\_H\_}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ ARM\_MATH\_TYPES\_H\_}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#if\ defined(ARM\_DSP\_CUSTOM\_CONFIG)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}arm\_dsp\_config.h"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#ifndef\ ARM\_DSP\_ATTRIBUTE\ }}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ ARM\_DSP\_ATTRIBUTE\ }}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#ifndef\ ARM\_DSP\_TABLE\_ATTRIBUTE\ }}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ ARM\_DSP\_TABLE\_ATTRIBUTE\ }}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00043\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{/*\ Compiler\ specific\ diagnostic\ adjustment\ */}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#if\ \ \ defined\ (\ \_\_CC\_ARM\ )}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_ARMCC\_VERSION\ )\ \&\&\ (\ \_\_ARMCC\_VERSION\ >=\ 6010050\ )}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_APPLE\_CC\_\_\ )}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wold-\/style-\/cast"{}}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#elif\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ push}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wsign-\/conversion"{}}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wconversion"{}}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wunused-\/parameter"{}}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_GNUC\_\_\ )}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ push}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wsign-\/conversion"{}}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wconversion"{}}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ \#pragma\ GCC\ diagnostic\ ignored\ "{}-\/Wunused-\/parameter"{}}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{//\ Disable\ some\ code\ having\ issue\ with\ GCC}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \#define\ ARM\_DSP\_BUILT\_WITH\_GCC\ }}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_ICCARM\_\_\ )}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_TI\_ARM\_\_\ )}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_CSMC\_\_\ )}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_TASKING\_\_\ )}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_MSC\_VER\ )}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\ \ \#error\ Unknown\ compiler}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{comment}{/*\ Included\ for\ instrinsics\ definitions\ */}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#if\ defined\ (\_MSC\_VER\ )\ }}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ \_\_STATIC\_FORCEINLINE\ static\ \_\_forceinline}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#define\ \_\_STATIC\_INLINE\ static\ \_\_inline}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#define\ \_\_ALIGNED(x)\ \_\_declspec(align(x))}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\#define\ \_\_WEAK}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_APPLE\_CC\_\_\ )}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#define\ \ \_\_ALIGNED(x)\ \_\_attribute\_\_((aligned(x)))}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ \_\_STATIC\_FORCEINLINE\ static\ inline\ \_\_attribute\_\_((always\_inline))\ }}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#define\ \_\_STATIC\_INLINE\ static\ inline}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#define\ \_\_WEAK}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#elif\ defined\ (\_\_GNUC\_PYTHON\_\_)}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ \ \_\_ALIGNED(x)\ \_\_attribute\_\_((aligned(x)))}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#define\ \_\_STATIC\_FORCEINLINE\ static\ inline\ \_\_attribute\_\_((always\_inline))\ }}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ \_\_STATIC\_INLINE\ static\ inline}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#define\ \_\_WEAK}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{cmsis__compiler_8h}{cmsis\_compiler.h}}"{}}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#include\ <float.h>}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#include\ <limits.h>}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \textcolor{comment}{/*\ evaluate\ ARM\ DSP\ feature\ */}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#if\ (defined\ (\_\_ARM\_FEATURE\_DSP)\ \&\&\ (\_\_ARM\_FEATURE\_DSP\ ==\ 1))}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\ \ \#define\ ARM\_MATH\_DSP\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\ \ \#if\ defined(\_MSC\_VER)\ \&\&\ defined(\_M\_ARM64EC)}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\ \ \ \ \#include\ <arm64\_neon.h>}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\ \ \ \ \#include\ <arm\_neon.h>}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\ \ \#if\ defined(\_\_ARM\_FEATURE\_FP16\_VECTOR\_ARITHMETIC)\ \&\&\ \_\_ARM\_FEATURE\_FP16\_VECTOR\_ARITHMETIC}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\ \ \ \ \#if\ !defined(ARM\_MATH\_NEON\_FLOAT16)}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ ARM\_MATH\_NEON\_FLOAT16}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#if\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#if\ defined(\_\_ARM\_FEATURE\_MVE)}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#if\ \_\_ARM\_FEATURE\_MVE}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\ \ \#if\ !defined(ARM\_MATH\_MVEI)}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\ \ \ \ \#define\ ARM\_MATH\_MVEI}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#if\ defined(\_\_ARM\_FEATURE\_MVE)\ \&\&\ (\_\_ARM\_FEATURE\_MVE\ \&\ 2)}}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\ \ \#if\ !defined(ARM\_MATH\_MVEF)}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\ \ \ \ \#define\ ARM\_MATH\_MVEF}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00146\ \textcolor{preprocessor}{\ \ \#if\ !defined(ARM\_MATH\_MVE\_FLOAT16)}}
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \#define\ ARM\_MATH\_MVE\_FLOAT16}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined\ (\_\_ARM\_FEATURE\_MVE)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ !defined\ (ARM\_MATH\_AUTOVECTORIZE)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_HELIUM)}}
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\ \ \#if\ !defined(ARM\_MATH\_MVEF)}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\ \ \ \ \#define\ ARM\_MATH\_MVEF}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\ \ \#if\ !defined(ARM\_MATH\_MVEI)}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\ \ \ \ \#define\ ARM\_MATH\_MVEI}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\ \ \#if\ !defined(ARM\_MATH\_MVE\_FLOAT16)}}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \#define\ ARM\_MATH\_MVE\_FLOAT16}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#if\ \ \ defined\ (\ \_\_CC\_ARM\ )}}
+\DoxyCodeLine{00172\ \ \ \textcolor{comment}{/*\ Enter\ low\ optimization\ region\ -\/\ place\ directly\ above\ function\ definition\ */}}
+\DoxyCodeLine{00173\ \textcolor{preprocessor}{\ \ \#if\ defined(\ \_\_ARM\_ARCH\_7EM\_\_\ )}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\ \ \ \ \#define\ LOW\_OPTIMIZATION\_ENTER\ \(\backslash\)}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \_Pragma\ ("{}push"{})\ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \_Pragma\ ("{}O1"{})}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\ \ \ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \textcolor{comment}{/*\ Exit\ low\ optimization\ region\ -\/\ place\ directly\ after\ end\ of\ function\ definition\ */}}
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\ \ \#if\ defined\ (\ \_\_ARM\_ARCH\_7EM\_\_\ )}}
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\ \ \ \ \#define\ LOW\_OPTIMIZATION\_EXIT\ \(\backslash\)}}
+\DoxyCodeLine{00184\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \_Pragma\ ("{}pop"{})}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\ \ \ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \textcolor{comment}{/*\ Enter\ low\ optimization\ region\ -\/\ place\ directly\ above\ function\ definition\ */}}
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \textcolor{comment}{/*\ Exit\ low\ optimization\ region\ -\/\ place\ directly\ after\ end\ of\ function\ definition\ */}}
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \textcolor{preprocessor}{\#elif\ defined\ (\_\_ARMCC\_VERSION\ )\ \&\&\ (\ \_\_ARMCC\_VERSION\ >=\ 6010050\ )}}
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00200\ \ \ }
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_APPLE\_CC\_\_\ )}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_GNUC\_\_\ )}}
+\DoxyCodeLine{00208\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_ENTER\ \(\backslash\)}}
+\DoxyCodeLine{00209\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \_\_attribute\_\_((\ optimize("{}-\/O1"{})\ ))}}
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_ICCARM\_\_\ )}}
+\DoxyCodeLine{00215\ \ \ \textcolor{comment}{/*\ Enter\ low\ optimization\ region\ -\/\ place\ directly\ above\ function\ definition\ */}}
+\DoxyCodeLine{00216\ \textcolor{preprocessor}{\ \ \#if\ defined\ (\ \_\_ARM\_ARCH\_7EM\_\_\ )}}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\ \ \ \ \#define\ LOW\_OPTIMIZATION\_ENTER\ \(\backslash\)}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \_Pragma\ ("{}optimize=low"{})}}
+\DoxyCodeLine{00219\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\ \ \ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \textcolor{comment}{/*\ Exit\ low\ optimization\ region\ -\/\ place\ directly\ after\ end\ of\ function\ definition\ */}}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \textcolor{comment}{/*\ Enter\ low\ optimization\ region\ -\/\ place\ directly\ above\ function\ definition\ */}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\ \ \#if\ defined\ (\ \_\_ARM\_ARCH\_7EM\_\_\ )}}
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\ \ \ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER\ \(\backslash\)}}
+\DoxyCodeLine{00229\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \_Pragma\ ("{}optimize=low"{})}}
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\ \ \#else}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\ \ \ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\ \ \#endif}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \textcolor{comment}{/*\ Exit\ low\ optimization\ region\ -\/\ place\ directly\ after\ end\ of\ function\ definition\ */}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_TI\_ARM\_\_\ )}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_CSMC\_\_\ )}}
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_TASKING\_\_\ )}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_MSC\_VER\ )\ ||\ defined(\_\_GNUC\_PYTHON\_\_)}}
+\DoxyCodeLine{00256\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ LOW\_OPTIMIZATION\_ENTER}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00258\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_ENTER\ }}
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\ \ \ \ \ \ \#define\ IAR\_ONLY\_LOW\_OPTIMIZATION\_EXIT}}
+\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \textcolor{comment}{/*\ Compiler\ specific\ diagnostic\ adjustment\ */}}
+\DoxyCodeLine{00265\ \textcolor{preprocessor}{\#if\ \ \ defined\ (\ \_\_CC\_ARM\ )}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_ARMCC\_VERSION\ )\ \&\&\ (\ \_\_ARMCC\_VERSION\ >=\ 6010050\ )}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_APPLE\_CC\_\_\ )}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_GNUC\_\_\ )}}
+\DoxyCodeLine{00272\ \textcolor{preprocessor}{\#pragma\ GCC\ diagnostic\ pop}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_ICCARM\_\_\ )}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_TI\_ARM\_\_\ )}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_CSMC\_\_\ )}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_\_TASKING\_\_\ )}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#elif\ defined\ (\ \_MSC\_VER\ )}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\ \ \#error\ Unknown\ compiler}}
+\DoxyCodeLine{00286\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00289\ \}}
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\#if\ defined(\_\_ARM\_FEATURE\_MVE)\ \&\&\ \_\_ARM\_FEATURE\_MVE}}
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#include\ <arm\_mve.h>}}
+\DoxyCodeLine{00294\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#if\ defined(ARM\_DSP\_CONFIG\_TABLES)}}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\#error("{}-\/DARM\_DSP\_CONFIG\_TABLES\ no\ more\ supported.\ Use\ the\ new\ initialization\ functions\ to\ let\ the\ linker\ optimize\ the\ code\ size."{})}}
+\DoxyCodeLine{00298\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00301\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00302\ \{}
+\DoxyCodeLine{00303\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00313\ \ \ \textcolor{keyword}{typedef}\ int8\_t\ \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\_t}};}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00318\ \ \ \textcolor{keyword}{typedef}\ int16\_t\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}};}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00323\ \ \ \textcolor{keyword}{typedef}\ int32\_t\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}};}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00328\ \ \ \textcolor{keyword}{typedef}\ int64\_t\ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}};}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00333\ \textcolor{preprocessor}{\#if\ !defined(\_\_ICCARM\_\_)\ ||\ !(\_\_ARM\_FEATURE\_MVE\ \&\ 2)}}
+\DoxyCodeLine{00334\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}};}
+\DoxyCodeLine{00335\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00340\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keywordtype}{double}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}};}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00345\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)\ ||\ (defined\ (ARM\_MATH\_MVEI)\ \ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE))}}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00350\ \ \ \textcolor{keyword}{typedef}\ int64x2\_t\ q63x2\_t;}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00355\ \ \ \textcolor{keyword}{typedef}\ int32x4\_t\ q31x4\_t;}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00360\ \ \ \textcolor{keyword}{typedef}\ \_\_ALIGNED(2)\ int16x8\_t\ q15x8\_t;}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00365\ \ \ typedef\ \_\_ALIGNED(1)\ int8x16\_t\ q7x16\_t;}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00370\ \ \ typedef\ int32x4x2\_t\ q31x4x2\_t;}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00375\ \ \ typedef\ int32x4x4\_t\ q31x4x4\_t;}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00380\ \ \ typedef\ int16x8x2\_t\ q15x8x2\_t;}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00385\ \ \ typedef\ int16x8x4\_t\ q15x8x4\_t;}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00390\ \ \ typedef\ int8x16x2\_t\ q7x16x2\_t;}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00395\ \ \ \ typedef\ int8x16x4\_t\ q7x16x4\_t;}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00400\ \ \ typedef\ int32\_t\ q23\_t;}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00405\ \ \ typedef\ int32x4\_t\ q23x4\_t;}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00410\ \ \ typedef\ int64x2\_t\ status64x2\_t;}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00415\ \ \ typedef\ int32x4\_t\ status32x4\_t;}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00420\ \ \ typedef\ int16x8\_t\ status16x8\_t;}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00425\ \ \ typedef\ int8x16\_t\ status8x16\_t;}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)\ ||\ (defined(ARM\_MATH\_MVEF)\ \ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE))\ }\textcolor{comment}{/*\ floating\ point\ vector*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00435\ \ \ \textcolor{keyword}{typedef}\ float32x4\_t\ f32x4\_t;}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00440\ \ \ \textcolor{keyword}{typedef}\ float32x4x2\_t\ f32x4x2\_t;}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00445\ \ \ \textcolor{keyword}{typedef}\ float32x4x4\_t\ f32x4x4\_t;}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00450\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{union\ }\_any32x4\_t}
+\DoxyCodeLine{00451\ \ \ \{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ float32x4\_t\ \ \ \ \ f;}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ int32x4\_t\ \ \ \ \ \ \ i;}
+\DoxyCodeLine{00454\ \ \ \}\ any32x4\_t;}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00456\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00462\ \ \ \textcolor{keyword}{typedef}\ int32x2\_t\ \ q31x2\_t;}
+\DoxyCodeLine{00463\ }
+\DoxyCodeLine{00467\ \ \ \textcolor{keyword}{typedef}\ \ \_\_ALIGNED(2)\ int16x4\_t\ q15x4\_t;}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00472\ \ \ typedef\ \ \_\_ALIGNED(1)\ int8x8\_t\ q7x8\_t;}
+\DoxyCodeLine{00473\ }
+\DoxyCodeLine{00477\ \ \ typedef\ float32x2\_t\ \ f32x2\_t;}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00482\ \ \ typedef\ float32x4x3\_t\ f32x4x3\_t;}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00487\ \ \ typedef\ int32x4x3\_t\ q31x4x3\_t;}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00492\ \ \ typedef\ int16x8x3\_t\ q15x8x3\_t;}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00497\ \ \ typedef\ int8x16x3\_t\ q7x16x3\_t;}
+\DoxyCodeLine{00498\ }
+\DoxyCodeLine{00502\ \ \ typedef\ float32x2x2\_t\ f32x2x2\_t;}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00507\ \ \ typedef\ float32x2x3\_t\ f32x2x3\_t;}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00512\ \ \ typedef\ float32x2x4\_t\ f32x2x4\_t;}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00517\ \ \ typedef\ int32x2x2\_t\ q31x2x2\_t;}
+\DoxyCodeLine{00518\ }
+\DoxyCodeLine{00522\ \ \ typedef\ int32x2x3\_t\ q31x2x3\_t;}
+\DoxyCodeLine{00523\ }
+\DoxyCodeLine{00527\ \ \ typedef\ int32x4x3\_t\ q31x2x4\_t;}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00532\ \ \ typedef\ int16x4x2\_t\ q15x4x2\_t;}
+\DoxyCodeLine{00533\ }
+\DoxyCodeLine{00537\ \ \ typedef\ int16x4x2\_t\ q15x4x3\_t;}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00542\ \ \ typedef\ int16x4x3\_t\ q15x4x4\_t;}
+\DoxyCodeLine{00543\ }
+\DoxyCodeLine{00547\ \ \ typedef\ int8x8x2\_t\ q7x8x2\_t;}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00552\ \ \ typedef\ int8x8x3\_t\ q7x8x3\_t;}
+\DoxyCodeLine{00553\ }
+\DoxyCodeLine{00557\ \ \ typedef\ int8x8x4\_t\ q7x8x4\_t;}
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00562\ \ \ typedef\ union\ \_any32x2\_t}
+\DoxyCodeLine{00563\ \ \ \{}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ float32x2\_t\ \ \ \ \ f;}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ int32x2\_t\ \ \ \ \ \ \ i;}
+\DoxyCodeLine{00566\ \ \ \}\ any32x2\_t;}
+\DoxyCodeLine{00567\ }
+\DoxyCodeLine{00571\ \ \ \textcolor{keyword}{typedef}\ int32x4\_t\ status32x2\_t;}
+\DoxyCodeLine{00572\ }
+\DoxyCodeLine{00576\ \ \ \textcolor{keyword}{typedef}\ int16x8\_t\ status16x4\_t;}
+\DoxyCodeLine{00577\ }
+\DoxyCodeLine{00581\ \ \ \textcolor{keyword}{typedef}\ int8x16\_t\ status8x8\_t;}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00584\ }
+\DoxyCodeLine{00588\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}}
+\DoxyCodeLine{00589\ \ \ \{}
+\DoxyCodeLine{00590\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ 0,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00591\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}}\ \ \ \ \ \ \ \ \ \ =\ -\/1,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00592\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9ae74d7f8a53aec0512ae8f0a421e0e1}{ARM\_MATH\_LENGTH\_ERROR}}\ \ \ \ \ \ \ \ \ \ \ \ =\ -\/2,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00593\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}}\ \ \ \ \ \ \ \ \ \ \ =\ -\/3,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00594\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6ac55996aaf19245238a8f57a91aeaefcc}{ARM\_MATH\_NANINF}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ -\/4,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00595\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a91509ea9c819dbd592ac13a6b05382dc}{ARM\_MATH\_SINGULAR}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ -\/5,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00596\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a09457f2be656b35015fd6d36202fa376}{ARM\_MATH\_TEST\_FAILURE}}\ \ \ \ \ \ \ \ \ \ \ \ =\ -\/6,\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00597\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\_MATH\_DECOMPOSITION\_FAILURE}}\ \ \ =\ -\/7\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00598\ \ \ \}\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}};}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00603\ }
+\DoxyCodeLine{00604\ }
+\DoxyCodeLine{00605\ \textcolor{preprocessor}{\#define\ F64\_MAX\ \ \ ((float64\_t)DBL\_MAX)}}
+\DoxyCodeLine{00606\ \textcolor{preprocessor}{\#define\ F32\_MAX\ \ \ ((float32\_t)FLT\_MAX)}}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ }
+\DoxyCodeLine{00610\ \textcolor{preprocessor}{\#define\ F64\_MIN\ \ \ (-\/DBL\_MAX)}}
+\DoxyCodeLine{00611\ \textcolor{preprocessor}{\#define\ F32\_MIN\ \ \ (-\/FLT\_MAX)}}
+\DoxyCodeLine{00612\ }
+\DoxyCodeLine{00613\ }
+\DoxyCodeLine{00614\ }
+\DoxyCodeLine{00615\ \textcolor{preprocessor}{\#define\ F64\_ABSMAX\ \ \ ((float64\_t)DBL\_MAX)}}
+\DoxyCodeLine{00616\ \textcolor{preprocessor}{\#define\ F32\_ABSMAX\ \ \ ((float32\_t)FLT\_MAX)}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00620\ \textcolor{preprocessor}{\#define\ F64\_ABSMIN\ \ \ ((float64\_t)0.0)}}
+\DoxyCodeLine{00621\ \textcolor{preprocessor}{\#define\ F32\_ABSMIN\ \ \ ((float32\_t)0.0)}}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ }
+\DoxyCodeLine{00624\ \textcolor{preprocessor}{\#define\ Q31\_MAX\ \ \ ((q31\_t)(0x7FFFFFFFL))}}
+\DoxyCodeLine{00625\ \textcolor{preprocessor}{\#define\ Q15\_MAX\ \ \ ((q15\_t)(0x7FFF))}}
+\DoxyCodeLine{00626\ \textcolor{preprocessor}{\#define\ Q7\_MAX\ \ \ \ ((q7\_t)(0x7F))}}
+\DoxyCodeLine{00627\ \textcolor{preprocessor}{\#define\ Q31\_MIN\ \ \ ((q31\_t)(0x80000000L))}}
+\DoxyCodeLine{00628\ \textcolor{preprocessor}{\#define\ Q15\_MIN\ \ \ ((q15\_t)(0x8000))}}
+\DoxyCodeLine{00629\ \textcolor{preprocessor}{\#define\ Q7\_MIN\ \ \ \ ((q7\_t)(0x80))}}
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \textcolor{preprocessor}{\#define\ Q31\_ABSMAX\ \ \ ((q31\_t)(0x7FFFFFFFL))}}
+\DoxyCodeLine{00632\ \textcolor{preprocessor}{\#define\ Q15\_ABSMAX\ \ \ ((q15\_t)(0x7FFF))}}
+\DoxyCodeLine{00633\ \textcolor{preprocessor}{\#define\ Q7\_ABSMAX\ \ \ \ ((q7\_t)(0x7F))}}
+\DoxyCodeLine{00634\ \textcolor{preprocessor}{\#define\ Q31\_ABSMIN\ \ \ ((q31\_t)0)}}
+\DoxyCodeLine{00635\ \textcolor{preprocessor}{\#define\ Q15\_ABSMIN\ \ \ ((q15\_t)0)}}
+\DoxyCodeLine{00636\ \textcolor{preprocessor}{\#define\ Q7\_ABSMIN\ \ \ \ ((q7\_t)0)}}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \ \ \textcolor{comment}{/*\ Dimension\ C\ vector\ space\ */}}
+\DoxyCodeLine{00639\ \textcolor{preprocessor}{\ \ \#define\ CMPLX\_DIM\ 2}}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00641\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00642\ \}}
+\DoxyCodeLine{00643\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00645\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*ifndef\ \_ARM\_MATH\_TYPES\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

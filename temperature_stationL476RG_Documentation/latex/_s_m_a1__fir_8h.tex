@@ -1,0 +1,80 @@
+\doxysection{Dokumentacja pliku Components/\+\+Inc/\+\+SMA1\+\_\+fir.h}
+\hypertarget{_s_m_a1__fir_8h}{}\label{_s_m_a1__fir_8h}\index{Components/Inc/SMA1\_fir.h@{Components/Inc/SMA1\_fir.h}}
+
+
+Definicje i deklaracje dla prostego filtra uśredniającego (SMA) w formacie ARM CMSIS-\/\+DSP.  
+
+
+{\ttfamily \+\#include "{}arm\+\_\+math.\+h"{}}\newline
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{_s_m_a1__fir_8h_a008898a303a3a3a631ee33a9cc83e77f}\label{_s_m_a1__fir_8h_a008898a303a3a3a631ee33a9cc83e77f} 
+\+\#define {\bfseries SMA1\+\_\+\+NUM\+\_\+\+TAPS}~10
+\begin{DoxyCompactList}\small\item\em Liczba współczynników (tapów) filtra SMA1. \end{DoxyCompactList}\item 
+\Hypertarget{_s_m_a1__fir_8h_a3ae01460c555625bf822ad3e657f97cc}\label{_s_m_a1__fir_8h_a3ae01460c555625bf822ad3e657f97cc} 
+\+\#define {\bfseries SMA1\+\_\+\+BLOCK\+\_\+\+SIZE}~1
+\begin{DoxyCompactList}\small\item\em Rozmiar bloku danych przetwarzanych w jednej iteracji filtra. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+float32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{_s_m_a1__fir_8h_a335cba84955a702c1917923adcbf34bc}{SMA1\+\_\+\+STATE}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na tablicę przechowującą stan filtra FIR. \end{DoxyCompactList}\item 
+float32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{_s_m_a1__fir_8h_a172f28a269911968c17437626b0b5076}{SMA1\+\_\+\+COEFFS}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na tablicę współczynników filtra FIR. \end{DoxyCompactList}\item 
+arm\+\_\+fir\+\_\+instance\+\_\+f32 \doxymbox{\hyperlink{_s_m_a1__fir_8h_aa60c4616a401d7e32c8e8c9ee7ee09a5}{SMA1}}
+\begin{DoxyCompactList}\small\item\em Instancja filtra FIR typu float32 CMSIS-\/\+DSP. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Definicje i deklaracje dla prostego filtra uśredniającego (SMA) w formacie ARM CMSIS-\/\+DSP. 
+
+Ten plik nagłówkowy został wygenerowany automatycznie przez MATLAB i zawiera:\+
+\begin{DoxyItemize}
+\item stałe konfiguracji filtra (liczba współczynników, rozmiar bloku),
+\item wskaźniki na stan filtra i współczynniki,
+\item deklarację instancji filtra CMSIS-\/\+DSP.
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Autor}
+MATLAB 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+05-\/Feb-\/2026 
+\end{DoxyDate}
+
+
+\label{doc-var-members}
+\Hypertarget{_s_m_a1__fir_8h_doc-var-members}
+\doxysubsection{Dokumentacja zmiennych}
+\Hypertarget{_s_m_a1__fir_8h_aa60c4616a401d7e32c8e8c9ee7ee09a5}\index{SMA1\_fir.h@{SMA1\_fir.h}!SMA1@{SMA1}}
+\index{SMA1@{SMA1}!SMA1\_fir.h@{SMA1\_fir.h}}
+\doxysubsubsection{\texorpdfstring{SMA1}{SMA1}}
+{\footnotesize\ttfamily \label{_s_m_a1__fir_8h_aa60c4616a401d7e32c8e8c9ee7ee09a5} 
+arm\+\_\+fir\+\_\+instance\+\_\+f32 SMA1\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Instancja filtra FIR typu float32 CMSIS-\/\+DSP. 
+
+Struktura przechowująca stan filtra, liczbę tapów i wskaźniki na współczynniki. \Hypertarget{_s_m_a1__fir_8h_a172f28a269911968c17437626b0b5076}\index{SMA1\_fir.h@{SMA1\_fir.h}!SMA1\_COEFFS@{SMA1\_COEFFS}}
+\index{SMA1\_COEFFS@{SMA1\_COEFFS}!SMA1\_fir.h@{SMA1\_fir.h}}
+\doxysubsubsection{\texorpdfstring{SMA1\_COEFFS}{SMA1\_COEFFS}}
+{\footnotesize\ttfamily \label{_s_m_a1__fir_8h_a172f28a269911968c17437626b0b5076} 
+float32\+\_\+t\texorpdfstring{$\ast$}{*} SMA1\+\_\+\+COEFFS\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Wskaźnik na tablicę współczynników filtra FIR. 
+
+Tablica dynamicznie alokowana i wypełniana współczynnikami filtra. \Hypertarget{_s_m_a1__fir_8h_a335cba84955a702c1917923adcbf34bc}\index{SMA1\_fir.h@{SMA1\_fir.h}!SMA1\_STATE@{SMA1\_STATE}}
+\index{SMA1\_STATE@{SMA1\_STATE}!SMA1\_fir.h@{SMA1\_fir.h}}
+\doxysubsubsection{\texorpdfstring{SMA1\_STATE}{SMA1\_STATE}}
+{\footnotesize\ttfamily \label{_s_m_a1__fir_8h_a335cba84955a702c1917923adcbf34bc} 
+float32\+\_\+t\texorpdfstring{$\ast$}{*} SMA1\+\_\+\+STATE\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Wskaźnik na tablicę przechowującą stan filtra FIR. 
+
+Tablica dynamicznie alokowana i wykorzystywana przez funkcje CMSIS-\/\+DSP do przechowywania poprzednich próbek filtra FIR. 

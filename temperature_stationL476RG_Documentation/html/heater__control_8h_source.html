@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Plik źródłowy Core/Inc/heater_control.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('heater__control_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">heater_control.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="heater__control_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifndef CORE_INC_HEATER_CONTROL_H_</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define CORE_INC_HEATER_CONTROL_H_</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;tim.h&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="foldopen" id="foldopen00021" data-start="{" data-end="};">
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="struct_heater_handle__t.html">   21</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="struct_heater_handle__t.html#a5dc7d1c65997ccaed48a93a3f4ffc486">   23</a></span>    TIM_HandleTypeDef *<a class="code hl_variable" href="struct_heater_handle__t.html#a5dc7d1c65997ccaed48a93a3f4ffc486">htim</a>;   </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="struct_heater_handle__t.html#a0c72dd5e18823aef187a34137983c9a6">   24</a></span>    uint32_t <a class="code hl_variable" href="struct_heater_handle__t.html#a0c72dd5e18823aef187a34137983c9a6">channel</a>;           </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="struct_heater_handle__t.html#a5decc13fa9ec8b70efdf84da7faa88f1">   25</a></span>    uint16_t <a class="code hl_variable" href="struct_heater_handle__t.html#a5decc13fa9ec8b70efdf84da7faa88f1">current_power</a>;     </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>} <a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a>;</div>
+</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="heater__control_8h.html#a7f5d58bec0c8b1e52931fab91fd7a707">Heater_Init</a>(<a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                 TIM_HandleTypeDef *htim,</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                 uint32_t channel);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keywordtype">void</span> <a class="code hl_function" href="heater__control_8h.html#a2f676e92aa2965f5bdcec5ab67998c15">Heater_Start</a>(<a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater);</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">void</span> <a class="code hl_function" href="heater__control_8h.html#a3493015070cf36e8ab65b0f38d47b8eb">Heater_Stop</a>(<a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keywordtype">void</span> <a class="code hl_function" href="heater__control_8h.html#a810523a5f79289027f0f7e34069189e7">Heater_SetPower</a>(<a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater, uint16_t power);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>uint16_t <a class="code hl_function" href="heater__control_8h.html#a13c06dbab75437ce1591eb47ac3ad276">Heater_GetPower</a>(<a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keywordtype">void</span> <a class="code hl_function" href="heater__control_8h.html#a645e0983ad91bcb4c9ff5cad89c3cd41">Heater_Off</a>(<a class="code hl_struct" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif </span><span class="comment">/* CORE_INC_HEATER_CONTROL_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aheater__control_8h_html_a13c06dbab75437ce1591eb47ac3ad276"><div class="ttname"><a href="heater__control_8h.html#a13c06dbab75437ce1591eb47ac3ad276">Heater_GetPower</a></div><div class="ttdeci">uint16_t Heater_GetPower(HeaterHandle_t *hheater)</div><div class="ttdoc">Pobiera aktualną moc grzałki.</div><div class="ttdef"><b>Definicja</b> heater_control.c:40</div></div>
+<div class="ttc" id="aheater__control_8h_html_a2f676e92aa2965f5bdcec5ab67998c15"><div class="ttname"><a href="heater__control_8h.html#a2f676e92aa2965f5bdcec5ab67998c15">Heater_Start</a></div><div class="ttdeci">void Heater_Start(HeaterHandle_t *hheater)</div><div class="ttdoc">Uruchamia PWM grzałki.</div><div class="ttdef"><b>Definicja</b> heater_control.c:19</div></div>
+<div class="ttc" id="aheater__control_8h_html_a3493015070cf36e8ab65b0f38d47b8eb"><div class="ttname"><a href="heater__control_8h.html#a3493015070cf36e8ab65b0f38d47b8eb">Heater_Stop</a></div><div class="ttdeci">void Heater_Stop(HeaterHandle_t *hheater)</div><div class="ttdoc">Zatrzymuje PWM grzałki i ustawia moc na 0.</div><div class="ttdef"><b>Definicja</b> heater_control.c:24</div></div>
+<div class="ttc" id="aheater__control_8h_html_a645e0983ad91bcb4c9ff5cad89c3cd41"><div class="ttname"><a href="heater__control_8h.html#a645e0983ad91bcb4c9ff5cad89c3cd41">Heater_Off</a></div><div class="ttdeci">void Heater_Off(HeaterHandle_t *hheater)</div><div class="ttdoc">Wyłącza grzałkę (ustawia moc na 0).</div><div class="ttdef"><b>Definicja</b> heater_control.c:45</div></div>
+<div class="ttc" id="aheater__control_8h_html_a7f5d58bec0c8b1e52931fab91fd7a707"><div class="ttname"><a href="heater__control_8h.html#a7f5d58bec0c8b1e52931fab91fd7a707">Heater_Init</a></div><div class="ttdeci">void Heater_Init(HeaterHandle_t *hheater, TIM_HandleTypeDef *htim, uint32_t channel)</div><div class="ttdoc">Inicjalizuje strukturę grzałki.</div><div class="ttdef"><b>Definicja</b> heater_control.c:10</div></div>
+<div class="ttc" id="aheater__control_8h_html_a810523a5f79289027f0f7e34069189e7"><div class="ttname"><a href="heater__control_8h.html#a810523a5f79289027f0f7e34069189e7">Heater_SetPower</a></div><div class="ttdeci">void Heater_SetPower(HeaterHandle_t *hheater, uint16_t power)</div><div class="ttdoc">Ustawia moc grzałki.</div><div class="ttdef"><b>Definicja</b> heater_control.c:30</div></div>
+<div class="ttc" id="astruct_heater_handle__t_html"><div class="ttname"><a href="struct_heater_handle__t.html">HeaterHandle_t</a></div><div class="ttdoc">Struktura reprezentująca grzałkę sterowaną PWM.</div><div class="ttdef"><b>Definicja</b> heater_control.h:22</div></div>
+<div class="ttc" id="astruct_heater_handle__t_html_a0c72dd5e18823aef187a34137983c9a6"><div class="ttname"><a href="struct_heater_handle__t.html#a0c72dd5e18823aef187a34137983c9a6">HeaterHandle_t::channel</a></div><div class="ttdeci">uint32_t channel</div><div class="ttdef"><b>Definicja</b> heater_control.h:24</div></div>
+<div class="ttc" id="astruct_heater_handle__t_html_a5dc7d1c65997ccaed48a93a3f4ffc486"><div class="ttname"><a href="struct_heater_handle__t.html#a5dc7d1c65997ccaed48a93a3f4ffc486">HeaterHandle_t::htim</a></div><div class="ttdeci">TIM_HandleTypeDef * htim</div><div class="ttdef"><b>Definicja</b> heater_control.h:23</div></div>
+<div class="ttc" id="astruct_heater_handle__t_html_a5decc13fa9ec8b70efdf84da7faa88f1"><div class="ttname"><a href="struct_heater_handle__t.html#a5decc13fa9ec8b70efdf84da7faa88f1">HeaterHandle_t::current_power</a></div><div class="ttdeci">uint16_t current_power</div><div class="ttdef"><b>Definicja</b> heater_control.h:25</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="heater__control_8h.html">heater_control.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

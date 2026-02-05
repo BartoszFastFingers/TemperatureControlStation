@@ -1,0 +1,239 @@
+\doxysection{arm\+\_\+rfft\+\_\+fast\+\_\+init\+\_\+f16.\+c}
+\hypertarget{arm__rfft__fast__init__f16_8c_source}{}\label{arm__rfft__fast__init__f16_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_rfft\_fast\_init\_f16.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_rfft\_fast\_init\_f16.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_rfft\_fast\_init\_f16.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Split\ Radix\ Decimation\ in\ Frequency\ CFFT\ Floating\ point\ processing\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2023\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions\_f16.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_common\_tables\_f16.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}arm\_const\_structs\_f16.h"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#if\ defined(ARM\_FLOAT16\_SUPPORTED)}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_32\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ status=arm\_cfft\_init\_16\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00061\ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00063\ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ S-\/>fftLenRFFT\ =\ 32U;}
+\DoxyCodeLine{00066\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_32;}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00069\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_64\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ status=arm\_cfft\_init\_32\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00087\ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00089\ \ \ \}}
+\DoxyCodeLine{00090\ \ \ S-\/>fftLenRFFT\ =\ 64U;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_64;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00095\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_128\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ status=arm\_cfft\_init\_64\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00113\ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00115\ \ \ \}}
+\DoxyCodeLine{00116\ \ \ S-\/>fftLenRFFT\ =\ 128;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_128;}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00121\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_256\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ status=arm\_cfft\_init\_128\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00138\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00139\ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00141\ \ \ \}}
+\DoxyCodeLine{00142\ \ \ S-\/>fftLenRFFT\ =\ 256U;}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_256;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00147\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_512\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ status=arm\_cfft\_init\_256\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00164\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00165\ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00167\ \ \ \}}
+\DoxyCodeLine{00168\ \ \ S-\/>fftLenRFFT\ =\ 512U;}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_512;}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00173\ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_1024\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ status=arm\_cfft\_init\_512\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00190\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00191\ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00193\ \ \ \}}
+\DoxyCodeLine{00194\ \ \ S-\/>fftLenRFFT\ =\ 1024U;}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_1024;}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00199\ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00208\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_2048\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ status=arm\_cfft\_init\_1024\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00216\ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00218\ \ \ \}}
+\DoxyCodeLine{00219\ \ \ S-\/>fftLenRFFT\ =\ 2048U;}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_2048;}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00224\ \}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_4096\_f16(\ arm\_rfft\_fast\_instance\_f16\ *\ S\ )\ \{}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \textcolor{keywordflow}{if}(\ !S\ )\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ status=arm\_cfft\_init\_2048\_f16(\&(S-\/>Sint));}
+\DoxyCodeLine{00241\ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00242\ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00244\ \ \ \}}
+\DoxyCodeLine{00245\ \ \ S-\/>fftLenRFFT\ =\ 4096U;}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ S-\/>pTwiddleRFFT\ \ \ \ =\ (float16\_t\ *)\ twiddleCoefF16\_rfft\_4096;}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00250\ \}}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_fast\_init\_f16(}
+\DoxyCodeLine{00281\ \ \ arm\_rfft\_fast\_instance\_f16\ *\ S,}
+\DoxyCodeLine{00282\ \ \ uint16\_t\ fftLen)}
+\DoxyCodeLine{00283\ \{}
+\DoxyCodeLine{00284\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \textcolor{keywordflow}{switch}\ (fftLen)}
+\DoxyCodeLine{00288\ \ \ \{}
+\DoxyCodeLine{00289\ \ \ \textcolor{keywordflow}{case}\ 4096U:}
+\DoxyCodeLine{00290\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_4096\_f16(S);}
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00292\ \ \ \textcolor{keywordflow}{case}\ 2048U:}
+\DoxyCodeLine{00293\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_2048\_f16(S);}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00295\ \ \ \textcolor{keywordflow}{case}\ 1024U:}
+\DoxyCodeLine{00296\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_1024\_f16(S);}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00298\ \ \ \textcolor{keywordflow}{case}\ 512U:}
+\DoxyCodeLine{00299\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_512\_f16(S);}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00301\ \ \ \textcolor{keywordflow}{case}\ 256U:}
+\DoxyCodeLine{00302\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_256\_f16(S);}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00304\ \ \ \textcolor{keywordflow}{case}\ 128U:}
+\DoxyCodeLine{00305\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_128\_f16(S);}
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00307\ \ \ \textcolor{keywordflow}{case}\ 64U:}
+\DoxyCodeLine{00308\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_64\_f16(S);}
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00310\ \ \ \textcolor{keywordflow}{case}\ 32U:}
+\DoxyCodeLine{00311\ \ \ \ \ status\ =\ arm\_rfft\_fast\_init\_32\_f16(S);}
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00313\ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}});}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00316\ \ \ \}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \ \#if\ defined(ARM\_FLOAT16\_SUPPORTED)\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

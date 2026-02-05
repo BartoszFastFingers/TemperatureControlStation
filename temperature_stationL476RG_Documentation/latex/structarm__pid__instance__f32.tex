@@ -1,0 +1,83 @@
+\doxysection{arm\+\_\+pid\+\_\+instance\+\_\+f32 Struct Reference}
+\hypertarget{structarm__pid__instance__f32}{}\label{structarm__pid__instance__f32}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+
+
+Instance structure for the floating-\/point PID Control.  
+
+
+
+
+{\ttfamily \+\#include $<$controller\+\_\+functions.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_afc2ed2bf70b7d9d84f49ee9ae7caa004}{A0}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_a5e6785a3a5cf7b98f3bfc7b180d98273}{A1}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_a5b00947275caf079f351271bf41573fe}{A2}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_a473556ac6100fc188e77930d56f51062}{state}} \+[3]\+
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_abe23f3e122ef5f55398fcf77c793c425}{Kp}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_ad1a1aa1c10a2dca201a3422f82198777}{Ki}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{structarm__pid__instance__f32_ace6b9e405a991cbaf6b4c137ca0d51a3}{Kd}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the floating-\/point PID Control. 
+
+\label{doc-variable-members}
+\Hypertarget{structarm__pid__instance__f32_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structarm__pid__instance__f32_afc2ed2bf70b7d9d84f49ee9ae7caa004}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!A0@{A0}}
+\index{A0@{A0}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{A0}{A0}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_afc2ed2bf70b7d9d84f49ee9ae7caa004} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} A0}
+
+The derived gain, A0 = Kp + Ki + Kd . \Hypertarget{structarm__pid__instance__f32_a5e6785a3a5cf7b98f3bfc7b180d98273}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!A1@{A1}}
+\index{A1@{A1}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{A1}{A1}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_a5e6785a3a5cf7b98f3bfc7b180d98273} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} A1}
+
+The derived gain, A1 = -\/Kp -\/ 2Kd. \Hypertarget{structarm__pid__instance__f32_a5b00947275caf079f351271bf41573fe}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!A2@{A2}}
+\index{A2@{A2}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{A2}{A2}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_a5b00947275caf079f351271bf41573fe} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} A2}
+
+The derived gain, A2 = Kd . \Hypertarget{structarm__pid__instance__f32_ace6b9e405a991cbaf6b4c137ca0d51a3}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!Kd@{Kd}}
+\index{Kd@{Kd}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{Kd}{Kd}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_ace6b9e405a991cbaf6b4c137ca0d51a3} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Kd}
+
+The derivative gain. \Hypertarget{structarm__pid__instance__f32_ad1a1aa1c10a2dca201a3422f82198777}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!Ki@{Ki}}
+\index{Ki@{Ki}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{Ki}{Ki}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_ad1a1aa1c10a2dca201a3422f82198777} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Ki}
+
+The integral gain. \Hypertarget{structarm__pid__instance__f32_abe23f3e122ef5f55398fcf77c793c425}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!Kp@{Kp}}
+\index{Kp@{Kp}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{Kp}{Kp}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_abe23f3e122ef5f55398fcf77c793c425} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} Kp}
+
+The proportional gain. \Hypertarget{structarm__pid__instance__f32_a473556ac6100fc188e77930d56f51062}\index{arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}!state@{state}}
+\index{state@{state}!arm\_pid\_instance\_f32@{arm\_pid\_instance\_f32}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{structarm__pid__instance__f32_a473556ac6100fc188e77930d56f51062} 
+\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} state\+[3]\+}
+
+The state array of length 3. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Middlewares/\+\+Third\+\_\+\+Party/\+\+ARM\+\_\+\+CMSIS/\+\+Include/\+dsp/\+controller\+\_\+functions.\+h\end{DoxyCompactItemize}

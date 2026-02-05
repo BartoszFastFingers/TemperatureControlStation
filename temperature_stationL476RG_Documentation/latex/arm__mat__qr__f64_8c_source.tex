@@ -1,0 +1,279 @@
+\doxysection{arm\+\_\+mat\+\_\+qr\+\_\+f64.\+c}
+\hypertarget{arm__mat__qr__f64_8c_source}{}\label{arm__mat__qr__f64_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/MatrixFunctions/arm\_mat\_qr\_f64.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/MatrixFunctions/arm\_mat\_qr\_f64.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_mat\_qr\_f64.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Double\ floating-\/point\ matrix\ QR\ decomposition.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 15\ June\ 2022}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.11.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2022\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_functions.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_utils.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_q_r_gaa56b5e49d38a791a3bcca5309fa7feba}{arm\_mat\_qr\_f64}}(}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrc,}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ threshold,}
+\DoxyCodeLine{00075\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pOutR,}
+\DoxyCodeLine{00076\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pOutQ,}
+\DoxyCodeLine{00077\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pOutTau,}
+\DoxyCodeLine{00078\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pTmpA,}
+\DoxyCodeLine{00079\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pTmpB}
+\DoxyCodeLine{00080\ \ \ \ \ )}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \{}
+\DoxyCodeLine{00083\ \ \ int32\_t\ col=0;}
+\DoxyCodeLine{00084\ \ \ int32\_t\ nb,pos;}
+\DoxyCodeLine{00085\ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pa,*pc;}
+\DoxyCodeLine{00086\ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ beta;}
+\DoxyCodeLine{00087\ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pv;}
+\DoxyCodeLine{00088\ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pdst;}
+\DoxyCodeLine{00089\ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *p;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordflow}{if}\ (pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ <\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})}
+\DoxyCodeLine{00092\ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}});}
+\DoxyCodeLine{00094\ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ memcpy(pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}},pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}},pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ *\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}*\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}));}
+\DoxyCodeLine{00097\ \ \ pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00098\ \ \ pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00099\ \ \ }
+\DoxyCodeLine{00100\ \ \ p\ =\ pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}};}
+\DoxyCodeLine{00101\ \ \ }
+\DoxyCodeLine{00102\ \ \ pc\ =\ pOutTau;}
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{for}(col=0\ ;\ col\ <\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ col++)}
+\DoxyCodeLine{00104\ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ int32\_t\ i,j,k,blkCnt;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pa0,*pa1,*pa2,*pa3;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ COPY\_COL\_F64(pOutR,col,col,pTmpA);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ beta\ =\ \doxymbox{\hyperlink{group___matrix_householder_ga4f061148bcbd3aae2714133944568525}{arm\_householder\_f64}}(pTmpA,threshold,pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ -\/\ col,pTmpA);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ *pc++\ =\ beta;}
+\DoxyCodeLine{00111\ \ \ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \textcolor{comment}{/*\ v.T\ A(col:,col:)\ -\/>\ tmpb\ */}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ pv\ =\ pTmpA;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ pa\ =\ p;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}-\/col;\ j++)}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pdst++\ =\ *pv\ *\ *pa++;\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ pa\ +=\ col;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ pv++;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ pa0\ =\ pa;}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ pa1\ =\ pa0\ +\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ pa2\ =\ pa1\ +\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ pa3\ =\ pa2\ +\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \textcolor{comment}{/*\ Unrolled\ loop\ */}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ blkCnt\ =\ (pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/col\ -\/\ 1)\ >>\ 2;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ k=1;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ sum;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}-\/col;\ j++)}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ =\ *pdst;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[0]\ *\ *pa0++;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[1]\ *\ *pa1++;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[2]\ *\ *pa2++;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[3]\ *\ *pa3++;}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pdst++\ =\ sum;\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ pa0\ +=\ col\ +\ 3*pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ pa1\ +=\ col\ +\ 3*pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ pa2\ +=\ col\ +\ 3*pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ pa3\ +=\ col\ +\ 3*pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ pv\ \ +=\ 4;}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ k\ +=\ 4;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ pa\ =\ pa0;}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;k<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/col;\ k++)}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}-\/col;\ j++)}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pdst++\ +=\ *pv\ *\ *pa++;\ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ pa\ +=\ col;}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ pv++;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \textcolor{comment}{/*\ A(col:,col:)\ -\/\ beta\ v\ tmpb\ */}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ pa\ =\ p;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/col;\ j++)}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ f\ =\ beta\ *\ pTmpA[j];}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}-\/col;\ i++)}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ *pa\ =\ *pa\ -\/\ f\ *\ pTmpB[i]\ ;}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ pa++;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ pa\ +=\ col;}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \textcolor{comment}{/*\ Copy\ Householder\ reflectors\ into\ R\ matrix\ */}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ pa\ =\ p\ +\ pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(k=0;k<pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/col-\/1;\ k++)}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ *pa\ =\ pTmpA[k+1];}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ pa\ +=\ pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \ \ p\ +=\ 1\ +\ pOutR-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00193\ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \textcolor{comment}{/*\ Generate\ Q\ if\ requested\ by\ user\ matrix\ */}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \textcolor{keywordflow}{if}\ (pOutQ\ !=\ NULL)}
+\DoxyCodeLine{00198\ \ \ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \textcolor{comment}{/*\ Initialize\ Q\ matrix\ to\ identity\ */}}
+\DoxyCodeLine{00200\ \ \ \ \ \ memset(pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}},0,\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}})*pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}*pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}});}
+\DoxyCodeLine{00201\ \ \ \ \ \ }
+\DoxyCodeLine{00202\ \ \ \ \ \ pa\ =\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}};}
+\DoxyCodeLine{00203\ \ \ \ \ \ \textcolor{keywordflow}{for}(col=0\ ;\ col\ <\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ col++)}
+\DoxyCodeLine{00204\ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ *pa\ =\ 1.0;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ pa\ +=\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}+1;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \}}
+\DoxyCodeLine{00208\ \ \ \ }
+\DoxyCodeLine{00209\ \ \ \ \ \ nb\ =\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ -\/\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ +\ 1;}
+\DoxyCodeLine{00210\ \ \ \ }
+\DoxyCodeLine{00211\ \ \ \ \ \ pc\ =\ pOutTau\ +\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ -\/\ 1;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \textcolor{keywordflow}{for}(col=0\ ;\ col\ <\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ col++)}
+\DoxyCodeLine{00213\ \ \ \ \ \ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ int32\_t\ i,j,k,\ blkCnt;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pa0,*pa1,*pa2,*pa3;}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ pos\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ -\/\ nb;}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ p\ =\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}}\ +\ pos\ +\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}*pos\ ;}
+\DoxyCodeLine{00218\ \ \ \ }
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ COPY\_COL\_F64(pOutR,pos,pos,pTmpA);}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ pTmpA[0]\ =\ 1.0;}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ }
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ v.T\ A(col:,col:)\ -\/>\ tmpb\ */}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ pv\ =\ pTmpA;}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ pa\ =\ p;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/pos;\ j++)}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pdst++\ =\ *pv\ *\ *pa++;\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ pa\ +=\ pos;}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ pv++;}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ pa0\ =\ pa;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ pa1\ =\ pa0\ +\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ pa2\ =\ pa1\ +\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ pa3\ =\ pa2\ +\ pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Unrolled\ loop\ */}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ blkCnt\ =\ (pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/pos\ -\/\ 1)\ >>\ 2;}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ k=1;}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ sum;}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/pos;\ j++)}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ =\ *pdst;}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[0]\ *\ *pa0++;}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[1]\ *\ *pa1++;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[2]\ *\ *pa2++;}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ +=\ pv[3]\ *\ *pa3++;}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pdst++\ =\ sum;\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ pa0\ +=\ pos\ +\ 3*pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ pa1\ +=\ pos\ +\ 3*pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ pa2\ +=\ pos\ +\ 3*pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ pa3\ +=\ pos\ +\ 3*pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ pv\ \ +=\ 4;}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ k\ +=\ 4;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ pa\ =\ pa0;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;k<pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/pos;\ k++)}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/pos;\ j++)}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *pdst++\ +=\ *pv\ *\ *pa++;\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ pa\ +=\ pos;}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ pv++;}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ pdst\ =\ pTmpB;}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \ \ \ }
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ pa\ =\ p;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ beta\ =\ *pc-\/-\/;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=0;j<pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}-\/pos;\ j++)}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ f\ =\ beta\ *\ pTmpA[j];}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(i=0;i<pOutQ-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}-\/pos;\ i++)}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ *pa\ =\ *pa\ -\/\ f\ *\ pTmpB[i]\ ;}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ pa++;}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ pa\ +=\ pos;}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00293\ \ \ \ }
+\DoxyCodeLine{00294\ \ \ \ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ nb++;}
+\DoxyCodeLine{00296\ \ \ \ \ \ \}}
+\DoxyCodeLine{00297\ \ \ \}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00300\ \ \ \textcolor{comment}{/*\ Return\ to\ application\ */}}
+\DoxyCodeLine{00301\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00302\ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ }
+
+\end{DoxyCode}

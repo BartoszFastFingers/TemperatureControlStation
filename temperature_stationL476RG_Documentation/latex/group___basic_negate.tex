@@ -1,0 +1,138 @@
+\doxysubsection{Vector Negate }
+\hypertarget{group___basic_negate}{}\label{group___basic_negate}\index{Vector Negate@{Vector Negate}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_negate_ga3ad08da4b2479e4251b224eef41564b0}{arm\+\_\+negate\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Negates the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_negate_ga4951d7a0fb8db9d83bef710aaf94590b}{arm\+\_\+negate\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Negates the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_negate_gaa1769c530165c2093d7cecf90ecc990c}{arm\+\_\+negate\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Negates the elements of a Q15 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_negate_ga5d51a844304f38c34315c2cf2ad285e5}{arm\+\_\+negate\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Negates the elements of a Q31 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_negate_ga6b5688f9aa229118cb605c177f67a9bf}{arm\+\_\+negate\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Negates the elements of a Q7 vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Negates the elements of a vector.
+
+
+\begin{DoxyPre}
+    pDst[n] = -\/pSrc[n],   0 <= n < blockSize.
+\end{DoxyPre}
+
+
+The functions support in-\/place computation allowing the source and destination pointers to reference the same memory buffer. There are separate functions for floating-\/point, Q7, Q15, and Q31 data types.
+
+\label{doc-func-members}
+\Hypertarget{group___basic_negate_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___basic_negate_ga3ad08da4b2479e4251b224eef41564b0}\index{Vector Negate@{Vector Negate}!arm\_negate\_f32@{arm\_negate\_f32}}
+\index{arm\_negate\_f32@{arm\_negate\_f32}!Vector Negate@{Vector Negate}}
+\doxysubsubsubsection{\texorpdfstring{arm\_negate\_f32()}{arm\_negate\_f32()}}
+{\footnotesize\ttfamily \label{group___basic_negate_ga3ad08da4b2479e4251b224eef41564b0} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+negate\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Negates the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_negate_ga4951d7a0fb8db9d83bef710aaf94590b}\index{Vector Negate@{Vector Negate}!arm\_negate\_f64@{arm\_negate\_f64}}
+\index{arm\_negate\_f64@{arm\_negate\_f64}!Vector Negate@{Vector Negate}}
+\doxysubsubsubsection{\texorpdfstring{arm\_negate\_f64()}{arm\_negate\_f64()}}
+{\footnotesize\ttfamily \label{group___basic_negate_ga4951d7a0fb8db9d83bef710aaf94590b} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+negate\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Negates the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_negate_gaa1769c530165c2093d7cecf90ecc990c}\index{Vector Negate@{Vector Negate}!arm\_negate\_q15@{arm\_negate\_q15}}
+\index{arm\_negate\_q15@{arm\_negate\_q15}!Vector Negate@{Vector Negate}}
+\doxysubsubsubsection{\texorpdfstring{arm\_negate\_q15()}{arm\_negate\_q15()}}
+{\footnotesize\ttfamily \label{group___basic_negate_gaa1769c530165c2093d7cecf90ecc990c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+negate\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Negates the elements of a Q15 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Conditions for optimum performance}
+Input and output buffers should be aligned by 32-\/bit 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. The Q15 value -\/1 (0x8000) is saturated to the maximum allowable positive value 0x7\+FFF. 
+\end{DoxyParagraph}
+\Hypertarget{group___basic_negate_ga5d51a844304f38c34315c2cf2ad285e5}\index{Vector Negate@{Vector Negate}!arm\_negate\_q31@{arm\_negate\_q31}}
+\index{arm\_negate\_q31@{arm\_negate\_q31}!Vector Negate@{Vector Negate}}
+\doxysubsubsubsection{\texorpdfstring{arm\_negate\_q31()}{arm\_negate\_q31()}}
+{\footnotesize\ttfamily \label{group___basic_negate_ga5d51a844304f38c34315c2cf2ad285e5} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+negate\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Negates the elements of a Q31 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. The Q31 value -\/1 (0x80000000) is saturated to the maximum allowable positive value 0x7\+FFFFFFF. 
+\end{DoxyParagraph}
+\Hypertarget{group___basic_negate_ga6b5688f9aa229118cb605c177f67a9bf}\index{Vector Negate@{Vector Negate}!arm\_negate\_q7@{arm\_negate\_q7}}
+\index{arm\_negate\_q7@{arm\_negate\_q7}!Vector Negate@{Vector Negate}}
+\doxysubsubsubsection{\texorpdfstring{arm\_negate\_q7()}{arm\_negate\_q7()}}
+{\footnotesize\ttfamily \label{group___basic_negate_ga6b5688f9aa229118cb605c177f67a9bf} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+negate\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Negates the elements of a Q7 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. The Q7 value -\/1 (0x80) is saturated to the maximum allowable positive value 0x7F. 
+\end{DoxyParagraph}

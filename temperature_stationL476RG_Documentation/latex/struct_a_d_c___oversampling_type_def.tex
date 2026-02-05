@@ -1,0 +1,59 @@
+\doxysection{ADC\+\_\+\+Oversampling\+Type\+Def Struct Reference}
+\hypertarget{struct_a_d_c___oversampling_type_def}{}\label{struct_a_d_c___oversampling_type_def}\index{ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}}
+
+
+ADC group regular oversampling structure definition.  
+
+
+
+
+{\ttfamily \+\#include $<$stm32l4xx\+\_\+hal\+\_\+adc.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_a_d_c___oversampling_type_def_aa14f06e7c1e716f5128e7d127f8eb492}{Ratio}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_a_d_c___oversampling_type_def_ae96bca270a08f8b867fca5d0200b7a6a}{Right\+Bit\+Shift}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_a_d_c___oversampling_type_def_a7646825a6ca230e0177757dc53be34ac}{Triggered\+Mode}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_a_d_c___oversampling_type_def_a7ee9e95c9ba2331a0c7ef22af6dd7dd8}{Oversampling\+Stop\+Reset}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ADC group regular oversampling structure definition. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_a_d_c___oversampling_type_def_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{struct_a_d_c___oversampling_type_def_a7ee9e95c9ba2331a0c7ef22af6dd7dd8}\index{ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}!OversamplingStopReset@{OversamplingStopReset}}
+\index{OversamplingStopReset@{OversamplingStopReset}!ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}}
+\doxysubsubsection{\texorpdfstring{OversamplingStopReset}{OversamplingStopReset}}
+{\footnotesize\ttfamily \label{struct_a_d_c___oversampling_type_def_a7ee9e95c9ba2331a0c7ef22af6dd7dd8} 
+uint32\+\_\+t Oversampling\+Stop\+Reset}
+
+Selects the regular oversampling mode. The oversampling is either temporary stopped or reset upon an injected sequence interruption. If oversampling is enabled on both regular and injected groups, this parameter is discarded and forced to setting "{}\+ADC\+\_\+\+REGOVERSAMPLING\+\_\+\+RESUMED\+\_\+\+MODE"{} (the oversampling buffer is zeroed during injection sequence). This parameter can be a value of \doxylink{group___a_d_c___h_a_l___e_c___o_v_s___s_c_o_p_e___r_e_g}{Oversampling -\/ Oversampling scope for ADC group regular} \Hypertarget{struct_a_d_c___oversampling_type_def_aa14f06e7c1e716f5128e7d127f8eb492}\index{ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}!Ratio@{Ratio}}
+\index{Ratio@{Ratio}!ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}}
+\doxysubsubsection{\texorpdfstring{Ratio}{Ratio}}
+{\footnotesize\ttfamily \label{struct_a_d_c___oversampling_type_def_aa14f06e7c1e716f5128e7d127f8eb492} 
+uint32\+\_\+t Ratio}
+
+Configures the oversampling ratio. This parameter can be a value of \doxylink{group___a_d_c___h_a_l___e_c___o_v_s___r_a_t_i_o}{Oversampling -\/ Ratio} \Hypertarget{struct_a_d_c___oversampling_type_def_ae96bca270a08f8b867fca5d0200b7a6a}\index{ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}!RightBitShift@{RightBitShift}}
+\index{RightBitShift@{RightBitShift}!ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}}
+\doxysubsubsection{\texorpdfstring{RightBitShift}{RightBitShift}}
+{\footnotesize\ttfamily \label{struct_a_d_c___oversampling_type_def_ae96bca270a08f8b867fca5d0200b7a6a} 
+uint32\+\_\+t Right\+Bit\+Shift}
+
+Configures the division coefficient for the Oversampler. This parameter can be a value of \doxylink{group___a_d_c___h_a_l___e_c___o_v_s___s_h_i_f_t}{Oversampling -\/ Data shift} \Hypertarget{struct_a_d_c___oversampling_type_def_a7646825a6ca230e0177757dc53be34ac}\index{ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}!TriggeredMode@{TriggeredMode}}
+\index{TriggeredMode@{TriggeredMode}!ADC\_OversamplingTypeDef@{ADC\_OversamplingTypeDef}}
+\doxysubsubsection{\texorpdfstring{TriggeredMode}{TriggeredMode}}
+{\footnotesize\ttfamily \label{struct_a_d_c___oversampling_type_def_a7646825a6ca230e0177757dc53be34ac} 
+uint32\+\_\+t Triggered\+Mode}
+
+Selects the regular triggered oversampling mode. This parameter can be a value of \doxylink{group___a_d_c___h_a_l___e_c___o_v_s___d_i_s_c_o_n_t___m_o_d_e}{Oversampling -\/ Discontinuous mode} 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Drivers/\+\+STM32\+L4xx\+\_\+\+HAL\+\_\+\+Driver/\+\+Inc/\+\doxymbox{\hyperlink{stm32l4xx__hal__adc_8h}{stm32l4xx\+\_\+hal\+\_\+adc.\+h}}\end{DoxyCompactItemize}

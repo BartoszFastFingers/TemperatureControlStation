@@ -1,0 +1,165 @@
+\doxysubsection{Vector Scale }
+\hypertarget{group___basic_scale}{}\label{group___basic_scale}\index{Vector Scale@{Vector Scale}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_scale_ga541ff6661371c197c76d59b57f4cc650}{arm\+\_\+scale\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} scale, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Multiplies a floating-\/point vector by a scalar. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_scale_ga5a14778d7872e5aaedafc3e21b49d896}{arm\+\_\+scale\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} scale, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Multiplies a floating-\/point vector by a scalar. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_scale_ga7575735fd67442425ccc3a170b29caae}{arm\+\_\+scale\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} scale\+Fract, int8\+\_\+t shift, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Multiplies a Q15 vector by a scalar. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_scale_gaa70c0ee242db427c0b2491a48a1680b8}{arm\+\_\+scale\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} scale\+Fract, int8\+\_\+t shift, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Multiplies a Q31 vector by a scalar. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_scale_ga914dd475d988643c061ef7550b78b0ff}{arm\+\_\+scale\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} scale\+Fract, int8\+\_\+t shift, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Multiplies a Q7 vector by a scalar. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Multiply a vector by a scalar value. For floating-\/point data, the algorithm used is:\+
+
+
+\begin{DoxyPre}
+    pDst[n] = pSrc[n] * scale,   0 <= n < blockSize.
+\end{DoxyPre}
+
+
+In the fixed-\/point Q7, Q15, and Q31 functions, {\ttfamily scale} is represented by a fractional multiplication {\ttfamily scale\+Fract} and an arithmetic shift {\ttfamily shift}. The shift allows the gain of the scaling operation to exceed 1.\+0. The algorithm used with fixed-\/point data is:\+
+
+
+\begin{DoxyPre}
+    pDst[n] = (pSrc[n] * scaleFract) << shift,   0 <= n < blockSize.
+\end{DoxyPre}
+
+
+The overall scale factor applied to the fixed-\/point data is 
+\begin{DoxyPre}
+    scale = scaleFract * 2^shift.
+\end{DoxyPre}
+
+
+The functions support in-\/place computation allowing the source and destination pointers to reference the same memory buffer.
+
+\label{doc-func-members}
+\Hypertarget{group___basic_scale_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___basic_scale_ga541ff6661371c197c76d59b57f4cc650}\index{Vector Scale@{Vector Scale}!arm\_scale\_f32@{arm\_scale\_f32}}
+\index{arm\_scale\_f32@{arm\_scale\_f32}!Vector Scale@{Vector Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_scale\_f32()}{arm\_scale\_f32()}}
+{\footnotesize\ttfamily \label{group___basic_scale_ga541ff6661371c197c76d59b57f4cc650} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+scale\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{scale}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies a floating-\/point vector by a scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale} & scale factor to be applied \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_scale_ga5a14778d7872e5aaedafc3e21b49d896}\index{Vector Scale@{Vector Scale}!arm\_scale\_f64@{arm\_scale\_f64}}
+\index{arm\_scale\_f64@{arm\_scale\_f64}!Vector Scale@{Vector Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_scale\_f64()}{arm\_scale\_f64()}}
+{\footnotesize\ttfamily \label{group___basic_scale_ga5a14778d7872e5aaedafc3e21b49d896} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+scale\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}}}]{scale}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies a floating-\/point vector by a scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale} & scale factor to be applied \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_scale_ga7575735fd67442425ccc3a170b29caae}\index{Vector Scale@{Vector Scale}!arm\_scale\_q15@{arm\_scale\_q15}}
+\index{arm\_scale\_q15@{arm\_scale\_q15}!Vector Scale@{Vector Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_scale\_q15()}{arm\_scale\_q15()}}
+{\footnotesize\ttfamily \label{group___basic_scale_ga7575735fd67442425ccc3a170b29caae} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+scale\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{scale\+Fract}{, }\item[{int8\+\_\+t}]{shift}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies a Q15 vector by a scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale\+Fract} & fractional portion of the scale value \\
+\hline
+\doxymbox{\texttt{in}}  & {\em shift} & number of bits to shift the result by \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The input data {\ttfamily \texorpdfstring{$\ast$}{*}p\+Src} and {\ttfamily scale\+Fract} are in 1.\+15 format. These are multiplied to yield a 2.\+30 intermediate result and this is shifted with saturation to 1.\+15 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___basic_scale_gaa70c0ee242db427c0b2491a48a1680b8}\index{Vector Scale@{Vector Scale}!arm\_scale\_q31@{arm\_scale\_q31}}
+\index{arm\_scale\_q31@{arm\_scale\_q31}!Vector Scale@{Vector Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_scale\_q31()}{arm\_scale\_q31()}}
+{\footnotesize\ttfamily \label{group___basic_scale_gaa70c0ee242db427c0b2491a48a1680b8} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+scale\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{scale\+Fract}{, }\item[{int8\+\_\+t}]{shift}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies a Q31 vector by a scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale\+Fract} & fractional portion of the scale value \\
+\hline
+\doxymbox{\texttt{in}}  & {\em shift} & number of bits to shift the result by \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The input data {\ttfamily \texorpdfstring{$\ast$}{*}p\+Src} and {\ttfamily scale\+Fract} are in 1.\+31 format. These are multiplied to yield a 2.\+62 intermediate result and this is shifted with saturation to 1.\+31 format. There is an intermediate shift by 32 to go from the 2.\+62 to 1.\+31 format. The shift argument is applied on the 1.\+31 result and not to the intermediate 2.\+62 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___basic_scale_ga914dd475d988643c061ef7550b78b0ff}\index{Vector Scale@{Vector Scale}!arm\_scale\_q7@{arm\_scale\_q7}}
+\index{arm\_scale\_q7@{arm\_scale\_q7}!Vector Scale@{Vector Scale}}
+\doxysubsubsubsection{\texorpdfstring{arm\_scale\_q7()}{arm\_scale\_q7()}}
+{\footnotesize\ttfamily \label{group___basic_scale_ga914dd475d988643c061ef7550b78b0ff} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+scale\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}}}]{scale\+Fract}{, }\item[{int8\+\_\+t}]{shift}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies a Q7 vector by a scalar. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em scale\+Fract} & fractional portion of the scale value \\
+\hline
+\doxymbox{\texttt{in}}  & {\em shift} & number of bits to shift the result by \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The input data {\ttfamily \texorpdfstring{$\ast$}{*}p\+Src} and {\ttfamily scale\+Fract} are in 1.\+7 format. These are multiplied to yield a 2.\+14 intermediate result and this is shifted with saturation to 1.\+7 format. 
+\end{DoxyParagraph}

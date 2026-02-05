@@ -1,0 +1,269 @@
+\doxysection{arm\+\_\+fir\+\_\+sparse\+\_\+f32.\+c}
+\hypertarget{arm__fir__sparse__f32_8c_source}{}\label{arm__fir__sparse__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_fir\_sparse\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_fir\_sparse\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_fir\_sparse\_f32.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Floating-\/point\ sparse\ FIR\ filter\ processing\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/filtering\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___f_i_r___sparse_ga5fd37ec4c09f90fc84c06a7c20ed0f06}{arm\_fir\_sparse\_f32}}(}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__fir__sparse__instance__f32}{arm\_fir\_sparse\_instance\_f32}}\ *\ S,}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pScratchIn,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ uint32\_t\ blockSize)}
+\DoxyCodeLine{00118\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pState\ =\ S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a335c87e6fdc4b96601d95a5de8b9c463}{pState}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ State\ pointer\ */}}
+\DoxyCodeLine{00120\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pCoeffs\ =\ S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a39230f04a29d8321948e339633780442}{pCoeffs}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Coefficient\ pointer\ */}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *px;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Scratch\ buffer\ pointer\ */}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *py\ =\ pState;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ pointers\ for\ state\ buffer\ */}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pb\ =\ pScratchIn;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ pointers\ for\ scratch\ buffer\ */}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pOut;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ */}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ int32\_t\ *pTapDelay\ =\ S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_adec00b3793ab4f08edfeb4ea6a9eb6e6}{pTapDelay}};\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Pointer\ to\ the\ array\ containing\ offset\ of\ the\ non-\/zero\ tap\ values.\ */}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ uint32\_t\ delaySize\ =\ S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_ab25f4ee7550e6d92acff77ada283733f}{maxDelay}}\ +\ blockSize;\ \ \textcolor{comment}{/*\ state\ length\ */}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ uint16\_t\ numTaps\ =\ S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a751941891e47f522a7f5375fe8990aac}{numTaps}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Number\ of\ filter\ coefficients\ in\ the\ filter\ \ */}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ int32\_t\ readIndex;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ index\ of\ the\ state\ buffer\ */}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ uint32\_t\ tapCnt,\ blkCnt;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ coeff\ =\ *pCoeffs++;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ the\ first\ coefficient\ value\ */}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \textcolor{comment}{/*\ BlockSize\ of\ Input\ samples\ are\ copied\ into\ the\ state\ buffer\ */}}
+\DoxyCodeLine{00134\ \ \ \textcolor{comment}{/*\ StateIndex\ points\ to\ the\ starting\ position\ to\ write\ in\ the\ state\ buffer\ */}}
+\DoxyCodeLine{00135\ \ \ arm\_circularWrite\_f32((int32\_t\ *)\ py,\ delaySize,\ \&S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a566a0cb53437e48b9a3bf18e5b03d8aa}{stateIndex}},\ 1,\ (int32\_t\ *)\ pSrc,\ 1,\ blockSize);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \textcolor{comment}{/*\ Read\ Index,\ from\ where\ the\ state\ buffer\ should\ be\ read,\ is\ calculated.\ */}}
+\DoxyCodeLine{00138\ \ \ readIndex\ =\ (int32\_t)\ (S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a566a0cb53437e48b9a3bf18e5b03d8aa}{stateIndex}}\ -\/\ blockSize)\ -\/\ *pTapDelay++;}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{comment}{/*\ Wraparound\ of\ readIndex\ */}}
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordflow}{if}\ (readIndex\ <\ 0)}
+\DoxyCodeLine{00142\ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ readIndex\ +=\ (int32\_t)\ delaySize;}
+\DoxyCodeLine{00144\ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ state\ buffer\ is\ updated\ */}}
+\DoxyCodeLine{00147\ \ \ py\ =\ pState;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \textcolor{comment}{/*\ blockSize\ samples\ are\ read\ from\ the\ state\ buffer\ */}}
+\DoxyCodeLine{00150\ \ \ arm\_circularRead\_f32((int32\_t\ *)\ py,\ delaySize,\ \&readIndex,\ 1,}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (int32\_t\ *)\ pb,\ (int32\_t\ *)\ pb,\ blockSize,\ 1,\ blockSize);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ the\ scratch\ buffer\ of\ state\ values\ */}}
+\DoxyCodeLine{00154\ \ \ px\ =\ pb;}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ scratch\ buffer\ of\ output\ values\ */}}
+\DoxyCodeLine{00157\ \ \ pOut\ =\ pDst;}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time.\ */}}
+\DoxyCodeLine{00163\ \ \ blkCnt\ =\ blockSize\ >>\ 2U;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00166\ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{comment}{/*\ Perform\ Multiplications\ and\ store\ in\ destination\ buffer\ */}}
+\DoxyCodeLine{00168\ \ \ \ \ *pOut++\ =\ *px++\ *\ coeff;}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ *pOut++\ =\ *px++\ *\ coeff;}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ *pOut++\ =\ *px++\ *\ coeff;}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ *pOut++\ =\ *px++\ *\ coeff;}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00177\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00178\ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00181\ \ \ blkCnt\ =\ blockSize\ \%\ 0x4U;}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00186\ \ \ blkCnt\ =\ blockSize;}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00191\ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{comment}{/*\ Perform\ Multiplication\ and\ store\ in\ destination\ buffer\ */}}
+\DoxyCodeLine{00193\ \ \ \ \ *pOut++\ =\ *px++\ *\ coeff;}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00196\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00197\ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \textcolor{comment}{/*\ Load\ the\ coefficient\ value\ and}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ *\ increment\ the\ coefficient\ buffer\ for\ the\ next\ set\ of\ state\ values\ */}}
+\DoxyCodeLine{00201\ \ \ coeff\ =\ *pCoeffs++;}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \textcolor{comment}{/*\ Read\ Index,\ from\ where\ the\ state\ buffer\ should\ be\ read,\ is\ calculated.\ */}}
+\DoxyCodeLine{00204\ \ \ readIndex\ =\ (int32\_t)\ (S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a566a0cb53437e48b9a3bf18e5b03d8aa}{stateIndex}}\ -\/\ blockSize)\ -\/\ *pTapDelay++;}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \textcolor{comment}{/*\ Wraparound\ of\ readIndex\ */}}
+\DoxyCodeLine{00207\ \ \ \textcolor{keywordflow}{if}\ (readIndex\ <\ 0)}
+\DoxyCodeLine{00208\ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ readIndex\ +=\ (int32\_t)\ delaySize;}
+\DoxyCodeLine{00210\ \ \ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \textcolor{comment}{/*\ Loop\ over\ the\ number\ of\ taps.\ */}}
+\DoxyCodeLine{00213\ \ \ tapCnt\ =\ (uint32\_t)\ numTaps\ -\/\ 2U;}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \textcolor{keywordflow}{while}\ (tapCnt\ >\ 0U)}
+\DoxyCodeLine{00216\ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ state\ buffer\ is\ updated\ */}}
+\DoxyCodeLine{00218\ \ \ \ \ py\ =\ pState;}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{/*\ blockSize\ samples\ are\ read\ from\ the\ state\ buffer\ */}}
+\DoxyCodeLine{00221\ \ \ \ \ arm\_circularRead\_f32((int32\_t\ *)\ py,\ delaySize,\ \&readIndex,\ 1,}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (int32\_t\ *)\ pb,\ (int32\_t\ *)\ pb,\ blockSize,\ 1,\ blockSize);}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ the\ scratch\ buffer\ of\ state\ values\ */}}
+\DoxyCodeLine{00225\ \ \ \ \ px\ =\ pb;}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ scratch\ buffer\ of\ output\ values\ */}}
+\DoxyCodeLine{00228\ \ \ \ \ pOut\ =\ pDst;}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time.\ */}}
+\DoxyCodeLine{00234\ \ \ \ \ blkCnt\ =\ blockSize\ >>\ 2U;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00237\ \ \ \ \ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ Multiply-\/Accumulate\ */}}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00249\ \ \ \ \ \}}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00252\ \ \ \ \ blkCnt\ =\ blockSize\ \%\ 0x4U;}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00257\ \ \ \ \ blkCnt\ =\ blockSize;}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00262\ \ \ \ \ \{}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ Multiply-\/Accumulate\ */}}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00268\ \ \ \ \ \}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{comment}{/*\ Load\ the\ coefficient\ value\ and}}
+\DoxyCodeLine{00271\ \textcolor{comment}{\ \ \ \ \ *\ increment\ the\ coefficient\ buffer\ for\ the\ next\ set\ of\ state\ values\ */}}
+\DoxyCodeLine{00272\ \ \ \ \ coeff\ =\ *pCoeffs++;}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{comment}{/*\ Read\ Index,\ from\ where\ the\ state\ buffer\ should\ be\ read,\ is\ calculated.\ */}}
+\DoxyCodeLine{00275\ \ \ \ \ readIndex\ =\ (int32\_t)\ (S-\/>\doxymbox{\hyperlink{structarm__fir__sparse__instance__f32_a566a0cb53437e48b9a3bf18e5b03d8aa}{stateIndex}}\ -\/\ blockSize)\ -\/\ *pTapDelay++;}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{comment}{/*\ Wraparound\ of\ readIndex\ */}}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordflow}{if}\ (readIndex\ <\ 0)}
+\DoxyCodeLine{00279\ \ \ \ \ \{}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ readIndex\ +=\ (int32\_t)\ delaySize;}
+\DoxyCodeLine{00281\ \ \ \ \ \}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ tap\ loop\ counter\ */}}
+\DoxyCodeLine{00284\ \ \ \ \ tapCnt-\/-\/;}
+\DoxyCodeLine{00285\ \ \ \}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \textcolor{comment}{/*\ Compute\ last\ tap\ without\ the\ final\ read\ of\ pTapDelay\ */}}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ state\ buffer\ is\ updated\ */}}
+\DoxyCodeLine{00290\ \ \ py\ =\ pState;}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \textcolor{comment}{/*\ blockSize\ samples\ are\ read\ from\ the\ state\ buffer\ */}}
+\DoxyCodeLine{00293\ \ \ arm\_circularRead\_f32((int32\_t\ *)\ py,\ delaySize,\ \&readIndex,\ 1,}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (int32\_t\ *)\ pb,\ (int32\_t\ *)\ pb,\ blockSize,\ 1,\ blockSize);}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ the\ scratch\ buffer\ of\ state\ values\ */}}
+\DoxyCodeLine{00297\ \ \ px\ =\ pb;}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \textcolor{comment}{/*\ Working\ pointer\ for\ scratch\ buffer\ of\ output\ values\ */}}
+\DoxyCodeLine{00300\ \ \ pOut\ =\ pDst;}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time.\ */}}
+\DoxyCodeLine{00306\ \ \ blkCnt\ =\ blockSize\ >>\ 2U;}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00309\ \ \ \{}
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{comment}{/*\ Perform\ Multiply-\/Accumulate\ */}}
+\DoxyCodeLine{00311\ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00312\ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00313\ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00314\ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00317\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00318\ \ \ \}}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00321\ \ \ blkCnt\ =\ blockSize\ \%\ 0x4U;}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00326\ \ \ blkCnt\ =\ blockSize;}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00331\ \ \ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{comment}{/*\ Perform\ Multiply-\/Accumulate\ */}}
+\DoxyCodeLine{00333\ \ \ \ \ *pOut++\ +=\ *px++\ *\ coeff;}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00336\ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00337\ \ \ \}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \}}
+\DoxyCodeLine{00340\ }
+
+\end{DoxyCode}

@@ -1,0 +1,82 @@
+\doxysubsubsection{DCT4 F32 }
+\hypertarget{group___d_c_t4_f32}{}\label{group___d_c_t4_f32}\index{DCT4 F32@{DCT4 F32}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___d_c_t4_f32_ga8edf2464bfac88bbce85a8396a0de0fa}{arm\+\_\+dct4\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__dct4__instance__f32}{arm\+\_\+dct4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+State, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Inline\+Buffer)
+\begin{DoxyCompactList}\small\item\em Processing function for the floating-\/point DCT4/\+\+IDCT4. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___d_c_t4_f32_ga6ad5d282e7a76621ee51e9906a4b2561}{arm\+\_\+dct4\+\_\+init\+\_\+f32}} (\doxymbox{\hyperlink{structarm__dct4__instance__f32}{arm\+\_\+dct4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\+\_\+rfft\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S\+\_\+\+RFFT, \doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32}{arm\+\_\+cfft\+\_\+radix4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}S\+\_\+\+CFFT, uint16\+\_\+t N, uint16\+\_\+t Nby2, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} normalize)
+\begin{DoxyCompactList}\small\item\em Initialization function for the floating-\/point DCT4/\+\+IDCT4. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___d_c_t4_f32_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___d_c_t4_f32_ga8edf2464bfac88bbce85a8396a0de0fa}\index{DCT4 F32@{DCT4 F32}!arm\_dct4\_f32@{arm\_dct4\_f32}}
+\index{arm\_dct4\_f32@{arm\_dct4\_f32}!DCT4 F32@{DCT4 F32}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_dct4\_f32()}{arm\_dct4\_f32()}}
+{\footnotesize\ttfamily \label{group___d_c_t4_f32_ga8edf2464bfac88bbce85a8396a0de0fa} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dct4\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__dct4__instance__f32}{arm\+\_\+dct4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+State}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Inline\+Buffer}{}\end{DoxyParamCaption})}
+
+
+
+Processing function for the floating-\/point DCT4/\+\+IDCT4. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\doxymbox{\hyperlink{deprecated__deprecated000018}{Deprecated}}]Do not use this function. It is using a deprecated version of the RFFT. \end{DoxyRefDesc}
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & points to an instance of the floating-\/point DCT4/\+\+IDCT4 structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+State} & points to state buffer \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p\+Inline\+Buffer} & points to the in-\/place input and output buffer \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___d_c_t4_f32_ga6ad5d282e7a76621ee51e9906a4b2561}\index{DCT4 F32@{DCT4 F32}!arm\_dct4\_init\_f32@{arm\_dct4\_init\_f32}}
+\index{arm\_dct4\_init\_f32@{arm\_dct4\_init\_f32}!DCT4 F32@{DCT4 F32}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_dct4\_init\_f32()}{arm\_dct4\_init\_f32()}}
+{\footnotesize\ttfamily \label{group___d_c_t4_f32_ga6ad5d282e7a76621ee51e9906a4b2561} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+dct4\+\_\+init\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__dct4__instance__f32}{arm\+\_\+dct4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{structarm__rfft__instance__f32}{arm\+\_\+rfft\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S\+\_\+\+RFFT}{, }\item[{\doxymbox{\hyperlink{structarm__cfft__radix4__instance__f32}{arm\+\_\+cfft\+\_\+radix4\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{S\+\_\+\+CFFT}{, }\item[{uint16\+\_\+t}]{N}{, }\item[{uint16\+\_\+t}]{Nby2}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{normalize}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the floating-\/point DCT4/\+\+IDCT4. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\doxymbox{\hyperlink{deprecated__deprecated000019}{Deprecated}}]Do not use this function. It is using a deprecated version of the RFFT. \end{DoxyRefDesc}
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of floating-\/point DCT4/\+\+IDCT4 structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em S\+\_\+\+RFFT} & points to an instance of floating-\/point RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em S\+\_\+\+CFFT} & points to an instance of floating-\/point CFFT/\+\+CIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em N} & length of the DCT4 \\
+\hline
+\doxymbox{\texttt{in}}  & {\em Nby2} & half of the length of the DCT4 \\
+\hline
+\doxymbox{\texttt{in}}  & {\em normalize} & normalizing factor. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily N} is not a supported transform length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Normalizing factor}
+The normalizing factor is {\ttfamily sqrt(2/\+N)}, which depends on the size of transform {\ttfamily N}. Floating-\/point normalizing factors are mentioned in the table below for different DCT sizes:\+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}DCT Size  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Normalizing factor value  \\
+\SetCell{r}2048  &\SetCell{r}0.\+03125  \\
+\SetCell{r}512  &\SetCell{r}0.\+0625  \\
+\SetCell{r}128  &\SetCell{r}0.\+125  \\
+\end{DoxyTable}

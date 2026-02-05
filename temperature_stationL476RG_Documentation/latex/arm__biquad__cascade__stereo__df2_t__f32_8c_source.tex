@@ -1,0 +1,408 @@
+\doxysection{arm\+\_\+biquad\+\_\+cascade\+\_\+stereo\+\_\+df2\+T\+\_\+f32.\+c}
+\hypertarget{arm__biquad__cascade__stereo__df2_t__f32_8c_source}{}\label{arm__biquad__cascade__stereo__df2_t__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_biquad\_cascade\_stereo\_df2T\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_biquad\_cascade\_stereo\_df2T\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_biquad\_cascade\_stereo\_df2T\_f32.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Processing\ function\ for\ floating-\/point\ transposed\ direct\ form\ II\ Biquad\ cascade\ filter.\ 2\ channels}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/filtering\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#if\ (defined(ARM\_MATH\_MVEF)\ \&\&\ defined(ARM\_MATH\_HELIUM\_EXPERIMENTAL))\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___biquad_cascade_d_f2_t_ga8b6b9af64cf113d2f0c1f274b494397b}{arm\_biquad\_cascade\_stereo\_df2T\_f32}}(}
+\DoxyCodeLine{00051\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32}{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}}\ *\ S,}
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ uint32\_t\ blockSize)}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pIn\ =\ pSrc;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ source\ pointer\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00057\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pOut\ =\ pDst;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ destination\ pointer\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00058\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pState\ =\ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a335c87e6fdc4b96601d95a5de8b9c463}{pState}};\ \ \ \ \ \ \textcolor{comment}{/*\ \ State\ pointer\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pCoeffs\ =\ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a39230f04a29d8321948e339633780442}{pCoeffs}};\ \ \ \ \textcolor{comment}{/*\ \ coefficient\ pointer\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00060\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ b0,\ b1,\ b2,\ a1,\ a2;\ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Filter\ coefficients\ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00061\ \ \ \ \ uint32\_t\ \ sample,\ stage\ =\ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a3615af038f56917909e0370c11bc2ec7}{numStages}};\ \textcolor{comment}{/*\ \ loop\ counters\ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00062\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ scratch[6];}
+\DoxyCodeLine{00063\ \ \ \ \ uint32x4\_t\ loadIdxVec;}
+\DoxyCodeLine{00064\ \ \ \ \ f32x4\_t\ aCoeffs,\ bCoeffs;}
+\DoxyCodeLine{00065\ \ \ \ \ f32x4\_t\ stateVec0,\ stateVec1;}
+\DoxyCodeLine{00066\ \ \ \ \ f32x4\_t\ inVec;}
+\DoxyCodeLine{00067\ \ \ \ \ uint32\_t\ \ startIdx\ =\ 0;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00070\ \textcolor{comment}{\ \ \ \ \ *\ \{0,\ 1,\ 0,\ 1\}\ generator}}
+\DoxyCodeLine{00071\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00072\ \ \ \ \ loadIdxVec\ =\ viwdupq\_u32(\&startIdx,\ 2,\ 1);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ \ *\ scratch\ top\ clearing}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ \ \ \ \ *\ layout\ :\ [d1a\ d1b\ d2a\ d2b\ 0\ 0]}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00078\ \ \ \ \ scratch[4]\ =\ 0.0f;}
+\DoxyCodeLine{00079\ \ \ \ \ scratch[5]\ =\ 0.0f;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00082\ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Reading\ the\ coefficients}}
+\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ b0\ =\ *pCoeffs++;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ b1\ =\ *pCoeffs++;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ b2\ =\ *pCoeffs++;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ a1\ =\ *pCoeffs++;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ a2\ =\ *pCoeffs++;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00093\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ aCoeffs\ =\ \{a1\ a1\ a2\ a2\}}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ aCoeffs\ =\ vdupq\_n\_f32(a1);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ aCoeffs\ =\ vsetq\_lane(a2,\ aCoeffs,\ 2);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ aCoeffs\ =\ vsetq\_lane(a2,\ aCoeffs,\ 3);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ bCoeffs\ =\ \{b1\ b1\ b2\ b2\}}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ bCoeffs\ =\ vdupq\_n\_f32(b1);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ bCoeffs\ =\ vsetq\_lane(b2,\ bCoeffs,\ 2);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ bCoeffs\ =\ vsetq\_lane(b2,\ bCoeffs,\ 3);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00107\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Reading\ the\ state\ values}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Save\ into\ scratch}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ *(f32x4\_t\ *)\ scratch\ =\ *(f32x4\_t\ *)\ pState;}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ sample\ =\ blockSize;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (sample\ >\ 0U)}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ step\ 1}}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 0\ \ \ |\ acc1a\ =\ xn1a\ *\ b0\ +\ d1a}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 1\ \ \ |\ acc1b\ =\ xn1b\ *\ b0\ +\ d1b}}
+\DoxyCodeLine{00121\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 2\ \ \ |\ acc1a\ =\ xn1a\ *\ b0\ +\ d1a}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 3\ \ \ |\ acc1b\ =\ xn1b\ *\ b0\ +\ d1b}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ load\ \{d1a,\ d1b,\ d1a,\ d1b\}}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ stateVec0\ =\ (f32x4\_t)vldrwq\_gather\_shifted\_offset((uint32\_t\ \textcolor{keyword}{const}\ *)\ scratch,\ loadIdxVec);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ load\ \{in0\ in1\ in0\ in1\}}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ inVec\ =\ (f32x4\_t)vldrwq\_gather\_shifted\_offset((uint32\_t\ \textcolor{keyword}{const}\ *)\ pIn,\ loadIdxVec);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ stateVec0\ =\ vfmaq(stateVec0,\ inVec,\ b0);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ vgetq\_lane(stateVec0,\ 0);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ vgetq\_lane(stateVec0,\ 1);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ step\ 2}}
+\DoxyCodeLine{00139\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 0\ \ |\ d1a\ =\ b1\ *\ xn1a\ \ +\ \ a1\ *\ acc1a\ \ +\ \ d2a}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 1\ \ |\ d1b\ =\ b1\ *\ xn1b\ \ +\ \ a1\ *\ acc1b\ \ +\ \ d2b}}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 2\ \ |\ d2a\ =\ b2\ *\ xn1a\ \ +\ \ a2\ *\ acc1a\ \ +\ \ 0}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ 3\ \ |\ d2b\ =\ b2\ *\ xn1b\ \ +\ \ a2\ *\ acc1b\ \ +\ \ 0}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ load\ \{d2a,\ d2b,\ 0,\ 0\}}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ stateVec1\ =\ *(f32x4\_t\ *)\ \&\ scratch[2];}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ stateVec1\ =\ vfmaq(stateVec1,\ stateVec0,\ aCoeffs);}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ stateVec1\ =\ vfmaq(stateVec1,\ inVec,\ bCoeffs);}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ *(f32x4\_t\ *)\ scratch\ =\ stateVec1;}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ pIn\ =\ pIn\ +\ 2;}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ sample-\/-\/;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Store\ the\ updated\ state\ variables\ back\ into\ the\ state\ array}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ vst1q(pState,\ stateVec1);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ pState\ +=\ 4;}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ The\ current\ stage\ output\ is\ given\ as\ the\ input\ to\ the\ next\ stage}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ pIn\ =\ pDst;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00169\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Reset\ the\ output\ working\ pointer}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ pOut\ =\ pDst;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ decrement\ the\ loop\ counter}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ stage-\/-\/;}
+\DoxyCodeLine{00176\ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordflow}{while}\ (stage\ >\ 0U);}
+\DoxyCodeLine{00178\ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___biquad_cascade_d_f2_t_ga8b6b9af64cf113d2f0c1f274b494397b}{arm\_biquad\_cascade\_stereo\_df2T\_f32}}(}
+\DoxyCodeLine{00183\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32}{arm\_biquad\_cascade\_stereo\_df2T\_instance\_f32}}\ *\ S,}
+\DoxyCodeLine{00184\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pDst,}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ uint32\_t\ blockSize)}
+\DoxyCodeLine{00187\ \{}
+\DoxyCodeLine{00188\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pIn\ =\ pSrc;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Source\ pointer\ */}}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pOut\ =\ pDst;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ */}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pState\ =\ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a335c87e6fdc4b96601d95a5de8b9c463}{pState}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ State\ pointer\ */}}
+\DoxyCodeLine{00191\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pCoeffs\ =\ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a39230f04a29d8321948e339633780442}{pCoeffs}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Coefficient\ pointer\ */}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ acc1a,\ acc1b;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ */}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ b0,\ b1,\ b2,\ a1,\ a2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Filter\ coefficients\ */}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ Xn1a,\ Xn1b;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ input\ */}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ d1a,\ d2a,\ d1b,\ d2b;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ State\ variables\ */}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ uint32\_t\ sample,\ stage\ =\ S-\/>\doxymbox{\hyperlink{structarm__biquad__cascade__stereo__df2_t__instance__f32_a3615af038f56917909e0370c11bc2ec7}{numStages}};\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ counters\ */}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00199\ \ \ \ \ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reading\ the\ coefficients\ */}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ b0\ =\ pCoeffs[0];}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ b1\ =\ pCoeffs[1];}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ b2\ =\ pCoeffs[2];}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ a1\ =\ pCoeffs[3];}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ a2\ =\ pCoeffs[4];}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reading\ the\ state\ values\ */}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ d1a\ =\ pState[0];}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ d2a\ =\ pState[1];}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ d1b\ =\ pState[2];}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ d2b\ =\ pState[3];}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ pCoeffs\ +=\ 5U;}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 8\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ sample\ =\ blockSize\ >>\ 3U;}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (sample\ >\ 0U)\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ y[n]\ =\ b0\ *\ x[n]\ +\ d1\ */}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ d1\ =\ b1\ *\ x[n]\ +\ a1\ *\ y[n]\ +\ d2\ */}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ d2\ =\ b2\ *\ x[n]\ +\ a2\ *\ y[n]\ */}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \textcolor{comment}{/*\ \ 1\ */}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \textcolor{comment}{/*\ \ 2\ */}}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \textcolor{comment}{/*\ \ 3\ */}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \textcolor{comment}{/*\ \ 4\ */}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ \textcolor{comment}{/*\ \ 5\ */}}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \textcolor{comment}{/*\ \ 6\ */}}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{comment}{/*\ \ 7\ */}}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{comment}{/*\ \ 8\ */}}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ sample-\/-\/;}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ sample\ =\ blockSize\ \&\ 0x7U;}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ sample\ =\ blockSize;}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (sample\ >\ 0U)\ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ the\ input\ */}}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ Xn1a\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ a\ */}}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ Xn1b\ =\ *pIn++;\ \textcolor{comment}{/*\ Channel\ b\ */}}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ y[n]\ =\ b0\ *\ x[n]\ +\ d1\ */}}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ acc1a\ =\ (b0\ *\ Xn1a)\ +\ d1a;}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ acc1b\ =\ (b0\ *\ Xn1b)\ +\ d1b;}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ result\ in\ the\ accumulator\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1a;}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ *pOut++\ =\ acc1b;}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Every\ time\ after\ the\ output\ is\ computed\ state\ should\ be\ updated.\ */}}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ d1\ =\ b1\ *\ x[n]\ +\ a1\ *\ y[n]\ +\ d2\ */}}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ d1a\ =\ ((b1\ *\ Xn1a)\ +\ (a1\ *\ acc1a))\ +\ d2a;}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ d1b\ =\ ((b1\ *\ Xn1b)\ +\ (a1\ *\ acc1b))\ +\ d2b;}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ d2\ =\ b2\ *\ x[n]\ +\ a2\ *\ y[n]\ */}}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ d2a\ =\ (b2\ *\ Xn1a)\ +\ (a2\ *\ acc1a);}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ d2b\ =\ (b2\ *\ Xn1b)\ +\ (a2\ *\ acc1b);}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ sample-\/-\/;}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ updated\ state\ variables\ back\ into\ the\ state\ array\ */}}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ pState[0]\ =\ d1a;}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ pState[1]\ =\ d2a;}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ pState[2]\ =\ d1b;}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ pState[3]\ =\ d2b;}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ pState\ +=\ 4U;}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ The\ current\ stage\ output\ is\ given\ as\ the\ input\ to\ the\ next\ stage\ */}}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ pIn\ =\ pDst;}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reset\ the\ output\ working\ pointer\ */}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ pOut\ =\ pDst;}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ the\ loop\ counter\ */}}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ stage-\/-\/;}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (stage\ >\ 0U);}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \}}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00415\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00416\ }
+
+\end{DoxyCode}

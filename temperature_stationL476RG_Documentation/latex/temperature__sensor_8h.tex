@@ -1,0 +1,156 @@
+\doxysection{Dokumentacja pliku Core/\+\+Inc/\+temperature\+\_\+sensor.h}
+\hypertarget{temperature__sensor_8h}{}\label{temperature__sensor_8h}\index{Core/Inc/temperature\_sensor.h@{Core/Inc/temperature\_sensor.h}}
+
+
+Obsługa czujników temperatury z filtrem FIR (SMA) dla mikrokontrolerów STM32.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}adc.\+h"{}}\newline
+{\ttfamily \+\#include "{}arm\+\_\+math.\+h"{}}\newline
+{\ttfamily \+\#include "{}SMA1\+\_\+fir.\+h"{}}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t}{Temp\+Sensor\+Handle\+\_\+filter\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struktura przechowująca dane filtra FIR dla pojedynczego czujnika. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struktura reprezentująca jeden lub więcej czujników temperatury. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{temperature__sensor_8h_ab0c432e3be8436ec79a4431f6cd30411}\label{temperature__sensor_8h_ab0c432e3be8436ec79a4431f6cd30411} 
+\+\#define {\bfseries MAX\+\_\+\+TEMP\+\_\+\+SENSORS}~2
+\begin{DoxyCompactList}\small\item\em Maksymalna liczba czujników temperatury obsługiwanych w systemie. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{temperature__sensor_8h_adf74bbba89cbb8de25680efd2a48d83f}{Temp\+Sensor\+\_\+\+Init}} (\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}htemp, ADC\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}hadc, uint8\+\_\+t sensor\+\_\+count, uint16\+\_\+t \texorpdfstring{$\ast$}{*}adc\+\_\+buffer, float vref)
+\begin{DoxyCompactList}\small\item\em Inicjalizuje strukturę czujnika temperatury i filtr SMA. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{temperature__sensor_8h_ad6855126c666ac7efcbe695bbefa9d75}{Temp\+Sensor\+\_\+\+Start}} (\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}htemp)
+\begin{DoxyCompactList}\small\item\em Uruchamia odczyt ADC z czujników temperatury z użyciem DMA. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{temperature__sensor_8h_a70b027296971f254b7da4673fca9c127}{Temp\+Sensor\+\_\+\+Get\+Voltage}} (\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}htemp, uint8\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Pobiera napięcie z wybranego czujnika. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{temperature__sensor_8h_a207977086eb2457992d963291ef21272}{Temp\+Sensor\+\_\+\+Get\+Temperature}} (\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}htemp, uint8\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Pobiera temperaturę z wybranego czujnika. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{temperature__sensor_8h_a53d6890f65f8d8ada86c06d46f82a4bd}{Temp\+Sensor\+\_\+\+Get\+Average\+Temperature}} (\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}htemp)
+\begin{DoxyCompactList}\small\item\em Oblicza średnią temperaturę ze wszystkich czujników z filtracją SMA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Obsługa czujników temperatury z filtrem FIR (SMA) dla mikrokontrolerów STM32. 
+
+Moduł umożliwia:\+
+\begin{DoxyItemize}
+\item inicjalizację czujników ADC,
+\item odczyt napięcia i temperatury,
+\item obliczanie średniej temperatury z filtracją cyfrową (SMA/\+\+FIR).
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Autor}
+00ary 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+30-\/Jan-\/2026 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{temperature__sensor_8h_doc-func-members}
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{temperature__sensor_8h_a53d6890f65f8d8ada86c06d46f82a4bd}\index{temperature\_sensor.h@{temperature\_sensor.h}!TempSensor\_GetAverageTemperature@{TempSensor\_GetAverageTemperature}}
+\index{TempSensor\_GetAverageTemperature@{TempSensor\_GetAverageTemperature}!temperature\_sensor.h@{temperature\_sensor.h}}
+\doxysubsubsection{\texorpdfstring{TempSensor\_GetAverageTemperature()}{TempSensor\_GetAverageTemperature()}}
+{\footnotesize\ttfamily \label{temperature__sensor_8h_a53d6890f65f8d8ada86c06d46f82a4bd} 
+float Temp\+Sensor\+\_\+\+Get\+Average\+Temperature (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{htemp}{}\end{DoxyParamCaption})}
+
+
+
+Oblicza średnią temperaturę ze wszystkich czujników z filtracją SMA. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em htemp} & Wskaźnik na strukturę \doxylink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Przefiltrowana średnia temperatura w °C 
+\end{DoxyReturn}
+\Hypertarget{temperature__sensor_8h_a207977086eb2457992d963291ef21272}\index{temperature\_sensor.h@{temperature\_sensor.h}!TempSensor\_GetTemperature@{TempSensor\_GetTemperature}}
+\index{TempSensor\_GetTemperature@{TempSensor\_GetTemperature}!temperature\_sensor.h@{temperature\_sensor.h}}
+\doxysubsubsection{\texorpdfstring{TempSensor\_GetTemperature()}{TempSensor\_GetTemperature()}}
+{\footnotesize\ttfamily \label{temperature__sensor_8h_a207977086eb2457992d963291ef21272} 
+float Temp\+Sensor\+\_\+\+Get\+Temperature (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{htemp}{, }\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Pobiera temperaturę z wybranego czujnika. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em htemp} & Wskaźnik na strukturę \doxylink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t} \\
+\hline
+{\em index} & Indeks czujnika (0..sensor\+\_\+count-\/1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Temperatura w °C 
+\end{DoxyReturn}
+\Hypertarget{temperature__sensor_8h_a70b027296971f254b7da4673fca9c127}\index{temperature\_sensor.h@{temperature\_sensor.h}!TempSensor\_GetVoltage@{TempSensor\_GetVoltage}}
+\index{TempSensor\_GetVoltage@{TempSensor\_GetVoltage}!temperature\_sensor.h@{temperature\_sensor.h}}
+\doxysubsubsection{\texorpdfstring{TempSensor\_GetVoltage()}{TempSensor\_GetVoltage()}}
+{\footnotesize\ttfamily \label{temperature__sensor_8h_a70b027296971f254b7da4673fca9c127} 
+float Temp\+Sensor\+\_\+\+Get\+Voltage (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{htemp}{, }\item[{uint8\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Pobiera napięcie z wybranego czujnika. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em htemp} & Wskaźnik na strukturę \doxylink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t} \\
+\hline
+{\em index} & Indeks czujnika (0..sensor\+\_\+count-\/1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Napięcie w woltach 
+\end{DoxyReturn}
+\Hypertarget{temperature__sensor_8h_adf74bbba89cbb8de25680efd2a48d83f}\index{temperature\_sensor.h@{temperature\_sensor.h}!TempSensor\_Init@{TempSensor\_Init}}
+\index{TempSensor\_Init@{TempSensor\_Init}!temperature\_sensor.h@{temperature\_sensor.h}}
+\doxysubsubsection{\texorpdfstring{TempSensor\_Init()}{TempSensor\_Init()}}
+{\footnotesize\ttfamily \label{temperature__sensor_8h_adf74bbba89cbb8de25680efd2a48d83f} 
+void Temp\+Sensor\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{htemp}{, }\item[{ADC\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{hadc}{, }\item[{uint8\+\_\+t}]{sensor\+\_\+count}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{adc\+\_\+buffer}{, }\item[{float}]{vref}{}\end{DoxyParamCaption})}
+
+
+
+Inicjalizuje strukturę czujnika temperatury i filtr SMA. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em htemp} & Wskaźnik na strukturę \doxylink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t} \\
+\hline
+{\em hadc} & Wskaźnik na strukturę ADC STM32 \\
+\hline
+{\em sensor\+\_\+count} & Liczba czujników do obsługi \\
+\hline
+{\em adc\+\_\+buffer} & Bufor do odczytu ADC \\
+\hline
+{\em vref} & Napięcie odniesienia ADC \\
+\hline
+\end{DoxyParams}
+\Hypertarget{temperature__sensor_8h_ad6855126c666ac7efcbe695bbefa9d75}\index{temperature\_sensor.h@{temperature\_sensor.h}!TempSensor\_Start@{TempSensor\_Start}}
+\index{TempSensor\_Start@{TempSensor\_Start}!temperature\_sensor.h@{temperature\_sensor.h}}
+\doxysubsubsection{\texorpdfstring{TempSensor\_Start()}{TempSensor\_Start()}}
+{\footnotesize\ttfamily \label{temperature__sensor_8h_ad6855126c666ac7efcbe695bbefa9d75} 
+void Temp\+Sensor\+\_\+\+Start (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{htemp}{}\end{DoxyParamCaption})}
+
+
+
+Uruchamia odczyt ADC z czujników temperatury z użyciem DMA. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em htemp} & Wskaźnik na strukturę \doxylink{struct_temp_sensor_handle__t}{Temp\+Sensor\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}

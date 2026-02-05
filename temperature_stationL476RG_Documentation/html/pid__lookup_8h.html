@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Components/Inc/pid_lookup.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('pid__lookup_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku pid_lookup.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Interpolacja parametrów PID z CMSIS-DSP 1.16.2.  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &quot;arm_math.h&quot;</code><br />
+</div>
+<p><a href="pid__lookup_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:a807975bad2d36ce331edbc0c87dfcfce" id="r_a807975bad2d36ce331edbc0c87dfcfce"><td class="memItemLeft"><a id="a807975bad2d36ce331edbc0c87dfcfce" name="a807975bad2d36ce331edbc0c87dfcfce"></a>
+#define&#160;</td><td class="memItemRight"><b>NUM_OPERATING_POINTS</b>&#160;&#160;&#160;3</td></tr>
+<tr class="memitem:a291c37d8ca168fd08535be9b05f14fe9" id="r_a291c37d8ca168fd08535be9b05f14fe9"><td class="memItemLeft"><a id="a291c37d8ca168fd08535be9b05f14fe9" name="a291c37d8ca168fd08535be9b05f14fe9"></a>
+#define&#160;</td><td class="memItemRight"><b>IDW_POWER</b>&#160;&#160;&#160;2.0f</td></tr>
+<tr class="memitem:ab48b36751bce1bcde7588ebf0620a4d1" id="r_ab48b36751bce1bcde7588ebf0620a4d1"><td class="memItemLeft"><a id="ab48b36751bce1bcde7588ebf0620a4d1" name="ab48b36751bce1bcde7588ebf0620a4d1"></a>
+#define&#160;</td><td class="memItemRight"><b>PID_SAMPLE_TIME_S</b>&#160;&#160;&#160;1.0f</td></tr>
+<tr class="memitem:a391fa1e490bd712720989b58fa0d9904" id="r_a391fa1e490bd712720989b58fa0d9904"><td class="memItemLeft"><a id="a391fa1e490bd712720989b58fa0d9904" name="a391fa1e490bd712720989b58fa0d9904"></a>
+#define&#160;</td><td class="memItemRight"><b>PWM_MAX</b>&#160;&#160;&#160;999</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:ada274dba31454c7704f40636cb9d3bc4" id="r_ada274dba31454c7704f40636cb9d3bc4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ada274dba31454c7704f40636cb9d3bc4">PID_Interpolate</a> (uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid, uint8_t reset_state)</td></tr>
+<tr class="memdesc:ada274dba31454c7704f40636cb9d3bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpoluje parametry PID i aktualizuje instancję CMSIS-DSP.  <br /></td></tr>
+<tr class="memitem:afaa51912936d5f9b4e86e793fe90c92a" id="r_afaa51912936d5f9b4e86e793fe90c92a"><td class="memItemLeft"><a id="afaa51912936d5f9b4e86e793fe90c92a" name="afaa51912936d5f9b4e86e793fe90c92a"></a>
+void&#160;</td><td class="memItemRight"><b>PID_Init</b> (uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid)</td></tr>
+<tr class="memdesc:afaa51912936d5f9b4e86e793fe90c92a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizuje PID dla danego punktu pracy. <br /></td></tr>
+<tr class="memitem:ae01268ecad1c353e831bc2a6083ad767" id="r_ae01268ecad1c353e831bc2a6083ad767"><td class="memItemLeft"><a id="ae01268ecad1c353e831bc2a6083ad767" name="ae01268ecad1c353e831bc2a6083ad767"></a>
+void&#160;</td><td class="memItemRight"><b>PID_GetNearest</b> (uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid)</td></tr>
+<tr class="memdesc:ae01268ecad1c353e831bc2a6083ad767"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zwraca parametry dla najbliższego punktu (bez interpolacji). <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Interpolacja parametrów PID z CMSIS-DSP 1.16.2. </p>
+<dl class="section note"><dt>Nota</dt><dd>Wygenerowano automatycznie przez MATLAB </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2026-02-01 03:03 </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji</h2>
+<a id="ada274dba31454c7704f40636cb9d3bc4" name="ada274dba31454c7704f40636cb9d3bc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada274dba31454c7704f40636cb9d3bc4">&#9670;&#160;</a></span>PID_Interpolate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PID_Interpolate </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>heater_pwm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>fan_pwm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">arm_pid_instance_f32 *</td>          <td class="paramname"><span class="paramname"><em>pid</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>reset_state</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interpoluje parametry PID i aktualizuje instancję CMSIS-DSP. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">heater_pwm</td><td>Wartość PWM grzałki [0-999] </td></tr>
+    <tr><td class="paramname">fan_pwm</td><td>Wartość PWM wentylatora [0-999] </td></tr>
+    <tr><td class="paramname">pid</td><td>Wskaźnik na instancję arm_pid_instance_f32 </td></tr>
+    <tr><td class="paramname">reset_state</td><td>Czy zresetować stan całkowania (1=tak, 0=nie) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Components</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="pid__lookup_8h.html">pid_lookup.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+\doxysection{arm\+\_\+euclidean\+\_\+distance\+\_\+f64.\+c}
+\hypertarget{arm__euclidean__distance__f64_8c_source}{}\label{arm__euclidean__distance__f64_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/DistanceFunctions/arm\_euclidean\_distance\_f64.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/DistanceFunctions/arm\_euclidean\_distance\_f64.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_euclidean\_distance\_f64.c}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Description:\ \ Euclidean\ distance\ between\ two\ vectors}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 10\ August\ 2022}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.10.1}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}dsp/distance\_functions.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ <limits.h>}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00050\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ \doxymbox{\hyperlink{group___euclidean_ga05b9704a1c67d2a932c369cc7b84d8fa}{arm\_euclidean\_distance\_f64}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pA,\textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pB,\ uint32\_t\ blockSize)}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ accum=0.,tmp;}
+\DoxyCodeLine{00053\ \ \ \ \ uint32\_t\ blkCnt;}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)\ \&\&\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00055\ \ \ \ \ float64x2\_t\ accumV,tmpV\ ,\ pAV\ ,pBV;}
+\DoxyCodeLine{00056\ \ \ \ \ accumV\ =\ vdupq\_n\_f64(0.0);}
+\DoxyCodeLine{00057\ \ \ \ \ blkCnt\ =\ blockSize\ >>\ 1U;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0U)}
+\DoxyCodeLine{00059\ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ pAV\ =\ vld1q\_f64(pA);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ pBV\ =\ vld1q\_f64(pB);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ tmpV\ =\ vsubq\_f64(pAV,\ pBV);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ accumV\ =\ vmlaq\_f64(accumV,\ tmpV,\ tmpV);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ pA+=2;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ pB+=2;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00067\ \ \ \ \ \}}
+\DoxyCodeLine{00068\ \ \ \ \ accum\ =\ vaddvq\_f64(accumV);}
+\DoxyCodeLine{00069\ \ \ \ \ blkCnt\ =\ blockSize\ \&\ 1;}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00071\ \ \ \ \ blkCnt\ =\ blockSize;}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00074\ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ tmp\ =\ *pA++\ -\/\ *pB++;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ accum\ +=\ ARM\_SQ(tmp);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ blkCnt\ -\/-\/;}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ tmp\ =\ sqrt(accum);}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{return}(tmp);}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ }
+
+\end{DoxyCode}

@@ -1,0 +1,100 @@
+\doxysubsection{Real FFT Functions }
+\hypertarget{group___real_f_f_t}{}\label{group___real_f_f_t}\index{Real FFT Functions@{Real FFT Functions}}
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___real_f_f_t_f64}{Real FFT F64 Functions}}
+\item 
+\doxymbox{\hyperlink{group___real_f_f_t_q15}{Real FFT Q15 Functions}}
+\item 
+\doxymbox{\hyperlink{group___real_f_f_t_q31}{Real FFT Q31 Functions}}
+\item 
+\doxymbox{\hyperlink{group___real_f_f_t___table}{Real FFT Tables}}
+\item 
+\doxymbox{\hyperlink{group___real_f_f_t_f32}{Real FFT F32 Functions}}
+\item 
+\doxymbox{\hyperlink{group___deprecated_real_f_f_t}{Deprecated Real FFT Functions}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+\begin{DoxyParagraph}{}
+The CMSIS DSP library includes specialized algorithms for computing the FFT of real data sequences. The FFT is defined over complex data but in many applications the input is real. Real FFT algorithms take advantage of the symmetry properties of the FFT and have a speed advantage over complex algorithms of the same length. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The Fast RFFT algorithm relays on the mixed radix CFFT that save processor usage. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The real length N forward FFT of a sequence is computed using the steps shown below. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The real sequence is initially treated as if it were complex to perform a CFFT. Later, a processing stage reshapes the data to obtain half of the frequency spectrum in complex format.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The input for the inverse RFFT should keep the same format as the output of the forward RFFT. A first processing stage pre-\/process the data to later perform an inverse CFFT. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The algorithms for floating-\/point, Q15, and Q31 data are slightly different and we describe each algorithm in turn. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Floating-\/point}
+The main functions are \doxylink{group___real_f_f_t_f32_gafc85e6d6359a6d21c3554428c74258c9}{arm\+\_\+rfft\+\_\+fast\+\_\+f32()} and \doxylink{group___real_f_f_t_f32_ga25c9f75d32ba9871b2705b3dcc7372c0}{arm\+\_\+rfft\+\_\+fast\+\_\+init\+\_\+f32()}. The older functions \doxylink{group___deprecated_real_f_f_t_ga592726e37f1dffc41948e56624e91ab1}{arm\+\_\+rfft\+\_\+f32()} and \doxylink{group___deprecated_real_f_f_t_ga3eb28d0ca4ac6a1350e5f01b7c30a676}{arm\+\_\+rfft\+\_\+init\+\_\+f32()} have been deprecated but are still documented. For f16, the functions are arm\+\_\+rfft\+\_\+fast\+\_\+f16() and arm\+\_\+rfft\+\_\+fast\+\_\+init\+\_\+f16(). For f64, the functions are \doxylink{group___real_f_f_t_f64_ga8c2d2e85c034bdd28e5781aad8c1fab5}{arm\+\_\+rfft\+\_\+fast\+\_\+f64()} and \doxylink{group___real_f_f_t_f64_gaee919dd59461ca2d76d4c505a1f85111}{arm\+\_\+rfft\+\_\+fast\+\_\+init\+\_\+f64()}. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The FFT of a real N-\/point sequence has even symmetry in the frequency domain. The second half of the data equals the conjugate of the first half flipped in frequency. This conjugate part is not computed by the float RFFT. As consequence, the output of a N point real FFT should be a N/\+/\+2 + 1 complex numbers so N + 2 floats. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+It happens that the first complex of number of the RFFT output is actually all real. Its real part represents the DC offset. The value at Nyquist frequency is also real.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Those two complex numbers can be encoded with 2 floats rather than using two numbers with an imaginary part set to zero. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The implementation is using a trick so that the output buffer can be N float :\+ the last real is packaged in the imaginary part of the first complex (since this imaginary part is not used and is zero).
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The real FFT functions pack the frequency domain data in this fashion. The forward transform outputs the data in this form and the inverse transform expects input data in this form. The function always performs the needed bitreversal so that the input and output data is always in normal order. The functions support lengths of \+[32, 64, 128, ..., 4096]\+ samples. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Q15 and Q31}
+The real algorithms are defined in a similar manner and utilize N/\+2 complex transforms behind the scenes.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+But warning, contrary to the float version, the fixed point implementation RFFT is also computing the conjugate part (except for MVE version) so the output buffer must be bigger. Also the fixed point RFFTs are not using any trick to pack the DC and Nyquist frequency in the same complex number. The RIFFT is not using the conjugate part but it is still using the Nyquist frequency value. The details are given in the documentation for the functions. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The complex transforms used internally include scaling to prevent fixed-\/point overflows. The overall scaling equals 1/\+(fft\+Len/\+2). Due to the use of complex transform internally, the source buffer is modified by the rfft. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+A separate instance structure must be defined for each transform used but twiddle factor and bit reversal tables can be reused. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+There is also an associated initialization function for each data type. The initialization function performs the following operations:\+
+\begin{DoxyItemize}
+\item Sets the values of the internal structure fields.
+\item Initializes twiddle factor table and bit reversal table pointers.
+\item Initializes the internal complex FFT data structure. 
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Use of the initialization function is optional {\bfseries{except for MVE versions where it is mandatory}}. If you don\textquotesingle{}t use the initialization functions, then the structures should be initialized with code similar to the one below:\+ 
+\begin{DoxyPre}
+      \doxylink{structarm__rfft__instance__q31}{arm\_rfft\_instance\_q31} S = \{fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft\};
+      \doxylink{structarm__rfft__instance__q15}{arm\_rfft\_instance\_q15} S = \{fftLenReal, fftLenBy2, ifftFlagR, bitReverseFlagR, twidCoefRModifier, pTwiddleAReal, pTwiddleBReal, pCfft\};
+  \end{DoxyPre}
+ where {\ttfamily fft\+Len\+Real} is the length of the real transform; {\ttfamily fft\+Len\+By2} length of the internal complex transform (fft\+Len\+Real/\+2). {\ttfamily ifft\+FlagR} Selects forward (=0) or inverse (=1) transform. {\ttfamily bit\+Reverse\+FlagR} Selects bit reversed output (=0) or normal order output (=1). {\ttfamily twid\+Coef\+RModifier} stride modifier for the twiddle factor table. The value is based on the FFT length; {\ttfamily p\+Twiddle\+AReal}points to the A array of twiddle coefficients; {\ttfamily p\+Twiddle\+BReal}points to the B array of twiddle coefficients; {\ttfamily p\+Cfft} points to the CFFT Instance structure. The CFFT structure must also be initialized. ~\newline
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Note that with MVE versions you can\textquotesingle{}t initialize instance structures directly and {\bfseries{must use the initialization function}}. 
+\end{DoxyParagraph}
+\input{group___real_f_f_t_f64}
+\input{group___real_f_f_t_q15}
+\input{group___real_f_f_t_q31}
+\input{group___real_f_f_t___table}
+\input{group___real_f_f_t_f32}
+\input{group___deprecated_real_f_f_t}

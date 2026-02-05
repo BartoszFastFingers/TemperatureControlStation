@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Components/Inc/PID_controller.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_p_i_d__controller_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku PID_controller.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Regulator PID temperatury.  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="pid__lookup_8h_source.html">pid_lookup.h</a>&quot;</code><br />
+</div>
+<p><a href="_p_i_d__controller_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:af954b68bbb88675895f708171956bfab" id="r_af954b68bbb88675895f708171956bfab"><td class="memItemLeft"><a id="af954b68bbb88675895f708171956bfab" name="af954b68bbb88675895f708171956bfab"></a>
+void&#160;</td><td class="memItemRight"><b>Temperature_Control_Init</b> (void)</td></tr>
+<tr class="memdesc:af954b68bbb88675895f708171956bfab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizacja regulatora temperatury. <br /></td></tr>
+<tr class="memitem:aaebf3c30971f2d15dbdcd025ef33d8f3" id="r_aaebf3c30971f2d15dbdcd025ef33d8f3"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#aaebf3c30971f2d15dbdcd025ef33d8f3">Temperature_Control_Update</a> (float current_temp)</td></tr>
+<tr class="memdesc:aaebf3c30971f2d15dbdcd025ef33d8f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Aktualizacja regulatora (wywoływać co 500ms).  <br /></td></tr>
+<tr class="memitem:ae7db9a0aeca973149ece62b383bfbc3d" id="r_ae7db9a0aeca973149ece62b383bfbc3d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae7db9a0aeca973149ece62b383bfbc3d">Temperature_Control_SetTarget</a> (float target_temp)</td></tr>
+<tr class="memdesc:ae7db9a0aeca973149ece62b383bfbc3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ustawienie temperatury zadanej.  <br /></td></tr>
+<tr class="memitem:a1253cbfe4f4d878bceaa1aad9f46c318" id="r_a1253cbfe4f4d878bceaa1aad9f46c318"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1253cbfe4f4d878bceaa1aad9f46c318">Temperature_Control_SetFanPWM</a> (uint16_t pwm)</td></tr>
+<tr class="memdesc:a1253cbfe4f4d878bceaa1aad9f46c318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ręczne ustawienie PWM wentylatora (override).  <br /></td></tr>
+<tr class="memitem:a5e8472f2a9154007c945ecc2db846335" id="r_a5e8472f2a9154007c945ecc2db846335"><td class="memItemLeft"><a id="a5e8472f2a9154007c945ecc2db846335" name="a5e8472f2a9154007c945ecc2db846335"></a>
+uint16_t&#160;</td><td class="memItemRight"><b>Temperature_Control_GetHeaterPWM</b> (void)</td></tr>
+<tr class="memdesc:a5e8472f2a9154007c945ecc2db846335"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobierz aktualne PWM grzałki. <br /></td></tr>
+<tr class="memitem:aaa96ca99ed06c6bb6a3e189ab77e220b" id="r_aaa96ca99ed06c6bb6a3e189ab77e220b"><td class="memItemLeft"><a id="aaa96ca99ed06c6bb6a3e189ab77e220b" name="aaa96ca99ed06c6bb6a3e189ab77e220b"></a>
+uint16_t&#160;</td><td class="memItemRight"><b>Temperature_Control_GetFanPWM</b> (void)</td></tr>
+<tr class="memdesc:aaa96ca99ed06c6bb6a3e189ab77e220b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobierz aktualne PWM wentylatora. <br /></td></tr>
+<tr class="memitem:acad27418364639a2d8e318ec29a88b32" id="r_acad27418364639a2d8e318ec29a88b32"><td class="memItemLeft"><a id="acad27418364639a2d8e318ec29a88b32" name="acad27418364639a2d8e318ec29a88b32"></a>
+float&#160;</td><td class="memItemRight"><b>Temperature_Control_GetSetpoint</b> (void)</td></tr>
+<tr class="memdesc:acad27418364639a2d8e318ec29a88b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobierz aktualny setpoint. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr class="memitem:a8d17d2b15e3a5fe6dfa8d5f6b9512597" id="r_a8d17d2b15e3a5fe6dfa8d5f6b9512597"><td class="memItemLeft"><a id="a8d17d2b15e3a5fe6dfa8d5f6b9512597" name="a8d17d2b15e3a5fe6dfa8d5f6b9512597"></a>
+arm_pid_instance_f32&#160;</td><td class="memItemRight"><b>pid_heat</b></td></tr>
+<tr class="memitem:a3e783fdd7f7536ecc5f30a5075d4bdac" id="r_a3e783fdd7f7536ecc5f30a5075d4bdac"><td class="memItemLeft"><a id="a3e783fdd7f7536ecc5f30a5075d4bdac" name="a3e783fdd7f7536ecc5f30a5075d4bdac"></a>
+arm_pid_instance_f32&#160;</td><td class="memItemRight"><b>pid_cool</b></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Regulator PID temperatury. </p>
+<dl class="section author"><dt>Autor</dt><dd>00ary </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>2026-02-01 </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji</h2>
+<a id="a1253cbfe4f4d878bceaa1aad9f46c318" name="a1253cbfe4f4d878bceaa1aad9f46c318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1253cbfe4f4d878bceaa1aad9f46c318">&#9670;&#160;</a></span>Temperature_Control_SetFanPWM()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Temperature_Control_SetFanPWM </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>pwm</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ręczne ustawienie PWM wentylatora (override). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pwm</td><td>Wartość PWM [0-999] </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae7db9a0aeca973149ece62b383bfbc3d" name="ae7db9a0aeca973149ece62b383bfbc3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7db9a0aeca973149ece62b383bfbc3d">&#9670;&#160;</a></span>Temperature_Control_SetTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Temperature_Control_SetTarget </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>target_temp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ustawienie temperatury zadanej. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">target_temp</td><td>Temperatura zadana [°C] </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaebf3c30971f2d15dbdcd025ef33d8f3" name="aaebf3c30971f2d15dbdcd025ef33d8f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaebf3c30971f2d15dbdcd025ef33d8f3">&#9670;&#160;</a></span>Temperature_Control_Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Temperature_Control_Update </td>
+          <td>(</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>current_temp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Aktualizacja regulatora (wywoływać co 500ms). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">current_temp</td><td>Aktualna temperatura [°C] </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>PWM grzałki [0-999] </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Components</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="_p_i_d__controller_8h.html">PID_controller.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

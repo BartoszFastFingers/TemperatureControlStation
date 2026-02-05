@@ -256,14 +256,11 @@ class TemperatureMonitor(QMainWindow):
         conn_layout.addStretch()
         main_layout.addWidget(conn_group)
         
-        # ===== Środkowy panel - dane i sterowanie =====
         middle_layout = QHBoxLayout()
         
-        # --- Wyświetlanie temperatury ---
         temp_group = QGroupBox("Temperatura")
         temp_layout = QGridLayout(temp_group)
         
-        # Aktualna temperatura - duża czcionka
         self.temp_label = QLabel("--.-")
         self.temp_label.setFont(QFont("Arial", 48, QFont.Weight.Bold))
         self.temp_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -272,7 +269,6 @@ class TemperatureMonitor(QMainWindow):
         
         temp_layout.addWidget(QLabel("°C"), 0, 2)
         
-        # Setpoint
         temp_layout.addWidget(QLabel("Setpoint:"), 1, 0)
         self.setpoint_display = QLabel("--.- °C")
         self.setpoint_display.setFont(QFont("Arial", 14))
@@ -303,7 +299,6 @@ class TemperatureMonitor(QMainWindow):
         self.set_temp_btn.setEnabled(False)
         control_layout.addWidget(self.set_temp_btn, 0, 2)
         
-        # Start/Stop
         self.start_btn = QPushButton("START")
         self.start_btn.clicked.connect(self.send_start)
         self.start_btn.setEnabled(False)
@@ -318,7 +313,6 @@ class TemperatureMonitor(QMainWindow):
         
         middle_layout.addWidget(control_group)
         
-        # --- PWM Status ---
         pwm_group = QGroupBox("Status PWM")
         pwm_layout = QGridLayout(pwm_group)
         
@@ -426,14 +420,12 @@ class TemperatureMonitor(QMainWindow):
     
     def on_data_received(self, temp: float, setpoint: float, heater: int, fan: int, timestamp: int):
         """Obsługa odebranych danych"""
-        # Aktualizuj wyświetlacze
         self.temp_label.setText(f"{temp:.1f}")
         self.setpoint_display.setText(f"{setpoint:.1f} °C")
         
         error = setpoint - temp
         self.error_display.setText(f"{error:+.2f} °C")
         
-        # Kolor błędu
         if abs(error) < 0.5:
             self.error_display.setStyleSheet("color: #00AA00;")  # Zielony
         elif error > 0:
@@ -441,7 +433,6 @@ class TemperatureMonitor(QMainWindow):
         else:
             self.error_display.setStyleSheet("color: #AA0000;")  # Czerwony (za ciepło)
         
-        # Kolor temperatury
         if abs(error) < 1.0:
             self.temp_label.setStyleSheet("color: #00AA00;")
         else:
@@ -459,7 +450,6 @@ class TemperatureMonitor(QMainWindow):
         self.heater_data.append(heater)
         self.fan_data.append(fan)
         
-        # Aktualizuj wykresy
         if len(self.time_data) > 1:
             time_arr = np.array(self.time_data)
             time_arr = time_arr - time_arr[0]  # Względny czas
@@ -501,7 +491,6 @@ class TemperatureMonitor(QMainWindow):
         event.accept()
 
 
-# ============ MAIN ============
 
 def main():
     app = QApplication(sys.argv)

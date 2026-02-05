@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Plik źródłowy Components/Inc/pid_lookup.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('pid__lookup_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">pid_lookup.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="pid__lookup_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef PID_LOOKUP_H</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define PID_LOOKUP_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;arm_math.h&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define NUM_OPERATING_POINTS 3</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define IDW_POWER            2.0f</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define PID_SAMPLE_TIME_S    1.0f  </span><span class="comment">// Dostosuj do swojego Ts!</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#define PWM_MAX              999   </span><span class="comment">// Maksymalna wartość PWM</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid__lookup_8h.html#ada274dba31454c7704f40636cb9d3bc4">PID_Interpolate</a>(uint16_t heater_pwm, uint16_t fan_pwm, </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>                     arm_pid_instance_f32 *pid, uint8_t reset_state);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid__lookup_8h.html#afaa51912936d5f9b4e86e793fe90c92a">PID_Init</a>(uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keywordtype">void</span> <a class="code hl_function" href="pid__lookup_8h.html#ae01268ecad1c353e831bc2a6083ad767">PID_GetNearest</a>(uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">// PID_LOOKUP_H</span></div>
+<div class="ttc" id="apid__lookup_8h_html_ada274dba31454c7704f40636cb9d3bc4"><div class="ttname"><a href="pid__lookup_8h.html#ada274dba31454c7704f40636cb9d3bc4">PID_Interpolate</a></div><div class="ttdeci">void PID_Interpolate(uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid, uint8_t reset_state)</div><div class="ttdoc">Interpoluje parametry PID i aktualizuje instancję CMSIS-DSP.</div><div class="ttdef"><b>Definicja</b> pid_lookup.c:103</div></div>
+<div class="ttc" id="apid__lookup_8h_html_ae01268ecad1c353e831bc2a6083ad767"><div class="ttname"><a href="pid__lookup_8h.html#ae01268ecad1c353e831bc2a6083ad767">PID_GetNearest</a></div><div class="ttdeci">void PID_GetNearest(uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid)</div><div class="ttdoc">Zwraca parametry dla najbliższego punktu (bez interpolacji).</div><div class="ttdef"><b>Definicja</b> pid_lookup.c:111</div></div>
+<div class="ttc" id="apid__lookup_8h_html_afaa51912936d5f9b4e86e793fe90c92a"><div class="ttname"><a href="pid__lookup_8h.html#afaa51912936d5f9b4e86e793fe90c92a">PID_Init</a></div><div class="ttdeci">void PID_Init(uint16_t heater_pwm, uint16_t fan_pwm, arm_pid_instance_f32 *pid)</div><div class="ttdoc">Inicjalizuje PID dla danego punktu pracy.</div><div class="ttdef"><b>Definicja</b> pid_lookup.c:96</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Components</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="pid__lookup_8h.html">pid_lookup.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

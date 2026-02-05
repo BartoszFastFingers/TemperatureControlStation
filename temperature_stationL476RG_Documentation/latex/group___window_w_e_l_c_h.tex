@@ -1,0 +1,79 @@
+\doxysubsubsection{Welch window function (21.\+3 dB) }
+\hypertarget{group___window_w_e_l_c_h}{}\label{group___window_w_e_l_c_h}\index{Welch window function (21.3 dB)@{Welch window function (21.3 dB)}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___window_w_e_l_c_h_ga3c9d8d13b3434a2bc5882ac12892151d}{arm\+\_\+welch\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Welch window generating function (f32). \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___window_w_e_l_c_h_ga6913b5e0bce345b52b8245dad24fdb6c}{arm\+\_\+welch\+\_\+f64}} (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Welch window generating function (f64). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___window_w_e_l_c_h_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___window_w_e_l_c_h_ga3c9d8d13b3434a2bc5882ac12892151d}\index{Welch window function (21.3 dB)@{Welch window function (21.3 dB)}!arm\_welch\_f32@{arm\_welch\_f32}}
+\index{arm\_welch\_f32@{arm\_welch\_f32}!Welch window function (21.3 dB)@{Welch window function (21.3 dB)}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_welch\_f32()}{arm\_welch\_f32()}}
+{\footnotesize\ttfamily \label{group___window_w_e_l_c_h_ga3c9d8d13b3434a2bc5882ac12892151d} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+welch\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Welch window generating function (f32). 
+
+Welch window (float).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output generated window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Parameters of the window}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+\SetCell{r}Peak sidelobe level  &\SetCell{r}21.\+3 dB  \\
+\SetCell{r}Normalized equivalent noise bandwidth  &\SetCell{r}1.\+2 bins  \\
+\SetCell{r}3 dB bandwidth  &\SetCell{r}1.\+1535 bins  \\
+\SetCell{r}Flatness  &\SetCell{r}-\/2.\+2248 dB  \\
+\SetCell{r}Recommended overlap  &\SetCell{r}29.\+3 \%  \\
+\end{DoxyTable}
+\Hypertarget{group___window_w_e_l_c_h_ga6913b5e0bce345b52b8245dad24fdb6c}\index{Welch window function (21.3 dB)@{Welch window function (21.3 dB)}!arm\_welch\_f64@{arm\_welch\_f64}}
+\index{arm\_welch\_f64@{arm\_welch\_f64}!Welch window function (21.3 dB)@{Welch window function (21.3 dB)}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_welch\_f64()}{arm\_welch\_f64()}}
+{\footnotesize\ttfamily \label{group___window_w_e_l_c_h_ga6913b5e0bce345b52b8245dad24fdb6c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+welch\+\_\+f64 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Welch window generating function (f64). 
+
+Welch window (double).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output generated window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Parameters of the window}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+\SetCell{r}Peak sidelobe level  &\SetCell{r}21.\+3 dB  \\
+\SetCell{r}Normalized equivalent noise bandwidth  &\SetCell{r}1.\+2 bins  \\
+\SetCell{r}3 dB bandwidth  &\SetCell{r}1.\+1535 bins  \\
+\SetCell{r}Flatness  &\SetCell{r}-\/2.\+2248 dB  \\
+\SetCell{r}Recommended overlap  &\SetCell{r}29.\+3 \%  \\
+\end{DoxyTable}

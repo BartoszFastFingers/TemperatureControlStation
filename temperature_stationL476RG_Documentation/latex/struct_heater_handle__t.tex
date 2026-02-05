@@ -1,0 +1,51 @@
+\doxysection{Dokumentacja struktury Heater\+Handle\+\_\+t}
+\hypertarget{struct_heater_handle__t}{}\label{struct_heater_handle__t}\index{HeaterHandle\_t@{HeaterHandle\_t}}
+
+
+Struktura reprezentująca grzałkę sterowaną PWM.  
+
+
+
+
+{\ttfamily \+\#include $<$heater\+\_\+control.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_heater_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486}{htim}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{struct_heater_handle__t_a0c72dd5e18823aef187a34137983c9a6}{channel}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{struct_heater_handle__t_a5decc13fa9ec8b70efdf84da7faa88f1}{current\+\_\+power}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura reprezentująca grzałkę sterowaną PWM. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_heater_handle__t_doc-variable-members}
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_heater_handle__t_a0c72dd5e18823aef187a34137983c9a6}\index{HeaterHandle\_t@{HeaterHandle\_t}!channel@{channel}}
+\index{channel@{channel}!HeaterHandle\_t@{HeaterHandle\_t}}
+\doxysubsubsection{\texorpdfstring{channel}{channel}}
+{\footnotesize\ttfamily \label{struct_heater_handle__t_a0c72dd5e18823aef187a34137983c9a6} 
+uint32\+\_\+t channel}
+
+Kanał timera dla PWM \Hypertarget{struct_heater_handle__t_a5decc13fa9ec8b70efdf84da7faa88f1}\index{HeaterHandle\_t@{HeaterHandle\_t}!current\_power@{current\_power}}
+\index{current\_power@{current\_power}!HeaterHandle\_t@{HeaterHandle\_t}}
+\doxysubsubsection{\texorpdfstring{current\_power}{current\_power}}
+{\footnotesize\ttfamily \label{struct_heater_handle__t_a5decc13fa9ec8b70efdf84da7faa88f1} 
+uint16\+\_\+t current\+\_\+power}
+
+Aktualna moc grzałki (0-\/999) \Hypertarget{struct_heater_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486}\index{HeaterHandle\_t@{HeaterHandle\_t}!htim@{htim}}
+\index{htim@{htim}!HeaterHandle\_t@{HeaterHandle\_t}}
+\doxysubsubsection{\texorpdfstring{htim}{htim}}
+{\footnotesize\ttfamily \label{struct_heater_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486} 
+TIM\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} htim}
+
+Wskaźnik na strukturę timera STM32 używanego do PWM 
+
+Dokumentacja dla tej struktury została wygenerowana z pliku:\+\begin{DoxyCompactItemize}
+\item 
+Core/\+\+Inc/\+\doxymbox{\hyperlink{heater__control_8h}{heater\+\_\+control.\+h}}\end{DoxyCompactItemize}

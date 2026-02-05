@@ -1,0 +1,91 @@
+\doxysection{Matrix Functions }
+\hypertarget{group__group_matrix}{}\label{group__group_matrix}\index{Matrix Functions@{Matrix Functions}}
+\doxysubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___matrix_householder}{Householder transform of a vector}}
+\item 
+\doxymbox{\hyperlink{group___matrix_add}{Matrix Addition}}
+\item 
+\doxymbox{\hyperlink{group___matrix_chol}{Cholesky and LDLT decompositions}}
+\item 
+\doxymbox{\hyperlink{group___cmplx_matrix_mult}{Complex Matrix Multiplication}}
+\item 
+\doxymbox{\hyperlink{group___matrix_complex_trans}{Complex Matrix Transpose}}
+\item 
+\doxymbox{\hyperlink{group___matrix_init}{Matrix Initialization}}
+\item 
+\doxymbox{\hyperlink{group___matrix_inv}{Matrix Inverse}}
+\item 
+\doxymbox{\hyperlink{group___matrix_mult}{Matrix Multiplication}}
+\item 
+\doxymbox{\hyperlink{group___matrix_q_r}{QR decomposition of a Matrix}}
+\item 
+\doxymbox{\hyperlink{group___matrix_scale}{Matrix Scale}}
+\item 
+\doxymbox{\hyperlink{group___matrix_sub}{Matrix Subtraction}}
+\item 
+\doxymbox{\hyperlink{group___matrix_trans}{Matrix Transpose}}
+\item 
+\doxymbox{\hyperlink{group___matrix_vect_mult}{Matrix Vector Multiplication}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This set of functions provides basic matrix math operations. The functions operate on matrix data structures. For example, the type definition for the floating-\/point matrix structure is shown below:\+ 
+\begin{DoxyPre}
+    typedef struct
+    \{
+      uint16\_t numRows;     // number of rows of the matrix.
+      uint16\_t numCols;     // number of columns of the matrix.
+      \doxylink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t} *pData;     // points to the data of the matrix.
+    \} \doxylink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32};
+\end{DoxyPre}
+ There are similar definitions for Q15 and Q31 data types.
+
+The structure specifies the size of the matrix and then points to an array of data. The array is of size {\ttfamily num\+Rows X num\+Cols} and the values are arranged in row order. That is, the matrix element (i, j) is stored at:\+ 
+\begin{DoxyPre}
+    pData[i*numCols + j]
+\end{DoxyPre}
+
+
+\begin{DoxyParagraph}{Init Functions}
+There is an associated initialization function for each type of matrix data structure. The initialization function sets the values of the internal structure fields. Refer to \doxylink{group___matrix_init_ga750a582d71f582c699207c2743e127d3}{arm\+\_\+mat\+\_\+init\+\_\+f32()}, \doxylink{group___matrix_init_gad865daa574c1ac8f69d21b2124c59ea4}{arm\+\_\+mat\+\_\+init\+\_\+q31()} and \doxylink{group___matrix_init_ga4d0c635ae70b3a26230c31b943b4d26a}{arm\+\_\+mat\+\_\+init\+\_\+q15()} for floating-\/point, Q31 and Q15 types, respectively.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Use of the initialization function is optional. However, if initialization function is used then the instance structure cannot be placed into a const data section. To place the instance structure in a const data section, manually initialize the data structure. For example:\+ 
+\begin{DoxyPre}
+{\ttfamily \doxylink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32} S = \{nRows, nColumns, pData\};}
+{\ttfamily \doxylink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31} S = \{nRows, nColumns, pData\};}
+{\ttfamily \doxylink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15} S = \{nRows, nColumns, pData\};}
+\end{DoxyPre}
+ where {\ttfamily n\+Rows} specifies the number of rows, {\ttfamily n\+Columns} specifies the number of columns, and {\ttfamily p\+Data} points to the data array.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Size Checking}
+By default all of the matrix functions perform size checking on the input and output matrices. For example, the matrix addition function verifies that the two input matrices and the output matrix all have the same number of rows and columns. If the size check fails the functions return:\+ 
+\begin{DoxyPre}
+    ARM\_MATH\_SIZE\_MISMATCH
+\end{DoxyPre}
+ Otherwise the functions return 
+\begin{DoxyPre}
+    ARM\_MATH\_SUCCESS
+\end{DoxyPre}
+ There is some overhead associated with this matrix size checking. The matrix size checking is enabled via the \#define 
+\begin{DoxyPre}
+    ARM\_MATH\_MATRIX\_CHECK
+\end{DoxyPre}
+ within the library project settings. By default this macro is defined and size checking is enabled. By changing the project settings and undefining this macro size checking is eliminated and the functions run a bit faster. With size checking disabled the functions always return {\ttfamily ARM\+\_\+\+MATH\+\_\+\+SUCCESS}. 
+\end{DoxyParagraph}
+\input{group___matrix_householder}
+\input{group___matrix_add}
+\input{group___matrix_chol}
+\input{group___cmplx_matrix_mult}
+\input{group___matrix_complex_trans}
+\input{group___matrix_init}
+\input{group___matrix_inv}
+\input{group___matrix_mult}
+\input{group___matrix_q_r}
+\input{group___matrix_scale}
+\input{group___matrix_sub}
+\input{group___matrix_trans}
+\input{group___matrix_vect_mult}

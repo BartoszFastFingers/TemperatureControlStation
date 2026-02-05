@@ -1,0 +1,256 @@
+\documentclass{article}
+\usepackage{iftex}
+\usepackage{ifthen}
+\usepackage{epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage{xcolor}
+\color{white}
+\pagecolor{black}
+\ifPDFTeX
+\usepackage{newunicodechar}
+  \makeatletter
+    \def\doxynewunicodechar#1#2{%
+    \@tempswafalse
+    \edef\nuc@tempa{\detokenize{#1}}%
+    \if\relax\nuc@tempa\relax
+      \nuc@emptyargerr
+    \else
+      \edef\@tempb{\expandafter\@car\nuc@tempa\@nil}%
+      \nuc@check
+      \if@tempswa
+        \@namedef{u8:\nuc@tempa}{#2}%
+      \fi
+    \fi
+  }
+  \makeatother
+  \doxynewunicodechar{⁻}{${}^{-}$}% Superscript minus
+  \doxynewunicodechar{²}{${}^{2}$}% Superscript two
+  \doxynewunicodechar{³}{${}^{3}$}% Superscript three
+
+\fi
+\pagestyle{empty}
+\begin{document}
+\[                     c[n] = a[n] * b[n]
+\]
+\pagebreak
+
+\[                  c[n] = \sum_{k=0}^{srcALen} a[k] b[n-k]
+\]
+\pagebreak
+
+\[                     a[n] * b[n] = b[n] * a[n].
+\]
+\pagebreak
+
+\[                 c[n] = a[n] * b[n]
+\]
+\pagebreak
+
+\[                 c[n] = a[n] * b[-n]
+\]
+\pagebreak
+
+\[                 c[n] = \sum_{k=0}^{srcALen} a[k] b[k-n]
+\]
+\pagebreak
+
+\[      v_0 = 1
+\]
+\pagebreak
+
+$\beta$
+\pagebreak
+
+\[  P = I - \beta v v^T 
+\]
+\pagebreak
+
+\[  P x = ||x||_2 e_1
+\]
+\pagebreak
+
+$e_1$
+\pagebreak
+
+\[  \begin{pmatrix}
+      1       \\
+      0       \\
+      \vdots  \\
+  \end{pmatrix}
+\]
+\pagebreak
+
+\[  x =
+  \begin{pmatrix}
+      x_0     \\
+      xr      \\
+  \end{pmatrix}
+\]
+\pagebreak
+
+$xr$
+\pagebreak
+
+\[      ||xr||^2
+\]
+\pagebreak
+
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} \\
+ a_{2,1} & a_{2,2} & a_{2,3} \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}
++
+\begin{pmatrix}
+ b_{1,1} & b_{1,2} & b_{1,3} \\
+ b_{2,1} & b_{2,2} & b_{2,3} \\
+ b_{3,1} & b_{3,2} & b_{3,3} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+ a_{1,1}+b_{1,1} & a_{1,2}+b_{1,2} & a_{1,3}+b_{1,3} \\
+ a_{2,1}+b_{2,1} & a_{2,2}+b_{2,2} & a_{2,3}+b_{2,3} \\
+ a_{3,1}+b_{3,1} & a_{3,2}+b_{3,2} & a_{3,3}+b_{3,3} \\
+\end{pmatrix}
+\]
+\pagebreak
+
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} \\
+ a_{2,1} & a_{2,2} & a_{2,3} \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}^T
+ =
+\begin{pmatrix}
+ a_{1,1} & a_{2,1} & a_{3,1} \\
+ a_{1,2} & a_{2,2} & a_{3,2} \\
+ a_{1,3} & a_{2,3} & a_{3,3} \\
+\end{pmatrix}
+\]
+\pagebreak
+
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} & | & 1 & 0 & 0\\
+ a_{2,1} & a_{2,2} & a_{2,3} & | & 0 & 1 & 0\\
+ a_{3,1} & a_{3,2} & a_{3,3} & | & 0 & 0 & 1\\
+\end{pmatrix}
+\rightarrow
+\begin{pmatrix}
+ 1 & 0 & 0 & | & x_{1,1} & x_{2,1} & x_{3,1} \\
+ 0 & 1 & 0 & | & x_{1,2} & x_{2,2} & x_{3,2} \\
+ 0 & 0 & 1 & | & x_{1,3} & x_{2,3} & x_{3,3} \\
+\end{pmatrix}
+\]
+\pagebreak
+
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} \\
+ a_{2,1} & a_{2,2} & a_{2,3} \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}
+
+\begin{pmatrix}
+ b_{1,1} & b_{1,2} & b_{1,3} \\
+ b_{2,1} & b_{2,2} & b_{2,3} \\
+ b_{3,1} & b_{3,2} & b_{3,3} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+ a_{1,1} b_{1,1}+a_{1,2} b_{2,1}+a_{1,3} b_{3,1} & a_{1,1} b_{1,2}+a_{1,2} b_{2,2}+a_{1,3} b_{3,2} & a_{1,1} b_{1,3}+a_{1,2} b_{2,3}+a_{1,3} b_{3,3} \\
+ a_{2,1} b_{1,1}+a_{2,2} b_{2,1}+a_{2,3} b_{3,1} & a_{2,1} b_{1,2}+a_{2,2} b_{2,2}+a_{2,3} b_{3,2} & a_{2,1} b_{1,3}+a_{2,2} b_{2,3}+a_{2,3} b_{3,3} \\
+ a_{3,1} b_{1,1}+a_{3,2} b_{2,1}+a_{3,3} b_{3,1} & a_{3,1} b_{1,2}+a_{3,2} b_{2,2}+a_{3,3} b_{3,2} & a_{3,1} b_{1,3}+a_{3,2} b_{2,3}+a_{3,3} b_{3,3} \\
+\end{pmatrix}
+\]
+\pagebreak
+
+\[      M = Q R
+\]
+\pagebreak
+
+$\tau$
+\pagebreak
+
+\[  \begin{pmatrix}
+  r_{11} & r_{12}     & \dots  & r_{1n} \\
+  v_{12} & r_{22}     & \dots  & r_{2n} \\
+  v_{13} & v_{22}     & \dots  & r_{3n} \\
+  \vdots & \vdots     & \ddots & \vdots   \\
+  v_{1m} & v_{2(m-1)} & \dots  & r_{mn} \\
+  \end{pmatrix}
+\]
+\pagebreak
+
+\[  v_1 = 
+  \begin{pmatrix}
+  1       \\
+  v_{12}  \\
+  \vdots  \\
+  v_{1m}  \\
+  \end{pmatrix}
+\]
+\pagebreak
+
+$H_1$
+\pagebreak
+
+\[  H_1 = I - \tau_1 v_1 v_1^T
+\]
+\pagebreak
+
+\[  Q = H_1 H_2 \dots H_n
+\]
+\pagebreak
+
+\[  \begin{pmatrix}
+  r_{11} & r_{12} & \dots  & r_{1n} \\
+  0      & r_{22} & \dots  & r_{2n} \\
+  0      & 0      & \dots  & r_{3n} \\
+  \vdots & \vdots & \ddots & \vdots   \\
+  0      & 0      & \dots  & r_{mn} \\
+  \end{pmatrix}
+\]
+\pagebreak
+
+\[\begin{pmatrix}
+a_{1,1} & a_{1,2} & a_{1,3} \\
+a_{2,1} & a_{2,2} & a_{2,3} \\
+a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}
+  K = 
+\begin{pmatrix}
+ K a_{1,1} & K a_{1,2} & K a_{1,3} \\
+ K a_{2,1} & K a_{2,2} & K a_{2,3} \\
+ K a_{3,1} & K a_{3,2} & K a_{3,3} \\
+\end{pmatrix}
+\]
+\pagebreak
+
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} \\
+ a_{2,1} & a_{2,2} & a_{2,3} \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}
+-
+\begin{pmatrix}
+ b_{1,1} & b_{1,2} & b_{1,3} \\
+ b_{2,1} & b_{2,2} & b_{2,3} \\
+ b_{3,1} & b_{3,2} & b_{3,3} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+ a_{1,1}-b_{1,1} & a_{1,2}-b_{1,2} & a_{1,3}-b_{1,3} \\
+ a_{2,1}-b_{2,1} & a_{2,2}-b_{2,2} & a_{2,3}-b_{2,3} \\
+ a_{3,1}-b_{3,1} & a_{3,2}-b_{3,2} & a_{3,3}-b_{3,3} \\
+\end{pmatrix}
+\]
+\pagebreak
+
+\[                 X_c(k) = \sqrt{\frac{2}{N}}\sum_{n=0}^{N-1} x(n)cos\Big[\Big(n+\frac{1}{2}\Big)\Big(k+\frac{1}{2}\Big)\frac{\pi}{N}\Big]
+\]
+\pagebreak
+
+\[                 x(n) = \sqrt{\frac{2}{N}}\sum_{k=0}^{N-1} X_c(k)cos\Big[\Big(n+\frac{1}{2}\Big)\Big(k+\frac{1}{2}\Big)\frac{\pi}{N}\Big]
+\]
+\pagebreak
+
+\end{document}

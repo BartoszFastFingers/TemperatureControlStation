@@ -1,0 +1,371 @@
+\doxysection{matrix\+\_\+functions.\+h}
+\hypertarget{matrix__functions_8h_source}{}\label{matrix__functions_8h_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Include/dsp/matrix\_functions.h@{Middlewares/Third\_Party/ARM\_CMSIS/Include/dsp/matrix\_functions.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ @file\ \ \ \ \ matrix\_functions.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ @brief\ \ \ \ Public\ header\ file\ for\ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ @version\ \ V1.10.1}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ @date\ \ \ \ \ 10\ August\ 2022}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2010-\/2020\ Arm\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#ifndef\ MATRIX\_FUNCTIONS\_H\_}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ MATRIX\_FUNCTIONS\_H\_}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_types.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_memory.h"{}}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}dsp/none.h"{}}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}dsp/utils.h"{}}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \#define\ DEFAULT\_HOUSEHOLDER\_THRESHOLD\_F64\ (1.0e-\/16)}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\ \ \#define\ DEFAULT\_HOUSEHOLDER\_THRESHOLD\_F32\ (1.0e-\/12f)}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00119\ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};\ \ \ \ \ }
+\DoxyCodeLine{00121\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ \ \ \ \ }
+\DoxyCodeLine{00122\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ }
+\DoxyCodeLine{00123\ \ \ \}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}};}
+\DoxyCodeLine{00124\ \ }
+\DoxyCodeLine{00128\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00129\ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__f64_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};\ \ \ \ \ }
+\DoxyCodeLine{00131\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__f64_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ \ \ \ \ }
+\DoxyCodeLine{00132\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\doxymbox{\hyperlink{structarm__matrix__instance__f64_aa7a4c9839c31e933360ef3a3167b9877}{pData}};\ \ \ \ \ }
+\DoxyCodeLine{00133\ \ \ \}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00138\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00139\ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__q7_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};\ \ \ \ \ }
+\DoxyCodeLine{00141\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__q7_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ \ \ \ \ }
+\DoxyCodeLine{00142\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\_t}}\ *\doxymbox{\hyperlink{structarm__matrix__instance__q7_afde7546ea2ec5df9fe42fb04d128a016}{pData}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \}\ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00148\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00149\ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__q15_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};\ \ \ \ \ }
+\DoxyCodeLine{00151\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__q15_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ \ \ \ \ }
+\DoxyCodeLine{00152\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\doxymbox{\hyperlink{structarm__matrix__instance__q15_a817ede38365e63e561a12069c6c5c087}{pData}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00153\ \ \ \}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}};}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00159\ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__q31_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};\ \ \ \ \ }
+\DoxyCodeLine{00161\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{structarm__matrix__instance__q31_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};\ \ \ \ \ }
+\DoxyCodeLine{00162\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\doxymbox{\hyperlink{structarm__matrix__instance__q31_ad296f76577326ff280726323536eed6d}{pData}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00163\ \ \ \}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00173\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_add_ga23d257b4c1ff96bd26bf903286eb4f8c}{arm\_mat\_add\_f32}}(}
+\DoxyCodeLine{00174\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00175\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00186\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_add_ga8e7d520f25ea6e7691846e4a75a11ce6}{arm\_mat\_add\_q15}}(}
+\DoxyCodeLine{00187\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcA,}
+\DoxyCodeLine{00188\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcB,}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00199\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_add_ga4edb43ea3b77114bfe9ac4e9cac2b220}{arm\_mat\_add\_q31}}(}
+\DoxyCodeLine{00200\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcA,}
+\DoxyCodeLine{00201\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcB,}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00212\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___cmplx_matrix_mult_gaa7b84125ca6ff27d6579a0ace77b646c}{arm\_mat\_cmplx\_mult\_f32}}(}
+\DoxyCodeLine{00213\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00214\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00225\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___cmplx_matrix_mult_ga0fddbb38441889ffc387a7c53ac29e9e}{arm\_mat\_cmplx\_mult\_q15}}(}
+\DoxyCodeLine{00226\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcA,}
+\DoxyCodeLine{00227\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcB,}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst,}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pScratch);}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00239\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___cmplx_matrix_mult_ga8f8645ae5fec2dbe686ab10f565dcd35}{arm\_mat\_cmplx\_mult\_q31}}(}
+\DoxyCodeLine{00240\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcA,}
+\DoxyCodeLine{00241\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcB,}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00251\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_trans_gac79f5fd8d276ac43bcbdc1dcf2029196}{arm\_mat\_trans\_f32}}(}
+\DoxyCodeLine{00252\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00262\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_trans_gae28b12fba3bed9e4fd28a38c7e2331b8}{arm\_mat\_trans\_f64}}(}
+\DoxyCodeLine{00263\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrc,}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pDst);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00273\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_complex_trans_gae00c720ff004743534cba368d35c1dc8}{arm\_mat\_cmplx\_trans\_f32}}(}
+\DoxyCodeLine{00274\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00275\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00285\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_trans_ga51de7e4205aea17bdd223df06513ecb2}{arm\_mat\_trans\_q15}}(}
+\DoxyCodeLine{00286\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrc,}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst);}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00296\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_complex_trans_gaa11b1e31cf992c5d1df649b051f219e5}{arm\_mat\_cmplx\_trans\_q15}}(}
+\DoxyCodeLine{00297\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrc,}
+\DoxyCodeLine{00298\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst);}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00307\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_trans_ga67c46bddc27e8afffb7a818b4c7831a3}{arm\_mat\_trans\_q7}}(}
+\DoxyCodeLine{00308\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *\ pSrc,}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *\ pDst);}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00318\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_trans_ga3d353e7c71c3d93636d4216d7f1100f5}{arm\_mat\_trans\_q31}}(}
+\DoxyCodeLine{00319\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrc,}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00329\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_complex_trans_ga25ffe9e0812194bd9636ea1af6f02887}{arm\_mat\_cmplx\_trans\_q31}}(}
+\DoxyCodeLine{00330\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrc,}
+\DoxyCodeLine{00331\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00341\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_gaf108a0beeafd4575054d677603e12203}{arm\_mat\_mult\_f32}}(}
+\DoxyCodeLine{00342\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00343\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00354\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga598af1b0bfc9267ba1b8a9688b4cee98}{arm\_mat\_mult\_f64}}(}
+\DoxyCodeLine{00355\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrcA,}
+\DoxyCodeLine{00356\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrcB,}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pDst);}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00365\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_vect_mult_ga4085350742627b41453e92b991b64f8a}{arm\_mat\_vec\_mult\_f32}}(}
+\DoxyCodeLine{00366\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *pSrcMat,\ }
+\DoxyCodeLine{00367\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pVec,\ }
+\DoxyCodeLine{00368\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pDst);}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00379\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga46f1d125b2e3c4ce9294417800444347}{arm\_mat\_mult\_q7}}(}
+\DoxyCodeLine{00380\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *\ pSrcA,}
+\DoxyCodeLine{00381\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *\ pSrcB,}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *\ pDst,}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\_t}}\ *\ pState);}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00391\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_vect_mult_ga69e150455527170179572d199c061d93}{arm\_mat\_vec\_mult\_q7}}(}
+\DoxyCodeLine{00392\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *pSrcMat,\ }
+\DoxyCodeLine{00393\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\_t}}\ *pVec,\ }
+\DoxyCodeLine{00394\ \ \ \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\_t}}\ *pDst);}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00405\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga1d9a293db40e98ba07a6198784a0d1e7}{arm\_mat\_mult\_q15}}(}
+\DoxyCodeLine{00406\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcA,}
+\DoxyCodeLine{00407\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcB,}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst,}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pState);}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00417\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_vect_mult_gae236e4aada80639338a7dadcd9a33d58}{arm\_mat\_vec\_mult\_q15}}(}
+\DoxyCodeLine{00418\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *pSrcMat,\ }
+\DoxyCodeLine{00419\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *pVec,\ }
+\DoxyCodeLine{00420\ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *pDst);}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00431\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga593d61ec4750f34f618b5cdf322229f4}{arm\_mat\_mult\_fast\_q15}}(}
+\DoxyCodeLine{00432\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcA,}
+\DoxyCodeLine{00433\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcB,}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst,}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pState);}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00445\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga314ad66bb959a5bd12f9633c289df8aa}{arm\_mat\_mult\_q31}}(}
+\DoxyCodeLine{00446\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcA,}
+\DoxyCodeLine{00447\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcB,}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00449\ }
+\DoxyCodeLine{00459\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga5acafca3979e4aaae0bd8c84778a1586}{arm\_mat\_mult\_opt\_q31}}(}
+\DoxyCodeLine{00460\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcA,}
+\DoxyCodeLine{00461\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcB,}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst,}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pState);}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00471\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_vect_mult_ga13b69ec7eeaf7850500375eb7408b4a7}{arm\_mat\_vec\_mult\_q31}}(}
+\DoxyCodeLine{00472\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *pSrcMat,\ }
+\DoxyCodeLine{00473\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pVec,\ }
+\DoxyCodeLine{00474\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pDst);}
+\DoxyCodeLine{00475\ }
+\DoxyCodeLine{00484\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_mult_ga31fe3acd1dfd9672390c9b1e64525808}{arm\_mat\_mult\_fast\_q31}}(}
+\DoxyCodeLine{00485\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcA,}
+\DoxyCodeLine{00486\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcB,}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00497\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_sub_gab8a2573dce05775f12ef9cb619dba84e}{arm\_mat\_sub\_f32}}(}
+\DoxyCodeLine{00498\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00499\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00510\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_sub_ga41a972a84c8eb7da1c51d3c8de54ce03}{arm\_mat\_sub\_f64}}(}
+\DoxyCodeLine{00511\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrcA,}
+\DoxyCodeLine{00512\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrcB,}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pDst);}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00523\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_sub_ga12d981ce7bbe4b9a37237b36c30fd7cb}{arm\_mat\_sub\_q15}}(}
+\DoxyCodeLine{00524\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcA,}
+\DoxyCodeLine{00525\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrcB,}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst);}
+\DoxyCodeLine{00527\ }
+\DoxyCodeLine{00536\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_sub_gadf947157a70ec11344abdaf8fbf63cf4}{arm\_mat\_sub\_q31}}(}
+\DoxyCodeLine{00537\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcA,}
+\DoxyCodeLine{00538\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrcB,}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00549\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_scale_ga58ac73c4406d441cdd9b85f06d3b2328}{arm\_mat\_scale\_f32}}(}
+\DoxyCodeLine{00550\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ scale,}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst);}
+\DoxyCodeLine{00553\ }
+\DoxyCodeLine{00563\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_scale_gadace9e0311efde63a4f5622bc9b07b27}{arm\_mat\_scale\_q15}}(}
+\DoxyCodeLine{00564\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pSrc,}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ scaleFract,}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ int32\_t\ shift,}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ pDst);}
+\DoxyCodeLine{00568\ }
+\DoxyCodeLine{00578\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_scale_gac150db920c4186b1466026ed0ad29db8}{arm\_mat\_scale\_q31}}(}
+\DoxyCodeLine{00579\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pSrc,}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ scaleFract,}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ int32\_t\ shift,}
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ pDst);}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00591\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_init_gad865daa574c1ac8f69d21b2124c59ea4}{arm\_mat\_init\_q31}}(}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ *\ S,}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ uint16\_t\ nRows,}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ uint16\_t\ nColumns,}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pData);}
+\DoxyCodeLine{00596\ }
+\DoxyCodeLine{00604\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_init_ga4d0c635ae70b3a26230c31b943b4d26a}{arm\_mat\_init\_q15}}(}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\_matrix\_instance\_q15}}\ *\ S,}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ uint16\_t\ nRows,}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ uint16\_t\ nColumns,}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *\ pData);}
+\DoxyCodeLine{00609\ }
+\DoxyCodeLine{00617\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_init_ga750a582d71f582c699207c2743e127d3}{arm\_mat\_init\_f32}}(}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ S,}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ uint16\_t\ nRows,}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ uint16\_t\ nColumns,}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pData);}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00630\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___matrix_init_ga2c6ac166fa9103939784dc7dcc67b114}{arm\_mat\_init\_f64}}(}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ S,}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ uint16\_t\ nRows,}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ uint16\_t\ nColumns,}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pData);}
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00636\ }
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ }
+\DoxyCodeLine{00646\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_inv_ga39a1214739eaf0116209ed1ced5c4da7}{arm\_mat\_inverse\_f32}}(}
+\DoxyCodeLine{00647\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ src,}
+\DoxyCodeLine{00648\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ dst);}
+\DoxyCodeLine{00649\ }
+\DoxyCodeLine{00650\ }
+\DoxyCodeLine{00658\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_inv_ga09508fe33d2a0ab44447fa61c21f8dbe}{arm\_mat\_inverse\_f64}}(}
+\DoxyCodeLine{00659\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ src,}
+\DoxyCodeLine{00660\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ dst);}
+\DoxyCodeLine{00661\ }
+\DoxyCodeLine{00671\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_gaca40ff53d34a13d536875526b87ff588}{arm\_mat\_cholesky\_f64}}(}
+\DoxyCodeLine{00672\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ src,}
+\DoxyCodeLine{00673\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ dst);}
+\DoxyCodeLine{00674\ }
+\DoxyCodeLine{00684\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004}{arm\_mat\_cholesky\_f32}}(}
+\DoxyCodeLine{00685\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ src,}
+\DoxyCodeLine{00686\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ dst);}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00695\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_inv_gadc17a01342ba23538bc7927c732d1284}{arm\_mat\_solve\_upper\_triangular\_f32}}(}
+\DoxyCodeLine{00696\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ ut,}
+\DoxyCodeLine{00697\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ a,}
+\DoxyCodeLine{00698\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ dst);}
+\DoxyCodeLine{00699\ }
+\DoxyCodeLine{00707\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_inv_ga58fa7bf2d93ab84f19037822ede54606}{arm\_mat\_solve\_lower\_triangular\_f32}}(}
+\DoxyCodeLine{00708\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ lt,}
+\DoxyCodeLine{00709\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ a,}
+\DoxyCodeLine{00710\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ dst);}
+\DoxyCodeLine{00711\ }
+\DoxyCodeLine{00712\ }
+\DoxyCodeLine{00720\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_inv_ga9a5c43bd8ef69aa782337f01f883ac23}{arm\_mat\_solve\_upper\_triangular\_f64}}(}
+\DoxyCodeLine{00721\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ ut,}
+\DoxyCodeLine{00722\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ a,}
+\DoxyCodeLine{00723\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ dst);}
+\DoxyCodeLine{00724\ }
+\DoxyCodeLine{00732\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_inv_ga5ea4644bb69e39b91234e1b4f26a3d90}{arm\_mat\_solve\_lower\_triangular\_f64}}(}
+\DoxyCodeLine{00733\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ lt,}
+\DoxyCodeLine{00734\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ a,}
+\DoxyCodeLine{00735\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ dst);}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ }
+\DoxyCodeLine{00748\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_gae760a1cdf75f07172bb7ddd600af62f7}{arm\_mat\_ldlt\_f32}}(}
+\DoxyCodeLine{00749\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ src,}
+\DoxyCodeLine{00750\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ l,}
+\DoxyCodeLine{00751\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ d,}
+\DoxyCodeLine{00752\ \ \ uint16\_t\ *\ pp);}
+\DoxyCodeLine{00753\ }
+\DoxyCodeLine{00764\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_gae753cc1481d506b7d81f26902e14ac96}{arm\_mat\_ldlt\_f64}}(}
+\DoxyCodeLine{00765\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ src,}
+\DoxyCodeLine{00766\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ l,}
+\DoxyCodeLine{00767\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ d,}
+\DoxyCodeLine{00768\ \ \ uint16\_t\ *\ pp);}
+\DoxyCodeLine{00769\ }
+\DoxyCodeLine{00784\ }
+\DoxyCodeLine{00785\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_q_r_ga020173e1b30e288084647dea7259fba4}{arm\_mat\_qr\_f32}}(}
+\DoxyCodeLine{00786\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00787\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ threshold,}
+\DoxyCodeLine{00788\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pOutR,}
+\DoxyCodeLine{00789\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pOutQ,}
+\DoxyCodeLine{00790\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pOutTau,}
+\DoxyCodeLine{00791\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pTmpA,}
+\DoxyCodeLine{00792\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pTmpB}
+\DoxyCodeLine{00793\ \ \ \ \ );}
+\DoxyCodeLine{00794\ }
+\DoxyCodeLine{00809\ }
+\DoxyCodeLine{00810\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_q_r_gaa56b5e49d38a791a3bcca5309fa7feba}{arm\_mat\_qr\_f64}}(}
+\DoxyCodeLine{00811\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pSrc,}
+\DoxyCodeLine{00812\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ threshold,}
+\DoxyCodeLine{00813\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pOutR,}
+\DoxyCodeLine{00814\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\_matrix\_instance\_f64}}\ *\ pOutQ,}
+\DoxyCodeLine{00815\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pOutTau,}
+\DoxyCodeLine{00816\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pTmpA,}
+\DoxyCodeLine{00817\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *pTmpB}
+\DoxyCodeLine{00818\ \ \ \ \ );}
+\DoxyCodeLine{00819\ }
+\DoxyCodeLine{00828\ }
+\DoxyCodeLine{00829\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ \doxymbox{\hyperlink{group___matrix_householder_ga90414f58dc2c669a3e3da94b71d55e93}{arm\_householder\_f32}}(}
+\DoxyCodeLine{00830\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00831\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ threshold,}
+\DoxyCodeLine{00832\ \ \ \ \ uint32\_t\ \ \ \ blockSize,}
+\DoxyCodeLine{00833\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *\ pOut}
+\DoxyCodeLine{00834\ \ \ \ \ );}
+\DoxyCodeLine{00835\ }
+\DoxyCodeLine{00844\ }
+\DoxyCodeLine{00845\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ \doxymbox{\hyperlink{group___matrix_householder_ga4f061148bcbd3aae2714133944568525}{arm\_householder\_f64}}(}
+\DoxyCodeLine{00846\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00847\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ threshold,}
+\DoxyCodeLine{00848\ \ \ \ \ uint32\_t\ \ \ \ blockSize,}
+\DoxyCodeLine{00849\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\_t}}\ *\ pOut}
+\DoxyCodeLine{00850\ \ \ \ \ );}
+\DoxyCodeLine{00851\ }
+\DoxyCodeLine{00852\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00853\ \}}
+\DoxyCodeLine{00854\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00855\ }
+\DoxyCodeLine{00856\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \_MATRIX\_FUNCTIONS\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

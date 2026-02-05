@@ -1,0 +1,71 @@
+\doxysection{Log\+Sum\+Exp }
+\hypertarget{group___log_sum_exp}{}\label{group___log_sum_exp}\index{LogSumExp@{LogSumExp}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___log_sum_exp_ga652cb0d85e9c42b829969b2fb0688867}{arm\+\_\+logsumexp\+\_\+dot\+\_\+prod\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Tmp\+Buffer)
+\begin{DoxyCompactList}\small\item\em Dot product with log arithmetic. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___log_sum_exp_ga77517865ce1222d3d377f822af1fca8e}{arm\+\_\+logsumexp\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}in, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Computation of the Log\+Sum\+Exp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___log_sum_exp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group___log_sum_exp_ga652cb0d85e9c42b829969b2fb0688867}\index{LogSumExp@{LogSumExp}!arm\_logsumexp\_dot\_prod\_f32@{arm\_logsumexp\_dot\_prod\_f32}}
+\index{arm\_logsumexp\_dot\_prod\_f32@{arm\_logsumexp\_dot\_prod\_f32}!LogSumExp@{LogSumExp}}
+\doxysubsubsection{\texorpdfstring{arm\_logsumexp\_dot\_prod\_f32()}{arm\_logsumexp\_dot\_prod\_f32()}}
+{\footnotesize\ttfamily \label{group___log_sum_exp_ga652cb0d85e9c42b829969b2fb0688867} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+logsumexp\+\_\+dot\+\_\+prod\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Tmp\+Buffer}{}\end{DoxyParamCaption})}
+
+
+
+Dot product with log arithmetic. 
+
+Vectors are containing the log of the samples
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+SrcA} & points to the first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+SrcB} & points to the second input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+Tmp\+Buffer} & temporary buffer of length block\+Size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The log of the dot product. 
+\end{DoxyReturn}
+\Hypertarget{group___log_sum_exp_ga77517865ce1222d3d377f822af1fca8e}\index{LogSumExp@{LogSumExp}!arm\_logsumexp\_f32@{arm\_logsumexp\_f32}}
+\index{arm\_logsumexp\_f32@{arm\_logsumexp\_f32}!LogSumExp@{LogSumExp}}
+\doxysubsubsection{\texorpdfstring{arm\_logsumexp\_f32()}{arm\_logsumexp\_f32()}}
+{\footnotesize\ttfamily \label{group___log_sum_exp_ga77517865ce1222d3d377f822af1fca8e} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+logsumexp\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{in}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Computation of the Log\+Sum\+Exp. 
+
+In probabilistic computations, the dynamic of the probability values can be very wide because they come from gaussian functions. To avoid underflow and overflow issues, the values are represented by their log. In this representation, multiplying the original exp values is easy :\+ their logs are added. But adding the original exp values is requiring some special handling and it is the goal of the Log\+Sum\+Exp function.
+
+If the values are x1...xn, the function is computing:\+
+
+ln(exp(x1) + ... + exp(xn)) and the computation is done in such a way that rounding issues are minimised.
+
+The max xm of the values is extracted and the function is computing:\+ xm + ln(exp(x1 -\/ xm) + ... + exp(xn -\/ xm))
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}in} & Pointer to an array of input values. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & Number of samples in the input array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Log\+Sum\+Exp 
+\end{DoxyReturn}

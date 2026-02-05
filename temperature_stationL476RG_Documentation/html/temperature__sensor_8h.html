@@ -1,0 +1,321 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Core/Inc/temperature_sensor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('temperature__sensor_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku temperature_sensor.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Obsługa czujników temperatury z filtrem FIR (SMA) dla mikrokontrolerów STM32.  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;adc.h&quot;</code><br />
+<code>#include &quot;arm_math.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="_s_m_a1__fir_8h_source.html">SMA1_fir.h</a>&quot;</code><br />
+</div>
+<p><a href="temperature__sensor_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Struktury danych</h2></td></tr>
+<tr class="memitem:TempSensorHandle_5Ffilter_5Ft" id="r_TempSensorHandle_5Ffilter_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_temp_sensor_handle__filter__t.html">TempSensorHandle_filter_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura przechowująca dane filtra FIR dla pojedynczego czujnika.  <a href="struct_temp_sensor_handle__filter__t.html#details">Więcej...</a><br /></td></tr>
+<tr class="memitem:TempSensorHandle_5Ft" id="r_TempSensorHandle_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura reprezentująca jeden lub więcej czujników temperatury.  <a href="struct_temp_sensor_handle__t.html#details">Więcej...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:ab0c432e3be8436ec79a4431f6cd30411" id="r_ab0c432e3be8436ec79a4431f6cd30411"><td class="memItemLeft"><a id="ab0c432e3be8436ec79a4431f6cd30411" name="ab0c432e3be8436ec79a4431f6cd30411"></a>
+#define&#160;</td><td class="memItemRight"><b>MAX_TEMP_SENSORS</b>&#160;&#160;&#160;2</td></tr>
+<tr class="memdesc:ab0c432e3be8436ec79a4431f6cd30411"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maksymalna liczba czujników temperatury obsługiwanych w systemie. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:adf74bbba89cbb8de25680efd2a48d83f" id="r_adf74bbba89cbb8de25680efd2a48d83f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#adf74bbba89cbb8de25680efd2a48d83f">TempSensor_Init</a> (<a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp, ADC_HandleTypeDef *hadc, uint8_t sensor_count, uint16_t *adc_buffer, float vref)</td></tr>
+<tr class="memdesc:adf74bbba89cbb8de25680efd2a48d83f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizuje strukturę czujnika temperatury i filtr SMA.  <br /></td></tr>
+<tr class="memitem:ad6855126c666ac7efcbe695bbefa9d75" id="r_ad6855126c666ac7efcbe695bbefa9d75"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad6855126c666ac7efcbe695bbefa9d75">TempSensor_Start</a> (<a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp)</td></tr>
+<tr class="memdesc:ad6855126c666ac7efcbe695bbefa9d75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uruchamia odczyt ADC z czujników temperatury z użyciem DMA.  <br /></td></tr>
+<tr class="memitem:a70b027296971f254b7da4673fca9c127" id="r_a70b027296971f254b7da4673fca9c127"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a70b027296971f254b7da4673fca9c127">TempSensor_GetVoltage</a> (<a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp, uint8_t index)</td></tr>
+<tr class="memdesc:a70b027296971f254b7da4673fca9c127"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobiera napięcie z wybranego czujnika.  <br /></td></tr>
+<tr class="memitem:a207977086eb2457992d963291ef21272" id="r_a207977086eb2457992d963291ef21272"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a207977086eb2457992d963291ef21272">TempSensor_GetTemperature</a> (<a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp, uint8_t index)</td></tr>
+<tr class="memdesc:a207977086eb2457992d963291ef21272"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobiera temperaturę z wybranego czujnika.  <br /></td></tr>
+<tr class="memitem:a53d6890f65f8d8ada86c06d46f82a4bd" id="r_a53d6890f65f8d8ada86c06d46f82a4bd"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a53d6890f65f8d8ada86c06d46f82a4bd">TempSensor_GetAverageTemperature</a> (<a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp)</td></tr>
+<tr class="memdesc:a53d6890f65f8d8ada86c06d46f82a4bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Oblicza średnią temperaturę ze wszystkich czujników z filtracją SMA.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Obsługa czujników temperatury z filtrem FIR (SMA) dla mikrokontrolerów STM32. </p>
+<p>Moduł umożliwia:</p><ul>
+<li>inicjalizację czujników ADC,</li>
+<li>odczyt napięcia i temperatury,</li>
+<li>obliczanie średniej temperatury z filtracją cyfrową (SMA/FIR).</li>
+</ul>
+<dl class="section author"><dt>Autor</dt><dd>00ary </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>30-Jan-2026 </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji</h2>
+<a id="a53d6890f65f8d8ada86c06d46f82a4bd" name="a53d6890f65f8d8ada86c06d46f82a4bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53d6890f65f8d8ada86c06d46f82a4bd">&#9670;&#160;</a></span>TempSensor_GetAverageTemperature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float TempSensor_GetAverageTemperature </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>htemp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Oblicza średnią temperaturę ze wszystkich czujników z filtracją SMA. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htemp</td><td>Wskaźnik na strukturę <a class="el" href="struct_temp_sensor_handle__t.html" title="Struktura reprezentująca jeden lub więcej czujników temperatury.">TempSensorHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Przefiltrowana średnia temperatura w °C </dd></dl>
+
+</div>
+</div>
+<a id="a207977086eb2457992d963291ef21272" name="a207977086eb2457992d963291ef21272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a207977086eb2457992d963291ef21272">&#9670;&#160;</a></span>TempSensor_GetTemperature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float TempSensor_GetTemperature </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>htemp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pobiera temperaturę z wybranego czujnika. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htemp</td><td>Wskaźnik na strukturę <a class="el" href="struct_temp_sensor_handle__t.html" title="Struktura reprezentująca jeden lub więcej czujników temperatury.">TempSensorHandle_t</a> </td></tr>
+    <tr><td class="paramname">index</td><td>Indeks czujnika (0..sensor_count-1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Temperatura w °C </dd></dl>
+
+</div>
+</div>
+<a id="a70b027296971f254b7da4673fca9c127" name="a70b027296971f254b7da4673fca9c127"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70b027296971f254b7da4673fca9c127">&#9670;&#160;</a></span>TempSensor_GetVoltage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float TempSensor_GetVoltage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>htemp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>index</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pobiera napięcie z wybranego czujnika. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htemp</td><td>Wskaźnik na strukturę <a class="el" href="struct_temp_sensor_handle__t.html" title="Struktura reprezentująca jeden lub więcej czujników temperatury.">TempSensorHandle_t</a> </td></tr>
+    <tr><td class="paramname">index</td><td>Indeks czujnika (0..sensor_count-1) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Napięcie w woltach </dd></dl>
+
+</div>
+</div>
+<a id="adf74bbba89cbb8de25680efd2a48d83f" name="adf74bbba89cbb8de25680efd2a48d83f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf74bbba89cbb8de25680efd2a48d83f">&#9670;&#160;</a></span>TempSensor_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TempSensor_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>htemp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ADC_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>hadc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>sensor_count</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t *</td>          <td class="paramname"><span class="paramname"><em>adc_buffer</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>vref</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicjalizuje strukturę czujnika temperatury i filtr SMA. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htemp</td><td>Wskaźnik na strukturę <a class="el" href="struct_temp_sensor_handle__t.html" title="Struktura reprezentująca jeden lub więcej czujników temperatury.">TempSensorHandle_t</a> </td></tr>
+    <tr><td class="paramname">hadc</td><td>Wskaźnik na strukturę ADC STM32 </td></tr>
+    <tr><td class="paramname">sensor_count</td><td>Liczba czujników do obsługi </td></tr>
+    <tr><td class="paramname">adc_buffer</td><td>Bufor do odczytu ADC </td></tr>
+    <tr><td class="paramname">vref</td><td>Napięcie odniesienia ADC </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad6855126c666ac7efcbe695bbefa9d75" name="ad6855126c666ac7efcbe695bbefa9d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6855126c666ac7efcbe695bbefa9d75">&#9670;&#160;</a></span>TempSensor_Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TempSensor_Start </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>htemp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uruchamia odczyt ADC z czujników temperatury z użyciem DMA. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">htemp</td><td>Wskaźnik na strukturę <a class="el" href="struct_temp_sensor_handle__t.html" title="Struktura reprezentująca jeden lub więcej czujników temperatury.">TempSensorHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="temperature__sensor_8h.html">temperature_sensor.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

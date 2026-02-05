@@ -1,0 +1,146 @@
+\doxysection{Dokumentacja pliku Core/\+\+Inc/\+heater\+\_\+control.h}
+\hypertarget{heater__control_8h}{}\label{heater__control_8h}\index{Core/Inc/heater\_control.h@{Core/Inc/heater\_control.h}}
+
+
+Sterowanie grzałką za pomocą PWM na mikrokontrolerach STM32.  
+
+
+{\ttfamily \+\#include $<$stdint.\+h$>$}\newline
+{\ttfamily \+\#include "{}tim.\+h"{}}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em Struktura reprezentująca grzałkę sterowaną PWM. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{heater__control_8h_a7f5d58bec0c8b1e52931fab91fd7a707}{Heater\+\_\+\+Init}} (\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hheater, TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}htim, uint32\+\_\+t channel)
+\begin{DoxyCompactList}\small\item\em Inicjalizuje strukturę grzałki. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{heater__control_8h_a2f676e92aa2965f5bdcec5ab67998c15}{Heater\+\_\+\+Start}} (\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hheater)
+\begin{DoxyCompactList}\small\item\em Uruchamia PWM grzałki. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{heater__control_8h_a3493015070cf36e8ab65b0f38d47b8eb}{Heater\+\_\+\+Stop}} (\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hheater)
+\begin{DoxyCompactList}\small\item\em Zatrzymuje PWM grzałki i ustawia moc na 0. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{heater__control_8h_a810523a5f79289027f0f7e34069189e7}{Heater\+\_\+\+Set\+Power}} (\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hheater, uint16\+\_\+t power)
+\begin{DoxyCompactList}\small\item\em Ustawia moc grzałki. \end{DoxyCompactList}\item 
+uint16\+\_\+t \doxymbox{\hyperlink{heater__control_8h_a13c06dbab75437ce1591eb47ac3ad276}{Heater\+\_\+\+Get\+Power}} (\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hheater)
+\begin{DoxyCompactList}\small\item\em Pobiera aktualną moc grzałki. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{heater__control_8h_a645e0983ad91bcb4c9ff5cad89c3cd41}{Heater\+\_\+\+Off}} (\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}hheater)
+\begin{DoxyCompactList}\small\item\em Wyłącza grzałkę (ustawia moc na 0). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Sterowanie grzałką za pomocą PWM na mikrokontrolerach STM32. 
+
+Zawiera deklaracje funkcji i struktur dla inicjalizacji, uruchamiania, zatrzymywania i ustawiania mocy grzałki.
+
+\begin{DoxyAuthor}{Autor}
+00ary 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Data}
+31-\/Jan-\/2026 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{heater__control_8h_doc-func-members}
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{heater__control_8h_a13c06dbab75437ce1591eb47ac3ad276}\index{heater\_control.h@{heater\_control.h}!Heater\_GetPower@{Heater\_GetPower}}
+\index{Heater\_GetPower@{Heater\_GetPower}!heater\_control.h@{heater\_control.h}}
+\doxysubsubsection{\texorpdfstring{Heater\_GetPower()}{Heater\_GetPower()}}
+{\footnotesize\ttfamily \label{heater__control_8h_a13c06dbab75437ce1591eb47ac3ad276} 
+uint16\+\_\+t Heater\+\_\+\+Get\+Power (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hheater}{}\end{DoxyParamCaption})}
+
+
+
+Pobiera aktualną moc grzałki. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hheater} & Wskaźnik na strukturę \doxylink{struct_heater_handle__t}{Heater\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Aktualna moc PWM 
+\end{DoxyReturn}
+\Hypertarget{heater__control_8h_a7f5d58bec0c8b1e52931fab91fd7a707}\index{heater\_control.h@{heater\_control.h}!Heater\_Init@{Heater\_Init}}
+\index{Heater\_Init@{Heater\_Init}!heater\_control.h@{heater\_control.h}}
+\doxysubsubsection{\texorpdfstring{Heater\_Init()}{Heater\_Init()}}
+{\footnotesize\ttfamily \label{heater__control_8h_a7f5d58bec0c8b1e52931fab91fd7a707} 
+void Heater\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hheater}{, }\item[{TIM\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*}}]{htim}{, }\item[{uint32\+\_\+t}]{channel}{}\end{DoxyParamCaption})}
+
+
+
+Inicjalizuje strukturę grzałki. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hheater} & Wskaźnik na strukturę \doxylink{struct_heater_handle__t}{Heater\+Handle\+\_\+t} \\
+\hline
+{\em htim} & Wskaźnik na strukturę timera STM32 \\
+\hline
+{\em channel} & Kanał timera dla PWM \\
+\hline
+\end{DoxyParams}
+\Hypertarget{heater__control_8h_a645e0983ad91bcb4c9ff5cad89c3cd41}\index{heater\_control.h@{heater\_control.h}!Heater\_Off@{Heater\_Off}}
+\index{Heater\_Off@{Heater\_Off}!heater\_control.h@{heater\_control.h}}
+\doxysubsubsection{\texorpdfstring{Heater\_Off()}{Heater\_Off()}}
+{\footnotesize\ttfamily \label{heater__control_8h_a645e0983ad91bcb4c9ff5cad89c3cd41} 
+void Heater\+\_\+\+Off (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hheater}{}\end{DoxyParamCaption})}
+
+
+
+Wyłącza grzałkę (ustawia moc na 0). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hheater} & Wskaźnik na strukturę \doxylink{struct_heater_handle__t}{Heater\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\Hypertarget{heater__control_8h_a810523a5f79289027f0f7e34069189e7}\index{heater\_control.h@{heater\_control.h}!Heater\_SetPower@{Heater\_SetPower}}
+\index{Heater\_SetPower@{Heater\_SetPower}!heater\_control.h@{heater\_control.h}}
+\doxysubsubsection{\texorpdfstring{Heater\_SetPower()}{Heater\_SetPower()}}
+{\footnotesize\ttfamily \label{heater__control_8h_a810523a5f79289027f0f7e34069189e7} 
+void Heater\+\_\+\+Set\+Power (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hheater}{, }\item[{uint16\+\_\+t}]{power}{}\end{DoxyParamCaption})}
+
+
+
+Ustawia moc grzałki. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hheater} & Wskaźnik na strukturę \doxylink{struct_heater_handle__t}{Heater\+Handle\+\_\+t} \\
+\hline
+{\em power} & Moc PWM w zakresie 0-\/999 \\
+\hline
+\end{DoxyParams}
+\Hypertarget{heater__control_8h_a2f676e92aa2965f5bdcec5ab67998c15}\index{heater\_control.h@{heater\_control.h}!Heater\_Start@{Heater\_Start}}
+\index{Heater\_Start@{Heater\_Start}!heater\_control.h@{heater\_control.h}}
+\doxysubsubsection{\texorpdfstring{Heater\_Start()}{Heater\_Start()}}
+{\footnotesize\ttfamily \label{heater__control_8h_a2f676e92aa2965f5bdcec5ab67998c15} 
+void Heater\+\_\+\+Start (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hheater}{}\end{DoxyParamCaption})}
+
+
+
+Uruchamia PWM grzałki. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hheater} & Wskaźnik na strukturę \doxylink{struct_heater_handle__t}{Heater\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}
+\Hypertarget{heater__control_8h_a3493015070cf36e8ab65b0f38d47b8eb}\index{heater\_control.h@{heater\_control.h}!Heater\_Stop@{Heater\_Stop}}
+\index{Heater\_Stop@{Heater\_Stop}!heater\_control.h@{heater\_control.h}}
+\doxysubsubsection{\texorpdfstring{Heater\_Stop()}{Heater\_Stop()}}
+{\footnotesize\ttfamily \label{heater__control_8h_a3493015070cf36e8ab65b0f38d47b8eb} 
+void Heater\+\_\+\+Stop (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_heater_handle__t}{Heater\+Handle\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{hheater}{}\end{DoxyParamCaption})}
+
+
+
+Zatrzymuje PWM grzałki i ustawia moc na 0. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em hheater} & Wskaźnik na strukturę \doxylink{struct_heater_handle__t}{Heater\+Handle\+\_\+t} \\
+\hline
+\end{DoxyParams}

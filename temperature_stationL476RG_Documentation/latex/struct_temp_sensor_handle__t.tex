@@ -1,0 +1,67 @@
+\doxysection{Dokumentacja struktury Temp\+Sensor\+Handle\+\_\+t}
+\hypertarget{struct_temp_sensor_handle__t}{}\label{struct_temp_sensor_handle__t}\index{TempSensorHandle\_t@{TempSensorHandle\_t}}
+
+
+Struktura reprezentująca jeden lub więcej czujników temperatury.  
+
+
+
+
+{\ttfamily \+\#include $<$temperature\+\_\+sensor.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+ADC\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_temp_sensor_handle__t_af982c0fe5d77061049c468b599100134}{hadc}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_temp_sensor_handle__t_aa55fc0ac5902d2f03ffebeba15c2cb6a}{sensor\+\_\+count}}
+\item 
+uint16\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_temp_sensor_handle__t_a01775fb8fa2fbc2d84e64f5b8b8b8c8e}{adc\+\_\+buffer}}
+\item 
+float \doxymbox{\hyperlink{struct_temp_sensor_handle__t_a4363b65a393b0ca493fa20d6c1e244c2}{vref}}
+\item 
+\doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t}{Temp\+Sensor\+Handle\+\_\+filter\+\_\+t}} \doxymbox{\hyperlink{struct_temp_sensor_handle__t_ab9065f6f8317d5e7ccd0d6a14e1b3476}{filter}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura reprezentująca jeden lub więcej czujników temperatury. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_temp_sensor_handle__t_doc-variable-members}
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_temp_sensor_handle__t_a01775fb8fa2fbc2d84e64f5b8b8b8c8e}\index{TempSensorHandle\_t@{TempSensorHandle\_t}!adc\_buffer@{adc\_buffer}}
+\index{adc\_buffer@{adc\_buffer}!TempSensorHandle\_t@{TempSensorHandle\_t}}
+\doxysubsubsection{\texorpdfstring{adc\_buffer}{adc\_buffer}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__t_a01775fb8fa2fbc2d84e64f5b8b8b8c8e} 
+uint16\+\_\+t\texorpdfstring{$\ast$}{*} adc\+\_\+buffer}
+
+Bufor ADC do przechowywania próbek \Hypertarget{struct_temp_sensor_handle__t_ab9065f6f8317d5e7ccd0d6a14e1b3476}\index{TempSensorHandle\_t@{TempSensorHandle\_t}!filter@{filter}}
+\index{filter@{filter}!TempSensorHandle\_t@{TempSensorHandle\_t}}
+\doxysubsubsection{\texorpdfstring{filter}{filter}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__t_ab9065f6f8317d5e7ccd0d6a14e1b3476} 
+\doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t}{Temp\+Sensor\+Handle\+\_\+filter\+\_\+t}} filter}
+
+Struktura filtra FIR dla uśredniania temperatury \Hypertarget{struct_temp_sensor_handle__t_af982c0fe5d77061049c468b599100134}\index{TempSensorHandle\_t@{TempSensorHandle\_t}!hadc@{hadc}}
+\index{hadc@{hadc}!TempSensorHandle\_t@{TempSensorHandle\_t}}
+\doxysubsubsection{\texorpdfstring{hadc}{hadc}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__t_af982c0fe5d77061049c468b599100134} 
+ADC\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} hadc}
+
+Wskaźnik na strukturę ADC STM32 \Hypertarget{struct_temp_sensor_handle__t_aa55fc0ac5902d2f03ffebeba15c2cb6a}\index{TempSensorHandle\_t@{TempSensorHandle\_t}!sensor\_count@{sensor\_count}}
+\index{sensor\_count@{sensor\_count}!TempSensorHandle\_t@{TempSensorHandle\_t}}
+\doxysubsubsection{\texorpdfstring{sensor\_count}{sensor\_count}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__t_aa55fc0ac5902d2f03ffebeba15c2cb6a} 
+uint8\+\_\+t sensor\+\_\+count}
+
+Liczba czujników w systemie \Hypertarget{struct_temp_sensor_handle__t_a4363b65a393b0ca493fa20d6c1e244c2}\index{TempSensorHandle\_t@{TempSensorHandle\_t}!vref@{vref}}
+\index{vref@{vref}!TempSensorHandle\_t@{TempSensorHandle\_t}}
+\doxysubsubsection{\texorpdfstring{vref}{vref}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__t_a4363b65a393b0ca493fa20d6c1e244c2} 
+float vref}
+
+Napięcie odniesienia ADC 
+
+Dokumentacja dla tej struktury została wygenerowana z pliku:\+\begin{DoxyCompactItemize}
+\item 
+Core/\+\+Inc/\+\doxymbox{\hyperlink{temperature__sensor_8h}{temperature\+\_\+sensor.\+h}}\end{DoxyCompactItemize}

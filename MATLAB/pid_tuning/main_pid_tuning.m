@@ -60,26 +60,3 @@ fprintf('     pid.Ki = params.Ki;\n');
 fprintf('     pid.Kd = params.Kd;\n');
 fprintf('     float output = PID_Compute(&pid, setpoint, temperature);\n\n');
 
-srcDest = fullfile('../../temperature_stationL476RG/Components/Src');
-incDest = fullfile('../../temperature_stationL476RG/Components/Inc');
-
-if ~exist(srcDest, 'dir')
-    mkdir(srcDest);
-end
-if ~exist(incDest, 'dir')
-    mkdir(incDest);
-end
-
-cFiles = dir('*.c');
-csvFiles = dir('*.csv');
-for i = 1:length(cFiles)
-    movefile(cFiles(i).name, fullfile(srcDest, cFiles(i).name));
-end
-for i = 1:length(csvFiles)
-    movefile(csvFiles(i).name, fullfile(srcDest, csvFiles(i).name));
-end
-
-hFiles = dir('*.h');
-for i = 1:length(hFiles)
-    movefile(hFiles(i).name, fullfile(incDest, hFiles(i).name));
-end

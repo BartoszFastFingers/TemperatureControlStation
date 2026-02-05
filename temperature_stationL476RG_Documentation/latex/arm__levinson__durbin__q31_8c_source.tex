@@ -1,0 +1,364 @@
+\doxysection{arm\+\_\+levinson\+\_\+durbin\+\_\+q31.\+c}
+\hypertarget{arm__levinson__durbin__q31_8c_source}{}\label{arm__levinson__durbin__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_levinson\_durbin\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_levinson\_durbin\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_levinson\_durbin\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ q31\ version\ of\ Levinson\ Durbin\ algorithm}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/filtering\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#define\ ONE\_Q31\ 0x7FFFFFFFL}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ TWO\_Q30\ 0x7FFFFFFFL}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ HALF\_Q31\ 0x00008000L}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ ONE\_Q15\ 0x7FFF}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#define\ HALF\_Q15\ 0x3FFF}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ LOWPART\_MASK\ 0x07FFF}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \_\_STATIC\_FORCEINLINE\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ mul32x16(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ a,\ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ b)}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ r\ =\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})a\ *\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})b)\ >>\ 15;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordflow}{return}(r);}
+\DoxyCodeLine{00044\ \ \ }
+\DoxyCodeLine{00045\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \_\_STATIC\_FORCEINLINE\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ mul32x32(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ a,\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ b)}
+\DoxyCodeLine{00048\ \{}
+\DoxyCodeLine{00049\ \ \ \textcolor{comment}{//q31\_t\ r\ =\ \_\_SSAT(((q63\_t)a\ *\ b)\ >>\ 31,31);}}
+\DoxyCodeLine{00050\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ r\ =\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})a\ *\ b)\ >>\ 31;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keywordflow}{return}(r);}
+\DoxyCodeLine{00053\ \ \ }
+\DoxyCodeLine{00054\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \_\_STATIC\_FORCEINLINE\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ divide(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ n,\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ d)}
+\DoxyCodeLine{00057\ \{}
+\DoxyCodeLine{00058\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;}
+\DoxyCodeLine{00059\ \ \ int16\_t\ shift;}
+\DoxyCodeLine{00060\ \ \ \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ inverse;}
+\DoxyCodeLine{00061\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ r;}
+\DoxyCodeLine{00062\ \ \ \textcolor{comment}{//\ We\ are\ computing:}}
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{//\ n\ /\ d\ =\ n\ /\ (h\ +\ l)\ where\ h\ and\ l\ are\ the\ high\ end\ and\ low\ end\ part.}}
+\DoxyCodeLine{00064\ \ \ \textcolor{comment}{//\ 1\ /\ (h\ +\ l)\ =\ 1\ /\ h\ (1\ -\/\ l\ /\ h)}}
+\DoxyCodeLine{00065\ \ \ \textcolor{comment}{//\ Our\ division\ algorithm\ has\ a\ shift.\ So\ it\ is\ returning\ a\ scaled\ value\ sh.}}
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{//\ So\ we\ need\ a\ <<\ shift\ to\ convert\ 1/\ sh\ to\ 1/h.}}
+\DoxyCodeLine{00067\ \ \ \textcolor{comment}{//\ In\ below\ code,\ we\ are\ organizing\ the\ computation\ differently.\ Instead\ of\ computing:}}
+\DoxyCodeLine{00068\ \ \ \textcolor{comment}{//\ 1\ /\ h\ (1\ -\/\ l\ /\ h)\ }}
+\DoxyCodeLine{00069\ \ \ \textcolor{comment}{//\ we\ are\ computing}}
+\DoxyCodeLine{00070\ \ \ \textcolor{comment}{//\ 1\ /\ h\ (2\ -\/\ (l\ +\ h)\ /\ h)\ }}
+\DoxyCodeLine{00071\ \ \ \textcolor{comment}{//\ 1\ /\ h\ (2\ -\/\ d\ /\ h)}}
+\DoxyCodeLine{00072\ \ \ \textcolor{comment}{//\ Also,\ we\ are\ not\ computing\ 1/h\ in\ Q15\ but\ in\ Q14.}}
+\DoxyCodeLine{00073\ \ \ \textcolor{comment}{//\ 2\ is\ expressed\ in\ Q30.}}
+\DoxyCodeLine{00074\ \ \ \textcolor{comment}{//\ So\ at\ the\ end\ of\ all\ computation\ we\ need\ a\ <<\ 2}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \textcolor{comment}{//\ Result\ is\ in\ Q14\ because\ of\ use\ of\ HALF\_Q15\ instead\ of\ ONE\_Q15.}}
+\DoxyCodeLine{00077\ \ \ status=\doxymbox{\hyperlink{group__divide_ga3b61a30b32ec85bca22ffc2974dde7a8}{arm\_divide\_q15}}(HALF\_Q15,d>>16,\&inverse,\&shift);}
+\DoxyCodeLine{00078\ \ \ (void)status;}
+\DoxyCodeLine{00079\ \ \ }
+\DoxyCodeLine{00080\ \ \ \textcolor{comment}{//\ d\ is\ used\ instead\ of\ l}}
+\DoxyCodeLine{00081\ \ \ \textcolor{comment}{//\ So\ we\ will\ need\ to\ substract\ to\ 2\ instead\ of\ 1.}}
+\DoxyCodeLine{00082\ \ \ r\ =\ mul32x16(d,inverse);}
+\DoxyCodeLine{00083\ \ \ r\ =\ TWO\_Q30\ -\/\ (r\ <<\ shift);}
+\DoxyCodeLine{00084\ \ \ r\ =\ mul32x16(r,\ inverse);}
+\DoxyCodeLine{00085\ \ \ r\ =\ mul32x32(r,n)\ ;}
+\DoxyCodeLine{00086\ \ \ r\ =\ r\ <<\ (shift\ +\ 2);}
+\DoxyCodeLine{00087\ \ \ }
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordflow}{return}(r);}
+\DoxyCodeLine{00089\ \ \ }
+\DoxyCodeLine{00090\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVE\_FLOAT16)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ \&\&\ defined(ARM\_DSP\_BUILT\_WITH\_GCC)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#pragma\ GCC\ warning\ "{}Scalar\ version\ of\ arm\_levinson\_durbin\_q31\ built.\ Helium\ version\ has\ build\ issues\ with\ gcc."{}}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#endif\ }}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEI)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ \&\&\ \ !defined(ARM\_DSP\_BUILT\_WITH\_GCC)}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#define\ LANE23\_MASK\ 0xFF00}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00120\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___l_d_gae2ff340ac23ff1e47e9f50f997dfbb2e}{arm\_levinson\_durbin\_q31}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *phi,}
+\DoxyCodeLine{00121\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *a,\ }
+\DoxyCodeLine{00122\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *err,}
+\DoxyCodeLine{00123\ \ \ \textcolor{keywordtype}{int}\ nbCoefs)}
+\DoxyCodeLine{00124\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ e;}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint32\_t\ revOffsetArray[4]\ =\ \{3,2,1,0\};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \textcolor{comment}{//a[0]\ =\ phi[1]\ /\ phi[0];}}
+\DoxyCodeLine{00130\ \ \ \ a[0]\ =\ divide(phi[1],\ phi[0]);}
+\DoxyCodeLine{00131\ \ \ \ }
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \textcolor{comment}{//e\ =\ phi[0]\ -\/\ phi[1]\ *\ a[0];}}
+\DoxyCodeLine{00134\ \ \ \ e\ =\ phi[0]\ -\/\ mul32x32(phi[1],a[0]);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ p=1;\ p\ <\ nbCoefs;\ p++)}
+\DoxyCodeLine{00137\ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ suma=0;}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ sumb=0;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ q31x4\_t\ vecA,vecRevPhi,vecPhi;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ k;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ uint32\_t\ blkCnt;\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pPhi,*pRevPhi,*pA;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ uint32x4\_t\ revOffset;}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nb,j,i;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \ \ revOffset\ =\ vld1q(revOffsetArray);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ pRevPhi\ =\ \&phi[p-\/3];}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ pPhi\ =\ \&phi[1];}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ pA\ =\ a;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ i\ =\ 0;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ blkCnt\ =\ p\ >>\ 2;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ vecA\ =\ vld1q(pA);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ pA\ +=\ 4;}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ vecPhi\ =\ vld1q(pPhi);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ pPhi\ +=\ 4;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ vecRevPhi\ =\ vldrwq\_gather\_shifted\_offset\_s32(pRevPhi,revOffset);}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ pRevPhi\ -\/=\ 4;}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ suma\ =\ vmlaldavaq(suma,vecA,vecRevPhi);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ sumb\ =\ vmlaldavaq(sumb,vecA,vecPhi);\ }
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ i\ +=\ 4;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ blkCnt\ =\ p\ \&\ 3;}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ suma\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})a[i]\ *\ phi[p\ -\/\ i]);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ sumb\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})a[i]\ *\ phi[i\ +\ 1]);}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ suma\ =\ asrl(suma,\ 31);}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ sumb\ =\ asrl(sumb,\ 31);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \textcolor{comment}{//k\ =\ (phi[p+1]-\/suma)/(phi[0]\ -\/\ sumb);}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ k\ =\ divide(phi[p+1]-\/(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})suma,phi[0]\ -\/\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})sumb);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ q31x4\_t\ vecRevA,tmp;}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ orgOffsetArray[4]=\{0,1,-\/1,-\/2\};}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ int32\_t\ offsetIncArray[4]=\{2,2,-\/2,-\/2\};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ uint32x4\_t\ offset,offsetInc,vecTmp;}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ offset\ =\ vld1q\_u32((uint32\_t*)orgOffsetArray);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ vecTmp\ =\ vdupq\_n\_u32(p);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ offset\ =\ vaddq\_m\_u32(offset,offset,vecTmp,LANE23\_MASK);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ offsetInc\ =\ vld1q\_u32((uint32\_t*)offsetIncArray);}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ nb\ =\ p\ >>\ 2;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ j=0;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =0;i\ <\ nb\ ;\ i++)}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ q31\_t\ x0,x1,x2,x3;}}
+\DoxyCodeLine{00214\ \textcolor{comment}{}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //x\ =\ a[j]\ -\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ x0\ =\ a[j]\ -\/\ mul32x32(k,a[p-\/1-\/j]);}}
+\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ x1\ =\ a[j+1]\ -\/\ mul32x32(k,a[p-\/2-\/j]);}}
+\DoxyCodeLine{00218\ \textcolor{comment}{}}
+\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ //y\ =\ a[p-\/1-\/j]\ -\/\ k\ *\ a[j];}}
+\DoxyCodeLine{00220\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ x2\ =\ a[p-\/1-\/j]\ -\/\ mul32x32(k\ ,\ a[j]);}}
+\DoxyCodeLine{00221\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ x3\ =\ a[p-\/2-\/j]\ -\/\ mul32x32(k\ ,\ a[j+1]);}}
+\DoxyCodeLine{00222\ \textcolor{comment}{}}
+\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ a[j]\ =\ x0;}}
+\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ a[j+1]\ =\ x1;}}
+\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ x2;}}
+\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ a[p-\/2-\/j]\ =\ x3;}}
+\DoxyCodeLine{00227\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ uint64\_t\ tmpa,tmpb;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_gather\_shifted\_offset\_s32(a,offset);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ tmpa\ =\ vgetq\_lane\_u64((uint64x2\_t)vecA,0);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ tmpb\ =\ vgetq\_lane\_u64((uint64x2\_t)vecA,1);}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ vecRevA\ =\ (q31x4\_t)\ vsetq\_lane\_u64(tmpb,(uint64x2\_t)vecRevA,0);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ vecRevA\ =\ (q31x4\_t)\ vsetq\_lane\_u64(tmpa,(uint64x2\_t)vecRevA,1);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vsubq(vecA,vqdmulhq\_n\_s32(vecRevA,k));}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ vstrwq\_scatter\_shifted\_offset\_s32(a,\ offset,\ tmp);}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ offset\ =\ vaddq(offset,offsetInc);}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ j+=2;}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(p\ \&\ 3)}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ x,y;}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//x\ =\ a[j]\ -\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ x\ =\ a[j]\ -\/\ mul32x32(k,a[p-\/1-\/j]);}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//y\ =\ a[p-\/1-\/j]\ -\/\ k\ *\ a[j];}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ y\ =\ a[p-\/1-\/j]\ -\/\ mul32x32(k\ ,\ a[j]);}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ x;}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ y;}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//a[j]\ =\ a[j]-\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ a[j+1]\ =\ a[j+1]\ -\/\ mul32x32(k,a[p-\/2-\/j]);}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ x,y;}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//x\ =\ a[j]\ -\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ x\ =\ a[j]\ -\/\ mul32x32(k,a[p-\/1-\/j]);}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//y\ =\ a[p-\/1-\/j]\ -\/\ k\ *\ a[j];}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ y\ =\ a[p-\/1-\/j]\ -\/\ mul32x32(k\ ,\ a[j]);}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ x;}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ y;}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//a[j]\ =\ a[j]-\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ a[j]\ -\/\ mul32x32(k,a[p-\/1-\/j]);}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \ \ \ \ a[p]\ =\ k;}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \textcolor{comment}{//\ e\ =\ e\ *\ (1\ -\/\ k*k);}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ e\ =\ mul32x32(e,ONE\_Q31\ -\/\ mul32x32(k,k));}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \ \ \ \}}
+\DoxyCodeLine{00295\ \ \ \ *err\ =\ e;}
+\DoxyCodeLine{00296\ \}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___l_d_gae2ff340ac23ff1e47e9f50f997dfbb2e}{arm\_levinson\_durbin\_q31}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *phi,}
+\DoxyCodeLine{00301\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *a,\ }
+\DoxyCodeLine{00302\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *err,}
+\DoxyCodeLine{00303\ \ \ \textcolor{keywordtype}{int}\ nbCoefs)}
+\DoxyCodeLine{00304\ \{}
+\DoxyCodeLine{00305\ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ e;}
+\DoxyCodeLine{00306\ \ \ \ \textcolor{keywordtype}{int}\ p;}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \textcolor{comment}{//a[0]\ =\ phi[1]\ /\ phi[0];}}
+\DoxyCodeLine{00309\ \ \ \ a[0]\ =\ divide(phi[1],\ phi[0]);}
+\DoxyCodeLine{00310\ \ \ \ }
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \textcolor{comment}{//e\ =\ phi[0]\ -\/\ phi[1]\ *\ a[0];}}
+\DoxyCodeLine{00313\ \ \ \ e\ =\ phi[0]\ -\/\ mul32x32(phi[1],a[0]);}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \textcolor{keywordflow}{for}(p=1;\ p\ <\ nbCoefs;\ p++)}
+\DoxyCodeLine{00316\ \ \ \ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ suma=0;}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ sumb=0;}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ k;}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nb,j,i;}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(i=0;\ i\ <\ p;\ i++)}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ suma\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})a[i]\ *\ phi[p\ -\/\ i]);}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ sumb\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})a[i]\ *\ phi[i\ +\ 1]);}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ \ \ suma\ =\ suma\ >>\ 31;}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ sumb\ =\ sumb\ >>\ 31;}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \textcolor{comment}{//k\ =\ (phi[p+1]-\/suma)/(phi[0]\ -\/\ sumb);}}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ k\ =\ divide(phi[p+1]-\/(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})suma,phi[0]\ -\/\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})sumb);}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \ \ \ \ \ nb\ =\ p\ >>\ 1;}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ j=0;}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(i\ =0;i\ <\ nb\ ;\ i++)}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ x,y;}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//x\ =\ a[j]\ -\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ x\ =\ a[j]\ -\/\ mul32x32(k,a[p-\/1-\/j]);}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//y\ =\ a[p-\/1-\/j]\ -\/\ k\ *\ a[j];}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ y\ =\ a[p-\/1-\/j]\ -\/\ mul32x32(k\ ,\ a[j]);}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ x;}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ y;}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ j++;}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00355\ \ \ \ \ \ \ nb\ =\ p\ \&\ 1;}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nb)}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//a[j]\ =\ a[j]-\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ a[j]\ -\/\ mul32x32(k,a[p-\/1-\/j]);}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \ \ a[p]\ =\ k;}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \textcolor{comment}{//\ e\ =\ e\ *\ (1\ -\/\ k*k);}}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ e\ =\ mul32x32(e,ONE\_Q31\ -\/\ mul32x32(k,k));}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \ \}}
+\DoxyCodeLine{00369\ \ \ \ *err\ =\ e;}
+\DoxyCodeLine{00370\ \}}
+\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEI)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00372\ }
+
+\end{DoxyCode}

@@ -1,0 +1,99 @@
+\doxysubsubsection{Hft95 window function (95.\+0 dB) }
+\hypertarget{group___window_h_f_t95}{}\label{group___window_h_f_t95}\index{Hft95 window function (95.0 dB)@{Hft95 window function (95.0 dB)}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___window_h_f_t95_gaa753562ff93e416d01638082122be3cf}{arm\+\_\+hft95\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Hft95 window generating function (f32). \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___window_h_f_t95_gacbea87c530fb0e7551635e0ef837e829}{arm\+\_\+hft95\+\_\+f64}} (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Hft95 window generating function (f64). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___window_h_f_t95_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___window_h_f_t95_gaa753562ff93e416d01638082122be3cf}\index{Hft95 window function (95.0 dB)@{Hft95 window function (95.0 dB)}!arm\_hft95\_f32@{arm\_hft95\_f32}}
+\index{arm\_hft95\_f32@{arm\_hft95\_f32}!Hft95 window function (95.0 dB)@{Hft95 window function (95.0 dB)}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_hft95\_f32()}{arm\_hft95\_f32()}}
+{\footnotesize\ttfamily \label{group___window_h_f_t95_gaa753562ff93e416d01638082122be3cf} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+hft95\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Hft95 window generating function (f32). 
+
+Hft95 window (float).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output generated window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Parameters of the window}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+\SetCell{r}Peak sidelobe level  &\SetCell{r}95.\+0 dB  \\
+\SetCell{r}Normalized equivalent noise bandwidth  &\SetCell{r}3.\+8112 bins  \\
+\SetCell{r}3 dB bandwidth  &\SetCell{r}3.\+7590 bins  \\
+\SetCell{r}Flatness  &\SetCell{r}0.\+0044 dB  \\
+\SetCell{r}Recommended overlap  &\SetCell{r}75.\+6 \%  \\
+\end{DoxyTable}
+
+
+Included in CMSIS-\/\+DSP with authorization from professor Gerhard Heinzel.
+
+\begin{DoxyParagraph}{Original article:\+}
+Spectrum and spectral density estimation by the Discrete Fourier transform (DFT), including a comprehensive list of window functions and some new flat-\/top windows.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Authors:\+ }
+G. Heinzel, A. Rudiger and R. Schilling, Max-\/\+Planck-\/\+Institut fur Gravitationsphysik (Albert-\/\+Einstein-\/\+Institut) Teilinstitut Hannover 
+\end{DoxyParagraph}
+\Hypertarget{group___window_h_f_t95_gacbea87c530fb0e7551635e0ef837e829}\index{Hft95 window function (95.0 dB)@{Hft95 window function (95.0 dB)}!arm\_hft95\_f64@{arm\_hft95\_f64}}
+\index{arm\_hft95\_f64@{arm\_hft95\_f64}!Hft95 window function (95.0 dB)@{Hft95 window function (95.0 dB)}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_hft95\_f64()}{arm\_hft95\_f64()}}
+{\footnotesize\ttfamily \label{group___window_h_f_t95_gacbea87c530fb0e7551635e0ef837e829} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+hft95\+\_\+f64 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Hft95 window generating function (f64). 
+
+Hft95 window (double).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output generated window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Parameters of the window}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+\SetCell{r}Peak sidelobe level  &\SetCell{r}95.\+0 dB  \\
+\SetCell{r}Normalized equivalent noise bandwidth  &\SetCell{r}3.\+8112 bins  \\
+\SetCell{r}3 dB bandwidth  &\SetCell{r}3.\+7590 bins  \\
+\SetCell{r}Flatness  &\SetCell{r}0.\+0044 dB  \\
+\SetCell{r}Recommended overlap  &\SetCell{r}75.\+6 \%  \\
+\end{DoxyTable}
+
+
+Included in CMSIS-\/\+DSP with authorization from professor Gerhard Heinzel.
+
+\begin{DoxyParagraph}{Original article:\+}
+Spectrum and spectral density estimation by the Discrete Fourier transform (DFT), including a comprehensive list of window functions and some new flat-\/top windows.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Authors:\+ }
+G. Heinzel, A. Rudiger and R. Schilling, Max-\/\+Planck-\/\+Institut fur Gravitationsphysik (Albert-\/\+Einstein-\/\+Institut) Teilinstitut Hannover 
+\end{DoxyParagraph}

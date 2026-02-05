@@ -1,0 +1,26 @@
+\doxysection{pid\+\_\+lookup.\+h}
+\hypertarget{pid__lookup_8h_source}{}\label{pid__lookup_8h_source}\index{Components/Inc/pid\_lookup.h@{Components/Inc/pid\_lookup.h}}
+\doxymbox{\hyperlink{pid__lookup_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ PID\_LOOKUP\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ PID\_LOOKUP\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}arm\_math.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ NUM\_OPERATING\_POINTS\ 3}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ IDW\_POWER\ \ \ \ \ \ \ \ \ \ \ \ 2.0f}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ PID\_SAMPLE\_TIME\_S\ \ \ \ 1.0f\ \ }\textcolor{comment}{//\ Dostosuj\ do\ swojego\ Ts!}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ PWM\_MAX\ \ \ \ \ \ \ \ \ \ \ \ \ \ 999\ \ \ }\textcolor{comment}{//\ Maksymalna\ wartość\ PWM}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{pid__lookup_8h_ada274dba31454c7704f40636cb9d3bc4}{PID\_Interpolate}}(uint16\_t\ heater\_pwm,\ uint16\_t\ fan\_pwm,\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ arm\_pid\_instance\_f32\ *pid,\ uint8\_t\ reset\_state);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{pid__lookup_8h_afaa51912936d5f9b4e86e793fe90c92a}{PID\_Init}}(uint16\_t\ heater\_pwm,\ uint16\_t\ fan\_pwm,\ arm\_pid\_instance\_f32\ *pid);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{pid__lookup_8h_ae01268ecad1c353e831bc2a6083ad767}{PID\_GetNearest}}(uint16\_t\ heater\_pwm,\ uint16\_t\ fan\_pwm,\ arm\_pid\_instance\_f32\ *pid);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ PID\_LOOKUP\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,104 @@
+\doxysection{Dynamic Time Warping Distance }
+\hypertarget{group___d_t_w}{}\label{group___d_t_w}\index{Dynamic Time Warping Distance@{Dynamic Time Warping Distance}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___d_t_w_ga71fe7bc7aed8ae64e4d61ae6c30e2d9e}{arm\+\_\+dtw\+\_\+distance\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Distance, const \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}p\+Window, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+DTW, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}distance)
+\begin{DoxyCompactList}\small\item\em Dynamic Time Warping distance. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___d_t_w_gad01cfea6e191b26eb12deddaf4a8c8c7}{arm\+\_\+dtw\+\_\+init\+\_\+window\+\_\+q7}} (const arm\+\_\+dtw\+\_\+window window\+Type, const int32\+\_\+t window\+Size, \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}p\+Window)
+\begin{DoxyCompactList}\small\item\em Window for dynamic time warping computation. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___d_t_w_ga26f2e5b0a972fe282b190f2b6fbf7d22}{arm\+\_\+dtw\+\_\+path\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+DTW, int16\+\_\+t \texorpdfstring{$\ast$}{*}p\+Path, uint32\+\_\+t \texorpdfstring{$\ast$}{*}path\+Length)
+\begin{DoxyCompactList}\small\item\em Mapping between query and template. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Dynamic Time Warping Distance.
+
+This is not really a distance since triangular inequality is not respected.
+
+The step pattern used is symmetric2. Future versions of this function will provide more customization options.
+
+\label{doc-func-members}
+\Hypertarget{group___d_t_w_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group___d_t_w_ga71fe7bc7aed8ae64e4d61ae6c30e2d9e}\index{Dynamic Time Warping Distance@{Dynamic Time Warping Distance}!arm\_dtw\_distance\_f32@{arm\_dtw\_distance\_f32}}
+\index{arm\_dtw\_distance\_f32@{arm\_dtw\_distance\_f32}!Dynamic Time Warping Distance@{Dynamic Time Warping Distance}}
+\doxysubsubsection{\texorpdfstring{arm\_dtw\_distance\_f32()}{arm\_dtw\_distance\_f32()}}
+{\footnotesize\ttfamily \label{group___d_t_w_ga71fe7bc7aed8ae64e4d61ae6c30e2d9e} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+dtw\+\_\+distance\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Distance}{, }\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}}]{p\+Window}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+DTW}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{distance}{}\end{DoxyParamCaption})}
+
+
+
+Dynamic Time Warping distance. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Distance} & Distance matrix (Query rows \texorpdfstring{$\ast$}{*} Template columns) \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Window} & Windowing matrix (can be NULL if no windowing used) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+DTW} & Temporary cost buffer (same size) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em distance} & Distance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR in case no path can be found with window constraint
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Windowing matrix}
+
+\end{DoxyParagraph}
+The windowing matrix is used to impose some constraints on the search for a path. The algorithm will run faster (smaller search path) but may not be able to find a solution.
+
+The distance matrix must be initialized only where the windowing matrix is containing 1. Thus, use of a window also decreases the number of distances which must be computed. \Hypertarget{group___d_t_w_gad01cfea6e191b26eb12deddaf4a8c8c7}\index{Dynamic Time Warping Distance@{Dynamic Time Warping Distance}!arm\_dtw\_init\_window\_q7@{arm\_dtw\_init\_window\_q7}}
+\index{arm\_dtw\_init\_window\_q7@{arm\_dtw\_init\_window\_q7}!Dynamic Time Warping Distance@{Dynamic Time Warping Distance}}
+\doxysubsubsection{\texorpdfstring{arm\_dtw\_init\_window\_q7()}{arm\_dtw\_init\_window\_q7()}}
+{\footnotesize\ttfamily \label{group___d_t_w_gad01cfea6e191b26eb12deddaf4a8c8c7} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+dtw\+\_\+init\+\_\+window\+\_\+q7 (\begin{DoxyParamCaption}\item[{const arm\+\_\+dtw\+\_\+window}]{window\+Type}{, }\item[{const int32\+\_\+t}]{window\+Size}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}}]{p\+Window}{}\end{DoxyParamCaption})}
+
+
+
+Window for dynamic time warping computation. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em window\+Type} & Type of window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em window\+Size} & Window size \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p\+Window} & Window \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error if window type not recognized
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Windowing matrix}
+The window matrix will contain 1 for the position which are accepted and 0 for the positions which are rejected.
+\end{DoxyParagraph}
+The input matrix must already contain a buffer and the number of rows (query length) and columns (template length) must be initialized. The function will fill the matrix with 0 and 1. \Hypertarget{group___d_t_w_ga26f2e5b0a972fe282b190f2b6fbf7d22}\index{Dynamic Time Warping Distance@{Dynamic Time Warping Distance}!arm\_dtw\_path\_f32@{arm\_dtw\_path\_f32}}
+\index{arm\_dtw\_path\_f32@{arm\_dtw\_path\_f32}!Dynamic Time Warping Distance@{Dynamic Time Warping Distance}}
+\doxysubsubsection{\texorpdfstring{arm\_dtw\_path\_f32()}{arm\_dtw\_path\_f32()}}
+{\footnotesize\ttfamily \label{group___d_t_w_ga26f2e5b0a972fe282b190f2b6fbf7d22} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dtw\+\_\+path\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+DTW}{, }\item[{int16\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+Path}{, }\item[{uint32\+\_\+t \texorpdfstring{$\ast$}{*}}]{path\+Length}{}\end{DoxyParamCaption})}
+
+
+
+Mapping between query and template. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+DTW} & Cost matrix (Query rows \texorpdfstring{$\ast$}{*} Template columns) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Path} & Warping path in cost matrix 2\texorpdfstring{$\ast$}{*}(nb rows + nb columns) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em path\+Length} & Length of path in number of points\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Warping path}
+
+\end{DoxyParagraph}
+The warping path has length which is at most 2\texorpdfstring{$\ast$}{*}(query length + template length) in float. 2 because it is a list of coordinates :\+ (query index, template index) coordinate.
+
+The buffer p\+Path must be big enough to contain the warping path.
+
+path\+Length is the number of points in the returned path. The resturned path may be smaller than query + template. 

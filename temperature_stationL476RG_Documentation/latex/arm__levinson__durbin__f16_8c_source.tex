@@ -1,0 +1,261 @@
+\doxysection{arm\+\_\+levinson\+\_\+durbin\+\_\+f16.\+c}
+\hypertarget{arm__levinson__durbin__f16_8c_source}{}\label{arm__levinson__durbin__f16_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_levinson\_durbin\_f16.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_levinson\_durbin\_f16.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_levinson\_durbin\_f16.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ f16\ version\ of\ Levinson\ Durbin\ algorithm}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/filtering\_functions\_f16.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVE\_FLOAT16)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ \&\&\ defined(ARM\_DSP\_BUILT\_WITH\_GCC)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#pragma\ GCC\ warning\ "{}Scalar\ version\ of\ arm\_levinson\_durbin\_f16\ built.\ Helium\ version\ has\ build\ issues\ with\ gcc."{}}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#endif\ }}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVE\_FLOAT16)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ \&\&\ \ !defined(ARM\_DSP\_BUILT\_WITH\_GCC)}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ LANE4567\_MASK\ 0xFF00}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_levinson\_durbin\_f16(\textcolor{keyword}{const}\ float16\_t\ *phi,}
+\DoxyCodeLine{00061\ \ \ float16\_t\ *a,\ }
+\DoxyCodeLine{00062\ \ \ float16\_t\ *err,}
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{int}\ nbCoefs)}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \_Float16\ e;}
+\DoxyCodeLine{00066\ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ uint16\_t\ revOffsetArray[8]\ =\ \{7,6,5,4,3,2,1,0\};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ a[0]\ =\ (\_Float16)phi[1]\ /\ (\_Float16)phi[0];}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ e\ =\ (\_Float16)phi[0]\ -\/\ (\_Float16)phi[1]\ *\ (\_Float16)a[0];}
+\DoxyCodeLine{00071\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ p=1;\ p\ <\ nbCoefs;\ p++)}
+\DoxyCodeLine{00072\ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \_Float16\ suma\ =\ 0.0f16;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \_Float16\ sumb\ =\ 0.0f16;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ f16x8\_t\ vecA,vecRevPhi,vecPhi,vecSumA,\ vecSumB;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \_Float16\ k;}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ uint32\_t\ blkCnt;\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pPhi,*pRevPhi,*pA;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ uint16x8\_t\ revOffset;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nb,j,i;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ revOffset\ =\ vld1q(revOffsetArray);}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ vecSumA\ =\ vdupq\_n\_f16(0.0f16);}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ vecSumB\ =\ vdupq\_n\_f16(0.0f16);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ pRevPhi\ =\ \&phi[p-\/7];}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ pPhi\ =\ \&phi[1];}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ pA\ =\ a;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ i\ =\ 0;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ blkCnt\ =\ p\ >>\ 3;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ vecA\ =\ vld1q(pA);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ pA\ +=\ 8;}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ vecPhi\ =\ vld1q(pPhi);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ pPhi\ +=\ 8;}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ vecRevPhi\ =\ vldrhq\_gather\_shifted\_offset\_f16(pRevPhi,revOffset);}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ pRevPhi\ -\/=\ 8;}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ vecSumA\ =\ vfmaq(vecSumA,vecA,vecRevPhi);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ vecSumB\ =\ vfmaq(vecSumB,vecA,vecPhi);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ i\ +=\ 8;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ suma\ =\ vecAddAcrossF16Mve(vecSumA);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ sumb\ =\ vecAddAcrossF16Mve(vecSumB);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ blkCnt\ =\ p\ \&\ 7;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \textcolor{keywordflow}{while}(blkCnt\ >\ 0)}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ suma\ +=\ (\_Float16)a[i]\ *\ (\_Float16)phi[p\ -\/\ i];}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ sumb\ +=\ (\_Float16)a[i]\ *\ (\_Float16)phi[i\ +\ 1];}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ i++;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ k\ =\ ((\_Float16)phi[p+1]\ -\/\ suma)/((\_Float16)phi[0]\ -\/\ sumb);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ f16x8\_t\ vecRevA,tmp;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \textcolor{keyword}{static}\ int16\_t\ orgOffsetArray[8]=\{0,1,2,3,-\/1,-\/2,-\/3,-\/4\};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ int16\_t\ offsetIncArray[8]=\{4,4,4,4,-\/4,-\/4,-\/4,-\/4\};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ uint16x8\_t\ offset,offsetInc,vecTmp;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ offset\ =\ vld1q\_u16((uint16\_t*)orgOffsetArray);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ vecTmp\ =\ vdupq\_n\_u16(p);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ offset\ =\ vaddq\_m\_u16(offset,offset,vecTmp,LANE4567\_MASK);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ offsetInc\ =\ vld1q\_u16((uint16\_t*)offsetIncArray);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ nb\ =\ p\ >>\ 3;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ j=0;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ nb\ ;\ i++)}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ x0=a[j]\ -\/\ k\ *\ a[p-\/1-\/j];}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ x1=a[j+1]\ -\/\ k\ *\ a[p-\/2-\/j];}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ x3=a[p-\/1-\/j]\ -\/\ k\ *\ a[j];}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ x4=a[p-\/2-\/j]\ -\/\ k\ *\ a[j+1];}}
+\DoxyCodeLine{00150\ \textcolor{comment}{}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ x0;}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ a[j+1]\ =\ x1;}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ x2;}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ a[p-\/2-\/j]\ =\ x3;}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ uint64\_t\ tmpa,tmpb;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ vecA\ =\ vldrhq\_gather\_shifted\_offset\_f16(a,offset);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ tmpa\ =\ vgetq\_lane\_u64((uint64x2\_t)vecA,0);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ tmpb\ =\ vgetq\_lane\_u64((uint64x2\_t)vecA,1);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ vecRevA\ =\ (f16x8\_t)\ vsetq\_lane\_u64(tmpb,(uint64x2\_t)vecRevA,0);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ vecRevA\ =\ (f16x8\_t)\ vsetq\_lane\_u64(tmpa,(uint64x2\_t)vecRevA,1);}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vsubq(vecA,vmulq\_n\_f16(vecRevA,k));}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ vstrhq\_scatter\_shifted\_offset\_f16(a,\ offset,\ tmp);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ offset\ =\ vaddq(offset,offsetInc);}
+\DoxyCodeLine{00171\ \ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ j+=4;}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \ \ blkCnt\ =\ p\ \&\ 7;}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (blkCnt)}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ nb\ =\ blkCnt\ >>\ 1;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =0;i\ <\ nb\ ;\ i++)}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \_Float16\ x,y;}
+\DoxyCodeLine{00184\ \ \ \ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ x=(\_Float16)a[j]\ -\/\ (\_Float16)k\ *\ (\_Float16)a[p-\/1-\/j];}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ y=(\_Float16)a[p-\/1-\/j]\ -\/\ (\_Float16)k\ *\ (\_Float16)a[j];}
+\DoxyCodeLine{00187\ \ \ \ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ x;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ y;}
+\DoxyCodeLine{00190\ \ \ \ }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ j++;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ nb\ =\ blkCnt\ \&\ 1;}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nb)}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ a[j]=(\_Float16)a[j]-\/\ (\_Float16)k\ *\ (\_Float16)a[p-\/1-\/j];}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ a[p]\ =\ k;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ e\ =\ e\ *\ (1.0f16\ -\/\ k*k);}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \}}
+\DoxyCodeLine{00207\ \ \ \ *err\ =\ e;}
+\DoxyCodeLine{00208\ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\#if\ defined(ARM\_FLOAT16\_SUPPORTED)}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_levinson\_durbin\_f16(\textcolor{keyword}{const}\ float16\_t\ *phi,}
+\DoxyCodeLine{00215\ \ \ float16\_t\ *a,\ }
+\DoxyCodeLine{00216\ \ \ float16\_t\ *err,}
+\DoxyCodeLine{00217\ \ \ \textcolor{keywordtype}{int}\ nbCoefs)}
+\DoxyCodeLine{00218\ \{}
+\DoxyCodeLine{00219\ \ \ \ \_Float16\ e;}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ a[0]\ =\ (\_Float16)phi[1]\ /\ (\_Float16)phi[0];}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ e\ =\ (\_Float16)phi[0]\ -\/\ (\_Float16)phi[1]\ *\ (\_Float16)a[0];}
+\DoxyCodeLine{00224\ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ p=1;\ p\ <\ nbCoefs;\ p++)}
+\DoxyCodeLine{00225\ \ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \_Float16\ suma=0.0f16;}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \_Float16\ sumb=0.0f16;}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \_Float16\ k;}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ nb,j;}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i=0;\ i\ <\ p;\ i++)}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ suma\ +=\ (\_Float16)a[i]\ *\ (\_Float16)phi[p\ -\/\ i];}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ sumb\ +=\ (\_Float16)a[i]\ *\ (\_Float16)phi[i\ +\ 1];}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ k\ =\ ((\_Float16)phi[p+1]-\/suma)/((\_Float16)phi[0]\ -\/\ sumb);}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ nb\ =\ p\ >>\ 1;}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ j=0;}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =0;i\ <\ nb\ ;\ i++)}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \_Float16\ x,y;}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ x=(\_Float16)a[j]\ -\/\ (\_Float16)k\ *\ (\_Float16)a[p-\/1-\/j];}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ y=(\_Float16)a[p-\/1-\/j]\ -\/\ (\_Float16)k\ *\ (\_Float16)a[j];}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ a[j]\ =\ x;}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ a[p-\/1-\/j]\ =\ y;}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ j++;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ nb\ =\ p\ \&\ 1;}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (nb)}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ a[j]=(\_Float16)a[j]-\/\ (\_Float16)k\ *\ (\_Float16)a[p-\/1-\/j];}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ a[p]\ =\ k;}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ e\ =\ e\ *\ (1.0f16\ -\/\ k*k);}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \}}
+\DoxyCodeLine{00266\ \ \ \ *err\ =\ e;}
+\DoxyCodeLine{00267\ \}}
+\DoxyCodeLine{00268\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_FLOAT16\_SUPPORTED\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ */}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,43 @@
+\doxysection{Dokumentacja struktury Temp\+Sensor\+Handle\+\_\+filter\+\_\+t}
+\hypertarget{struct_temp_sensor_handle__filter__t}{}\label{struct_temp_sensor_handle__filter__t}\index{TempSensorHandle\_filter\_t@{TempSensorHandle\_filter\_t}}
+
+
+Struktura przechowująca dane filtra FIR dla pojedynczego czujnika.  
+
+
+
+
+{\ttfamily \+\#include $<$temperature\+\_\+sensor.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+arm\+\_\+fir\+\_\+instance\+\_\+f32 \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t_a4ea56e400307ee6511dd43edb9e31353}{fir}}
+\item 
+float32\+\_\+t \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t_ab3804d2dbcea4e3dc5312f5aec06c5b2}{state}} \+[\doxymbox{\hyperlink{_s_m_a1__fir_8h_a008898a303a3a3a631ee33a9cc83e77f}{SMA1\+\_\+\+NUM\+\_\+\+TAPS}}+\doxymbox{\hyperlink{_s_m_a1__fir_8h_a3ae01460c555625bf822ad3e657f97cc}{SMA1\+\_\+\+BLOCK\+\_\+\+SIZE}} -\/ 1]\+
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura przechowująca dane filtra FIR dla pojedynczego czujnika. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_temp_sensor_handle__filter__t_doc-variable-members}
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_temp_sensor_handle__filter__t_a4ea56e400307ee6511dd43edb9e31353}\index{TempSensorHandle\_filter\_t@{TempSensorHandle\_filter\_t}!fir@{fir}}
+\index{fir@{fir}!TempSensorHandle\_filter\_t@{TempSensorHandle\_filter\_t}}
+\doxysubsubsection{\texorpdfstring{fir}{fir}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__filter__t_a4ea56e400307ee6511dd43edb9e31353} 
+arm\+\_\+fir\+\_\+instance\+\_\+f32 fir}
+
+Instancja filtra CMSIS-\/\+DSP \Hypertarget{struct_temp_sensor_handle__filter__t_ab3804d2dbcea4e3dc5312f5aec06c5b2}\index{TempSensorHandle\_filter\_t@{TempSensorHandle\_filter\_t}!state@{state}}
+\index{state@{state}!TempSensorHandle\_filter\_t@{TempSensorHandle\_filter\_t}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily \label{struct_temp_sensor_handle__filter__t_ab3804d2dbcea4e3dc5312f5aec06c5b2} 
+float32\+\_\+t state\+[\doxymbox{\hyperlink{_s_m_a1__fir_8h_a008898a303a3a3a631ee33a9cc83e77f}{SMA1\+\_\+\+NUM\+\_\+\+TAPS}}+\doxymbox{\hyperlink{_s_m_a1__fir_8h_a3ae01460c555625bf822ad3e657f97cc}{SMA1\+\_\+\+BLOCK\+\_\+\+SIZE}} -\/ 1]\+}
+
+Bufor stanu filtra 
+
+Dokumentacja dla tej struktury została wygenerowana z pliku:\+\begin{DoxyCompactItemize}
+\item 
+Core/\+\+Inc/\+\doxymbox{\hyperlink{temperature__sensor_8h}{temperature\+\_\+sensor.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,44 @@
+\doxysubsubsection{Quaternion to Rotation }
+\hypertarget{group___quat_rot}{}\label{group___quat_rot}\index{Quaternion to Rotation@{Quaternion to Rotation}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___quat_rot_gac3fe612af47335af460d8a51860f6054}{arm\+\_\+quaternion2rotation\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Input\+Quaternions, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Output\+Rotations, uint32\+\_\+t nb\+Quaternions)
+\begin{DoxyCompactList}\small\item\em Conversion of quaternion to equivalent rotation matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+Conversions from quaternion to rotation.
+
+\label{doc-func-members}
+\Hypertarget{group___quat_rot_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___quat_rot_gac3fe612af47335af460d8a51860f6054}\index{Quaternion to Rotation@{Quaternion to Rotation}!arm\_quaternion2rotation\_f32@{arm\_quaternion2rotation\_f32}}
+\index{arm\_quaternion2rotation\_f32@{arm\_quaternion2rotation\_f32}!Quaternion to Rotation@{Quaternion to Rotation}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_quaternion2rotation\_f32()}{arm\_quaternion2rotation\_f32()}}
+{\footnotesize\ttfamily \label{group___quat_rot_gac3fe612af47335af460d8a51860f6054} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+quaternion2rotation\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Input\+Quaternions}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Output\+Rotations}{, }\item[{uint32\+\_\+t}]{nb\+Quaternions}{}\end{DoxyParamCaption})}
+
+
+
+Conversion of quaternion to equivalent rotation matrix. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Input\+Quaternions} & points to an array of normalized quaternions \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Output\+Rotations} & points to an array of 3x3 rotations (in row order) \\
+\hline
+\doxymbox{\texttt{in}}  & {\em nb\+Quaternions} & number of quaternions in the array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{}
+Format of rotation matrix
+\end{DoxyParagraph}
+The quaternion a + ib + jc + kd is converted into rotation matrix:\+ 
+\begin{DoxyPre}
+  a^2 + b^2 -\/ c^2 -\/ d^2                 2bc -\/ 2ad                 2bd + 2ac
+              2bc + 2ad     a^2 -\/ b^2 + c^2 -\/ d^2                 2cd -\/ 2ab
+              2bd -\/ 2ac                 2cd + 2ab     a^2 -\/ b^2 -\/ c^2 + d^2
+\end{DoxyPre}
+ Rotation matrix is saved in row order :\+ R00 R01 R02 R10 R11 R12 R20 R21 R22 

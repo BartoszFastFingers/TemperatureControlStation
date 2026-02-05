@@ -1,8 +1,15 @@
-/*
- * uart_protocol.h
+/**
+ * @file uart_protocol.h
+ * @brief Protokół UART dla komunikacji z PC/innym urządzeniem (komendy, odczyt temperatury, PWM)
  *
- *  Created on: 1 lut 2026
- *      Author: 00ary
+ * Plik definiuje struktury, komendy i funkcje obsługujące protokół UART:
+ * - obsługa komend (PING, SET TEMP, START/STOP, PID),
+ * - wysyłanie danych pomiarowych,
+ * - obliczanie CRC8,
+ * - parsowanie odebranych bajtów.
+ *
+ * @author 00ary
+ * @date 01-Feb-2026
  */
 
 #ifndef CORE_INC_UART_PROTOCOL_H_
@@ -13,48 +20,54 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
+/** @def UART_PROTOCOL_HANDLE Domyślny uchwyt UART */
 #define UART_PROTOCOL_HANDLE    huart2
+/** @def UART_RX_BUFFER_SIZE Rozmiar bufora odbiorczego */
 #define UART_RX_BUFFER_SIZE     128
+/** @def UART_TX_BUFFER_SIZE Rozmiar bufora nadawczego */
 #define UART_TX_BUFFER_SIZE     128
 
-
+/**
+ * @brief Lista dostępnych komend UART
+ */
 typedef enum {
-    CMD_NONE = 0,
-    CMD_PING,           // $PING*XX
-    CMD_SET_TEMP,       // $SETP,40.0*XX
-    CMD_GET_STATUS,     // $STAT*XX
-    CMD_START,          // $START*XX
-    CMD_STOP,           // $STOP*XX
-    CMD_SET_KP,         // $SEKP,10.5*XX
-    CMD_SET_KI,         // $SEKI,0.5*XX
-    CMD_SET_KD,         // $SEKD,0.0*XX
+    CMD_NONE = 0,       /**< Brak komendy */
+    CMD_PING,           /**< $PING*XX */
+    CMD_SET_TEMP,       /**< $SETP,40.0*XX */
+    CMD_GET_STATUS,     /**< $STAT*XX */
+    CMD_START,          /**< $START*XX */
+    CMD_STOP,           /**< $STOP*XX */
+    CMD_SET_KP,         /**< $SEKP,10.5*XX */
+    CMD_SET_KI,         /**< $SEKI,0.5*XX */
+    CMD_SET_KD,         /**< $SEKD,0.0*XX */
 } UartCommand_t;
 
-
+/**
+ * @brief Struktura protokołu UART
+ */
 typedef struct {
-    UART_HandleTypeDef *huart;
+    UART_HandleTypeDef *huart; /**< Wskaźnik do UART */
 
     // Bufor odbiorczy
-    uint8_t rx_buffer[UART_RX_BUFFER_SIZE];
-    uint16_t rx_index;
-    bool rx_complete;
+    uint8_t rx_buffer[UART_RX_BUFFER_SIZE]; /**< Bufor przychodzący */
+    uint16_t rx_index;                       /**< Indeks w buforze RX */
+    bool rx_complete;                        /**< Flaga zakończenia odbioru */
 
     // Bufor nadawczy
-    uint8_t tx_buffer[UART_TX_BUFFER_SIZE];
+    uint8_t tx_buffer[UART_TX_BUFFER_SIZE]; /**< Bufor nadawczy */
 
     // Parsowana komenda
-    UartCommand_t last_command;
-    float command_arg;
+    UartCommand_t last_command; /**< Ostatnia odebrana komenda */
+    float command_arg;           /**< Argument komendy */
 
     // Status
-    bool running;
-
+    bool running;                /**< Flaga stanu systemu */
 } UartProtocol_t;
 
+/* ===================== FUNKCJE ===================== */
 
 /**
- * @brief Inicjalizacja protokołu
+ * @brief Inicjalizacja protokołu UART
  * @param proto Wskaźnik na strukturę protokołu
  * @param huart Uchwyt UART
  */
@@ -128,6 +141,5 @@ float UartProtocol_GetArg(UartProtocol_t *proto);
  * @return true jeśli CRC poprawne
  */
 bool UartProtocol_VerifyCRC(UartProtocol_t *proto);
-
 
 #endif /* CORE_INC_UART_PROTOCOL_H_ */

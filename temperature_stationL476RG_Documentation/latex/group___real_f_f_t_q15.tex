@@ -1,0 +1,478 @@
+\doxysubsubsection{Real FFT Q15 Functions }
+\hypertarget{group___real_f_f_t_q15}{}\label{group___real_f_f_t_q15}\index{Real FFT Q15 Functions@{Real FFT Q15 Functions}}
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___real_f_f_t_q15_ga25011a7d1b15781b1b62312f43175eb4}{RFFTINIT\+\_\+\+Q15}}(LEN,  CFFTLEN,  TWIDMOD)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___real_f_f_t_q15_ga66123fc269dba29d4199a702c242d72b}{arm\+\_\+rfft\+\_\+init\+\_\+q15}} (\doxymbox{\hyperlink{structarm__rfft__instance__q15}{arm\+\_\+rfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, uint32\+\_\+t fft\+Len\+Real, uint32\+\_\+t ifft\+FlagR, uint32\+\_\+t bit\+Reverse\+Flag)
+\begin{DoxyCompactList}\small\item\em Initialization function for the 8192 pt Q15 real FFT. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___real_f_f_t_q15_ga9a9307554139bcc033f6fef21931213e}{arm\+\_\+rfft\+\_\+q15}} (const \doxymbox{\hyperlink{structarm__rfft__instance__q15}{arm\+\_\+rfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Processing function for the Q15 RFFT/\+\+RIFFT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group___real_f_f_t_q15_doc-define-members}
+\doxysubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___real_f_f_t_q15_ga25011a7d1b15781b1b62312f43175eb4}\index{Real FFT Q15 Functions@{Real FFT Q15 Functions}!RFFTINIT\_Q15@{RFFTINIT\_Q15}}
+\index{RFFTINIT\_Q15@{RFFTINIT\_Q15}!Real FFT Q15 Functions@{Real FFT Q15 Functions}}
+\doxysubsubsubsubsection{\texorpdfstring{RFFTINIT\_Q15}{RFFTINIT\_Q15}}
+{\footnotesize\ttfamily \label{group___real_f_f_t_q15_ga25011a7d1b15781b1b62312f43175eb4} 
+\+\#define RFFTINIT\+\_\+\+Q15(\begin{DoxyParamCaption}\item[{}]{LEN}{, }\item[{}]{CFFTLEN}{, }\item[{}]{TWIDMOD}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_rfft\_init\_\#\#LEN\#\#\_q15(\ \doxymbox{\hyperlink{structarm__rfft__instance__q15}{arm\_rfft\_instance\_q15}}\ *\ S,\ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ ifftFlagR,\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ bitReverseFlag\ )\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ \ Initialize\ the\ Real\ FFT\ length\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>fftLenReal\ =\ (uint16\_t)\ LEN;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ \ Initialize\ the\ Twiddle\ coefficientA\ pointer\ */}\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>pTwiddleAReal\ =\ (\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *)\ realCoefAQ15;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ \ Initialize\ the\ Twiddle\ coefficientB\ pointer\ */}\ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>pTwiddleBReal\ =\ (\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t}}\ *)\ realCoefBQ15;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ \ Initialize\ the\ Flag\ for\ selection\ of\ RFFT\ or\ RIFFT\ */}\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>ifftFlagR\ =\ (uint8\_t)\ ifftFlagR;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ \ Initialize\ the\ Flag\ for\ calculation\ Bit\ reversal\ or\ not\ */}\(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>bitReverseFlagR\ =\ (uint8\_t)\ bitReverseFlag;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>twidCoefRModifier\ =\ TWIDMOD;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ S-\/>pCfft\ =\ \&arm\_cfft\_sR\_q15\_len\#\#CFFTLEN;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ return\ the\ status\ of\ RFFT\ Init\ function\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ return\ (\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}});\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{group___real_f_f_t_q15_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___real_f_f_t_q15_ga66123fc269dba29d4199a702c242d72b}\index{Real FFT Q15 Functions@{Real FFT Q15 Functions}!arm\_rfft\_init\_q15@{arm\_rfft\_init\_q15}}
+\index{arm\_rfft\_init\_q15@{arm\_rfft\_init\_q15}!Real FFT Q15 Functions@{Real FFT Q15 Functions}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_rfft\_init\_q15()}{arm\_rfft\_init\_q15()}}
+{\footnotesize\ttfamily \label{group___real_f_f_t_q15_ga66123fc269dba29d4199a702c242d72b} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+rfft\+\_\+init\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__rfft__instance__q15}{arm\+\_\+rfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint32\+\_\+t}]{fft\+Len\+Real}{, }\item[{uint32\+\_\+t}]{ifft\+FlagR}{, }\item[{uint32\+\_\+t}]{bit\+Reverse\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the 8192 pt Q15 real FFT. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 4096 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 2048 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 1024 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 512 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 256 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 128 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 64 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Initialization function for the 32 pt Q15 real FFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table.
+\end{DoxyParagraph}
+Generic initialization function for the Q15 RFFT/\+\+RIFFT. 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em fft\+Len\+Real} & length of the FFT \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+FlagR} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ {\ttfamily fft\+Len\+Real} is not a supported length
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Details}
+The parameter {\ttfamily fft\+Len\+Real} specifies length of RFFT/\+\+RIFFT Process. Supported FFT Lengths are 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily ifft\+FlagR} controls whether a forward or inverse transform is computed. Set(=1) ifft\+FlagR to calculate RIFFT, otherwise RFFT is calculated. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The parameter {\ttfamily bit\+Reverse\+Flag} controls whether output is in normal order or bit reversed order. Set(=1) bit\+Reverse\+Flag for output to be in normal order otherwise output is in bit reversed order. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function also initializes Twiddle factor table. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function should be used only if you don\textquotesingle{}t know the FFT sizes that you\textquotesingle{}ll need at build time. The use of this function will prevent the linker from removing the FFT tables that are not needed and the library code size will be bigger than needed. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+If you use CMSIS-\/\+DSP as a static library, and if you know the FFT sizes that you need at build time, then it is better to use the initialization functions defined for each FFT size. 
+\end{DoxyParagraph}
+\Hypertarget{group___real_f_f_t_q15_ga9a9307554139bcc033f6fef21931213e}\index{Real FFT Q15 Functions@{Real FFT Q15 Functions}!arm\_rfft\_q15@{arm\_rfft\_q15}}
+\index{arm\_rfft\_q15@{arm\_rfft\_q15}!Real FFT Q15 Functions@{Real FFT Q15 Functions}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_rfft\_q15()}{arm\_rfft\_q15()}}
+{\footnotesize\ttfamily \label{group___real_f_f_t_q15_ga9a9307554139bcc033f6fef21931213e} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+rfft\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__rfft__instance__q15}{arm\+\_\+rfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Processing function for the Q15 RFFT/\+\+RIFFT. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & points to an instance of the Q15 RFFT/\+\+RIFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input buffer (Source buffer is modified by this function.) \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output buffer\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Input an output formats}
+Internally input is downscaled by 2 for every stage to avoid saturations inside CFFT/\+\+CIFFT process. Hence the output format is different for different RFFT sizes. The input and output formats for different RFFT sizes and number of bits to upscale are mentioned in the tables below for RFFT and RIFFT:\+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Input and Output formats for RFFT Q15}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}RFFT Size  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Input Format  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Output Format  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Number of bits to upscale  \\
+\SetCell{r}32  &\SetCell{r}1.\+15  &\SetCell{r}6.\+10  &\SetCell{r}5  \\
+\SetCell{r}64  &\SetCell{r}1.\+15  &\SetCell{r}7.\+9  &\SetCell{r}6  \\
+\SetCell{r}128  &\SetCell{r}1.\+15  &\SetCell{r}8.\+8  &\SetCell{r}7  \\
+\SetCell{r}256  &\SetCell{r}1.\+15  &\SetCell{r}9.\+7  &\SetCell{r}8  \\
+\SetCell{r}512  &\SetCell{r}1.\+15  &\SetCell{r}10.\+6  &\SetCell{r}9  \\
+\SetCell{r}1024  &\SetCell{r}1.\+15  &\SetCell{r}11.\+5  &\SetCell{r}10  \\
+\SetCell{r}2048  &\SetCell{r}1.\+15  &\SetCell{r}12.\+4  &\SetCell{r}11  \\
+\SetCell{r}4096  &\SetCell{r}1.\+15  &\SetCell{r}13.\+3  &\SetCell{r}12  \\
+\SetCell{r}8192  &\SetCell{r}1.\+15  &\SetCell{r}14.\+2  &\SetCell{r}13  \\
+\end{DoxyTable}
+
+
+\begin{DoxyParagraph}{Input and Output formats for RIFFT Q15}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}RIFFT Size  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Input Format  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Output Format  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Number of bits to upscale  \\
+\SetCell{r}32  &\SetCell{r}1.\+15  &\SetCell{r}6.\+10  &\SetCell{r}0  \\
+\SetCell{r}64  &\SetCell{r}1.\+15  &\SetCell{r}7.\+9  &\SetCell{r}0  \\
+\SetCell{r}128  &\SetCell{r}1.\+15  &\SetCell{r}8.\+8  &\SetCell{r}0  \\
+\SetCell{r}256  &\SetCell{r}1.\+15  &\SetCell{r}9.\+7  &\SetCell{r}0  \\
+\SetCell{r}512  &\SetCell{r}1.\+15  &\SetCell{r}10.\+6  &\SetCell{r}0  \\
+\SetCell{r}1024  &\SetCell{r}1.\+15  &\SetCell{r}11.\+5  &\SetCell{r}0  \\
+\SetCell{r}2048  &\SetCell{r}1.\+15  &\SetCell{r}12.\+4  &\SetCell{r}0  \\
+\SetCell{r}4096  &\SetCell{r}1.\+15  &\SetCell{r}13.\+3  &\SetCell{r}0  \\
+\SetCell{r}8192  &\SetCell{r}1.\+15  &\SetCell{r}14.\+2  &\SetCell{r}0  \\
+\end{DoxyTable}
+
+
+\begin{DoxyParagraph}{}
+If the input buffer is of length N (fft\+Len\+Real), the output buffer must have length 2N since it is containing the conjugate part (except for MVE version where N+2 is enough). The input buffer is modified by this function. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+For the RIFFT, the source buffer must have length N+2 since the Nyquist frequency value is needed but conjugate part is ignored. It is not using the packing trick of the float version. 
+\end{DoxyParagraph}

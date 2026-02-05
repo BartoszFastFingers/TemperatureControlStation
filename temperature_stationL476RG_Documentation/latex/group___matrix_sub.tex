@@ -1,0 +1,151 @@
+\doxysubsection{Matrix Subtraction }
+\hypertarget{group___matrix_sub}{}\label{group___matrix_sub}\index{Matrix Subtraction@{Matrix Subtraction}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_sub_gab8a2573dce05775f12ef9cb619dba84e}{arm\+\_\+mat\+\_\+sub\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix subtraction. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_sub_ga41a972a84c8eb7da1c51d3c8de54ce03}{arm\+\_\+mat\+\_\+sub\+\_\+f64}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix subtraction. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_sub_ga12d981ce7bbe4b9a37237b36c30fd7cb}{arm\+\_\+mat\+\_\+sub\+\_\+q15}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q15 matrix subtraction. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_sub_gadf947157a70ec11344abdaf8fbf63cf4}{arm\+\_\+mat\+\_\+sub\+\_\+q31}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q31 matrix subtraction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Subtract two matrices. \begin{DoxyParagraph}{Subraction of two 3 x 3 matrices}
+
+\end{DoxyParagraph}
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} \\
+ a_{2,1} & a_{2,2} & a_{2,3} \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}
+-
+\begin{pmatrix}
+ b_{1,1} & b_{1,2} & b_{1,3} \\
+ b_{2,1} & b_{2,2} & b_{2,3} \\
+ b_{3,1} & b_{3,2} & b_{3,3} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+ a_{1,1}-b_{1,1} & a_{1,2}-b_{1,2} & a_{1,3}-b_{1,3} \\
+ a_{2,1}-b_{2,1} & a_{2,2}-b_{2,2} & a_{2,3}-b_{2,3} \\
+ a_{3,1}-b_{3,1} & a_{3,2}-b_{3,2} & a_{3,3}-b_{3,3} \\
+\end{pmatrix}
+\] The functions check to make sure that {\ttfamily p\+SrcA}, {\ttfamily p\+SrcB}, and {\ttfamily p\+Dst} have the same number of rows and columns.
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_sub_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_sub_gab8a2573dce05775f12ef9cb619dba84e}\index{Matrix Subtraction@{Matrix Subtraction}!arm\_mat\_sub\_f32@{arm\_mat\_sub\_f32}}
+\index{arm\_mat\_sub\_f32@{arm\_mat\_sub\_f32}!Matrix Subtraction@{Matrix Subtraction}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_sub\_f32()}{arm\_mat\_sub\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_sub_gab8a2573dce05775f12ef9cb619dba84e} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+sub\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix subtraction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input matrix structure \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_sub_ga41a972a84c8eb7da1c51d3c8de54ce03}\index{Matrix Subtraction@{Matrix Subtraction}!arm\_mat\_sub\_f64@{arm\_mat\_sub\_f64}}
+\index{arm\_mat\_sub\_f64@{arm\_mat\_sub\_f64}!Matrix Subtraction@{Matrix Subtraction}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_sub\_f64()}{arm\_mat\_sub\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_sub_ga41a972a84c8eb7da1c51d3c8de54ce03} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+sub\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix subtraction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input matrix structure \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_sub_ga12d981ce7bbe4b9a37237b36c30fd7cb}\index{Matrix Subtraction@{Matrix Subtraction}!arm\_mat\_sub\_q15@{arm\_mat\_sub\_q15}}
+\index{arm\_mat\_sub\_q15@{arm\_mat\_sub\_q15}!Matrix Subtraction@{Matrix Subtraction}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_sub\_q15()}{arm\_mat\_sub\_q15()}}
+{\footnotesize\ttfamily \label{group___matrix_sub_ga12d981ce7bbe4b9a37237b36c30fd7cb} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+sub\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q15 matrix subtraction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input matrix structure \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. Results outside of the allowable Q15 range \+[0x8000 0x7\+FFF]\+ are saturated. 
+\end{DoxyParagraph}
+\Hypertarget{group___matrix_sub_gadf947157a70ec11344abdaf8fbf63cf4}\index{Matrix Subtraction@{Matrix Subtraction}!arm\_mat\_sub\_q31@{arm\_mat\_sub\_q31}}
+\index{arm\_mat\_sub\_q31@{arm\_mat\_sub\_q31}!Matrix Subtraction@{Matrix Subtraction}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_sub\_q31()}{arm\_mat\_sub\_q31()}}
+{\footnotesize\ttfamily \label{group___matrix_sub_gadf947157a70ec11344abdaf8fbf63cf4} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+sub\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q31 matrix subtraction. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input matrix structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input matrix structure \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. Results outside of the allowable Q31 range \+[0x80000000 0x7\+FFFFFFF]\+ are saturated. 
+\end{DoxyParagraph}

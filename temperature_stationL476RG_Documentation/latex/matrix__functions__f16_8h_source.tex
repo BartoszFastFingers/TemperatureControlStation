@@ -1,0 +1,145 @@
+\doxysection{matrix\+\_\+functions\+\_\+f16.\+h}
+\hypertarget{matrix__functions__f16_8h_source}{}\label{matrix__functions__f16_8h_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Include/dsp/matrix\_functions\_f16.h@{Middlewares/Third\_Party/ARM\_CMSIS/Include/dsp/matrix\_functions\_f16.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/******************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ @file\ \ \ \ \ matrix\_functions\_f16.h}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ @brief\ \ \ \ Public\ header\ file\ for\ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ @version\ \ V1.10.0}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ @date\ \ \ \ \ 08\ July\ 2021}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ ******************************************************************************/}}
+\DoxyCodeLine{00008\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Copyright\ (c)\ 2010-\/2020\ Arm\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#ifndef\ MATRIX\_FUNCTIONS\_F16\_H\_}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ MATRIX\_FUNCTIONS\_F16\_H\_}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_types\_f16.h"{}}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_memory.h"{}}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#include\ "{}dsp/none.h"{}}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#include\ "{}dsp/utils.h"{}}}
+\DoxyCodeLine{00041\ \ \ \ \ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#if\ defined(ARM\_FLOAT16\_SUPPORTED)}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \#define\ DEFAULT\_HOUSEHOLDER\_THRESHOLD\_F16\ (1.0e-\/3f)}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00050\ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ uint16\_t\ numRows;\ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ uint16\_t\ numCols;\ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ float16\_t\ *pData;\ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \}\ arm\_matrix\_instance\_f16;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00064\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_add\_f16(}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcA,}
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcB,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00077\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_cmplx\_mult\_f16(}
+\DoxyCodeLine{00078\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcA,}
+\DoxyCodeLine{00079\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcB,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00089\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_trans\_f16(}
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrc,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00100\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_cmplx\_trans\_f16(}
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrc,}
+\DoxyCodeLine{00102\ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00112\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_mult\_f16(}
+\DoxyCodeLine{00113\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcA,}
+\DoxyCodeLine{00114\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcB,}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{void}\ arm\_mat\_vec\_mult\_f16(}
+\DoxyCodeLine{00123\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *pSrcMat,\ }
+\DoxyCodeLine{00124\ \ \ \textcolor{keyword}{const}\ float16\_t\ *pVec,\ }
+\DoxyCodeLine{00125\ \ \ float16\_t\ *pDst);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00135\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_sub\_f16(}
+\DoxyCodeLine{00136\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcA,}
+\DoxyCodeLine{00137\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrcB,}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00148\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_scale\_f16(}
+\DoxyCodeLine{00149\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrc,}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ float16\_t\ scale,}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pDst);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00160\ \textcolor{keywordtype}{void}\ arm\_mat\_init\_f16(}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ arm\_matrix\_instance\_f16\ *\ S,}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ uint16\_t\ nRows,}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ uint16\_t\ nColumns,}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ float16\_t\ *\ pData);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00174\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_inverse\_f16(}
+\DoxyCodeLine{00175\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ src,}
+\DoxyCodeLine{00176\ \ \ arm\_matrix\_instance\_f16\ *\ dst);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00188\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_cholesky\_f16(}
+\DoxyCodeLine{00189\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ src,}
+\DoxyCodeLine{00190\ \ \ arm\_matrix\_instance\_f16\ *\ dst);}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00199\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_solve\_upper\_triangular\_f16(}
+\DoxyCodeLine{00200\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ ut,}
+\DoxyCodeLine{00201\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ a,}
+\DoxyCodeLine{00202\ \ \ arm\_matrix\_instance\_f16\ *\ dst);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00211\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_solve\_lower\_triangular\_f16(}
+\DoxyCodeLine{00212\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ lt,}
+\DoxyCodeLine{00213\ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ a,}
+\DoxyCodeLine{00214\ \ \ arm\_matrix\_instance\_f16\ *\ dst);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00231\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_mat\_qr\_f16(}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keyword}{const}\ arm\_matrix\_instance\_f16\ *\ pSrc,}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ threshold,}
+\DoxyCodeLine{00234\ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pOutR,}
+\DoxyCodeLine{00235\ \ \ \ \ arm\_matrix\_instance\_f16\ *\ pOutQ,}
+\DoxyCodeLine{00236\ \ \ \ \ float16\_t\ *\ pOutTau,}
+\DoxyCodeLine{00237\ \ \ \ \ float16\_t\ *pTmpA,}
+\DoxyCodeLine{00238\ \ \ \ \ float16\_t\ *pTmpB}
+\DoxyCodeLine{00239\ \ \ \ \ );}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00249\ float16\_t\ arm\_householder\_f16(}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *\ pSrc,}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ threshold,}
+\DoxyCodeLine{00252\ \ \ \ \ uint32\_t\ \ \ \ blockSize,}
+\DoxyCodeLine{00253\ \ \ \ \ float16\_t\ *\ pOut}
+\DoxyCodeLine{00254\ \ \ \ \ );}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*defined(ARM\_FLOAT16\_SUPPORTED)*/}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#ifdef\ \ \ \_\_cplusplus}}
+\DoxyCodeLine{00258\ \}}
+\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ ifndef\ \_MATRIX\_FUNCTIONS\_F16\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

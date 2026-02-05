@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['nand_20aliased_20defines_20maintained_20for_20legacy_20purpose_0',['HAL NAND Aliased Defines maintained for legacy purpose',['../group___h_a_l___n_a_n_d___aliased___defines.html',1,'']]],
+  ['negate_1',['Vector Negate',['../group___basic_negate.html',1,'']]],
+  ['nested_20vectored_20interrupt_20controller_20nvic_2',['Nested Vectored Interrupt Controller (NVIC)',['../group___c_m_s_i_s___n_v_i_c.html',1,'']]],
+  ['network_20mode_3',['UART Local Interconnection Network mode',['../group___u_a_r_t___l_i_n.html',1,'']]],
+  ['no_20stretch_20mode_4',['I2C No-Stretch Mode',['../group___i2_c___n_o_s_t_r_e_t_c_h___m_o_d_e.html',1,'']]],
+  ['nor_20aliased_20defines_20maintained_20for_20legacy_20purpose_5',['HAL NOR Aliased Defines maintained for legacy purpose',['../group___h_a_l___n_o_r___aliased___defines.html',1,'']]],
+  ['norm_6',['Quaternion Norm',['../group___quat_norm.html',1,'']]],
+  ['normalization_7',['Quaternion normalization',['../group___quat_normalized.html',1,'']]],
+  ['normalized_20lms_20filters_8',['Normalized LMS Filters',['../group___l_m_s___n_o_r_m.html',1,'']]],
+  ['not_9',['Vector bitwise NOT',['../group___not.html',1,'']]],
+  ['not_20in_20scb_20scnscb_10',['System Controls not in SCB (SCnSCB)',['../group___c_m_s_i_s___s_cn_s_c_b.html',1,'']]],
+  ['nss_20pulse_20mode_11',['SPI NSS Pulse Mode',['../group___s_p_i___n_s_s_p___mode.html',1,'']]],
+  ['number_12',['number',['../group___a_d_c___h_a_l___e_c___c_h_a_n_n_e_l.html',1,'ADC instance - Channel number'],['../group___a_d_c___h_a_l___e_c___o_f_f_s_e_t___n_b.html',1,'ADC instance - Offset number'],['../group___a_d_c___h_a_l___e_c___a_w_d___n_u_m_b_e_r.html',1,'Analog watchdog - ADC analog watchdog (AWD) number']]],
+  ['number_20for_20i_20o_20setting_20in_20standby_20shutdown_20mode_13',['GPIO bit number for I/O setting in standby/shutdown mode',['../group___p_w_r_ex___g_p_i_o___bit___number.html',1,'']]],
+  ['number_20of_20stop_20bits_14',['UART Number of Stop Bits',['../group___u_a_r_t___stop___bits.html',1,'']]],
+  ['nuttall3_20window_20function_2046_207_20db_15',['Nuttall3 window function (46.7 dB)',['../group___window_n_u_t_t_a_l_l3.html',1,'']]],
+  ['nuttall3a_20window_20function_2064_202_20db_16',['Nuttall3a window function (64.2 dB)',['../group___window_n_u_t_t_a_l_l3_a.html',1,'']]],
+  ['nuttall3b_20window_20function_2071_205_20db_17',['Nuttall3b window function (71.5 dB)',['../group___window_n_u_t_t_a_l_l3_b.html',1,'']]],
+  ['nuttall4_20window_20function_2060_209_20db_18',['Nuttall4 window function (60.9 dB)',['../group___window_n_u_t_t_a_l_l4.html',1,'']]],
+  ['nuttall4a_20window_20function_2082_206_20db_19',['Nuttall4a window function (82.6 dB)',['../group___window_n_u_t_t_a_l_l4_a.html',1,'']]],
+  ['nuttall4b_20window_20function_2093_203_20db_20',['Nuttall4b window function (93.3 dB)',['../group___window_n_u_t_t_a_l_l4_b.html',1,'']]],
+  ['nuttall4c_20window_20function_2098_201_20db_21',['Nuttall4c window function (98.1 dB)',['../group___window_n_u_t_t_a_l_l4_c.html',1,'']]],
+  ['nvic_22',['Nested Vectored Interrupt Controller (NVIC)',['../group___c_m_s_i_s___n_v_i_c.html',1,'']]],
+  ['nvic_20functions_23',['NVIC Functions',['../group___c_m_s_i_s___core___n_v_i_c_functions.html',1,'']]]
+];

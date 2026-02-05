@@ -1,0 +1,264 @@
+\doxysubsubsection{Complex FFT Q15 }
+\hypertarget{group___complex_f_f_t_q15}{}\label{group___complex_f_f_t_q15}\index{Complex FFT Q15@{Complex FFT Q15}}
+\doxysubsubsubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\+\#define \doxymbox{\hyperlink{group___complex_f_f_t_q15_ga683e50ab6ad88d46aa763d21bf48ee96}{FFTINIT}}(EXT,  SIZE)
+\item 
+\+\#define \doxymbox{\hyperlink{group___complex_f_f_t_q15_ga1d76a72e66a611d842769f67eea0a520}{CFFTINIT\+\_\+\+Q15}}(LEN,  LENTWIDDLE)
+\end{DoxyCompactItemize}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___complex_f_f_t_q15_gaa12d90b0039ae7e9842c7095b024cc3a}{arm\+\_\+cfft\+\_\+init\+\_\+q15}} (\doxymbox{\hyperlink{structarm__cfft__instance__q15}{arm\+\_\+cfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, uint16\+\_\+t fft\+Len)
+\begin{DoxyCompactList}\small\item\em Initialization function for the cfft q15 function for 4096 samples. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___complex_f_f_t_q15_ga1147fd4d5a5f16d1cf30e48c5ca0a2fc}{arm\+\_\+cfft\+\_\+q15}} (const \doxymbox{\hyperlink{structarm__cfft__instance__q15}{arm\+\_\+cfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}S, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p1, uint8\+\_\+t ifft\+Flag, uint8\+\_\+t bit\+Reverse\+Flag)
+\begin{DoxyCompactList}\small\item\em Processing function for Q15 complex FFT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-define-members}
+\Hypertarget{group___complex_f_f_t_q15_doc-define-members}
+\doxysubsubsubsection{Macro Definition Documentation}
+\Hypertarget{group___complex_f_f_t_q15_ga1d76a72e66a611d842769f67eea0a520}\index{Complex FFT Q15@{Complex FFT Q15}!CFFTINIT\_Q15@{CFFTINIT\_Q15}}
+\index{CFFTINIT\_Q15@{CFFTINIT\_Q15}!Complex FFT Q15@{Complex FFT Q15}}
+\doxysubsubsubsubsection{\texorpdfstring{CFFTINIT\_Q15}{CFFTINIT\_Q15}}
+{\footnotesize\ttfamily \label{group___complex_f_f_t_q15_ga1d76a72e66a611d842769f67eea0a520} 
+\+\#define CFFTINIT\+\_\+\+Q15(\begin{DoxyParamCaption}\item[{}]{LEN}{, }\item[{}]{LENTWIDDLE}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ arm\_cfft\_init\_\#\#LEN\#\#\_q15(\doxymbox{\hyperlink{structarm__cfft__instance__q15}{arm\_cfft\_instance\_q15}}\ *\ S)\(\backslash\)}
+\DoxyCodeLine{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ default\ arm\ status\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ FFT\ length\ */}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ S-\/>fftLen\ =\ LEN;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ \ Initialise\ the\ Twiddle\ coefficient\ pointer\ */}\ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ S-\/>pTwiddle\ =\ NULL;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ FFTINIT(q15,LEN);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ return\ (status);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\Hypertarget{group___complex_f_f_t_q15_ga683e50ab6ad88d46aa763d21bf48ee96}\index{Complex FFT Q15@{Complex FFT Q15}!FFTINIT@{FFTINIT}}
+\index{FFTINIT@{FFTINIT}!Complex FFT Q15@{Complex FFT Q15}}
+\doxysubsubsubsubsection{\texorpdfstring{FFTINIT}{FFTINIT}}
+{\footnotesize\ttfamily \label{group___complex_f_f_t_q15_ga683e50ab6ad88d46aa763d21bf48ee96} 
+\+\#define FFTINIT(\begin{DoxyParamCaption}\item[{}]{EXT}{, }\item[{}]{SIZE}{}\end{DoxyParamCaption})}
+
+{\bfseries Value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{S-\/>bitRevLength\ =\ arm\_cfft\_sR\_\#\#EXT\#\#\_len\#\#SIZE.bitRevLength;\(\backslash\)}
+\DoxyCodeLine{S-\/>pBitRevTable\ =\ arm\_cfft\_sR\_\#\#EXT\#\#\_len\#\#SIZE.pBitRevTable;\(\backslash\)}
+\DoxyCodeLine{S-\/>pTwiddle\ =\ arm\_cfft\_sR\_\#\#EXT\#\#\_len\#\#SIZE.pTwiddle;}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{group___complex_f_f_t_q15_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___complex_f_f_t_q15_gaa12d90b0039ae7e9842c7095b024cc3a}\index{Complex FFT Q15@{Complex FFT Q15}!arm\_cfft\_init\_q15@{arm\_cfft\_init\_q15}}
+\index{arm\_cfft\_init\_q15@{arm\_cfft\_init\_q15}!Complex FFT Q15@{Complex FFT Q15}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_cfft\_init\_q15()}{arm\_cfft\_init\_q15()}}
+{\footnotesize\ttfamily \label{group___complex_f_f_t_q15_gaa12d90b0039ae7e9842c7095b024cc3a} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+cfft\+\_\+init\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structarm__cfft__instance__q15}{arm\+\_\+cfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{uint16\+\_\+t}]{fft\+Len}{}\end{DoxyParamCaption})}
+
+
+
+Initialization function for the cfft q15 function for 4096 samples. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 2048 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 1024 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 512 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 256 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 128 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 64 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 32 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Initialization function for the cfft q15 function for 16 samples 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+Generic initialization function for the cfft q15 function 
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in,out}}  & {\em S} & points to an instance of the floating-\/point CFFT structure \\
+\hline
+\doxymbox{\texttt{in}}  & {\em fft\+Len} & fft length (number of complex samples) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ an error is detected
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{Use of this function is mandatory only for the MVE version of the FFT.}
+Other versions can still initialize directly the data structure using variables declared in \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+This function should be used only if you don\textquotesingle{}t know the FFT sizes that you\textquotesingle{}ll need at build time. The use of this function will prevent the linker from removing the FFT tables that are not needed and the library code size will be bigger than needed.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+If you use CMSIS-\/\+DSP as a static library, and if you know the FFT sizes that you need at build time, then it is better to use the initialization functions defined for each FFT size. 
+\end{DoxyParagraph}
+\Hypertarget{group___complex_f_f_t_q15_ga1147fd4d5a5f16d1cf30e48c5ca0a2fc}\index{Complex FFT Q15@{Complex FFT Q15}!arm\_cfft\_q15@{arm\_cfft\_q15}}
+\index{arm\_cfft\_q15@{arm\_cfft\_q15}!Complex FFT Q15@{Complex FFT Q15}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_cfft\_q15()}{arm\_cfft\_q15()}}
+{\footnotesize\ttfamily \label{group___complex_f_f_t_q15_ga1147fd4d5a5f16d1cf30e48c5ca0a2fc} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cfft\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__cfft__instance__q15}{arm\+\_\+cfft\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{S}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p1}{, }\item[{uint8\+\_\+t}]{ifft\+Flag}{, }\item[{uint8\+\_\+t}]{bit\+Reverse\+Flag}{}\end{DoxyParamCaption})}
+
+
+
+Processing function for Q15 complex FFT. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em S} & points to an instance of Q15 CFFT structure \\
+\hline
+\doxymbox{\texttt{in,out}}  & {\em p1} & points to the complex data buffer of size {\ttfamily 2\texorpdfstring{$\ast$}{*}fft\+Len}. Processing occurs in-\/place \\
+\hline
+\doxymbox{\texttt{in}}  & {\em ifft\+Flag} & flag that selects transform direction
+\begin{DoxyItemize}
+\item value = 0:\+ forward transform
+\item value = 1:\+ inverse transform 
+\end{DoxyItemize}\\
+\hline
+\doxymbox{\texttt{in}}  & {\em bit\+Reverse\+Flag} & flag that enables /\+ disables bit reversal of output
+\begin{DoxyItemize}
+\item value = 0:\+ disables bit reversal of output
+\item value = 1:\+ enables bit reversal of output 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}

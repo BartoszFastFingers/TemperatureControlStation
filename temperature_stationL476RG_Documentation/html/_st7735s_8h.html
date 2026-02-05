@@ -1,0 +1,228 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Core/Inc/St7735s.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_st7735s_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku St7735s.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Interfejs do wyświetlacza ST7735 (funkcje graficzne i wyświetlanie temperatury).  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &quot;main.h&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+</div>
+<p><a href="_st7735s_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Struktury danych</h2></td></tr>
+<tr class="memitem:ST7735_5FHandle_5Ft" id="r_ST7735_5FHandle_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura uchwytu wyświetlacza ST7735.  <a href="struct_s_t7735___handle__t.html#details">Więcej...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:ae0f055da476dd25b90d1486f7f67bfa5" id="r_ae0f055da476dd25b90d1486f7f67bfa5"><td class="memItemLeft"><a id="ae0f055da476dd25b90d1486f7f67bfa5" name="ae0f055da476dd25b90d1486f7f67bfa5"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_CS_PORT</b>&#160;&#160;&#160;LCD_CS_GPIO_Port</td></tr>
+<tr class="memitem:a4a8a46f453d060c6be237984a555a272" id="r_a4a8a46f453d060c6be237984a555a272"><td class="memItemLeft"><a id="a4a8a46f453d060c6be237984a555a272" name="a4a8a46f453d060c6be237984a555a272"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_CS_PIN</b>&#160;&#160;&#160;LCD_CS_Pin</td></tr>
+<tr class="memitem:ab0e21f6e035be4aadb4673c384e0f645" id="r_ab0e21f6e035be4aadb4673c384e0f645"><td class="memItemLeft"><a id="ab0e21f6e035be4aadb4673c384e0f645" name="ab0e21f6e035be4aadb4673c384e0f645"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_DC_PORT</b>&#160;&#160;&#160;LCD_DC_GPIO_Port</td></tr>
+<tr class="memitem:ac3ee6eb358ecfb7428047cb97ba1756b" id="r_ac3ee6eb358ecfb7428047cb97ba1756b"><td class="memItemLeft"><a id="ac3ee6eb358ecfb7428047cb97ba1756b" name="ac3ee6eb358ecfb7428047cb97ba1756b"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_DC_PIN</b>&#160;&#160;&#160;LCD_DC_Pin</td></tr>
+<tr class="memitem:a2316f0593af7540c013c98d0e31f1929" id="r_a2316f0593af7540c013c98d0e31f1929"><td class="memItemLeft"><a id="a2316f0593af7540c013c98d0e31f1929" name="a2316f0593af7540c013c98d0e31f1929"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_RST_PORT</b>&#160;&#160;&#160;LCD_RST_GPIO_Port</td></tr>
+<tr class="memitem:adc287fe107e3a8d7daa0447a2c1523b5" id="r_adc287fe107e3a8d7daa0447a2c1523b5"><td class="memItemLeft"><a id="adc287fe107e3a8d7daa0447a2c1523b5" name="adc287fe107e3a8d7daa0447a2c1523b5"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_RST_PIN</b>&#160;&#160;&#160;LCD_RST_Pin</td></tr>
+<tr class="memitem:acbd7720b92e7596997e7787ec0a08851" id="r_acbd7720b92e7596997e7787ec0a08851"><td class="memItemLeft"><a id="acbd7720b92e7596997e7787ec0a08851" name="acbd7720b92e7596997e7787ec0a08851"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_WIDTH</b>&#160;&#160;&#160;128</td></tr>
+<tr class="memitem:a30f04ccc4a27354d46bbe5d52df3cb16" id="r_a30f04ccc4a27354d46bbe5d52df3cb16"><td class="memItemLeft"><a id="a30f04ccc4a27354d46bbe5d52df3cb16" name="a30f04ccc4a27354d46bbe5d52df3cb16"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_HEIGHT</b>&#160;&#160;&#160;160</td></tr>
+<tr class="memitem:ad2dc0b86584edf0adebf344ca9a697fd" id="r_ad2dc0b86584edf0adebf344ca9a697fd"><td class="memItemLeft"><a id="ad2dc0b86584edf0adebf344ca9a697fd" name="ad2dc0b86584edf0adebf344ca9a697fd"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_XSTART</b>&#160;&#160;&#160;2</td></tr>
+<tr class="memitem:ad87415a80a49cff3636ac2af23463568" id="r_ad87415a80a49cff3636ac2af23463568"><td class="memItemLeft"><a id="ad87415a80a49cff3636ac2af23463568" name="ad87415a80a49cff3636ac2af23463568"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_YSTART</b>&#160;&#160;&#160;1</td></tr>
+<tr class="memitem:aaa96c65299e5f6da446f29dc44362df4" id="r_aaa96c65299e5f6da446f29dc44362df4"><td class="memItemLeft"><a id="aaa96c65299e5f6da446f29dc44362df4" name="aaa96c65299e5f6da446f29dc44362df4"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_BLACK</b>&#160;&#160;&#160;0x0000</td></tr>
+<tr class="memitem:af8065f00d6684d4af187dc58b0611af3" id="r_af8065f00d6684d4af187dc58b0611af3"><td class="memItemLeft"><a id="af8065f00d6684d4af187dc58b0611af3" name="af8065f00d6684d4af187dc58b0611af3"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_WHITE</b>&#160;&#160;&#160;0xFFFF</td></tr>
+<tr class="memitem:a2449a6653137f07d2feb059750c7a0e0" id="r_a2449a6653137f07d2feb059750c7a0e0"><td class="memItemLeft"><a id="a2449a6653137f07d2feb059750c7a0e0" name="a2449a6653137f07d2feb059750c7a0e0"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_RED</b>&#160;&#160;&#160;0xF800</td></tr>
+<tr class="memitem:aaa6015ded61cf7d99ef6d59f1516853a" id="r_aaa6015ded61cf7d99ef6d59f1516853a"><td class="memItemLeft"><a id="aaa6015ded61cf7d99ef6d59f1516853a" name="aaa6015ded61cf7d99ef6d59f1516853a"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_GREEN</b>&#160;&#160;&#160;0x07E0</td></tr>
+<tr class="memitem:a16ebfdbf93e5ef70d658bf2c38a95939" id="r_a16ebfdbf93e5ef70d658bf2c38a95939"><td class="memItemLeft"><a id="a16ebfdbf93e5ef70d658bf2c38a95939" name="a16ebfdbf93e5ef70d658bf2c38a95939"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_BLUE</b>&#160;&#160;&#160;0x001F</td></tr>
+<tr class="memitem:ab45f6510169efe9c541a881c8ed56f1c" id="r_ab45f6510169efe9c541a881c8ed56f1c"><td class="memItemLeft"><a id="ab45f6510169efe9c541a881c8ed56f1c" name="ab45f6510169efe9c541a881c8ed56f1c"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_YELLOW</b>&#160;&#160;&#160;0xFFE0</td></tr>
+<tr class="memitem:ad810da70a616c774959a2b8e01bdbccd" id="r_ad810da70a616c774959a2b8e01bdbccd"><td class="memItemLeft"><a id="ad810da70a616c774959a2b8e01bdbccd" name="ad810da70a616c774959a2b8e01bdbccd"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_CYAN</b>&#160;&#160;&#160;0x07FF</td></tr>
+<tr class="memitem:afeb931b9ea5b9e7d1d3034f68da9ca64" id="r_afeb931b9ea5b9e7d1d3034f68da9ca64"><td class="memItemLeft"><a id="afeb931b9ea5b9e7d1d3034f68da9ca64" name="afeb931b9ea5b9e7d1d3034f68da9ca64"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_MAGENTA</b>&#160;&#160;&#160;0xF81F</td></tr>
+<tr class="memitem:ac7e77407665d5d65be802492793b2562" id="r_ac7e77407665d5d65be802492793b2562"><td class="memItemLeft"><a id="ac7e77407665d5d65be802492793b2562" name="ac7e77407665d5d65be802492793b2562"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_ORANGE</b>&#160;&#160;&#160;0xFC00</td></tr>
+<tr class="memitem:a104ba0e12972c3e4097fb239933213ba" id="r_a104ba0e12972c3e4097fb239933213ba"><td class="memItemLeft"><a id="a104ba0e12972c3e4097fb239933213ba" name="a104ba0e12972c3e4097fb239933213ba"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_GRAY</b>&#160;&#160;&#160;0x8410</td></tr>
+<tr class="memitem:a69299fe2a19c5fe44c3136721b133de7" id="r_a69299fe2a19c5fe44c3136721b133de7"><td class="memItemLeft"><a id="a69299fe2a19c5fe44c3136721b133de7" name="a69299fe2a19c5fe44c3136721b133de7"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_DARKGRAY</b>&#160;&#160;&#160;0x4208</td></tr>
+<tr class="memitem:ab554246162bee399ebb588211f38ec2b" id="r_ab554246162bee399ebb588211f38ec2b"><td class="memItemLeft"><a id="ab554246162bee399ebb588211f38ec2b" name="ab554246162bee399ebb588211f38ec2b"></a>
+#define&#160;</td><td class="memItemRight"><b>ST7735_LIGHTGRAY</b>&#160;&#160;&#160;0xC618</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a58785aa34ae2ce34e508317e111e5855" id="r_a58785aa34ae2ce34e508317e111e5855"><td class="memItemLeft"><a id="a58785aa34ae2ce34e508317e111e5855" name="a58785aa34ae2ce34e508317e111e5855"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_Init</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, SPI_HandleTypeDef *hspi)</td></tr>
+<tr class="memdesc:a58785aa34ae2ce34e508317e111e5855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizacja wyświetlacza. <br /></td></tr>
+<tr class="memitem:aafe58e97055495941cccb991e92ebf81" id="r_aafe58e97055495941cccb991e92ebf81"><td class="memItemLeft"><a id="aafe58e97055495941cccb991e92ebf81" name="aafe58e97055495941cccb991e92ebf81"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_FillScreen</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t color)</td></tr>
+<tr class="memdesc:aafe58e97055495941cccb991e92ebf81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wypełnienie całego ekranu kolorem. <br /></td></tr>
+<tr class="memitem:a52c9505f2e7800c0fdf4e3797553c85e" id="r_a52c9505f2e7800c0fdf4e3797553c85e"><td class="memItemLeft"><a id="a52c9505f2e7800c0fdf4e3797553c85e" name="a52c9505f2e7800c0fdf4e3797553c85e"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawPixel</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, uint16_t color)</td></tr>
+<tr class="memdesc:a52c9505f2e7800c0fdf4e3797553c85e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rysowanie pojedynczego piksela. <br /></td></tr>
+<tr class="memitem:a9241af3816c9907788a65198e3fa25f7" id="r_a9241af3816c9907788a65198e3fa25f7"><td class="memItemLeft"><a id="a9241af3816c9907788a65198e3fa25f7" name="a9241af3816c9907788a65198e3fa25f7"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_FillRect</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)</td></tr>
+<tr class="memdesc:a9241af3816c9907788a65198e3fa25f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wypełnienie prostokąta kolorem. <br /></td></tr>
+<tr class="memitem:a97c35ba2e3898a7476af5bb583b89c47" id="r_a97c35ba2e3898a7476af5bb583b89c47"><td class="memItemLeft"><a id="a97c35ba2e3898a7476af5bb583b89c47" name="a97c35ba2e3898a7476af5bb583b89c47"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawRect</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color)</td></tr>
+<tr class="memdesc:a97c35ba2e3898a7476af5bb583b89c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rysowanie prostokąta (tylko ramka). <br /></td></tr>
+<tr class="memitem:a367249a257bc67d5e3c1fa73936edea4" id="r_a367249a257bc67d5e3c1fa73936edea4"><td class="memItemLeft"><a id="a367249a257bc67d5e3c1fa73936edea4" name="a367249a257bc67d5e3c1fa73936edea4"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawHLine</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, uint16_t w, uint16_t color)</td></tr>
+<tr class="memdesc:a367249a257bc67d5e3c1fa73936edea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rysowanie linii poziomej. <br /></td></tr>
+<tr class="memitem:a6da138c99c96238f3871556e527e81ed" id="r_a6da138c99c96238f3871556e527e81ed"><td class="memItemLeft"><a id="a6da138c99c96238f3871556e527e81ed" name="a6da138c99c96238f3871556e527e81ed"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawVLine</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, uint16_t h, uint16_t color)</td></tr>
+<tr class="memdesc:a6da138c99c96238f3871556e527e81ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rysowanie linii pionowej. <br /></td></tr>
+<tr class="memitem:ab6d308c7af4e908650b03d5534493bc4" id="r_ab6d308c7af4e908650b03d5534493bc4"><td class="memItemLeft"><a id="ab6d308c7af4e908650b03d5534493bc4" name="ab6d308c7af4e908650b03d5534493bc4"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawChar</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, char c, uint16_t color, uint16_t bg, uint8_t size)</td></tr>
+<tr class="memdesc:ab6d308c7af4e908650b03d5534493bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wypisanie znaku. <br /></td></tr>
+<tr class="memitem:a3fd092664132ef72f1a4af17591df58f" id="r_a3fd092664132ef72f1a4af17591df58f"><td class="memItemLeft"><a id="a3fd092664132ef72f1a4af17591df58f" name="a3fd092664132ef72f1a4af17591df58f"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawString</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, const char *str, uint16_t color, uint16_t bg, uint8_t size)</td></tr>
+<tr class="memdesc:a3fd092664132ef72f1a4af17591df58f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wypisanie stringa. <br /></td></tr>
+<tr class="memitem:a7b2520057af6c4be9d11b6ca5e403c47" id="r_a7b2520057af6c4be9d11b6ca5e403c47"><td class="memItemLeft"><a id="a7b2520057af6c4be9d11b6ca5e403c47" name="a7b2520057af6c4be9d11b6ca5e403c47"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawInt</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, int32_t num, uint16_t color, uint16_t bg, uint8_t size)</td></tr>
+<tr class="memdesc:a7b2520057af6c4be9d11b6ca5e403c47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wypisanie liczby całkowitej. <br /></td></tr>
+<tr class="memitem:a891adbae11130eae8c5c6e2804f90b29" id="r_a891adbae11130eae8c5c6e2804f90b29"><td class="memItemLeft"><a id="a891adbae11130eae8c5c6e2804f90b29" name="a891adbae11130eae8c5c6e2804f90b29"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawFloat</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, float num, uint8_t decimals, uint16_t color, uint16_t bg, uint8_t size)</td></tr>
+<tr class="memdesc:a891adbae11130eae8c5c6e2804f90b29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wypisanie liczby zmiennoprzecinkowej. <br /></td></tr>
+<tr class="memitem:aa1ab4cd6b531b17be42e03a5a65f5dfd" id="r_aa1ab4cd6b531b17be42e03a5a65f5dfd"><td class="memItemLeft"><a id="aa1ab4cd6b531b17be42e03a5a65f5dfd" name="aa1ab4cd6b531b17be42e03a5a65f5dfd"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_ShowTemperature</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, float temp, float setpoint, uint16_t heater_pwm, uint16_t fan_pwm)</td></tr>
+<tr class="memdesc:aa1ab4cd6b531b17be42e03a5a65f5dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyświetlenie temperatury z dużą czcionką <br /></td></tr>
+<tr class="memitem:ad5fa8d090565b7876d562b7c3808f9cc" id="r_ad5fa8d090565b7876d562b7c3808f9cc"><td class="memItemLeft"><a id="ad5fa8d090565b7876d562b7c3808f9cc" name="ad5fa8d090565b7876d562b7c3808f9cc"></a>
+void&#160;</td><td class="memItemRight"><b>ST7735_DrawProgressBar</b> (<a class="el" href="struct_s_t7735___handle__t.html">ST7735_Handle_t</a> *hst7735, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t value, uint16_t max_value, uint16_t bar_color, uint16_t bg_color)</td></tr>
+<tr class="memdesc:ad5fa8d090565b7876d562b7c3808f9cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rysowanie paska postępu (np. dla PWM). <br /></td></tr>
+<tr class="memitem:a7b19329f16dfc648f511532781582da7" id="r_a7b19329f16dfc648f511532781582da7"><td class="memItemLeft"><a id="a7b19329f16dfc648f511532781582da7" name="a7b19329f16dfc648f511532781582da7"></a>
+uint16_t&#160;</td><td class="memItemRight"><b>ST7735_RGB</b> (uint8_t r, uint8_t g, uint8_t b)</td></tr>
+<tr class="memdesc:a7b19329f16dfc648f511532781582da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konwersja RGB na RGB565. <br /></td></tr>
+<tr class="memitem:a418cfa010023d958c1ca114b2ead6ae8" id="r_a418cfa010023d958c1ca114b2ead6ae8"><td class="memItemLeft"><a id="a418cfa010023d958c1ca114b2ead6ae8" name="a418cfa010023d958c1ca114b2ead6ae8"></a>
+uint16_t&#160;</td><td class="memItemRight"><b>ST7735_TempColor</b> (float temp, float min_temp, float max_temp)</td></tr>
+<tr class="memdesc:a418cfa010023d958c1ca114b2ead6ae8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kolor zależny od temperatury (niebieski-&gt;zielony-&gt;czerwony). <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Interfejs do wyświetlacza ST7735 (funkcje graficzne i wyświetlanie temperatury). </p>
+<p>Plik zawiera definicje stałych, struktur i funkcji do obsługi wyświetlacza ST7735 w formacie RGB565 oraz funkcje specjalne dla wyświetlania temperatury.</p>
+<dl class="section author"><dt>Autor</dt><dd>00ary </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>31-Jan-2026 </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="_st7735s_8h.html">St7735s.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

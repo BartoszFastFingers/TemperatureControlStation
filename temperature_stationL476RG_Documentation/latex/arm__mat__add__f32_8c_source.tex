@@ -1,0 +1,281 @@
+\doxysection{arm\+\_\+mat\+\_\+add\+\_\+f32.\+c}
+\hypertarget{arm__mat__add__f32_8c_source}{}\label{arm__mat__add__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/MatrixFunctions/arm\_mat\_add\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/MatrixFunctions/arm\_mat\_add\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_mat\_add\_f32.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Floating-\/point\ matrix\ addition}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00083\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_add_ga23d257b4c1ff96bd26bf903286eb4f8c}{arm\_mat\_add\_f32}}(}
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00085\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00086\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst)}
+\DoxyCodeLine{00087\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;\ \ }
+\DoxyCodeLine{00089\ \ \ \ \ uint32\_t\ \ numSamples;\ \ \ \ \ \ \ \textcolor{comment}{/*\ total\ number\ of\ elements\ in\ the\ matrix\ \ */}}
+\DoxyCodeLine{00090\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pDataA,\ *pDataB,\ *pDataDst;}
+\DoxyCodeLine{00091\ \ \ \ \ f32x4\_t\ vecA,\ vecB,\ vecDst\ =\ \{\ 0\ \};}
+\DoxyCodeLine{00092\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ \textcolor{keyword}{const}\ *pSrcAVec;}
+\DoxyCodeLine{00093\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ \textcolor{keyword}{const}\ *pSrcBVec;}
+\DoxyCodeLine{00094\ \ \ \ \ uint32\_t\ \ blkCnt;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ pDataA\ =\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00097\ \ \ \ \ pDataB\ =\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00098\ \ \ \ \ pDataDst\ =\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00099\ \ \ \ \ pSrcAVec\ =\ (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ \textcolor{keyword}{const}\ *)\ pDataA;}
+\DoxyCodeLine{00100\ \ \ \ \ pSrcBVec\ =\ (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ \textcolor{keyword}{const}\ *)\ pDataB;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#ifdef\ ARM\_MATH\_MATRIX\_CHECK}}
+\DoxyCodeLine{00103\ \ \ \textcolor{comment}{/*\ Check\ for\ matrix\ mismatch\ condition\ */}}
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordflow}{if}\ ((pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ ||}
+\DoxyCodeLine{00105\ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ !=\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00106\ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ ||\ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}))}
+\DoxyCodeLine{00107\ \ \ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SIZE\_MISMATCH\ */}}
+\DoxyCodeLine{00109\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}};}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00113\ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ *\ Total\ number\ of\ samples\ in\ the\ input\ matrix}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00117\ \ \ \ \ numSamples\ =\ (uint32\_t)\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ *\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00118\ \ \ \ \ blkCnt\ =\ numSamples\ >>\ 2;}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00120\ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ C(m,n)\ =\ A(m,n)\ +\ B(m,n)\ */}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ and\ then\ store\ the\ results\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ vecA\ =\ vld1q(pSrcAVec);\ }
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ pSrcAVec\ +=\ 4;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ vecB\ =\ vld1q(pSrcBVec);\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ pSrcBVec\ +=\ 4;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ vecDst\ =\ vaddq(vecA,\ vecB);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ vst1q(pDataDst,\ vecDst);\ \ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ pDataDst\ +=\ 4;}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Decrement\ the\ blockSize\ loop\ counter}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ \ \ *\ tail}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00138\ \ \ \ \ blkCnt\ =\ numSamples\ \&\ 3;}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordflow}{if}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00140\ \ \ \ \ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ mve\_pred16\_t\ p0\ =\ vctp32q(blkCnt);}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ vecA\ =\ vld1q(pSrcAVec);\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ vecB\ =\ vld1q(pSrcBVec);\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ vecDst\ =\ vaddq\_m(vecDst,\ vecA,\ vecB,\ p0);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ vstrwq\_p(pDataDst,\ vecDst,\ p0);}
+\DoxyCodeLine{00146\ \ \ \ \ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{/*\ set\ status\ as\ ARM\_MATH\_SUCCESS\ */}}
+\DoxyCodeLine{00148\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00149\ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00151\ \}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)}}
+\DoxyCodeLine{00154\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00155\ \textcolor{comment}{}}
+\DoxyCodeLine{00156\ \textcolor{comment}{Neon\ version\ is\ assuming\ the\ matrix\ is\ small\ enough.}}
+\DoxyCodeLine{00157\ \textcolor{comment}{So\ no\ blocking\ is\ used\ for\ taking\ into\ account\ cache\ effects.}}
+\DoxyCodeLine{00158\ \textcolor{comment}{For\ big\ matrix,\ there\ exist\ better\ libraries\ for\ Neon.}}
+\DoxyCodeLine{00159\ \textcolor{comment}{}}
+\DoxyCodeLine{00160\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00161\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_add_ga23d257b4c1ff96bd26bf903286eb4f8c}{arm\_mat\_add\_f32}}(}
+\DoxyCodeLine{00162\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00163\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00164\ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst)}
+\DoxyCodeLine{00165\ \{}
+\DoxyCodeLine{00166\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pIn1\ =\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ input\ data\ matrix\ pointer\ A\ \ */}}
+\DoxyCodeLine{00167\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pIn2\ =\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ input\ data\ matrix\ pointer\ B\ \ */}}
+\DoxyCodeLine{00168\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pOut\ =\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ output\ data\ matrix\ pointer\ \ \ */}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ uint32\_t\ numSamples;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ total\ number\ of\ elements\ in\ the\ matrix\ \ */}}
+\DoxyCodeLine{00172\ \ \ uint32\_t\ blkCnt;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00173\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ status\ of\ matrix\ addition\ */}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#ifdef\ ARM\_MATH\_MATRIX\_CHECK}}
+\DoxyCodeLine{00176\ \ \ \textcolor{comment}{/*\ Check\ for\ matrix\ mismatch\ condition\ */}}
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordflow}{if}\ ((pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ ||}
+\DoxyCodeLine{00178\ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ !=\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00179\ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ ||\ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}))}
+\DoxyCodeLine{00180\ \ \ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SIZE\_MISMATCH\ */}}
+\DoxyCodeLine{00182\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}};}
+\DoxyCodeLine{00183\ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00186\ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ float32x4\_t\ vec1;}
+\DoxyCodeLine{00188\ \ \ \ \ float32x4\_t\ vec2;}
+\DoxyCodeLine{00189\ \ \ \ \ float32x4\_t\ res;}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{comment}{/*\ Total\ number\ of\ samples\ in\ the\ input\ matrix\ */}}
+\DoxyCodeLine{00192\ \ \ \ \ numSamples\ =\ (uint32\_t)\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ *\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ blkCnt\ =\ numSamples\ >>\ 2U;}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{comment}{/*\ Compute\ 4\ outputs\ at\ a\ time.}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ \ \ **\ a\ second\ loop\ below\ computes\ the\ remaining\ 1\ to\ 3\ samples.\ */}}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00199\ \ \ \ \ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \textcolor{comment}{/*\ C(m,n)\ =\ A(m,n)\ +\ B(m,n)\ */}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ and\ then\ store\ the\ results\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ vec1\ =\ vld1q\_f32(pIn1);}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ vec2\ =\ vld1q\_f32(pIn2);}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ res\ =\ vaddq\_f32(vec1,\ vec2);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ vst1q\_f32(pOut,\ res);}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \textcolor{comment}{/*\ update\ pointers\ to\ process\ next\ samples\ */}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ pIn1\ +=\ 4U;}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ pIn2\ +=\ 4U;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ pOut\ +=\ 4U;}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ the\ loop\ counter\ */}}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{comment}{/*\ If\ the\ numSamples\ is\ not\ a\ multiple\ of\ 4,\ compute\ any\ remaining\ output\ samples\ here.}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ \ **\ No\ loop\ unrolling\ is\ used.\ */}}
+\DoxyCodeLine{00217\ \ \ \ \ blkCnt\ =\ numSamples\ \%\ 0x4U;}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00220\ \ \ \ \ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \textcolor{comment}{/*\ C(m,n)\ =\ A(m,n)\ +\ B(m,n)\ */}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ and\ then\ store\ the\ results\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ *pOut++\ =\ (*pIn1++)\ +\ (*pIn2++);}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ the\ loop\ counter\ */}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00227\ \ \ \ \ \}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{comment}{/*\ set\ status\ as\ ARM\_MATH\_SUCCESS\ */}}
+\DoxyCodeLine{00230\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00231\ \ \ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \textcolor{comment}{/*\ Return\ to\ application\ */}}
+\DoxyCodeLine{00234\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00235\ \}}
+\DoxyCodeLine{00236\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00237\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_add_ga23d257b4c1ff96bd26bf903286eb4f8c}{arm\_mat\_add\_f32}}(}
+\DoxyCodeLine{00238\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcA,}
+\DoxyCodeLine{00239\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrcB,}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst)}
+\DoxyCodeLine{00241\ \{}
+\DoxyCodeLine{00242\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pInA\ =\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ input\ data\ matrix\ pointer\ A\ */}}
+\DoxyCodeLine{00243\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pInB\ =\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ input\ data\ matrix\ pointer\ B\ */}}
+\DoxyCodeLine{00244\ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pOut\ =\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ output\ data\ matrix\ pointer\ */}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ uint32\_t\ numSamples;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ total\ number\ of\ elements\ in\ the\ matrix\ */}}
+\DoxyCodeLine{00247\ \ \ uint32\_t\ blkCnt;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00248\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ status\ of\ matrix\ addition\ */}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#ifdef\ ARM\_MATH\_MATRIX\_CHECK}}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \textcolor{comment}{/*\ Check\ for\ matrix\ mismatch\ condition\ */}}
+\DoxyCodeLine{00253\ \ \ \textcolor{keywordflow}{if}\ ((pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ ||}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ !=\ pSrcB-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ \ ||}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ (pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ \ \ \ )}
+\DoxyCodeLine{00257\ \ \ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SIZE\_MISMATCH\ */}}
+\DoxyCodeLine{00259\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}};}
+\DoxyCodeLine{00260\ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#ifdef\ ARM\_MATH\_MATRIX\_CHECK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{comment}{/*\ Total\ number\ of\ samples\ in\ input\ matrix\ */}}
+\DoxyCodeLine{00267\ \ \ \ \ numSamples\ =\ (uint32\_t)\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ *\ pSrcA-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}};}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00272\ \ \ \ \ blkCnt\ =\ numSamples\ >>\ 2U;}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00275\ \ \ \ \ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \textcolor{comment}{/*\ C(m,n)\ =\ A(m,n)\ +\ B(m,n)\ */}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ and\ store\ result\ in\ destination\ buffer.\ */}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ *pOut++\ =\ *pInA++\ +\ *pInB++;}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ *pOut++\ =\ *pInA++\ +\ *pInB++;}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ *pOut++\ =\ *pInA++\ +\ *pInB++;}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \ \ \ \ \ \ *pOut++\ =\ *pInA++\ +\ *pInB++;}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00289\ \ \ \ \ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00292\ \ \ \ \ blkCnt\ =\ numSamples\ \%\ 0x4U;}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00297\ \ \ \ \ blkCnt\ =\ numSamples;}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00302\ \ \ \ \ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \textcolor{comment}{/*\ C(m,n)\ =\ A(m,n)\ +\ B(m,n)\ */}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \textcolor{comment}{/*\ Add\ and\ store\ result\ in\ destination\ buffer.\ */}}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ *pOut++\ =\ *pInA++\ +\ *pInB++;}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00310\ \ \ \ \ \}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SUCCESS\ */}}
+\DoxyCodeLine{00313\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00314\ \ \ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \textcolor{comment}{/*\ Return\ to\ application\ */}}
+\DoxyCodeLine{00317\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00318\ \}}
+\DoxyCodeLine{00319\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined(ARM\_MATH\_NEON)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00320\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00321\ }
+
+\end{DoxyCode}

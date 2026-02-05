@@ -1,0 +1,76 @@
+\doxysubsection{Vector Log }
+\hypertarget{group__vlog}{}\label{group__vlog}\index{Vector Log@{Vector Log}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__vlog_ga4554b7a2e66a3f5121b40692329a8dff}{arm\+\_\+vlog\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Floating-\/point vector of log values. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__vlog_gaba76019143235a99cc052e37b08b8028}{arm\+\_\+vlog\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em q15 vector of log values. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__vlog_ga37f2b40add8f03c90f8f669db70ebfb3}{arm\+\_\+vlog\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em q31 vector of log values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Compute the log values of a vector of samples.
+
+\label{doc-func-members}
+\Hypertarget{group__vlog_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__vlog_ga4554b7a2e66a3f5121b40692329a8dff}\index{Vector Log@{Vector Log}!arm\_vlog\_f32@{arm\_vlog\_f32}}
+\index{arm\_vlog\_f32@{arm\_vlog\_f32}!Vector Log@{Vector Log}}
+\doxysubsubsubsection{\texorpdfstring{arm\_vlog\_f32()}{arm\_vlog\_f32()}}
+{\footnotesize\ttfamily \label{group__vlog_ga4554b7a2e66a3f5121b40692329a8dff} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+vlog\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point vector of log values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__vlog_gaba76019143235a99cc052e37b08b8028}\index{Vector Log@{Vector Log}!arm\_vlog\_q15@{arm\_vlog\_q15}}
+\index{arm\_vlog\_q15@{arm\_vlog\_q15}!Vector Log@{Vector Log}}
+\doxysubsubsubsection{\texorpdfstring{arm\_vlog\_q15()}{arm\_vlog\_q15()}}
+{\footnotesize\ttfamily \label{group__vlog_gaba76019143235a99cc052e37b08b8028} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+vlog\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+q15 vector of log values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector in q15 \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector in q4.\+11 \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__vlog_ga37f2b40add8f03c90f8f669db70ebfb3}\index{Vector Log@{Vector Log}!arm\_vlog\_q31@{arm\_vlog\_q31}}
+\index{arm\_vlog\_q31@{arm\_vlog\_q31}!Vector Log@{Vector Log}}
+\doxysubsubsubsection{\texorpdfstring{arm\_vlog\_q31()}{arm\_vlog\_q31()}}
+{\footnotesize\ttfamily \label{group__vlog_ga37f2b40add8f03c90f8f669db70ebfb3} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+vlog\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+q31 vector of log values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector in q31 \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output vector q5.\+26 \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}

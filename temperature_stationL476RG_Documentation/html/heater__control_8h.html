@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Core/Inc/heater_control.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('heater__control_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku heater_control.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Sterowanie grzałką za pomocą PWM na mikrokontrolerach STM32.  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &quot;tim.h&quot;</code><br />
+</div>
+<p><a href="heater__control_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Struktury danych</h2></td></tr>
+<tr class="memitem:HeaterHandle_5Ft" id="r_HeaterHandle_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura reprezentująca grzałkę sterowaną PWM.  <a href="struct_heater_handle__t.html#details">Więcej...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a7f5d58bec0c8b1e52931fab91fd7a707" id="r_a7f5d58bec0c8b1e52931fab91fd7a707"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7f5d58bec0c8b1e52931fab91fd7a707">Heater_Init</a> (<a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater, TIM_HandleTypeDef *htim, uint32_t channel)</td></tr>
+<tr class="memdesc:a7f5d58bec0c8b1e52931fab91fd7a707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizuje strukturę grzałki.  <br /></td></tr>
+<tr class="memitem:a2f676e92aa2965f5bdcec5ab67998c15" id="r_a2f676e92aa2965f5bdcec5ab67998c15"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2f676e92aa2965f5bdcec5ab67998c15">Heater_Start</a> (<a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater)</td></tr>
+<tr class="memdesc:a2f676e92aa2965f5bdcec5ab67998c15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uruchamia PWM grzałki.  <br /></td></tr>
+<tr class="memitem:a3493015070cf36e8ab65b0f38d47b8eb" id="r_a3493015070cf36e8ab65b0f38d47b8eb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3493015070cf36e8ab65b0f38d47b8eb">Heater_Stop</a> (<a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater)</td></tr>
+<tr class="memdesc:a3493015070cf36e8ab65b0f38d47b8eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zatrzymuje PWM grzałki i ustawia moc na 0.  <br /></td></tr>
+<tr class="memitem:a810523a5f79289027f0f7e34069189e7" id="r_a810523a5f79289027f0f7e34069189e7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a810523a5f79289027f0f7e34069189e7">Heater_SetPower</a> (<a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater, uint16_t power)</td></tr>
+<tr class="memdesc:a810523a5f79289027f0f7e34069189e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ustawia moc grzałki.  <br /></td></tr>
+<tr class="memitem:a13c06dbab75437ce1591eb47ac3ad276" id="r_a13c06dbab75437ce1591eb47ac3ad276"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a13c06dbab75437ce1591eb47ac3ad276">Heater_GetPower</a> (<a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater)</td></tr>
+<tr class="memdesc:a13c06dbab75437ce1591eb47ac3ad276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobiera aktualną moc grzałki.  <br /></td></tr>
+<tr class="memitem:a645e0983ad91bcb4c9ff5cad89c3cd41" id="r_a645e0983ad91bcb4c9ff5cad89c3cd41"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a645e0983ad91bcb4c9ff5cad89c3cd41">Heater_Off</a> (<a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *hheater)</td></tr>
+<tr class="memdesc:a645e0983ad91bcb4c9ff5cad89c3cd41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wyłącza grzałkę (ustawia moc na 0).  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Sterowanie grzałką za pomocą PWM na mikrokontrolerach STM32. </p>
+<p>Zawiera deklaracje funkcji i struktur dla inicjalizacji, uruchamiania, zatrzymywania i ustawiania mocy grzałki.</p>
+<dl class="section author"><dt>Autor</dt><dd>00ary </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>31-Jan-2026 </dd></dl>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji</h2>
+<a id="a13c06dbab75437ce1591eb47ac3ad276" name="a13c06dbab75437ce1591eb47ac3ad276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13c06dbab75437ce1591eb47ac3ad276">&#9670;&#160;</a></span>Heater_GetPower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t Heater_GetPower </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hheater</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pobiera aktualną moc grzałki. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hheater</td><td>Wskaźnik na strukturę <a class="el" href="struct_heater_handle__t.html" title="Struktura reprezentująca grzałkę sterowaną PWM.">HeaterHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Aktualna moc PWM </dd></dl>
+
+</div>
+</div>
+<a id="a7f5d58bec0c8b1e52931fab91fd7a707" name="a7f5d58bec0c8b1e52931fab91fd7a707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f5d58bec0c8b1e52931fab91fd7a707">&#9670;&#160;</a></span>Heater_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Heater_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hheater</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TIM_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>htim</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>channel</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicjalizuje strukturę grzałki. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hheater</td><td>Wskaźnik na strukturę <a class="el" href="struct_heater_handle__t.html" title="Struktura reprezentująca grzałkę sterowaną PWM.">HeaterHandle_t</a> </td></tr>
+    <tr><td class="paramname">htim</td><td>Wskaźnik na strukturę timera STM32 </td></tr>
+    <tr><td class="paramname">channel</td><td>Kanał timera dla PWM </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a645e0983ad91bcb4c9ff5cad89c3cd41" name="a645e0983ad91bcb4c9ff5cad89c3cd41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a645e0983ad91bcb4c9ff5cad89c3cd41">&#9670;&#160;</a></span>Heater_Off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Heater_Off </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hheater</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wyłącza grzałkę (ustawia moc na 0). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hheater</td><td>Wskaźnik na strukturę <a class="el" href="struct_heater_handle__t.html" title="Struktura reprezentująca grzałkę sterowaną PWM.">HeaterHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a810523a5f79289027f0f7e34069189e7" name="a810523a5f79289027f0f7e34069189e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810523a5f79289027f0f7e34069189e7">&#9670;&#160;</a></span>Heater_SetPower()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Heater_SetPower </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hheater</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>power</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ustawia moc grzałki. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hheater</td><td>Wskaźnik na strukturę <a class="el" href="struct_heater_handle__t.html" title="Struktura reprezentująca grzałkę sterowaną PWM.">HeaterHandle_t</a> </td></tr>
+    <tr><td class="paramname">power</td><td>Moc PWM w zakresie 0-999 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2f676e92aa2965f5bdcec5ab67998c15" name="a2f676e92aa2965f5bdcec5ab67998c15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f676e92aa2965f5bdcec5ab67998c15">&#9670;&#160;</a></span>Heater_Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Heater_Start </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hheater</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Uruchamia PWM grzałki. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hheater</td><td>Wskaźnik na strukturę <a class="el" href="struct_heater_handle__t.html" title="Struktura reprezentująca grzałkę sterowaną PWM.">HeaterHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3493015070cf36e8ab65b0f38d47b8eb" name="a3493015070cf36e8ab65b0f38d47b8eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3493015070cf36e8ab65b0f38d47b8eb">&#9670;&#160;</a></span>Heater_Stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Heater_Stop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_heater_handle__t.html">HeaterHandle_t</a> *</td>          <td class="paramname"><span class="paramname"><em>hheater</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zatrzymuje PWM grzałki i ustawia moc na 0. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hheater</td><td>Wskaźnik na strukturę <a class="el" href="struct_heater_handle__t.html" title="Struktura reprezentująca grzałkę sterowaną PWM.">HeaterHandle_t</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="heater__control_8h.html">heater_control.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

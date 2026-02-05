@@ -1,0 +1,165 @@
+\doxysubsection{Matrix Transpose }
+\hypertarget{group___matrix_trans}{}\label{group___matrix_trans}\index{Matrix Transpose@{Matrix Transpose}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_trans_gac79f5fd8d276ac43bcbdc1dcf2029196}{arm\+\_\+mat\+\_\+trans\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix transpose. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_trans_gae28b12fba3bed9e4fd28a38c7e2331b8}{arm\+\_\+mat\+\_\+trans\+\_\+f64}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point matrix transpose. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_trans_ga51de7e4205aea17bdd223df06513ecb2}{arm\+\_\+mat\+\_\+trans\+\_\+q15}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q15 matrix transpose. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_trans_ga3d353e7c71c3d93636d4216d7f1100f5}{arm\+\_\+mat\+\_\+trans\+\_\+q31}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q31 matrix transpose. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_trans_ga67c46bddc27e8afffb7a818b4c7831a3}{arm\+\_\+mat\+\_\+trans\+\_\+q7}} (const \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Q7 matrix transpose. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Tranposes a matrix.
+
+Transposing an {\ttfamily M x N} matrix flips it around the center diagonal and results in an {\ttfamily N x M} matrix.
+
+\begin{DoxyParagraph}{Transpose of a 3 x 3 matrix}
+
+\end{DoxyParagraph}
+\[\begin{pmatrix}
+ a_{1,1} & a_{1,2} & a_{1,3} \\
+ a_{2,1} & a_{2,2} & a_{2,3} \\
+ a_{3,1} & a_{3,2} & a_{3,3} \\
+\end{pmatrix}^T
+ =
+\begin{pmatrix}
+ a_{1,1} & a_{2,1} & a_{3,1} \\
+ a_{1,2} & a_{2,2} & a_{3,2} \\
+ a_{1,3} & a_{2,3} & a_{3,3} \\
+\end{pmatrix}
+\]
+
+Tranposes a matrix.
+
+Transposing an {\ttfamily M x N} matrix flips it around the center diagonal and results in an {\ttfamily N x M} matrix. 
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_trans_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_trans_gac79f5fd8d276ac43bcbdc1dcf2029196}\index{Matrix Transpose@{Matrix Transpose}!arm\_mat\_trans\_f32@{arm\_mat\_trans\_f32}}
+\index{arm\_mat\_trans\_f32@{arm\_mat\_trans\_f32}!Matrix Transpose@{Matrix Transpose}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_trans\_f32()}{arm\_mat\_trans\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_trans_gac79f5fd8d276ac43bcbdc1dcf2029196} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+trans\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix transpose. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_trans_gae28b12fba3bed9e4fd28a38c7e2331b8}\index{Matrix Transpose@{Matrix Transpose}!arm\_mat\_trans\_f64@{arm\_mat\_trans\_f64}}
+\index{arm\_mat\_trans\_f64@{arm\_mat\_trans\_f64}!Matrix Transpose@{Matrix Transpose}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_trans\_f64()}{arm\_mat\_trans\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_trans_gae28b12fba3bed9e4fd28a38c7e2331b8} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+trans\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point matrix transpose. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_trans_ga51de7e4205aea17bdd223df06513ecb2}\index{Matrix Transpose@{Matrix Transpose}!arm\_mat\_trans\_q15@{arm\_mat\_trans\_q15}}
+\index{arm\_mat\_trans\_q15@{arm\_mat\_trans\_q15}!Matrix Transpose@{Matrix Transpose}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_trans\_q15()}{arm\_mat\_trans\_q15()}}
+{\footnotesize\ttfamily \label{group___matrix_trans_ga51de7e4205aea17bdd223df06513ecb2} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+trans\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q15}{arm\+\_\+matrix\+\_\+instance\+\_\+q15}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q15 matrix transpose. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_trans_ga3d353e7c71c3d93636d4216d7f1100f5}\index{Matrix Transpose@{Matrix Transpose}!arm\_mat\_trans\_q31@{arm\_mat\_trans\_q31}}
+\index{arm\_mat\_trans\_q31@{arm\_mat\_trans\_q31}!Matrix Transpose@{Matrix Transpose}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_trans\_q31()}{arm\_mat\_trans\_q31()}}
+{\footnotesize\ttfamily \label{group___matrix_trans_ga3d353e7c71c3d93636d4216d7f1100f5} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+trans\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\+\_\+matrix\+\_\+instance\+\_\+q31}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q31 matrix transpose. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___matrix_trans_ga67c46bddc27e8afffb7a818b4c7831a3}\index{Matrix Transpose@{Matrix Transpose}!arm\_mat\_trans\_q7@{arm\_mat\_trans\_q7}}
+\index{arm\_mat\_trans\_q7@{arm\_mat\_trans\_q7}!Matrix Transpose@{Matrix Transpose}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_trans\_q7()}{arm\_mat\_trans\_q7()}}
+{\footnotesize\ttfamily \label{group___matrix_trans_ga67c46bddc27e8afffb7a818b4c7831a3} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+trans\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\+\_\+matrix\+\_\+instance\+\_\+q7}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Q7 matrix transpose. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input matrix \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output matrix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed 
+\end{DoxyItemize}
+\end{DoxyReturn}

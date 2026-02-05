@@ -1,0 +1,103 @@
+\doxysection{arm\+\_\+const\+\_\+structs\+\_\+f16.\+c}
+\hypertarget{arm__const__structs__f16_8c_source}{}\label{arm__const__structs__f16_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/CommonTables/arm\_const\_structs\_f16.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/CommonTables/arm\_const\_structs\_f16.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_const\_structs\_f16.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Constant\ structs\ that\ are\ initialized\ for\ user\ convenience.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ For\ example,\ some\ can\ be\ given\ as\ arguments\ to\ the\ arm\_cfft\_f32()\ or\ arm\_rfft\_f32()\ functions.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}arm\_math\_types\_f16.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#if\ defined(ARM\_FLOAT16\_SUPPORTED)}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}arm\_const\_structs\_f16.h"{}}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{/*\ Floating-\/point\ structs\ */}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#if\ !defined(ARM\_MATH\_MVE\_FLOAT16)\ ||\ defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{comment}{/*\ }}
+\DoxyCodeLine{00044\ \textcolor{comment}{}}
+\DoxyCodeLine{00045\ \textcolor{comment}{Those\ structures\ cannot\ be\ used\ to\ initialize\ the\ MVE\ version\ of\ the\ FFT\ F32\ instances.}}
+\DoxyCodeLine{00046\ \textcolor{comment}{So\ they\ are\ not\ compiled\ when\ MVE\ is\ defined.}}
+\DoxyCodeLine{00047\ \textcolor{comment}{}}
+\DoxyCodeLine{00048\ \textcolor{comment}{For\ the\ MVE\ version,\ the\ new\ arm\_cfft\_init\_f16\ must\ be\ used.}}
+\DoxyCodeLine{00049\ \textcolor{comment}{}}
+\DoxyCodeLine{00050\ \textcolor{comment}{}}
+\DoxyCodeLine{00051\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#if\ !defined(\_\_CC\_ARM)}}
+\DoxyCodeLine{00054\ \ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len16\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00056\ \ \ 16,\ twiddleCoefF16\_16,\ armBitRevIndexTable\_fixed\_16,\ ARMBITREVINDEXTABLE\_FIXED\_16\_TABLE\_LENGTH}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len32\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00060\ \ \ 32,\ twiddleCoefF16\_32,\ armBitRevIndexTable\_fixed\_32,\ ARMBITREVINDEXTABLE\_FIXED\_32\_TABLE\_LENGTH}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len64\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00064\ \ \ 64,\ twiddleCoefF16\_64,\ armBitRevIndexTable\_fixed\_64,\ ARMBITREVINDEXTABLE\_FIXED\_64\_TABLE\_LENGTH}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len128\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00068\ \ \ 128,\ twiddleCoefF16\_128,\ armBitRevIndexTable\_fixed\_128,\ ARMBITREVINDEXTABLE\_FIXED\_128\_TABLE\_LENGTH}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len256\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00072\ \ \ 256,\ twiddleCoefF16\_256,\ armBitRevIndexTable\_fixed\_256,\ ARMBITREVINDEXTABLE\_FIXED\_256\_TABLE\_LENGTH}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len512\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00076\ \ \ 512,\ twiddleCoefF16\_512,\ armBitRevIndexTable\_fixed\_512,\ ARMBITREVINDEXTABLE\_FIXED\_512\_TABLE\_LENGTH}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len1024\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00080\ \ \ 1024,\ twiddleCoefF16\_1024,\ armBitRevIndexTable\_fixed\_1024,\ ARMBITREVINDEXTABLE\_FIXED\_1024\_TABLE\_LENGTH}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len2048\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00084\ \ \ 2048,\ twiddleCoefF16\_2048,\ armBitRevIndexTable\_fixed\_2048,\ ARMBITREVINDEXTABLE\_FIXED\_2048\_TABLE\_LENGTH}
+\DoxyCodeLine{00085\ \};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{const}\ arm\_cfft\_instance\_f16\ arm\_cfft\_sR\_f16\_len4096\ ARM\_DSP\_TABLE\_ATTRIBUTE\ =\ \{}
+\DoxyCodeLine{00088\ \ \ 4096,\ twiddleCoefF16\_4096,\ armBitRevIndexTable\_fixed\_4096,\ ARMBITREVINDEXTABLE\_FIXED\_4096\_TABLE\_LENGTH}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

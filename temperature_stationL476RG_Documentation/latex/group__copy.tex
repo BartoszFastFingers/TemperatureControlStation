@@ -1,0 +1,126 @@
+\doxysubsection{Vector Copy }
+\hypertarget{group__copy}{}\label{group__copy}\index{Vector Copy@{Vector Copy}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__copy_gaf3007f9bcf86ba72d10c9fafa4bec995}{arm\+\_\+copy\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Copies the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__copy_ga8686e1e3746cadf4c02368276bc285fe}{arm\+\_\+copy\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Copies the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__copy_gabc55c9db74c2386c3b8d3556178663f2}{arm\+\_\+copy\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Copies the elements of a Q15 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__copy_ga391a7dee12e30d7dacc88f63de0b892c}{arm\+\_\+copy\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Copies the elements of a Q31 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__copy_ga2b878742f266b4c44daf0d1384baf16f}{arm\+\_\+copy\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Copies the elements of a Q7 vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Copies sample by sample from source vector to destination vector.
+
+
+\begin{DoxyPre}
+    pDst[n] = pSrc[n];   0 <= n < blockSize.
+\end{DoxyPre}
+
+
+There are separate functions for floating point, Q31, Q15, and Q7 data types.
+
+\label{doc-func-members}
+\Hypertarget{group__copy_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__copy_gaf3007f9bcf86ba72d10c9fafa4bec995}\index{Vector Copy@{Vector Copy}!arm\_copy\_f32@{arm\_copy\_f32}}
+\index{arm\_copy\_f32@{arm\_copy\_f32}!Vector Copy@{Vector Copy}}
+\doxysubsubsubsection{\texorpdfstring{arm\_copy\_f32()}{arm\_copy\_f32()}}
+{\footnotesize\ttfamily \label{group__copy_gaf3007f9bcf86ba72d10c9fafa4bec995} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+copy\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Copies the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__copy_ga8686e1e3746cadf4c02368276bc285fe}\index{Vector Copy@{Vector Copy}!arm\_copy\_f64@{arm\_copy\_f64}}
+\index{arm\_copy\_f64@{arm\_copy\_f64}!Vector Copy@{Vector Copy}}
+\doxysubsubsubsection{\texorpdfstring{arm\_copy\_f64()}{arm\_copy\_f64()}}
+{\footnotesize\ttfamily \label{group__copy_ga8686e1e3746cadf4c02368276bc285fe} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+copy\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Copies the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__copy_gabc55c9db74c2386c3b8d3556178663f2}\index{Vector Copy@{Vector Copy}!arm\_copy\_q15@{arm\_copy\_q15}}
+\index{arm\_copy\_q15@{arm\_copy\_q15}!Vector Copy@{Vector Copy}}
+\doxysubsubsubsection{\texorpdfstring{arm\_copy\_q15()}{arm\_copy\_q15()}}
+{\footnotesize\ttfamily \label{group__copy_gabc55c9db74c2386c3b8d3556178663f2} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+copy\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Copies the elements of a Q15 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__copy_ga391a7dee12e30d7dacc88f63de0b892c}\index{Vector Copy@{Vector Copy}!arm\_copy\_q31@{arm\_copy\_q31}}
+\index{arm\_copy\_q31@{arm\_copy\_q31}!Vector Copy@{Vector Copy}}
+\doxysubsubsubsection{\texorpdfstring{arm\_copy\_q31()}{arm\_copy\_q31()}}
+{\footnotesize\ttfamily \label{group__copy_ga391a7dee12e30d7dacc88f63de0b892c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+copy\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Copies the elements of a Q31 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__copy_ga2b878742f266b4c44daf0d1384baf16f}\index{Vector Copy@{Vector Copy}!arm\_copy\_q7@{arm\_copy\_q7}}
+\index{arm\_copy\_q7@{arm\_copy\_q7}!Vector Copy@{Vector Copy}}
+\doxysubsubsubsection{\texorpdfstring{arm\_copy\_q7()}{arm\_copy\_q7()}}
+{\footnotesize\ttfamily \label{group__copy_ga2b878742f266b4c44daf0d1384baf16f} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+copy\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Copies the elements of a Q7 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,811 @@
+\doxysection{arm\+\_\+cfft\+\_\+q31.\+c}
+\hypertarget{arm__cfft__q31_8c_source}{}\label{arm__cfft__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_cfft\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_cfft\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_cfft\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Combined\ Radix\ Decimation\ in\ Frequency\ CFFT\ fixed\ point\ processing\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEI)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ "{}arm\_vec\_fft.h"{}}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_arm\_radix4\_butterfly\_q31\_mve(}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *\ S,}
+\DoxyCodeLine{00040\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ *pSrc,}
+\DoxyCodeLine{00041\ \ \ \ \ uint32\_t\ fftLen)}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ q31x4\_t\ vecTmp0,\ vecTmp1;}
+\DoxyCodeLine{00044\ \ \ \ \ q31x4\_t\ vecSum0,\ vecDiff0,\ vecSum1,\ vecDiff1;}
+\DoxyCodeLine{00045\ \ \ \ \ q31x4\_t\ vecA,\ vecB,\ vecC,\ vecD;}
+\DoxyCodeLine{00046\ \ \ \ \ uint32\_t\ \ blkCnt;}
+\DoxyCodeLine{00047\ \ \ \ \ uint32\_t\ \ n1,\ n2;}
+\DoxyCodeLine{00048\ \ \ \ \ uint32\_t\ \ stage\ =\ 0;}
+\DoxyCodeLine{00049\ \ \ \ \ int32\_t\ \ iter\ =\ 1;}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ int32\_t\ strides[4]\ =\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ (0\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *),\ (1\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *),}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ (8\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *),\ (9\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *)}
+\DoxyCodeLine{00053\ \ \ \ \ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ \ \ *\ Process\ first\ stages}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ *\ Each\ stage\ in\ middle\ stages\ provides\ two\ down\ scaling\ of\ the\ input}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00060\ \ \ \ \ n2\ =\ fftLen;}
+\DoxyCodeLine{00061\ \ \ \ \ n1\ =\ n2;}
+\DoxyCodeLine{00062\ \ \ \ \ n2\ >>=\ 2u;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ fftLen\ /\ 4u;\ k\ >\ 1;\ k\ >>=\ 2u)}
+\DoxyCodeLine{00065\ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *p\_rearranged\_twiddle\_tab\_stride2\ =}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \&S-\/>rearranged\_twiddle\_stride2[}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ S-\/>rearranged\_twiddle\_tab\_stride2\_arr[stage]];}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *p\_rearranged\_twiddle\_tab\_stride3\ =\ \&S-\/>rearranged\_twiddle\_stride3[}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ S-\/>rearranged\_twiddle\_tab\_stride3\_arr[stage]];}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *p\_rearranged\_twiddle\_tab\_stride1\ =}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \&S-\/>rearranged\_twiddle\_stride1[}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ S-\/>rearranged\_twiddle\_tab\_stride1\_arr[stage]];}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pBase\ =\ pSrc;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ iter;\ i++)}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inA\ =\ pBase;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inB\ =\ inA\ +\ n2\ *\ CMPLX\_DIM;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inC\ =\ inB\ +\ n2\ *\ CMPLX\_DIM;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inD\ =\ inC\ +\ n2\ *\ CMPLX\_DIM;}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *pW1\ =\ p\_rearranged\_twiddle\_tab\_stride1;}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *pW2\ =\ p\_rearranged\_twiddle\_tab\_stride2;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *pW3\ =\ p\_rearranged\_twiddle\_tab\_stride3;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ q31x4\_t\ \ \ \ vecW;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ blkCnt\ =\ n2\ /\ 2;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ load\ 2\ x\ q31\ complex\ pair}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_s32(inA);}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ vecC\ =\ vldrwq\_s32(inC);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecB\ =\ vldrwq\_s32(inB);}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecD\ =\ vldrwq\_s32(inD);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecSum0\ =\ vhaddq(vecA,\ vecC);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecDiff0\ =\ vhsubq(vecA,\ vecC);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecSum1\ =\ vhaddq(vecB,\ vecD);}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecDiff1\ =\ vhsubq(vecB,\ vecD);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ 1\ 1\ 1\ ]\ *\ [\ A\ B\ C\ D\ ]'\ .*\ 1}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhaddq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inA,\ vecTmp0);}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inA\ +=\ 4;}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/1\ 1\ -\/1\ ]\ *\ [\ A\ B\ C\ D\ ]'}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhsubq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/1\ 1\ -\/1\ ]\ *\ [\ A\ B\ C\ D\ ]'.*\ W2}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecW\ =\ vld1q(pW2);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pW2\ +=\ 4;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp1\ =\ MVE\_CMPLX\_MULT\_FX\_AxB(vecW,\ vecTmp0,\ q31x4\_t);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inB,\ vecTmp1);}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inB\ +=\ 4;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/i\ -\/1\ +i\ ]\ *\ [\ A\ B\ C\ D\ ]'}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_SUB\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/i\ -\/1\ +i\ ]\ *\ [\ A\ B\ C\ D\ ]'.*\ W1}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecW\ =\ vld1q(pW1);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pW1\ +=\ 4;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp1\ =\ MVE\_CMPLX\_MULT\_FX\_AxB(vecW,\ vecTmp0,\ q31x4\_t);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inC,\ vecTmp1);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inC\ +=\ 4;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ +i\ -\/1\ -\/i\ ]\ *\ [\ A\ B\ C\ D\ ]'}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_ADD\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00140\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ +i\ -\/1\ -\/i\ ]\ *\ [\ A\ B\ C\ D\ ]'.*\ W3}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecW\ =\ vld1q(pW3);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pW3\ +=\ 4;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp1\ =\ MVE\_CMPLX\_MULT\_FX\_AxB(vecW,\ vecTmp0,\ q31x4\_t);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inD,\ vecTmp1);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inD\ +=\ 4;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_s32(inA);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecC\ =\ vldrwq\_s32(inC);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ pBase\ +=\ \ CMPLX\_DIM\ *\ n1;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ n1\ =\ n2;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ n2\ >>=\ 2u;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ iter\ =\ iter\ <<\ 2;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ stage++;}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \ *\ End\ of\ 1st\ stages\ process}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 11.21(q21)\ format\ for\ the\ 1024\ point\ as\ there\ are\ 3\ middle\ stages}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 9.23(q23)\ format\ for\ the\ 256\ point\ as\ there\ are\ 2\ middle\ stages}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 7.25(q25)\ format\ for\ the\ 64\ point\ as\ there\ are\ 1\ middle\ stage}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 5.27(q27)\ format\ for\ the\ 16\ point\ as\ there\ are\ no\ middle\ stages}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ \ \ \ \ *\ start\ of\ Last\ stage\ process}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00172\ \ \ \ \ uint32x4\_t\ vecScGathAddr\ =\ vld1q\_u32((uint32\_t*)strides);}
+\DoxyCodeLine{00173\ \ \ \ \ vecScGathAddr\ =\ vecScGathAddr\ +\ (uint32\_t)\ pSrc;}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ \ \ \ \ *\ load\ scheduling}}
+\DoxyCodeLine{00177\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00178\ \ \ \ \ vecA\ =\ vldrwq\_gather\_base\_wb\_s32(\&vecScGathAddr,\ 64);}
+\DoxyCodeLine{00179\ \ \ \ \ vecC\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 16);}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ blkCnt\ =\ (fftLen\ >>\ 3);}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ vecSum0\ =\ vhaddq(vecA,\ vecC);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ vecDiff0\ =\ vhsubq(vecA,\ vecC);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ vecB\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 8);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ vecD\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 24);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ vecSum1\ =\ vhaddq(vecB,\ vecD);}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ vecDiff1\ =\ vhsubq(vecB,\ vecD);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ pre-\/load\ for\ next\ iteration}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_gather\_base\_wb\_s32(\&vecScGathAddr,\ 64);}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ vecC\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 16);}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhaddq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64,\ vecTmp0);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhsubq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64\ +\ 8,\ vecTmp0);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_SUB\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64\ +\ 16,\ vecTmp0);}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_ADD\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64\ +\ 24,\ vecTmp0);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00211\ \ \ \ \ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 11.21(q21)\ format\ for\ the\ 1024\ point}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 9.23(q23)\ format\ for\ the\ 256\ point}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 7.25(q25)\ format\ for\ the\ 64\ point}}
+\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 5.27(q27)\ format\ for\ the\ 16\ point}}
+\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00219\ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ arm\_cfft\_radix4by2\_q31\_mve(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *S,\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pSrc,\ uint32\_t\ fftLen)}
+\DoxyCodeLine{00223\ \{}
+\DoxyCodeLine{00224\ \ \ \ \ uint32\_t\ \ \ \ \ n2;}
+\DoxyCodeLine{00225\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ \ \ \ *pIn0;}
+\DoxyCodeLine{00226\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ \ \ \ *pIn1;}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pCoef\ =\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}};}
+\DoxyCodeLine{00228\ \ \ \ \ uint32\_t\ \ \ \ \ blkCnt;}
+\DoxyCodeLine{00229\ \ \ \ \ q31x4\_t\ \ \ \ vecIn0,\ vecIn1,\ vecSum,\ vecDiff;}
+\DoxyCodeLine{00230\ \ \ \ \ q31x4\_t\ \ \ \ vecCmplxTmp,\ vecTw;}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ n2\ =\ fftLen\ >>\ 1;}
+\DoxyCodeLine{00233\ \ \ \ \ pIn0\ =\ pSrc;}
+\DoxyCodeLine{00234\ \ \ \ \ pIn1\ =\ pSrc\ +\ fftLen;}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ blkCnt\ =\ n2\ /\ 2;}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00239\ \ \ \ \ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ vecIn0\ =\ vld1q\_s32(pIn0);}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ vecIn1\ =\ vld1q\_s32(pIn1);}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ vecIn0\ =\ vecIn0\ >>\ 1;}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ vecIn1\ =\ vecIn1\ >>\ 1;}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ vecSum\ =\ vhaddq(vecIn0,\ vecIn1);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ vst1q(pIn0,\ vecSum);}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ pIn0\ +=\ 4;}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ vecTw\ =\ vld1q\_s32(pCoef);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ pCoef\ +=\ 4;}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ vecDiff\ =\ vhsubq(vecIn0,\ vecIn1);}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ vecCmplxTmp\ =\ MVE\_CMPLX\_MULT\_FX\_AxConjB(vecDiff,\ vecTw,\ q31x4\_t);}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ vst1q(pIn1,\ vecCmplxTmp);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ pIn1\ +=\ 4;}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \_arm\_radix4\_butterfly\_q31\_mve(S,\ pSrc,\ n2);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \_arm\_radix4\_butterfly\_q31\_mve(S,\ pSrc\ +\ fftLen,\ n2);}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ pIn0\ =\ pSrc;}
+\DoxyCodeLine{00265\ \ \ \ \ blkCnt\ =\ (fftLen\ <<\ 1)\ >>\ 2;}
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00267\ \ \ \ \ \{}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ vecIn0\ =\ vld1q\_s32(pIn0);}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ vecIn0\ =\ vecIn0\ <<\ 1;}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ vst1q(pIn0,\ vecIn0);}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ pIn0\ +=\ 4;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00273\ \ \ \ \ \}}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00275\ \textcolor{comment}{\ \ \ \ \ *\ tail}}
+\DoxyCodeLine{00276\ \textcolor{comment}{\ \ \ \ \ *\ (will\ be\ merged\ thru\ tail\ predication)}}
+\DoxyCodeLine{00277\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00278\ \ \ \ \ blkCnt\ =\ (fftLen\ <<\ 1)\ \&\ 3;}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keywordflow}{if}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00280\ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ mve\_pred16\_t\ p0\ =\ vctp32q(blkCnt);}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ vecIn0\ =\ vld1q\_s32(pIn0);}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ vecIn0\ =\ vecIn0\ <<\ 1;}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ vstrwq\_p(pIn0,\ vecIn0,\ p0);}
+\DoxyCodeLine{00286\ \ \ \ \ \}}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \_arm\_radix4\_butterfly\_inverse\_q31\_mve(}
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *S,}
+\DoxyCodeLine{00292\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ *pSrc,}
+\DoxyCodeLine{00293\ \ \ \ \ uint32\_t\ fftLen)}
+\DoxyCodeLine{00294\ \{}
+\DoxyCodeLine{00295\ \ \ \ \ q31x4\_t\ vecTmp0,\ vecTmp1;}
+\DoxyCodeLine{00296\ \ \ \ \ q31x4\_t\ vecSum0,\ vecDiff0,\ vecSum1,\ vecDiff1;}
+\DoxyCodeLine{00297\ \ \ \ \ q31x4\_t\ vecA,\ vecB,\ vecC,\ vecD;}
+\DoxyCodeLine{00298\ \ \ \ \ uint32\_t\ \ blkCnt;}
+\DoxyCodeLine{00299\ \ \ \ \ uint32\_t\ \ n1,\ n2;}
+\DoxyCodeLine{00300\ \ \ \ \ uint32\_t\ \ stage\ =\ 0;}
+\DoxyCodeLine{00301\ \ \ \ \ int32\_t\ \ iter\ =\ 1;}
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ int32\_t\ strides[4]\ =\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ (0\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *),\ (1\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *),}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ (8\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *),\ (9\ -\/\ 16)\ *\ (int32\_t)\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *)}
+\DoxyCodeLine{00305\ \ \ \ \ \};}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00308\ \textcolor{comment}{\ \ \ \ \ *\ Process\ first\ stages}}
+\DoxyCodeLine{00309\ \textcolor{comment}{\ \ \ \ \ *\ Each\ stage\ in\ middle\ stages\ provides\ two\ down\ scaling\ of\ the\ input}}
+\DoxyCodeLine{00310\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00311\ \ \ \ \ n2\ =\ fftLen;}
+\DoxyCodeLine{00312\ \ \ \ \ n1\ =\ n2;}
+\DoxyCodeLine{00313\ \ \ \ \ n2\ >>=\ 2u;}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ k\ =\ fftLen\ /\ 4u;\ k\ >\ 1;\ k\ >>=\ 2u)}
+\DoxyCodeLine{00316\ \ \ \ \ \{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *p\_rearranged\_twiddle\_tab\_stride2\ =}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \&S-\/>rearranged\_twiddle\_stride2[}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ S-\/>rearranged\_twiddle\_tab\_stride2\_arr[stage]];}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *p\_rearranged\_twiddle\_tab\_stride3\ =\ \&S-\/>rearranged\_twiddle\_stride3[}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ S-\/>rearranged\_twiddle\_tab\_stride3\_arr[stage]];}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *p\_rearranged\_twiddle\_tab\_stride1\ =}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \&S-\/>rearranged\_twiddle\_stride1[}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ S-\/>rearranged\_twiddle\_tab\_stride1\_arr[stage]];}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pBase\ =\ pSrc;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ iter;\ i++)}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inA\ =\ pBase;}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inB\ =\ inA\ +\ n2\ *\ CMPLX\_DIM;}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inC\ =\ inB\ +\ n2\ *\ CMPLX\_DIM;}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *inD\ =\ inC\ +\ n2\ *\ CMPLX\_DIM;}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *pW1\ =\ p\_rearranged\_twiddle\_tab\_stride1;}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *pW2\ =\ p\_rearranged\_twiddle\_tab\_stride2;}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \textcolor{keyword}{const}\ *pW3\ =\ p\_rearranged\_twiddle\_tab\_stride3;}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ q31x4\_t\ \ \ \ vecW;}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ blkCnt\ =\ n2\ /\ 2;}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00340\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ *\ load\ 2\ x\ q31\ complex\ pair}}
+\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_s32(inA);}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ vecC\ =\ vldrwq\_s32(inC);}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecB\ =\ vldrwq\_s32(inB);}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecD\ =\ vldrwq\_s32(inD);}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecSum0\ =\ vhaddq(vecA,\ vecC);}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecDiff0\ =\ vhsubq(vecA,\ vecC);}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecSum1\ =\ vhaddq(vecB,\ vecD);}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecDiff1\ =\ vhsubq(vecB,\ vecD);}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ 1\ 1\ 1\ ]\ *\ [\ A\ B\ C\ D\ ]'\ .*\ 1}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhaddq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inA,\ vecTmp0);}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inA\ +=\ 4;}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/1\ 1\ -\/1\ ]\ *\ [\ A\ B\ C\ D\ ]'}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhsubq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/1\ 1\ -\/1\ ]\ *\ [\ A\ B\ C\ D\ ]'.*\ W2}}
+\DoxyCodeLine{00366\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecW\ =\ vld1q(pW2);}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pW2\ +=\ 4;}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp1\ =\ MVE\_CMPLX\_MULT\_FX\_AxConjB(vecTmp0,\ vecW,\ q31x4\_t);}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inB,\ vecTmp1);}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inB\ +=\ 4;}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/i\ -\/1\ +i\ ]\ *\ [\ A\ B\ C\ D\ ]'}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_ADD\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ -\/i\ -\/1\ +i\ ]\ *\ [\ A\ B\ C\ D\ ]'.*\ W1}}
+\DoxyCodeLine{00379\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecW\ =\ vld1q(pW1);}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pW1\ +=\ 4;}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp1\ =\ MVE\_CMPLX\_MULT\_FX\_AxConjB(vecTmp0,\ vecW,\ q31x4\_t);}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inC,\ vecTmp1);}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inC\ +=\ 4;}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00386\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ +i\ -\/1\ -\/i\ ]\ *\ [\ A\ B\ C\ D\ ]'}}
+\DoxyCodeLine{00387\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_SUB\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00390\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *\ [\ 1\ +i\ -\/1\ -\/i\ ]\ *\ [\ A\ B\ C\ D\ ]'.*\ W3}}
+\DoxyCodeLine{00391\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecW\ =\ vld1q(pW3);}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pW3\ +=\ 4;}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecTmp1\ =\ MVE\_CMPLX\_MULT\_FX\_AxConjB(vecTmp0,\ vecW,\ q31x4\_t);}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vst1q(inD,\ vecTmp1);}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ inD\ +=\ 4;}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_s32(inA);}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vecC\ =\ vldrwq\_s32(inC);}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ pBase\ +=\ \ CMPLX\_DIM\ *\ n1;}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ n1\ =\ n2;}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ n2\ >>=\ 2u;}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ iter\ =\ iter\ <<\ 2;}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ stage++;}
+\DoxyCodeLine{00409\ \ \ \ \ \}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00412\ \textcolor{comment}{\ \ \ \ \ *\ End\ of\ 1st\ stages\ process}}
+\DoxyCodeLine{00413\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 11.21(q21)\ format\ for\ the\ 1024\ point\ as\ there\ are\ 3\ middle\ stages}}
+\DoxyCodeLine{00414\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 9.23(q23)\ format\ for\ the\ 256\ point\ as\ there\ are\ 2\ middle\ stages}}
+\DoxyCodeLine{00415\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 7.25(q25)\ format\ for\ the\ 64\ point\ as\ there\ are\ 1\ middle\ stage}}
+\DoxyCodeLine{00416\ \textcolor{comment}{\ \ \ \ \ *\ data\ is\ in\ 5.27(q27)\ format\ for\ the\ 16\ point\ as\ there\ are\ no\ middle\ stages}}
+\DoxyCodeLine{00417\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00420\ \textcolor{comment}{\ \ \ \ \ *\ start\ of\ Last\ stage\ process}}
+\DoxyCodeLine{00421\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00422\ \ \ \ \ uint32x4\_t\ vecScGathAddr\ =\ vld1q\_u32((uint32\_t*)strides);}
+\DoxyCodeLine{00423\ \ \ \ \ vecScGathAddr\ =\ vecScGathAddr\ +\ (uint32\_t)\ pSrc;}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ \ *\ load\ scheduling}}
+\DoxyCodeLine{00427\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00428\ \ \ \ \ vecA\ =\ vldrwq\_gather\_base\_wb\_s32(\&vecScGathAddr,\ 64);}
+\DoxyCodeLine{00429\ \ \ \ \ vecC\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 16);}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ blkCnt\ =\ (fftLen\ >>\ 3);}
+\DoxyCodeLine{00432\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00433\ \ \ \ \ \{}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ vecSum0\ =\ vhaddq(vecA,\ vecC);}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ vecDiff0\ =\ vhsubq(vecA,\ vecC);}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ vecB\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 8);}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ vecD\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 24);}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ vecSum1\ =\ vhaddq(vecB,\ vecD);}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ vecDiff1\ =\ vhsubq(vecB,\ vecD);}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00443\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ pre-\/load\ for\ next\ iteration}}
+\DoxyCodeLine{00444\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ \ \ vecA\ =\ vldrwq\_gather\_base\_wb\_s32(\&vecScGathAddr,\ 64);}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ vecC\ =\ vldrwq\_gather\_base\_s32(vecScGathAddr,\ 16);}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhaddq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64,\ vecTmp0);}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ vecTmp0\ =\ vhsubq(vecSum0,\ vecSum1);}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64\ +\ 8,\ vecTmp0);}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_ADD\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64\ +\ 16,\ vecTmp0);}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ vecTmp0\ =\ MVE\_CMPLX\_SUB\_FX\_A\_ixB(vecDiff0,\ vecDiff1);}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ vstrwq\_scatter\_base\_s32(vecScGathAddr,\ -\/64\ +\ 24,\ vecTmp0);}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00461\ \ \ \ \ \}}
+\DoxyCodeLine{00462\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00463\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 11.21(q21)\ format\ for\ the\ 1024\ point}}
+\DoxyCodeLine{00464\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 9.23(q23)\ format\ for\ the\ 256\ point}}
+\DoxyCodeLine{00465\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 7.25(q25)\ format\ for\ the\ 64\ point}}
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ \ \ \ *\ output\ is\ in\ 5.27(q27)\ format\ for\ the\ 16\ point}}
+\DoxyCodeLine{00467\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00468\ \}}
+\DoxyCodeLine{00469\ }
+\DoxyCodeLine{00470\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ arm\_cfft\_radix4by2\_inverse\_q31\_mve(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *S,\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pSrc,\ uint32\_t\ fftLen)}
+\DoxyCodeLine{00471\ \{}
+\DoxyCodeLine{00472\ \ \ \ \ uint32\_t\ \ \ \ \ n2;}
+\DoxyCodeLine{00473\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ \ \ \ *pIn0;}
+\DoxyCodeLine{00474\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ \ \ \ *pIn1;}
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pCoef\ =\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}};}
+\DoxyCodeLine{00476\ }
+\DoxyCodeLine{00477\ \ \ \ \ \textcolor{comment}{//uint16\_t\ \ \ \ \ twidCoefModifier\ =\ arm\_cfft\_radix2\_twiddle\_factor(S-\/>fftLen);}}
+\DoxyCodeLine{00478\ \ \ \ \ \textcolor{comment}{//q31\_t\ \ \ \ \ \ \ \ twidIncr\ =\ (2\ *\ twidCoefModifier\ *\ sizeof(q31\_t));}}
+\DoxyCodeLine{00479\ \ \ \ \ uint32\_t\ \ \ \ \ blkCnt;}
+\DoxyCodeLine{00480\ \ \ \ \ \textcolor{comment}{//uint64x2\_t\ \ \ vecOffs;}}
+\DoxyCodeLine{00481\ \ \ \ \ q31x4\_t\ \ \ \ vecIn0,\ vecIn1,\ vecSum,\ vecDiff;}
+\DoxyCodeLine{00482\ \ \ \ \ q31x4\_t\ \ \ \ vecCmplxTmp,\ vecTw;}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \ \ \ \ n2\ =\ fftLen\ >>\ 1;}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00486\ \ \ \ \ pIn0\ =\ pSrc;}
+\DoxyCodeLine{00487\ \ \ \ \ pIn1\ =\ pSrc\ +\ fftLen;}
+\DoxyCodeLine{00488\ \ \ \ \ \textcolor{comment}{//vecOffs[0]\ =\ 0;}}
+\DoxyCodeLine{00489\ \ \ \ \ \textcolor{comment}{//vecOffs[1]\ =\ (uint64\_t)\ twidIncr;}}
+\DoxyCodeLine{00490\ \ \ \ \ blkCnt\ =\ n2\ /\ 2;}
+\DoxyCodeLine{00491\ }
+\DoxyCodeLine{00492\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00493\ \ \ \ \ \{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ vecIn0\ =\ vld1q\_s32(pIn0);}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ vecIn1\ =\ vld1q\_s32(pIn1);}
+\DoxyCodeLine{00496\ }
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ vecIn0\ =\ vecIn0\ >>\ 1;}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ vecIn1\ =\ vecIn1\ >>\ 1;}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ vecSum\ =\ vhaddq(vecIn0,\ vecIn1);}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ vst1q(pIn0,\ vecSum);}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ pIn0\ +=\ 4;}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \textcolor{comment}{//vecTw\ =\ (q31x4\_t)\ vldrdq\_gather\_offset\_s64(pCoef,\ vecOffs);}}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ vecTw\ =\ vld1q\_s32(pCoef);}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ pCoef\ +=\ 4;}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ vecDiff\ =\ vhsubq(vecIn0,\ vecIn1);}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ vecCmplxTmp\ =\ MVE\_CMPLX\_MULT\_FX\_AxB(vecDiff,\ vecTw,\ q31x4\_t);}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ vst1q(pIn1,\ vecCmplxTmp);}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ pIn1\ +=\ 4;}
+\DoxyCodeLine{00511\ }
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ \textcolor{comment}{//vecOffs\ =\ vaddq((q31x4\_t)\ vecOffs,\ 2\ *\ twidIncr);}}
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00514\ \ \ \ \ \}}
+\DoxyCodeLine{00515\ }
+\DoxyCodeLine{00516\ \ \ \ \ \_arm\_radix4\_butterfly\_inverse\_q31\_mve(S,\ pSrc,\ n2);}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00518\ \ \ \ \ \_arm\_radix4\_butterfly\_inverse\_q31\_mve(S,\ pSrc\ +\ fftLen,\ n2);}
+\DoxyCodeLine{00519\ }
+\DoxyCodeLine{00520\ \ \ \ \ pIn0\ =\ pSrc;}
+\DoxyCodeLine{00521\ \ \ \ \ blkCnt\ =\ (fftLen\ <<\ 1)\ >>\ 2;}
+\DoxyCodeLine{00522\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00523\ \ \ \ \ \{}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ vecIn0\ =\ vld1q\_s32(pIn0);}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ vecIn0\ =\ vecIn0\ <<\ 1;}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ vst1q(pIn0,\ vecIn0);}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ pIn0\ +=\ 4;}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00529\ \ \ \ \ \}}
+\DoxyCodeLine{00530\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00531\ \textcolor{comment}{\ \ \ \ \ *\ tail}}
+\DoxyCodeLine{00532\ \textcolor{comment}{\ \ \ \ \ *\ (will\ be\ merged\ thru\ tail\ predication)}}
+\DoxyCodeLine{00533\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00534\ \ \ \ \ blkCnt\ =\ (fftLen\ <<\ 1)\ \&\ 3;}
+\DoxyCodeLine{00535\ \ \ \ \ \textcolor{keywordflow}{if}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00536\ \ \ \ \ \{}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ mve\_pred16\_t\ p0\ =\ vctp32q(blkCnt);}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ vecIn0\ =\ vld1q\_s32(pIn0);}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ vecIn0\ =\ vecIn0\ <<\ 1;}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ vstrwq\_p(pIn0,\ vecIn0,\ p0);}
+\DoxyCodeLine{00542\ \ \ \ \ \}}
+\DoxyCodeLine{00543\ }
+\DoxyCodeLine{00544\ \}}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ }
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00563\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___complex_f_f_t_q31_gacf4cbd5fcba232d7793ee45072f5be5f}{arm\_cfft\_q31}}(}
+\DoxyCodeLine{00564\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *\ S,}
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ uint8\_t\ ifftFlag,}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ uint8\_t\ bitReverseFlag)}
+\DoxyCodeLine{00568\ \{}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen\ =\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}};}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ifftFlag\ ==\ 1U)\ \{}
+\DoxyCodeLine{00572\ }
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (fftLen)\ \{}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 64:}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 256:}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1024:}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4096:}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_arm\_radix4\_butterfly\_inverse\_q31\_mve(S,\ pSrc,\ fftLen);}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00581\ }
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 128:}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 512:}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2048:}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ arm\_cfft\_radix4by2\_inverse\_q31\_mve(S,\ pSrc,\ fftLen);}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (fftLen)\ \{}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 64:}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 256:}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1024:}
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4096:}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_arm\_radix4\_butterfly\_q31\_mve(S,\ pSrc,\ fftLen);}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00598\ }
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 128:}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 512:}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2048:}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ arm\_cfft\_radix4by2\_q31\_mve(S,\ pSrc,\ fftLen);}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bitReverseFlag)}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \ \ \ \ arm\_bitreversal\_32\_inpl\_mve((uint32\_t*)pSrc,\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}},\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}});}
+\DoxyCodeLine{00613\ }
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00615\ \}}
+\DoxyCodeLine{00616\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ arm\_radix4\_butterfly\_q31(}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00621\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCoef,}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ uint32\_t\ twidCoefModifier);}
+\DoxyCodeLine{00623\ }
+\DoxyCodeLine{00624\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ arm\_radix4\_butterfly\_inverse\_q31(}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00627\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCoef,}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ uint32\_t\ twidCoefModifier);}
+\DoxyCodeLine{00629\ }
+\DoxyCodeLine{00630\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ arm\_bitreversal\_32(}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ uint32\_t\ *\ pSrc,}
+\DoxyCodeLine{00632\ \ \ \textcolor{keyword}{const}\ uint16\_t\ bitRevLen,}
+\DoxyCodeLine{00633\ \ \ \textcolor{keyword}{const}\ uint16\_t\ *\ pBitRevTable);}
+\DoxyCodeLine{00634\ }
+\DoxyCodeLine{00635\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_cfft\_radix4by2\_q31(}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00638\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCoef);}
+\DoxyCodeLine{00639\ }
+\DoxyCodeLine{00640\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_cfft\_radix4by2\_inverse\_q31(}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00643\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCoef);}
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00650\ }
+\DoxyCodeLine{00662\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___complex_f_f_t_q31_gacf4cbd5fcba232d7793ee45072f5be5f}{arm\_cfft\_q31}}(}
+\DoxyCodeLine{00663\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *\ S,}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ p1,}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ uint8\_t\ ifftFlag,}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ uint8\_t\ bitReverseFlag)}
+\DoxyCodeLine{00667\ \{}
+\DoxyCodeLine{00668\ \ \ uint32\_t\ L\ =\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_ab8db3bbe7c61e6bb8ca2a55e3446e11a}{fftLen}};}
+\DoxyCodeLine{00669\ }
+\DoxyCodeLine{00670\ \ \ \textcolor{keywordflow}{if}\ (ifftFlag\ ==\ 1U)}
+\DoxyCodeLine{00671\ \ \ \{}
+\DoxyCodeLine{00672\ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (L)}
+\DoxyCodeLine{00673\ \ \ \ \ \ \{}
+\DoxyCodeLine{00674\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{00675\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 64:}
+\DoxyCodeLine{00676\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 256:}
+\DoxyCodeLine{00677\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1024:}
+\DoxyCodeLine{00678\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4096:}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ arm\_radix4\_butterfly\_inverse\_q31\ (\ p1,\ L,\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}},\ 1\ );}
+\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00681\ }
+\DoxyCodeLine{00682\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{00683\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 128:}
+\DoxyCodeLine{00684\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 512:}
+\DoxyCodeLine{00685\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2048:}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ arm\_cfft\_radix4by2\_inverse\_q31\ (\ p1,\ L,\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}}\ );}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00688\ \ \ \ \ \ \}}
+\DoxyCodeLine{00689\ \ \ \}}
+\DoxyCodeLine{00690\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00691\ \ \ \{}
+\DoxyCodeLine{00692\ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (L)}
+\DoxyCodeLine{00693\ \ \ \ \ \ \{}
+\DoxyCodeLine{00694\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{00695\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 64:}
+\DoxyCodeLine{00696\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 256:}
+\DoxyCodeLine{00697\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1024:}
+\DoxyCodeLine{00698\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 4096:}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ arm\_radix4\_butterfly\_q31\ (\ p1,\ L,\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}},\ 1\ );}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00701\ }
+\DoxyCodeLine{00702\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{00703\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 128:}
+\DoxyCodeLine{00704\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 512:}
+\DoxyCodeLine{00705\ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2048:}
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ arm\_cfft\_radix4by2\_q31\ (\ p1,\ L,\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a9760c603af5d85652496dbffd63a8a2e}{pTwiddle}}\ );}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00708\ \ \ \ \ \ \}}
+\DoxyCodeLine{00709\ \ \ \}}
+\DoxyCodeLine{00710\ }
+\DoxyCodeLine{00711\ \ \ \textcolor{keywordflow}{if}\ (\ bitReverseFlag\ )}
+\DoxyCodeLine{00712\ \ \ \ \ arm\_bitreversal\_32\ ((uint32\_t*)\ p1,\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a65e1b3e327b8fab9404287ed8f347cc8}{bitRevLength}},\ S-\/>\doxymbox{\hyperlink{structarm__cfft__instance__q31_a3b229432d381b0a511a9cdbe3aa74e78}{pBitRevTable}});}
+\DoxyCodeLine{00713\ \}}
+\DoxyCodeLine{00714\ }
+\DoxyCodeLine{00718\ }
+\DoxyCodeLine{00719\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_cfft\_radix4by2\_q31(}
+\DoxyCodeLine{00720\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00721\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00722\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCoef)}
+\DoxyCodeLine{00723\ \{}
+\DoxyCodeLine{00724\ \ \ \ \ \ \ \ \ uint32\_t\ i,\ l;}
+\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ uint32\_t\ n2;}
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ xt,\ yt,\ cosVal,\ sinVal;}
+\DoxyCodeLine{00727\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ p0,\ p1;}
+\DoxyCodeLine{00728\ }
+\DoxyCodeLine{00729\ \ \ n2\ =\ fftLen\ >>\ 1U;}
+\DoxyCodeLine{00730\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n2;\ i++)}
+\DoxyCodeLine{00731\ \ \ \{}
+\DoxyCodeLine{00732\ \ \ \ \ \ cosVal\ =\ pCoef[2\ *\ i];}
+\DoxyCodeLine{00733\ \ \ \ \ \ sinVal\ =\ pCoef[2\ *\ i\ +\ 1];}
+\DoxyCodeLine{00734\ }
+\DoxyCodeLine{00735\ \ \ \ \ \ l\ =\ i\ +\ n2;}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00737\ \ \ \ \ \ xt\ =\ \ \ \ \ \ \ \ \ \ (pSrc[2\ *\ i]\ >>\ 2U)\ -\/\ (pSrc[2\ *\ l]\ >>\ 2U);}
+\DoxyCodeLine{00738\ \ \ \ \ \ pSrc[2\ *\ i]\ =\ (pSrc[2\ *\ i]\ >>\ 2U)\ +\ (pSrc[2\ *\ l]\ >>\ 2U);}
+\DoxyCodeLine{00739\ }
+\DoxyCodeLine{00740\ \ \ \ \ \ yt\ =\ \ \ \ \ \ \ \ \ \ \ \ \ \ (pSrc[2\ *\ i\ +\ 1]\ >>\ 2U)\ -\/\ (pSrc[2\ *\ l\ +\ 1]\ >>\ 2U);}
+\DoxyCodeLine{00741\ \ \ \ \ \ pSrc[2\ *\ i\ +\ 1]\ =\ (pSrc[2\ *\ l\ +\ 1]\ >>\ 2U)\ +\ (pSrc[2\ *\ i\ +\ 1]\ >>\ 2U);}
+\DoxyCodeLine{00742\ }
+\DoxyCodeLine{00743\ \ \ \ \ \ mult\_32x32\_keep32\_R(p0,\ xt,\ cosVal);}
+\DoxyCodeLine{00744\ \ \ \ \ \ mult\_32x32\_keep32\_R(p1,\ yt,\ cosVal);}
+\DoxyCodeLine{00745\ \ \ \ \ \ multAcc\_32x32\_keep32\_R(p0,\ yt,\ sinVal);}
+\DoxyCodeLine{00746\ \ \ \ \ \ multSub\_32x32\_keep32\_R(p1,\ xt,\ sinVal);}
+\DoxyCodeLine{00747\ }
+\DoxyCodeLine{00748\ \ \ \ \ \ pSrc[2\ *\ l]\ \ \ \ \ =\ p0\ <<\ 1;}
+\DoxyCodeLine{00749\ \ \ \ \ \ pSrc[2\ *\ l\ +\ 1]\ =\ p1\ <<\ 1;}
+\DoxyCodeLine{00750\ \ \ \}}
+\DoxyCodeLine{00751\ }
+\DoxyCodeLine{00752\ }
+\DoxyCodeLine{00753\ \ \ \textcolor{comment}{/*\ first\ col\ */}}
+\DoxyCodeLine{00754\ \ \ arm\_radix4\_butterfly\_q31\ (pSrc,\ \ \ \ \ \ \ \ \ \ n2,\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)pCoef,\ 2U);}
+\DoxyCodeLine{00755\ }
+\DoxyCodeLine{00756\ \ \ \textcolor{comment}{/*\ second\ col\ */}}
+\DoxyCodeLine{00757\ \ \ arm\_radix4\_butterfly\_q31\ (pSrc\ +\ fftLen,\ n2,\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)pCoef,\ 2U);}
+\DoxyCodeLine{00758\ }
+\DoxyCodeLine{00759\ \ \ n2\ =\ fftLen\ >>\ 1U;}
+\DoxyCodeLine{00760\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n2;\ i++)}
+\DoxyCodeLine{00761\ \ \ \{}
+\DoxyCodeLine{00762\ \ \ \ \ \ p0\ =\ pSrc[4\ *\ i\ +\ 0];}
+\DoxyCodeLine{00763\ \ \ \ \ \ p1\ =\ pSrc[4\ *\ i\ +\ 1];}
+\DoxyCodeLine{00764\ \ \ \ \ \ xt\ =\ pSrc[4\ *\ i\ +\ 2];}
+\DoxyCodeLine{00765\ \ \ \ \ \ yt\ =\ pSrc[4\ *\ i\ +\ 3];}
+\DoxyCodeLine{00766\ }
+\DoxyCodeLine{00767\ \ \ \ \ \ p0\ <<=\ 1U;}
+\DoxyCodeLine{00768\ \ \ \ \ \ p1\ <<=\ 1U;}
+\DoxyCodeLine{00769\ \ \ \ \ \ xt\ <<=\ 1U;}
+\DoxyCodeLine{00770\ \ \ \ \ \ yt\ <<=\ 1U;}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00772\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 0]\ =\ p0;}
+\DoxyCodeLine{00773\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 1]\ =\ p1;}
+\DoxyCodeLine{00774\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 2]\ =\ xt;}
+\DoxyCodeLine{00775\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 3]\ =\ yt;}
+\DoxyCodeLine{00776\ \ \ \}}
+\DoxyCodeLine{00777\ }
+\DoxyCodeLine{00778\ \}}
+\DoxyCodeLine{00779\ }
+\DoxyCodeLine{00780\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ arm\_cfft\_radix4by2\_inverse\_q31(}
+\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrc,}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ uint32\_t\ fftLen,}
+\DoxyCodeLine{00783\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pCoef)}
+\DoxyCodeLine{00784\ \{}
+\DoxyCodeLine{00785\ \ \ uint32\_t\ i,\ l;}
+\DoxyCodeLine{00786\ \ \ uint32\_t\ n2;}
+\DoxyCodeLine{00787\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ xt,\ yt,\ cosVal,\ sinVal;}
+\DoxyCodeLine{00788\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ p0,\ p1;}
+\DoxyCodeLine{00789\ }
+\DoxyCodeLine{00790\ \ \ n2\ =\ fftLen\ >>\ 1U;}
+\DoxyCodeLine{00791\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n2;\ i++)}
+\DoxyCodeLine{00792\ \ \ \{}
+\DoxyCodeLine{00793\ \ \ \ \ \ cosVal\ =\ pCoef[2\ *\ i];}
+\DoxyCodeLine{00794\ \ \ \ \ \ sinVal\ =\ pCoef[2\ *\ i\ +\ 1];}
+\DoxyCodeLine{00795\ }
+\DoxyCodeLine{00796\ \ \ \ \ \ l\ =\ i\ +\ n2;}
+\DoxyCodeLine{00797\ }
+\DoxyCodeLine{00798\ \ \ \ \ \ xt\ =\ \ \ \ \ \ \ \ \ \ (pSrc[2\ *\ i]\ >>\ 2U)\ -\/\ (pSrc[2\ *\ l]\ >>\ 2U);}
+\DoxyCodeLine{00799\ \ \ \ \ \ pSrc[2\ *\ i]\ =\ (pSrc[2\ *\ i]\ >>\ 2U)\ +\ (pSrc[2\ *\ l]\ >>\ 2U);}
+\DoxyCodeLine{00800\ }
+\DoxyCodeLine{00801\ \ \ \ \ \ yt\ =\ \ \ \ \ \ \ \ \ \ \ \ \ \ (pSrc[2\ *\ i\ +\ 1]\ >>\ 2U)\ -\/\ (pSrc[2\ *\ l\ +\ 1]\ >>\ 2U);}
+\DoxyCodeLine{00802\ \ \ \ \ \ pSrc[2\ *\ i\ +\ 1]\ =\ (pSrc[2\ *\ l\ +\ 1]\ >>\ 2U)\ +\ (pSrc[2\ *\ i\ +\ 1]\ >>\ 2U);}
+\DoxyCodeLine{00803\ }
+\DoxyCodeLine{00804\ \ \ \ \ \ mult\_32x32\_keep32\_R(p0,\ xt,\ cosVal);}
+\DoxyCodeLine{00805\ \ \ \ \ \ mult\_32x32\_keep32\_R(p1,\ yt,\ cosVal);}
+\DoxyCodeLine{00806\ \ \ \ \ \ multSub\_32x32\_keep32\_R(p0,\ yt,\ sinVal);}
+\DoxyCodeLine{00807\ \ \ \ \ \ multAcc\_32x32\_keep32\_R(p1,\ xt,\ sinVal);}
+\DoxyCodeLine{00808\ }
+\DoxyCodeLine{00809\ \ \ \ \ \ pSrc[2\ *\ l]\ \ \ \ \ =\ p0\ <<\ 1U;}
+\DoxyCodeLine{00810\ \ \ \ \ \ pSrc[2\ *\ l\ +\ 1]\ =\ p1\ <<\ 1U;}
+\DoxyCodeLine{00811\ \ \ \}}
+\DoxyCodeLine{00812\ }
+\DoxyCodeLine{00813\ \ \ \textcolor{comment}{/*\ first\ col\ */}}
+\DoxyCodeLine{00814\ \ \ arm\_radix4\_butterfly\_inverse\_q31(\ pSrc,\ \ \ \ \ \ \ \ \ \ n2,\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)pCoef,\ 2U);}
+\DoxyCodeLine{00815\ }
+\DoxyCodeLine{00816\ \ \ \textcolor{comment}{/*\ second\ col\ */}}
+\DoxyCodeLine{00817\ \ \ arm\_radix4\_butterfly\_inverse\_q31(\ pSrc\ +\ fftLen,\ n2,\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)pCoef,\ 2U);}
+\DoxyCodeLine{00818\ }
+\DoxyCodeLine{00819\ \ \ n2\ =\ fftLen\ >>\ 1U;}
+\DoxyCodeLine{00820\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n2;\ i++)}
+\DoxyCodeLine{00821\ \ \ \{}
+\DoxyCodeLine{00822\ \ \ \ \ \ p0\ =\ pSrc[4\ *\ i\ +\ 0];}
+\DoxyCodeLine{00823\ \ \ \ \ \ p1\ =\ pSrc[4\ *\ i\ +\ 1];}
+\DoxyCodeLine{00824\ \ \ \ \ \ xt\ =\ pSrc[4\ *\ i\ +\ 2];}
+\DoxyCodeLine{00825\ \ \ \ \ \ yt\ =\ pSrc[4\ *\ i\ +\ 3];}
+\DoxyCodeLine{00826\ }
+\DoxyCodeLine{00827\ \ \ \ \ \ p0\ <<=\ 1U;}
+\DoxyCodeLine{00828\ \ \ \ \ \ p1\ <<=\ 1U;}
+\DoxyCodeLine{00829\ \ \ \ \ \ xt\ <<=\ 1U;}
+\DoxyCodeLine{00830\ \ \ \ \ \ yt\ <<=\ 1U;}
+\DoxyCodeLine{00831\ }
+\DoxyCodeLine{00832\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 0]\ =\ p0;}
+\DoxyCodeLine{00833\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 1]\ =\ p1;}
+\DoxyCodeLine{00834\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 2]\ =\ xt;}
+\DoxyCodeLine{00835\ \ \ \ \ \ pSrc[4\ *\ i\ +\ 3]\ =\ yt;}
+\DoxyCodeLine{00836\ \ \ \}}
+\DoxyCodeLine{00837\ \}}
+\DoxyCodeLine{00838\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEI)\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

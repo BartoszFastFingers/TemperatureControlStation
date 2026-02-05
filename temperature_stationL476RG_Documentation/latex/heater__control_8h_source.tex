@@ -1,0 +1,36 @@
+\doxysection{heater\+\_\+control.\+h}
+\hypertarget{heater__control_8h_source}{}\label{heater__control_8h_source}\index{Core/Inc/heater\_control.h@{Core/Inc/heater\_control.h}}
+\doxymbox{\hyperlink{heater__control_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ CORE\_INC\_HEATER\_CONTROL\_H\_}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ CORE\_INC\_HEATER\_CONTROL\_H\_}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}tim.h"{}}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ TIM\_HandleTypeDef\ *\doxymbox{\hyperlink{struct_heater_handle__t_a5dc7d1c65997ccaed48a93a3f4ffc486}{htim}};\ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ uint32\_t\ \doxymbox{\hyperlink{struct_heater_handle__t_a0c72dd5e18823aef187a34137983c9a6}{channel}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct_heater_handle__t_a5decc13fa9ec8b70efdf84da7faa88f1}{current\_power}};\ \ \ \ \ }
+\DoxyCodeLine{00026\ \}\ \doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00034\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{heater__control_8h_a7f5d58bec0c8b1e52931fab91fd7a707}{Heater\_Init}}(\doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}}\ *hheater,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TIM\_HandleTypeDef\ *htim,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ channel);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{heater__control_8h_a2f676e92aa2965f5bdcec5ab67998c15}{Heater\_Start}}(\doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}}\ *hheater);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{heater__control_8h_a3493015070cf36e8ab65b0f38d47b8eb}{Heater\_Stop}}(\doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}}\ *hheater);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{heater__control_8h_a810523a5f79289027f0f7e34069189e7}{Heater\_SetPower}}(\doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}}\ *hheater,\ uint16\_t\ power);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ uint16\_t\ \doxymbox{\hyperlink{heater__control_8h_a13c06dbab75437ce1591eb47ac3ad276}{Heater\_GetPower}}(\doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}}\ *hheater);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{heater__control_8h_a645e0983ad91bcb4c9ff5cad89c3cd41}{Heater\_Off}}(\doxymbox{\hyperlink{struct_heater_handle__t}{HeaterHandle\_t}}\ *hheater);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CORE\_INC\_HEATER\_CONTROL\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

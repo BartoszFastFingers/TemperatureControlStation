@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Plik źródłowy Core/Inc/temperature_sensor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('temperature__sensor_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">temperature_sensor.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="temperature__sensor_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#ifndef CORE_INC_TEMPERATURE_SENSOR_H_</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define CORE_INC_TEMPERATURE_SENSOR_H_</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;adc.h&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;arm_math.h&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="_s_m_a1__fir_8h.html">SMA1_fir.h</a>&quot;</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="temperature__sensor_8h.html#ab0c432e3be8436ec79a4431f6cd30411">   25</a></span><span class="preprocessor">#define MAX_TEMP_SENSORS 2</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__filter__t.html">   30</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__filter__t.html#a4ea56e400307ee6511dd43edb9e31353">   32</a></span>    arm_fir_instance_f32 <a class="code hl_variable" href="struct_temp_sensor_handle__filter__t.html#a4ea56e400307ee6511dd43edb9e31353">fir</a>;                      </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__filter__t.html#ab3804d2dbcea4e3dc5312f5aec06c5b2">   33</a></span>    float32_t <a class="code hl_variable" href="struct_temp_sensor_handle__filter__t.html#ab3804d2dbcea4e3dc5312f5aec06c5b2">state</a>[<a class="code hl_define" href="_s_m_a1__fir_8h.html#a008898a303a3a3a631ee33a9cc83e77f">SMA1_NUM_TAPS</a> + <a class="code hl_define" href="_s_m_a1__fir_8h.html#a3ae01460c555625bf822ad3e657f97cc">SMA1_BLOCK_SIZE</a> - 1]; </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>} <a class="code hl_struct" href="struct_temp_sensor_handle__filter__t.html">TempSensorHandle_filter_t</a>;</div>
+</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__t.html">   39</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__t.html#af982c0fe5d77061049c468b599100134">   41</a></span>    ADC_HandleTypeDef *<a class="code hl_variable" href="struct_temp_sensor_handle__t.html#af982c0fe5d77061049c468b599100134">hadc</a>;             </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__t.html#aa55fc0ac5902d2f03ffebeba15c2cb6a">   42</a></span>    uint8_t <a class="code hl_variable" href="struct_temp_sensor_handle__t.html#aa55fc0ac5902d2f03ffebeba15c2cb6a">sensor_count</a>;                </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__t.html#a01775fb8fa2fbc2d84e64f5b8b8b8c8e">   43</a></span>    uint16_t *<a class="code hl_variable" href="struct_temp_sensor_handle__t.html#a01775fb8fa2fbc2d84e64f5b8b8b8c8e">adc_buffer</a>;                </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__t.html#a4363b65a393b0ca493fa20d6c1e244c2">   44</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_temp_sensor_handle__t.html#a4363b65a393b0ca493fa20d6c1e244c2">vref</a>;                           </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="struct_temp_sensor_handle__t.html#ab9065f6f8317d5e7ccd0d6a14e1b3476">   46</a></span>    <a class="code hl_struct" href="struct_temp_sensor_handle__filter__t.html">TempSensorHandle_filter_t</a> <a class="code hl_variable" href="struct_temp_sensor_handle__t.html#ab9065f6f8317d5e7ccd0d6a14e1b3476">filter</a>;    </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>} <a class="code hl_struct" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a>;</div>
+</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keywordtype">void</span> <a class="code hl_function" href="temperature__sensor_8h.html#adf74bbba89cbb8de25680efd2a48d83f">TempSensor_Init</a>(<a class="code hl_struct" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                     ADC_HandleTypeDef *hadc,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                     uint8_t sensor_count,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                     uint16_t* adc_buffer,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                     <span class="keywordtype">float</span> vref);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordtype">void</span> <a class="code hl_function" href="temperature__sensor_8h.html#ad6855126c666ac7efcbe695bbefa9d75">TempSensor_Start</a>(<a class="code hl_struct" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp);</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">float</span> <a class="code hl_function" href="temperature__sensor_8h.html#a70b027296971f254b7da4673fca9c127">TempSensor_GetVoltage</a>(<a class="code hl_struct" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp, uint8_t index);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="keywordtype">float</span> <a class="code hl_function" href="temperature__sensor_8h.html#a207977086eb2457992d963291ef21272">TempSensor_GetTemperature</a>(<a class="code hl_struct" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp, uint8_t index);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keywordtype">float</span> <a class="code hl_function" href="temperature__sensor_8h.html#a53d6890f65f8d8ada86c06d46f82a4bd">TempSensor_GetAverageTemperature</a>(<a class="code hl_struct" href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a> *htemp);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="preprocessor">#endif </span><span class="comment">/* CORE_INC_TEMPERATURE_SENSOR_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_s_m_a1__fir_8h_html"><div class="ttname"><a href="_s_m_a1__fir_8h.html">SMA1_fir.h</a></div><div class="ttdoc">Definicje i deklaracje dla prostego filtra uśredniającego (SMA) w formacie ARM CMSIS-DSP.</div></div>
+<div class="ttc" id="a_s_m_a1__fir_8h_html_a008898a303a3a3a631ee33a9cc83e77f"><div class="ttname"><a href="_s_m_a1__fir_8h.html#a008898a303a3a3a631ee33a9cc83e77f">SMA1_NUM_TAPS</a></div><div class="ttdeci">#define SMA1_NUM_TAPS</div><div class="ttdoc">Liczba współczynników (tapów) filtra SMA1.</div><div class="ttdef"><b>Definicja</b> SMA1_fir.h:23</div></div>
+<div class="ttc" id="a_s_m_a1__fir_8h_html_a3ae01460c555625bf822ad3e657f97cc"><div class="ttname"><a href="_s_m_a1__fir_8h.html#a3ae01460c555625bf822ad3e657f97cc">SMA1_BLOCK_SIZE</a></div><div class="ttdeci">#define SMA1_BLOCK_SIZE</div><div class="ttdoc">Rozmiar bloku danych przetwarzanych w jednej iteracji filtra.</div><div class="ttdef"><b>Definicja</b> SMA1_fir.h:29</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__filter__t_html"><div class="ttname"><a href="struct_temp_sensor_handle__filter__t.html">TempSensorHandle_filter_t</a></div><div class="ttdoc">Struktura przechowująca dane filtra FIR dla pojedynczego czujnika.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:31</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__filter__t_html_a4ea56e400307ee6511dd43edb9e31353"><div class="ttname"><a href="struct_temp_sensor_handle__filter__t.html#a4ea56e400307ee6511dd43edb9e31353">TempSensorHandle_filter_t::fir</a></div><div class="ttdeci">arm_fir_instance_f32 fir</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:32</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__filter__t_html_ab3804d2dbcea4e3dc5312f5aec06c5b2"><div class="ttname"><a href="struct_temp_sensor_handle__filter__t.html#ab3804d2dbcea4e3dc5312f5aec06c5b2">TempSensorHandle_filter_t::state</a></div><div class="ttdeci">float32_t state[SMA1_NUM_TAPS+SMA1_BLOCK_SIZE - 1]</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:33</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__t_html"><div class="ttname"><a href="struct_temp_sensor_handle__t.html">TempSensorHandle_t</a></div><div class="ttdoc">Struktura reprezentująca jeden lub więcej czujników temperatury.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:40</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__t_html_a01775fb8fa2fbc2d84e64f5b8b8b8c8e"><div class="ttname"><a href="struct_temp_sensor_handle__t.html#a01775fb8fa2fbc2d84e64f5b8b8b8c8e">TempSensorHandle_t::adc_buffer</a></div><div class="ttdeci">uint16_t * adc_buffer</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:43</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__t_html_a4363b65a393b0ca493fa20d6c1e244c2"><div class="ttname"><a href="struct_temp_sensor_handle__t.html#a4363b65a393b0ca493fa20d6c1e244c2">TempSensorHandle_t::vref</a></div><div class="ttdeci">float vref</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:44</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__t_html_aa55fc0ac5902d2f03ffebeba15c2cb6a"><div class="ttname"><a href="struct_temp_sensor_handle__t.html#aa55fc0ac5902d2f03ffebeba15c2cb6a">TempSensorHandle_t::sensor_count</a></div><div class="ttdeci">uint8_t sensor_count</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:42</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__t_html_ab9065f6f8317d5e7ccd0d6a14e1b3476"><div class="ttname"><a href="struct_temp_sensor_handle__t.html#ab9065f6f8317d5e7ccd0d6a14e1b3476">TempSensorHandle_t::filter</a></div><div class="ttdeci">TempSensorHandle_filter_t filter</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:46</div></div>
+<div class="ttc" id="astruct_temp_sensor_handle__t_html_af982c0fe5d77061049c468b599100134"><div class="ttname"><a href="struct_temp_sensor_handle__t.html#af982c0fe5d77061049c468b599100134">TempSensorHandle_t::hadc</a></div><div class="ttdeci">ADC_HandleTypeDef * hadc</div><div class="ttdef"><b>Definicja</b> temperature_sensor.h:41</div></div>
+<div class="ttc" id="atemperature__sensor_8h_html_a207977086eb2457992d963291ef21272"><div class="ttname"><a href="temperature__sensor_8h.html#a207977086eb2457992d963291ef21272">TempSensor_GetTemperature</a></div><div class="ttdeci">float TempSensor_GetTemperature(TempSensorHandle_t *htemp, uint8_t index)</div><div class="ttdoc">Pobiera temperaturę z wybranego czujnika.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.c:43</div></div>
+<div class="ttc" id="atemperature__sensor_8h_html_a53d6890f65f8d8ada86c06d46f82a4bd"><div class="ttname"><a href="temperature__sensor_8h.html#a53d6890f65f8d8ada86c06d46f82a4bd">TempSensor_GetAverageTemperature</a></div><div class="ttdeci">float TempSensor_GetAverageTemperature(TempSensorHandle_t *htemp)</div><div class="ttdoc">Oblicza średnią temperaturę ze wszystkich czujników z filtracją SMA.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.c:49</div></div>
+<div class="ttc" id="atemperature__sensor_8h_html_a70b027296971f254b7da4673fca9c127"><div class="ttname"><a href="temperature__sensor_8h.html#a70b027296971f254b7da4673fca9c127">TempSensor_GetVoltage</a></div><div class="ttdeci">float TempSensor_GetVoltage(TempSensorHandle_t *htemp, uint8_t index)</div><div class="ttdoc">Pobiera napięcie z wybranego czujnika.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.c:35</div></div>
+<div class="ttc" id="atemperature__sensor_8h_html_ad6855126c666ac7efcbe695bbefa9d75"><div class="ttname"><a href="temperature__sensor_8h.html#ad6855126c666ac7efcbe695bbefa9d75">TempSensor_Start</a></div><div class="ttdeci">void TempSensor_Start(TempSensorHandle_t *htemp)</div><div class="ttdoc">Uruchamia odczyt ADC z czujników temperatury z użyciem DMA.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.c:26</div></div>
+<div class="ttc" id="atemperature__sensor_8h_html_adf74bbba89cbb8de25680efd2a48d83f"><div class="ttname"><a href="temperature__sensor_8h.html#adf74bbba89cbb8de25680efd2a48d83f">TempSensor_Init</a></div><div class="ttdeci">void TempSensor_Init(TempSensorHandle_t *htemp, ADC_HandleTypeDef *hadc, uint8_t sensor_count, uint16_t *adc_buffer, float vref)</div><div class="ttdoc">Inicjalizuje strukturę czujnika temperatury i filtr SMA.</div><div class="ttdef"><b>Definicja</b> temperature_sensor.c:12</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="temperature__sensor_8h.html">temperature_sensor.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,571 @@
+\doxysection{stm32l4xx\+\_\+ll\+\_\+spi.\+h}
+\hypertarget{stm32l4xx__ll__spi_8h_source}{}\label{stm32l4xx__ll__spi_8h_source}\index{Drivers/STM32L4xx\_HAL\_Driver/Inc/stm32l4xx\_ll\_spi.h@{Drivers/STM32L4xx\_HAL\_Driver/Inc/stm32l4xx\_ll\_spi.h}}
+\doxymbox{\hyperlink{stm32l4xx__ll__spi_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{/*\ Define\ to\ prevent\ recursive\ inclusion\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ STM32L4xx\_LL\_SPI\_H}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ STM32L4xx\_LL\_SPI\_H}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{comment}{/*\ Includes\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{stm32l4xx_8h}{stm32l4xx.h}}"{}}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#if\ defined\ (SPI1)\ ||\ defined\ (SPI2)\ ||\ defined\ (SPI3)}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{/*\ Private\ types\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00041\ \textcolor{comment}{/*\ Private\ variables\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00042\ \textcolor{comment}{/*\ Private\ macros\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{/*\ Exported\ types\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#if\ defined(USE\_FULL\_LL\_DRIVER)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00054\ \{}
+\DoxyCodeLine{00055\ \ \ uint32\_t\ TransferDirection;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ uint32\_t\ Mode;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ uint32\_t\ DataWidth;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ uint32\_t\ ClockPolarity;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ uint32\_t\ ClockPhase;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ uint32\_t\ NSS;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ uint32\_t\ BaudRate;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ uint32\_t\ BitOrder;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ uint32\_t\ CRCCalculation;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ uint32\_t\ CRCPoly;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \}\ LL\_SPI\_InitTypeDef;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ USE\_FULL\_LL\_DRIVER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{comment}{/*\ Exported\ constants\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_RXNE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_RXNE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_TXE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_TXE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_BSY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_BSY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_CRCERR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_CRCERR\ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_MODF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_MODF\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_OVR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_OVR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SR\_FRE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_SR\_FRE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CR2\_RXNEIE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_CR2\_RXNEIE\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CR2\_TXEIE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_CR2\_TXEIE\ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CR2\_ERRIE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ SPI\_CR2\_ERRIE\ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ LL\_SPI\_MODE\_MASTER\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_MSTR\ |\ SPI\_CR1\_SSI)\ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#define\ LL\_SPI\_MODE\_SLAVE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#define\ LL\_SPI\_PROTOCOL\_MOTOROLA\ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#define\ LL\_SPI\_PROTOCOL\_TI\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_FRF)\ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#define\ LL\_SPI\_PHASE\_1EDGE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#define\ LL\_SPI\_PHASE\_2EDGE\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_CPHA)\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#define\ LL\_SPI\_POLARITY\_LOW\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#define\ LL\_SPI\_POLARITY\_HIGH\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_CPOL)\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00196\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV2\ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00197\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV4\ \ \ \ \ \ (SPI\_CR1\_BR\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00198\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV8\ \ \ \ \ \ (SPI\_CR1\_BR\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00199\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV16\ \ \ \ \ (SPI\_CR1\_BR\_1\ |\ SPI\_CR1\_BR\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV32\ \ \ \ \ (SPI\_CR1\_BR\_2)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV64\ \ \ \ \ (SPI\_CR1\_BR\_2\ |\ SPI\_CR1\_BR\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV128\ \ \ \ (SPI\_CR1\_BR\_2\ |\ SPI\_CR1\_BR\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\#define\ LL\_SPI\_BAUDRATEPRESCALER\_DIV256\ \ \ \ (SPI\_CR1\_BR\_2\ |\ SPI\_CR1\_BR\_1\ |\ SPI\_CR1\_BR\_0)\ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\#define\ LL\_SPI\_LSB\_FIRST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_LSBFIRST)\ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\#define\ LL\_SPI\_MSB\_FIRST\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\#define\ LL\_SPI\_FULL\_DUPLEX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\#define\ LL\_SPI\_SIMPLEX\_RX\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_RXONLY)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\#define\ LL\_SPI\_HALF\_DUPLEX\_RX\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_BIDIMODE)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#define\ LL\_SPI\_HALF\_DUPLEX\_TX\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_BIDIMODE\ |\ SPI\_CR1\_BIDIOE)\ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\#define\ LL\_SPI\_NSS\_SOFT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_SSM)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\#define\ LL\_SPI\_NSS\_HARD\_INPUT\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\#define\ LL\_SPI\_NSS\_HARD\_OUTPUT\ \ \ \ \ \ \ \ \ \ \ \ \ (((uint32\_t)SPI\_CR2\_SSOE\ <<\ 16U))\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_4BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_0\ |\ SPI\_CR2\_DS\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_5BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_2)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_6BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_2\ |\ SPI\_CR2\_DS\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_7BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_2\ |\ SPI\_CR2\_DS\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_8BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_2\ |\ SPI\_CR2\_DS\_1\ |\ SPI\_CR2\_DS\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00246\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_9BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_10BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00248\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_11BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_12BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_1\ |\ SPI\_CR2\_DS\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_13BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_2)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00251\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_14BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_2\ |\ SPI\_CR2\_DS\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_15BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_2\ |\ SPI\_CR2\_DS\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DATAWIDTH\_16BIT\ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_DS\_3\ |\ SPI\_CR2\_DS\_2\ |\ SPI\_CR2\_DS\_1\ |\ SPI\_CR2\_DS\_0)\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#if\ defined(USE\_FULL\_LL\_DRIVER)}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CRCCALCULATION\_DISABLE\ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CRCCALCULATION\_ENABLE\ \ \ \ \ \ \ (SPI\_CR1\_CRCEN)\ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ USE\_FULL\_LL\_DRIVER\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00272\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CRC\_8BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#define\ LL\_SPI\_CRC\_16BIT\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_CR1\_CRCL)\ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#define\ LL\_SPI\_RX\_FIFO\_TH\_HALF\ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#define\ LL\_SPI\_RX\_FIFO\_TH\_QUARTER\ \ \ \ \ \ \ \ \ \ (SPI\_CR2\_FRXTH)\ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\#define\ LL\_SPI\_RX\_FIFO\_EMPTY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#define\ LL\_SPI\_RX\_FIFO\_QUARTER\_FULL\ \ \ \ \ \ \ \ (SPI\_SR\_FRLVL\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00292\ \textcolor{preprocessor}{\#define\ LL\_SPI\_RX\_FIFO\_HALF\_FULL\ \ \ \ \ \ \ \ \ \ \ (SPI\_SR\_FRLVL\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#define\ LL\_SPI\_RX\_FIFO\_FULL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_SR\_FRLVL\_1\ |\ SPI\_SR\_FRLVL\_0)\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00301\ \textcolor{preprocessor}{\#define\ LL\_SPI\_TX\_FIFO\_EMPTY\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00302\ \textcolor{preprocessor}{\#define\ LL\_SPI\_TX\_FIFO\_QUARTER\_FULL\ \ \ \ \ \ \ \ (SPI\_SR\_FTLVL\_0)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00303\ \textcolor{preprocessor}{\#define\ LL\_SPI\_TX\_FIFO\_HALF\_FULL\ \ \ \ \ \ \ \ \ \ \ (SPI\_SR\_FTLVL\_1)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00304\ \textcolor{preprocessor}{\#define\ LL\_SPI\_TX\_FIFO\_FULL\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (SPI\_SR\_FTLVL\_1\ |\ SPI\_SR\_FTLVL\_0)\ }\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00312\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DMA\_PARITY\_EVEN\ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000000U\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00313\ \textcolor{preprocessor}{\#define\ LL\_SPI\_DMA\_PARITY\_ODD\ \ \ \ \ \ \ \ \ \ \ \ \ \ 0x00000001U\ \ \ }\textcolor{preprocessor}{}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \textcolor{comment}{/*\ Exported\ macro\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00339\ \textcolor{preprocessor}{\#define\ LL\_SPI\_WriteReg(\_\_INSTANCE\_\_,\ \_\_REG\_\_,\ \_\_VALUE\_\_)\ WRITE\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_,\ (\_\_VALUE\_\_))}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00347\ \textcolor{preprocessor}{\#define\ LL\_SPI\_ReadReg(\_\_INSTANCE\_\_,\ \_\_REG\_\_)\ READ\_REG(\_\_INSTANCE\_\_-\/>\_\_REG\_\_)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \textcolor{comment}{/*\ Exported\ functions\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00371\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_Enable(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00372\ \{}
+\DoxyCodeLine{00373\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac5a646d978d3b98eb7c6a5d95d75c3f9}{SPI\_CR1\_SPE}});}
+\DoxyCodeLine{00374\ \}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00383\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_Disable(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00384\ \{}
+\DoxyCodeLine{00385\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac5a646d978d3b98eb7c6a5d95d75c3f9}{SPI\_CR1\_SPE}});}
+\DoxyCodeLine{00386\ \}}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00394\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabled(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00395\ \{}
+\DoxyCodeLine{00396\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac5a646d978d3b98eb7c6a5d95d75c3f9}{SPI\_CR1\_SPE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac5a646d978d3b98eb7c6a5d95d75c3f9}{SPI\_CR1\_SPE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00397\ \}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00410\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetMode(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ Mode)}
+\DoxyCodeLine{00411\ \{}
+\DoxyCodeLine{00412\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga5b3b6ae107fc37bf18e14506298d7a55}{SPI\_CR1\_MSTR}}\ |\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga5f154374b58c0234f82ea326cb303a1e}{SPI\_CR1\_SSI}},\ Mode);}
+\DoxyCodeLine{00413\ \}}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00424\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetMode(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00425\ \{}
+\DoxyCodeLine{00426\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga5b3b6ae107fc37bf18e14506298d7a55}{SPI\_CR1\_MSTR}}\ |\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga5f154374b58c0234f82ea326cb303a1e}{SPI\_CR1\_SSI}}));}
+\DoxyCodeLine{00427\ \}}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00439\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetStandard(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ Standard)}
+\DoxyCodeLine{00440\ \{}
+\DoxyCodeLine{00441\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga09e3f41fa2150831afaac191046087f2}{SPI\_CR2\_FRF}},\ Standard);}
+\DoxyCodeLine{00442\ \}}
+\DoxyCodeLine{00443\ }
+\DoxyCodeLine{00452\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetStandard(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00453\ \{}
+\DoxyCodeLine{00454\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga09e3f41fa2150831afaac191046087f2}{SPI\_CR2\_FRF}}));}
+\DoxyCodeLine{00455\ \}}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00468\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetClockPhase(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ ClockPhase)}
+\DoxyCodeLine{00469\ \{}
+\DoxyCodeLine{00470\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga97602d8ded14bbd2c1deadaf308755a3}{SPI\_CR1\_CPHA}},\ ClockPhase);}
+\DoxyCodeLine{00471\ \}}
+\DoxyCodeLine{00472\ }
+\DoxyCodeLine{00481\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetClockPhase(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00482\ \{}
+\DoxyCodeLine{00483\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga97602d8ded14bbd2c1deadaf308755a3}{SPI\_CR1\_CPHA}}));}
+\DoxyCodeLine{00484\ \}}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00497\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetClockPolarity(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ ClockPolarity)}
+\DoxyCodeLine{00498\ \{}
+\DoxyCodeLine{00499\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga2616a10f5118cdc68fbdf0582481e124}{SPI\_CR1\_CPOL}},\ ClockPolarity);}
+\DoxyCodeLine{00500\ \}}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00510\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetClockPolarity(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00511\ \{}
+\DoxyCodeLine{00512\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga2616a10f5118cdc68fbdf0582481e124}{SPI\_CR1\_CPOL}}));}
+\DoxyCodeLine{00513\ \}}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00531\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetBaudRatePrescaler(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ BaudRate)}
+\DoxyCodeLine{00532\ \{}
+\DoxyCodeLine{00533\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga261af22667719a32b3ce566c1e261936}{SPI\_CR1\_BR}},\ BaudRate);}
+\DoxyCodeLine{00534\ \}}
+\DoxyCodeLine{00535\ }
+\DoxyCodeLine{00550\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetBaudRatePrescaler(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00551\ \{}
+\DoxyCodeLine{00552\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga261af22667719a32b3ce566c1e261936}{SPI\_CR1\_BR}}));}
+\DoxyCodeLine{00553\ \}}
+\DoxyCodeLine{00554\ }
+\DoxyCodeLine{00565\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetTransferBitOrder(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ BitOrder)}
+\DoxyCodeLine{00566\ \{}
+\DoxyCodeLine{00567\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gab929e9d5ddbb66f229c501ab18d0e6e8}{SPI\_CR1\_LSBFIRST}},\ BitOrder);}
+\DoxyCodeLine{00568\ \}}
+\DoxyCodeLine{00569\ }
+\DoxyCodeLine{00578\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetTransferBitOrder(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00579\ \{}
+\DoxyCodeLine{00580\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gab929e9d5ddbb66f229c501ab18d0e6e8}{SPI\_CR1\_LSBFIRST}}));}
+\DoxyCodeLine{00581\ \}}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00598\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetTransferDirection(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ TransferDirection)}
+\DoxyCodeLine{00599\ \{}
+\DoxyCodeLine{00600\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga9ffecf774b84a8cdc11ab1f931791883}{SPI\_CR1\_RXONLY}}\ |\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga43608d3c2959fc9ca64398d61cbf484e}{SPI\_CR1\_BIDIMODE}}\ |\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga378953916b7701bd49f063c0366b703f}{SPI\_CR1\_BIDIOE}},\ TransferDirection);}
+\DoxyCodeLine{00601\ \}}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00615\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetTransferDirection(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00616\ \{}
+\DoxyCodeLine{00617\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga9ffecf774b84a8cdc11ab1f931791883}{SPI\_CR1\_RXONLY}}\ |\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga43608d3c2959fc9ca64398d61cbf484e}{SPI\_CR1\_BIDIMODE}}\ |\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga378953916b7701bd49f063c0366b703f}{SPI\_CR1\_BIDIOE}}));}
+\DoxyCodeLine{00618\ \}}
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00640\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetDataWidth(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ DataWidth)}
+\DoxyCodeLine{00641\ \{}
+\DoxyCodeLine{00642\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gad72d3bea8f7b00a3aed164205560883e}{SPI\_CR2\_DS}},\ DataWidth);}
+\DoxyCodeLine{00643\ \}}
+\DoxyCodeLine{00644\ }
+\DoxyCodeLine{00664\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetDataWidth(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00665\ \{}
+\DoxyCodeLine{00666\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gad72d3bea8f7b00a3aed164205560883e}{SPI\_CR2\_DS}}));}
+\DoxyCodeLine{00667\ \}}
+\DoxyCodeLine{00668\ }
+\DoxyCodeLine{00678\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetRxFIFOThreshold(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ Threshold)}
+\DoxyCodeLine{00679\ \{}
+\DoxyCodeLine{00680\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga6e02994914afef4270508bc3219db477}{SPI\_CR2\_FRXTH}},\ Threshold);}
+\DoxyCodeLine{00681\ \}}
+\DoxyCodeLine{00682\ }
+\DoxyCodeLine{00691\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetRxFIFOThreshold(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00692\ \{}
+\DoxyCodeLine{00693\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga6e02994914afef4270508bc3219db477}{SPI\_CR2\_FRXTH}}));}
+\DoxyCodeLine{00694\ \}}
+\DoxyCodeLine{00695\ }
+\DoxyCodeLine{00699\ }
+\DoxyCodeLine{00703\ }
+\DoxyCodeLine{00711\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableCRC(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00712\ \{}
+\DoxyCodeLine{00713\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac9339b7c6466f09ad26c26b3bb81c51b}{SPI\_CR1\_CRCEN}});}
+\DoxyCodeLine{00714\ \}}
+\DoxyCodeLine{00715\ }
+\DoxyCodeLine{00723\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableCRC(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00724\ \{}
+\DoxyCodeLine{00725\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac9339b7c6466f09ad26c26b3bb81c51b}{SPI\_CR1\_CRCEN}});}
+\DoxyCodeLine{00726\ \}}
+\DoxyCodeLine{00727\ }
+\DoxyCodeLine{00735\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledCRC(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00736\ \{}
+\DoxyCodeLine{00737\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac9339b7c6466f09ad26c26b3bb81c51b}{SPI\_CR1\_CRCEN}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac9339b7c6466f09ad26c26b3bb81c51b}{SPI\_CR1\_CRCEN}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00738\ \}}
+\DoxyCodeLine{00739\ }
+\DoxyCodeLine{00750\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetCRCWidth(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ CRCLength)}
+\DoxyCodeLine{00751\ \{}
+\DoxyCodeLine{00752\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga3828b6114d16fada0dea07b902377a5c}{SPI\_CR1\_CRCL}},\ CRCLength);}
+\DoxyCodeLine{00753\ \}}
+\DoxyCodeLine{00754\ }
+\DoxyCodeLine{00763\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetCRCWidth(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00764\ \{}
+\DoxyCodeLine{00765\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga3828b6114d16fada0dea07b902377a5c}{SPI\_CR1\_CRCL}}));}
+\DoxyCodeLine{00766\ \}}
+\DoxyCodeLine{00767\ }
+\DoxyCodeLine{00775\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetCRCNext(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00776\ \{}
+\DoxyCodeLine{00777\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga57072f13c2e54c12186ae8c5fdecb250}{SPI\_CR1\_CRCNEXT}});}
+\DoxyCodeLine{00778\ \}}
+\DoxyCodeLine{00779\ }
+\DoxyCodeLine{00787\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetCRCPolynomial(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ CRCPoly)}
+\DoxyCodeLine{00788\ \{}
+\DoxyCodeLine{00789\ \ \ WRITE\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ace450027b4b33f921dd8edd3425a717c}{CRCPR}},\ (uint16\_t)CRCPoly);}
+\DoxyCodeLine{00790\ \}}
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00798\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetCRCPolynomial(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00799\ \{}
+\DoxyCodeLine{00800\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ace450027b4b33f921dd8edd3425a717c}{CRCPR}}));}
+\DoxyCodeLine{00801\ \}}
+\DoxyCodeLine{00802\ }
+\DoxyCodeLine{00809\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetRxCRC(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00810\ \{}
+\DoxyCodeLine{00811\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a2cf9dcd9008924334f20f0dc6b57042e}{RXCRCR}}));}
+\DoxyCodeLine{00812\ \}}
+\DoxyCodeLine{00813\ }
+\DoxyCodeLine{00820\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetTxCRC(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00821\ \{}
+\DoxyCodeLine{00822\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab4e4328504fd66285df8264d410deefd}{TXCRCR}}));}
+\DoxyCodeLine{00823\ \}}
+\DoxyCodeLine{00824\ }
+\DoxyCodeLine{00828\ }
+\DoxyCodeLine{00832\ }
+\DoxyCodeLine{00845\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetNSSMode(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ NSS)}
+\DoxyCodeLine{00846\ \{}
+\DoxyCodeLine{00847\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga0e236047e05106cf1ba7929766311382}{SPI\_CR1\_SSM}},\ \ NSS);}
+\DoxyCodeLine{00848\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gae94612b95395eff626f5f3d7d28352dd}{SPI\_CR2\_SSOE}},\ ((uint32\_t)(NSS\ >>\ 16U)));}
+\DoxyCodeLine{00849\ \}}
+\DoxyCodeLine{00850\ }
+\DoxyCodeLine{00861\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetNSSMode(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00862\ \{}
+\DoxyCodeLine{00863\ \ \ uint32\_t\ Ssm\ \ =\ (READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga0e236047e05106cf1ba7929766311382}{SPI\_CR1\_SSM}}));}
+\DoxyCodeLine{00864\ \ \ uint32\_t\ Ssoe\ =\ (READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gae94612b95395eff626f5f3d7d28352dd}{SPI\_CR2\_SSOE}})\ <<\ 16U);}
+\DoxyCodeLine{00865\ \ \ \textcolor{keywordflow}{return}\ (Ssm\ |\ Ssoe);}
+\DoxyCodeLine{00866\ \}}
+\DoxyCodeLine{00867\ }
+\DoxyCodeLine{00875\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableNSSPulseMgt(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00876\ \{}
+\DoxyCodeLine{00877\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga2e7d9d05424a68e6b02b82280541dbd2}{SPI\_CR2\_NSSP}});}
+\DoxyCodeLine{00878\ \}}
+\DoxyCodeLine{00879\ }
+\DoxyCodeLine{00887\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableNSSPulseMgt(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00888\ \{}
+\DoxyCodeLine{00889\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga2e7d9d05424a68e6b02b82280541dbd2}{SPI\_CR2\_NSSP}});}
+\DoxyCodeLine{00890\ \}}
+\DoxyCodeLine{00891\ }
+\DoxyCodeLine{00899\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledNSSPulse(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00900\ \{}
+\DoxyCodeLine{00901\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga2e7d9d05424a68e6b02b82280541dbd2}{SPI\_CR2\_NSSP}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga2e7d9d05424a68e6b02b82280541dbd2}{SPI\_CR2\_NSSP}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00902\ \}}
+\DoxyCodeLine{00903\ }
+\DoxyCodeLine{00907\ }
+\DoxyCodeLine{00911\ }
+\DoxyCodeLine{00918\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_RXNE(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00919\ \{}
+\DoxyCodeLine{00920\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga40e14de547aa06864abcd4b0422d8b48}{SPI\_SR\_RXNE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga40e14de547aa06864abcd4b0422d8b48}{SPI\_SR\_RXNE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00921\ \}}
+\DoxyCodeLine{00922\ }
+\DoxyCodeLine{00929\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_TXE(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00930\ \{}
+\DoxyCodeLine{00931\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga5bd5d21816947fcb25ccae7d3bf8eb2c}{SPI\_SR\_TXE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga5bd5d21816947fcb25ccae7d3bf8eb2c}{SPI\_SR\_TXE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00932\ \}}
+\DoxyCodeLine{00933\ }
+\DoxyCodeLine{00940\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_CRCERR(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00941\ \{}
+\DoxyCodeLine{00942\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga69e543fa9584fd636032a3ee735f750b}{SPI\_SR\_CRCERR}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga69e543fa9584fd636032a3ee735f750b}{SPI\_SR\_CRCERR}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00943\ \}}
+\DoxyCodeLine{00944\ }
+\DoxyCodeLine{00951\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_MODF(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00952\ \{}
+\DoxyCodeLine{00953\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gabaa043349833dc7b8138969c64f63adf}{SPI\_SR\_MODF}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gabaa043349833dc7b8138969c64f63adf}{SPI\_SR\_MODF}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00954\ \}}
+\DoxyCodeLine{00955\ }
+\DoxyCodeLine{00962\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_OVR(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00963\ \{}
+\DoxyCodeLine{00964\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa8d902302c5eb81ce4a57029de281232}{SPI\_SR\_OVR}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa8d902302c5eb81ce4a57029de281232}{SPI\_SR\_OVR}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00965\ \}}
+\DoxyCodeLine{00966\ }
+\DoxyCodeLine{00980\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_BSY(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00981\ \{}
+\DoxyCodeLine{00982\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa3498df67729ae048dc5f315ef7c16bf}{SPI\_SR\_BSY}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa3498df67729ae048dc5f315ef7c16bf}{SPI\_SR\_BSY}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00983\ \}}
+\DoxyCodeLine{00984\ }
+\DoxyCodeLine{00991\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsActiveFlag\_FRE(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{00992\ \{}
+\DoxyCodeLine{00993\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gace2c7cac9431231663af42e6f5aabce6}{SPI\_SR\_FRE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gace2c7cac9431231663af42e6f5aabce6}{SPI\_SR\_FRE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{00994\ \}}
+\DoxyCodeLine{00995\ }
+\DoxyCodeLine{01006\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetRxFIFOLevel(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01007\ \{}
+\DoxyCodeLine{01008\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga60df84101c523802832c4d1a2895d665}{SPI\_SR\_FRLVL}}));}
+\DoxyCodeLine{01009\ \}}
+\DoxyCodeLine{01010\ }
+\DoxyCodeLine{01021\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetTxFIFOLevel(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01022\ \{}
+\DoxyCodeLine{01023\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga17880f1e186033ebc6917c008a623371}{SPI\_SR\_FTLVL}}));}
+\DoxyCodeLine{01024\ \}}
+\DoxyCodeLine{01025\ }
+\DoxyCodeLine{01032\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_ClearFlag\_CRCERR(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01033\ \{}
+\DoxyCodeLine{01034\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga69e543fa9584fd636032a3ee735f750b}{SPI\_SR\_CRCERR}});}
+\DoxyCodeLine{01035\ \}}
+\DoxyCodeLine{01036\ }
+\DoxyCodeLine{01045\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_ClearFlag\_MODF(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01046\ \{}
+\DoxyCodeLine{01047\ \ \ \doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint32\_t\ tmpreg\_sr;}
+\DoxyCodeLine{01048\ \ \ tmpreg\_sr\ =\ SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}};}
+\DoxyCodeLine{01049\ \ \ (void)\ tmpreg\_sr;}
+\DoxyCodeLine{01050\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_ab0ec7102960640751d44e92ddac994f0}{CR1}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gac5a646d978d3b98eb7c6a5d95d75c3f9}{SPI\_CR1\_SPE}});}
+\DoxyCodeLine{01051\ \}}
+\DoxyCodeLine{01052\ }
+\DoxyCodeLine{01061\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_ClearFlag\_OVR(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01062\ \{}
+\DoxyCodeLine{01063\ \ \ \doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint32\_t\ tmpreg;}
+\DoxyCodeLine{01064\ \ \ tmpreg\ =\ SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}};}
+\DoxyCodeLine{01065\ \ \ (void)\ tmpreg;}
+\DoxyCodeLine{01066\ \ \ tmpreg\ =\ SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}};}
+\DoxyCodeLine{01067\ \ \ (void)\ tmpreg;}
+\DoxyCodeLine{01068\ \}}
+\DoxyCodeLine{01069\ }
+\DoxyCodeLine{01077\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_ClearFlag\_FRE(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01078\ \{}
+\DoxyCodeLine{01079\ \ \ \doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint32\_t\ tmpreg;}
+\DoxyCodeLine{01080\ \ \ tmpreg\ =\ SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_af6aca2bbd40c0fb6df7c3aebe224a360}{SR}};}
+\DoxyCodeLine{01081\ \ \ (void)\ tmpreg;}
+\DoxyCodeLine{01082\ \}}
+\DoxyCodeLine{01083\ }
+\DoxyCodeLine{01087\ }
+\DoxyCodeLine{01091\ }
+\DoxyCodeLine{01100\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableIT\_ERR(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01101\ \{}
+\DoxyCodeLine{01102\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf18705567de7ab52a62e5ef3ba27418b}{SPI\_CR2\_ERRIE}});}
+\DoxyCodeLine{01103\ \}}
+\DoxyCodeLine{01104\ }
+\DoxyCodeLine{01111\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableIT\_RXNE(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01112\ \{}
+\DoxyCodeLine{01113\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa7d4c37fbbcced7f2a0421e6ffd103ea}{SPI\_CR2\_RXNEIE}});}
+\DoxyCodeLine{01114\ \}}
+\DoxyCodeLine{01115\ }
+\DoxyCodeLine{01122\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableIT\_TXE(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01123\ \{}
+\DoxyCodeLine{01124\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga23f683a1252ccaf625cae1a978989b2c}{SPI\_CR2\_TXEIE}});}
+\DoxyCodeLine{01125\ \}}
+\DoxyCodeLine{01126\ }
+\DoxyCodeLine{01135\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableIT\_ERR(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01136\ \{}
+\DoxyCodeLine{01137\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf18705567de7ab52a62e5ef3ba27418b}{SPI\_CR2\_ERRIE}});}
+\DoxyCodeLine{01138\ \}}
+\DoxyCodeLine{01139\ }
+\DoxyCodeLine{01146\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableIT\_RXNE(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01147\ \{}
+\DoxyCodeLine{01148\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa7d4c37fbbcced7f2a0421e6ffd103ea}{SPI\_CR2\_RXNEIE}});}
+\DoxyCodeLine{01149\ \}}
+\DoxyCodeLine{01150\ }
+\DoxyCodeLine{01157\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableIT\_TXE(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01158\ \{}
+\DoxyCodeLine{01159\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga23f683a1252ccaf625cae1a978989b2c}{SPI\_CR2\_TXEIE}});}
+\DoxyCodeLine{01160\ \}}
+\DoxyCodeLine{01161\ }
+\DoxyCodeLine{01168\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledIT\_ERR(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01169\ \{}
+\DoxyCodeLine{01170\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf18705567de7ab52a62e5ef3ba27418b}{SPI\_CR2\_ERRIE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf18705567de7ab52a62e5ef3ba27418b}{SPI\_CR2\_ERRIE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{01171\ \}}
+\DoxyCodeLine{01172\ }
+\DoxyCodeLine{01179\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledIT\_RXNE(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01180\ \{}
+\DoxyCodeLine{01181\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa7d4c37fbbcced7f2a0421e6ffd103ea}{SPI\_CR2\_RXNEIE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa7d4c37fbbcced7f2a0421e6ffd103ea}{SPI\_CR2\_RXNEIE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{01182\ \}}
+\DoxyCodeLine{01183\ }
+\DoxyCodeLine{01190\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledIT\_TXE(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01191\ \{}
+\DoxyCodeLine{01192\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga23f683a1252ccaf625cae1a978989b2c}{SPI\_CR2\_TXEIE}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga23f683a1252ccaf625cae1a978989b2c}{SPI\_CR2\_TXEIE}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{01193\ \}}
+\DoxyCodeLine{01194\ }
+\DoxyCodeLine{01198\ }
+\DoxyCodeLine{01202\ }
+\DoxyCodeLine{01209\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableDMAReq\_RX(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01210\ \{}
+\DoxyCodeLine{01211\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf23c590d98279634af05550702a806da}{SPI\_CR2\_RXDMAEN}});}
+\DoxyCodeLine{01212\ \}}
+\DoxyCodeLine{01213\ }
+\DoxyCodeLine{01220\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableDMAReq\_RX(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01221\ \{}
+\DoxyCodeLine{01222\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf23c590d98279634af05550702a806da}{SPI\_CR2\_RXDMAEN}});}
+\DoxyCodeLine{01223\ \}}
+\DoxyCodeLine{01224\ }
+\DoxyCodeLine{01231\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledDMAReq\_RX(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01232\ \{}
+\DoxyCodeLine{01233\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf23c590d98279634af05550702a806da}{SPI\_CR2\_RXDMAEN}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaf23c590d98279634af05550702a806da}{SPI\_CR2\_RXDMAEN}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{01234\ \}}
+\DoxyCodeLine{01235\ }
+\DoxyCodeLine{01242\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_EnableDMAReq\_TX(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01243\ \{}
+\DoxyCodeLine{01244\ \ \ SET\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga3eee671793983a3bd669c9173b2ce210}{SPI\_CR2\_TXDMAEN}});}
+\DoxyCodeLine{01245\ \}}
+\DoxyCodeLine{01246\ }
+\DoxyCodeLine{01253\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_DisableDMAReq\_TX(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01254\ \{}
+\DoxyCodeLine{01255\ \ \ CLEAR\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga3eee671793983a3bd669c9173b2ce210}{SPI\_CR2\_TXDMAEN}});}
+\DoxyCodeLine{01256\ \}}
+\DoxyCodeLine{01257\ }
+\DoxyCodeLine{01264\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_IsEnabledDMAReq\_TX(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01265\ \{}
+\DoxyCodeLine{01266\ \ \ \textcolor{keywordflow}{return}\ ((READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga3eee671793983a3bd669c9173b2ce210}{SPI\_CR2\_TXDMAEN}})\ ==\ (\doxymbox{\hyperlink{group___peripheral___registers___bits___definition_ga3eee671793983a3bd669c9173b2ce210}{SPI\_CR2\_TXDMAEN}}))\ ?\ 1UL\ :\ 0UL);}
+\DoxyCodeLine{01267\ \}}
+\DoxyCodeLine{01268\ }
+\DoxyCodeLine{01278\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetDMAParity\_RX(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ Parity)}
+\DoxyCodeLine{01279\ \{}
+\DoxyCodeLine{01280\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa9d127b9a82de6ac3bbd50943f4691cc}{SPI\_CR2\_LDMARX}},\ (Parity\ <<\ SPI\_CR2\_LDMARX\_Pos));}
+\DoxyCodeLine{01281\ \}}
+\DoxyCodeLine{01282\ }
+\DoxyCodeLine{01291\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetDMAParity\_RX(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01292\ \{}
+\DoxyCodeLine{01293\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gaa9d127b9a82de6ac3bbd50943f4691cc}{SPI\_CR2\_LDMARX}})\ >>\ SPI\_CR2\_LDMARX\_Pos);}
+\DoxyCodeLine{01294\ \}}
+\DoxyCodeLine{01295\ }
+\DoxyCodeLine{01305\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_SetDMAParity\_TX(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint32\_t\ Parity)}
+\DoxyCodeLine{01306\ \{}
+\DoxyCodeLine{01307\ \ \ MODIFY\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gae1fe5d3bde9983ff16a5227671642e1d}{SPI\_CR2\_LDMATX}},\ (Parity\ <<\ SPI\_CR2\_LDMATX\_Pos));}
+\DoxyCodeLine{01308\ \}}
+\DoxyCodeLine{01309\ }
+\DoxyCodeLine{01318\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_GetDMAParity\_TX(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01319\ \{}
+\DoxyCodeLine{01320\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)(READ\_BIT(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_afdfa307571967afb1d97943e982b6586}{CR2}},\ \doxymbox{\hyperlink{group___peripheral___registers___bits___definition_gae1fe5d3bde9983ff16a5227671642e1d}{SPI\_CR2\_LDMATX}})\ >>\ SPI\_CR2\_LDMATX\_Pos);}
+\DoxyCodeLine{01321\ \}}
+\DoxyCodeLine{01322\ }
+\DoxyCodeLine{01329\ \_\_STATIC\_INLINE\ uint32\_t\ LL\_SPI\_DMA\_GetRegAddr(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01330\ \{}
+\DoxyCodeLine{01331\ \ \ \textcolor{keywordflow}{return}\ (uint32\_t)\ \&(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}});}
+\DoxyCodeLine{01332\ \}}
+\DoxyCodeLine{01333\ }
+\DoxyCodeLine{01337\ }
+\DoxyCodeLine{01341\ }
+\DoxyCodeLine{01348\ \_\_STATIC\_INLINE\ uint8\_t\ LL\_SPI\_ReceiveData8(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01349\ \{}
+\DoxyCodeLine{01350\ \ \ \textcolor{keywordflow}{return}\ (*((\doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint8\_t\ *)\&SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}}));}
+\DoxyCodeLine{01351\ \}}
+\DoxyCodeLine{01352\ }
+\DoxyCodeLine{01359\ \_\_STATIC\_INLINE\ uint16\_t\ LL\_SPI\_ReceiveData16(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx)}
+\DoxyCodeLine{01360\ \{}
+\DoxyCodeLine{01361\ \ \ \textcolor{keywordflow}{return}\ (uint16\_t)(READ\_REG(SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}}));}
+\DoxyCodeLine{01362\ \}}
+\DoxyCodeLine{01363\ }
+\DoxyCodeLine{01371\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_TransmitData8(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint8\_t\ TxData)}
+\DoxyCodeLine{01372\ \{}
+\DoxyCodeLine{01373\ \textcolor{preprocessor}{\#if\ defined\ (\_\_GNUC\_\_)}}
+\DoxyCodeLine{01374\ \ \ \doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint8\_t\ *spidr\ =\ ((\doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint8\_t\ *)\&SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}});}
+\DoxyCodeLine{01375\ \ \ *spidr\ =\ TxData;}
+\DoxyCodeLine{01376\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01377\ \ \ *((\doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint8\_t\ *)\&SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}})\ =\ TxData;}
+\DoxyCodeLine{01378\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_GNUC\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01379\ \}}
+\DoxyCodeLine{01380\ }
+\DoxyCodeLine{01388\ \_\_STATIC\_INLINE\ \textcolor{keywordtype}{void}\ LL\_SPI\_TransmitData16(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ uint16\_t\ TxData)}
+\DoxyCodeLine{01389\ \{}
+\DoxyCodeLine{01390\ \textcolor{preprocessor}{\#if\ defined\ (\_\_GNUC\_\_)}}
+\DoxyCodeLine{01391\ \ \ \doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint16\_t\ *spidr\ =\ ((\doxymbox{\hyperlink{core__armv81mml_8h_aec43007d9998a0a0e01faede4133d6be}{\_\_IO}}\ uint16\_t\ *)\&SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}});}
+\DoxyCodeLine{01392\ \ \ *spidr\ =\ TxData;}
+\DoxyCodeLine{01393\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{01394\ \ \ SPIx-\/>\doxymbox{\hyperlink{struct_s_p_i___type_def_a3df0d8dfcd1ec958659ffe21eb64fa94}{DR}}\ =\ TxData;}
+\DoxyCodeLine{01395\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_GNUC\_\_\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01396\ \}}
+\DoxyCodeLine{01397\ }
+\DoxyCodeLine{01401\ \textcolor{preprocessor}{\#if\ defined(USE\_FULL\_LL\_DRIVER)}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01405\ }
+\DoxyCodeLine{01406\ ErrorStatus\ LL\_SPI\_DeInit(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx);}
+\DoxyCodeLine{01407\ ErrorStatus\ LL\_SPI\_Init(\doxymbox{\hyperlink{struct_s_p_i___type_def}{SPI\_TypeDef}}\ *SPIx,\ LL\_SPI\_InitTypeDef\ *SPI\_InitStruct);}
+\DoxyCodeLine{01408\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ LL\_SPI\_StructInit(LL\_SPI\_InitTypeDef\ *SPI\_InitStruct);}
+\DoxyCodeLine{01409\ }
+\DoxyCodeLine{01413\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ USE\_FULL\_LL\_DRIVER\ */}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01417\ }
+\DoxyCodeLine{01421\ }
+\DoxyCodeLine{01422\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined\ (SPI1)\ ||\ defined\ (SPI2)\ ||\ defined\ (SPI3)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01423\ }
+\DoxyCodeLine{01427\ }
+\DoxyCodeLine{01428\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{01429\ \}}
+\DoxyCodeLine{01430\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{01431\ }
+\DoxyCodeLine{01432\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ STM32L4xx\_LL\_SPI\_H\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{01433\ }
+
+\end{DoxyCode}

@@ -1,0 +1,405 @@
+\doxysection{arm\+\_\+mat\+\_\+cholesky\+\_\+f32.\+c}
+\hypertarget{arm__mat__cholesky__f32_8c_source}{}\label{arm__mat__cholesky__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/MatrixFunctions/arm\_mat\_cholesky\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/MatrixFunctions/arm\_mat\_cholesky\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_mat\_cholesky\_f32.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Floating-\/point\ Cholesky\ decomposition}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 05\ October\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.1}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_functions.h"{}}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_utils.h"{}}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004}{arm\_mat\_cholesky\_f32}}(}
+\DoxyCodeLine{00074\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst)}
+\DoxyCodeLine{00076\ \{}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ status\ of\ matrix\ inverse\ */}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#ifdef\ ARM\_MATH\_MATRIX\_CHECK}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \textcolor{comment}{/*\ Check\ for\ matrix\ mismatch\ condition\ */}}
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordflow}{if}\ ((pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ (pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ (pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ \ \ )}
+\DoxyCodeLine{00087\ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SIZE\_MISMATCH\ */}}
+\DoxyCodeLine{00089\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}};}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#ifdef\ ARM\_MATH\_MATRIX\_CHECK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{int}\ i,j,k;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00098\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ invSqrtVj;}
+\DoxyCodeLine{00099\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pA,*pG;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{int}\ kCnt;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ mve\_pred16\_t\ p0;}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ f32x4\_t\ acc,\ acc0,\ acc1,\ acc2,\ acc3;}
+\DoxyCodeLine{00105\ \ \ \ \ f32x4\_t\ vecGi;}
+\DoxyCodeLine{00106\ \ \ \ \ f32x4\_t\ vecGj,vecGj0,vecGj1,vecGj2,vecGj3;}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ pA\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00110\ \ \ \ \ pG\ =\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00111\ \ \ \ \ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordflow}{for}(i=0\ ;i\ <\ n\ ;\ i++)}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=i\ ;\ j+3\ <\ n\ ;\ j+=4)}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 0)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 0)\ *\ n\ +\ i];}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 1)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 1)\ *\ n\ +\ i];}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 2)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 2)\ *\ n\ +\ i];}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 3)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 3)\ *\ n\ +\ i];}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ kCnt\ =\ i;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ acc0\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ acc1\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ acc2\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ acc3\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(k=0;\ k\ <\ i\ ;\ k+=4)}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ p0\ =\ vctp32q(kCnt);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGi=vldrwq\_z\_f32(\&pG[i\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj0=vldrwq\_z\_f32(\&pG[(j\ +\ 0)\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj1=vldrwq\_z\_f32(\&pG[(j\ +\ 1)\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj2=vldrwq\_z\_f32(\&pG[(j\ +\ 2)\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj3=vldrwq\_z\_f32(\&pG[(j\ +\ 3)\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc0\ =\ vfmaq\_m(acc0,\ vecGi,\ vecGj0,\ p0);}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc1\ =\ vfmaq\_m(acc1,\ vecGi,\ vecGj1,\ p0);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc2\ =\ vfmaq\_m(acc2,\ vecGi,\ vecGj2,\ p0);}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc3\ =\ vfmaq\_m(acc3,\ vecGi,\ vecGj3,\ p0);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCnt\ -\/=\ 4;}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 0)\ *\ n\ +\ i]\ -\/=\ vecAddAcrossF32Mve(acc0);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 1)\ *\ n\ +\ i]\ -\/=\ vecAddAcrossF32Mve(acc1);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 2)\ *\ n\ +\ i]\ -\/=\ vecAddAcrossF32Mve(acc2);}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 3)\ *\ n\ +\ i]\ -\/=\ vecAddAcrossF32Mve(acc3);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;\ j\ <\ n\ ;\ j++)}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ pG[j\ *\ n\ +\ i]\ =\ pA[j\ *\ n\ +\ i];}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ kCnt\ =\ i;}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ acc\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(k=0;\ k\ <\ i\ ;\ k+=4)}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ p0\ =\ vctp32q(kCnt);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGi=vldrwq\_z\_f32(\&pG[i\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj=vldrwq\_z\_f32(\&pG[j\ *\ n\ +\ k],p0);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc\ =\ vfmaq\_m(acc,\ vecGi,\ vecGj,p0);}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCnt\ -\/=\ 4;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ pG[j\ *\ n\ +\ i]\ -\/=\ vecAddAcrossF32Mve(acc);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pG[i\ *\ n\ +\ i]\ <=\ 0.0f)}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\_MATH\_DECOMPOSITION\_FAILURE}});}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ invSqrtVj\ =\ 1.0f/sqrtf(pG[i\ *\ n\ +\ i]);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ SCALE\_COL\_F32(pDst,i,invSqrtVj,i);}
+\DoxyCodeLine{00179\ \ \ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ }
+\DoxyCodeLine{00186\ \ \ \textcolor{comment}{/*\ Return\ to\ application\ */}}
+\DoxyCodeLine{00187\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00188\ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00191\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_NEON)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004}{arm\_mat\_cholesky\_f32}}(}
+\DoxyCodeLine{00194\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst)}
+\DoxyCodeLine{00196\ \{}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ status\ of\ matrix\ inverse\ */}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\#ifdef\ ARM\_MATH\_MATRIX\_CHECK}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \textcolor{comment}{/*\ Check\ for\ matrix\ mismatch\ condition\ */}}
+\DoxyCodeLine{00204\ \ \ \textcolor{keywordflow}{if}\ ((pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ (pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ (pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ \ \ )}
+\DoxyCodeLine{00207\ \ \ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SIZE\_MISMATCH\ */}}
+\DoxyCodeLine{00209\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}};}
+\DoxyCodeLine{00210\ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#ifdef\ ARM\_MATH\_MATRIX\_CHECK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{int}\ i,j,k;}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00218\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ invSqrtVj;}
+\DoxyCodeLine{00219\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pA,*pG;}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordtype}{int}\ kCnt;}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ f32x4\_t\ acc,\ acc0,\ acc1,\ acc2,\ acc3;}
+\DoxyCodeLine{00224\ \ \ \ \ f32x4\_t\ vecGi;}
+\DoxyCodeLine{00225\ \ \ \ \ f32x4\_t\ vecGj,vecGj0,vecGj1,vecGj2,vecGj3;}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#if\ !defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00227\ \ \ \ \ f32x2\_t\ tmp\ =\ vdup\_n\_f32(0);\ \ \ }
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\#endif\ \ \ \ }}
+\DoxyCodeLine{00229\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ sum=0.0f;}
+\DoxyCodeLine{00230\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ sum0=0.0f,sum1=0.0f,sum2=0.0f,sum3=0.0f;}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ pA\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00234\ \ \ \ \ pG\ =\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00235\ \ \ \ \ }
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordflow}{for}(i=0\ ;i\ <\ n\ ;\ i++)}
+\DoxyCodeLine{00237\ \ \ \ \ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=i\ ;\ j+3\ <\ n\ ;\ j+=4)}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 0)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 0)\ *\ n\ +\ i];}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 1)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 1)\ *\ n\ +\ i];}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 2)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 2)\ *\ n\ +\ i];}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 3)\ *\ n\ +\ i]\ =\ pA[(j\ +\ 3)\ *\ n\ +\ i];}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ acc0\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ acc1\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ acc2\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ acc3\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ kCnt\ =\ i\ >>\ 2;}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ k=0;}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(kCnt\ >\ 0)}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGi=vld1q\_f32(\&pG[i\ *\ n\ +\ k]);}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj0=vld1q\_f32(\&pG[(j\ +\ 0)\ *\ n\ +\ k]);}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj1=vld1q\_f32(\&pG[(j\ +\ 1)\ *\ n\ +\ k]);}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj2=vld1q\_f32(\&pG[(j\ +\ 2)\ *\ n\ +\ k]);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj3=vld1q\_f32(\&pG[(j\ +\ 3)\ *\ n\ +\ k]);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc0\ =\ vfmaq\_f32(acc0,\ vecGi,\ vecGj0);}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc1\ =\ vfmaq\_f32(acc1,\ vecGi,\ vecGj1);}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc2\ =\ vfmaq\_f32(acc2,\ vecGi,\ vecGj2);}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc3\ =\ vfmaq\_f32(acc3,\ vecGi,\ vecGj3);}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCnt-\/-\/;}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ k+=4;}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \textcolor{preprocessor}{\#if\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ sum0\ =\ vpadds\_f32(vpadd\_f32(vget\_low\_f32(acc0),\ vget\_high\_f32(acc0)));}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ sum1\ =\ vpadds\_f32(vpadd\_f32(vget\_low\_f32(acc1),\ vget\_high\_f32(acc1)));}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ sum2\ =\ vpadds\_f32(vpadd\_f32(vget\_low\_f32(acc2),\ vget\_high\_f32(acc2)));}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ sum3\ =\ vpadds\_f32(vpadd\_f32(vget\_low\_f32(acc3),\ vget\_high\_f32(acc3)));}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vpadd\_f32(vget\_low\_f32(acc0),\ vget\_high\_f32(acc0));}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ sum0\ =\ vget\_lane\_f32(tmp,\ 0)\ +\ vget\_lane\_f32(tmp,\ 1);}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vpadd\_f32(vget\_low\_f32(acc1),\ vget\_high\_f32(acc1));}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ sum1\ =\ vget\_lane\_f32(tmp,\ 0)\ +\ vget\_lane\_f32(tmp,\ 1);}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vpadd\_f32(vget\_low\_f32(acc2),\ vget\_high\_f32(acc2));}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ sum2\ =\ vget\_lane\_f32(tmp,\ 0)\ +\ vget\_lane\_f32(tmp,\ 1);}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vpadd\_f32(vget\_low\_f32(acc3),\ vget\_high\_f32(acc3));}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ sum3\ =\ vget\_lane\_f32(tmp,\ 0)\ +\ vget\_lane\_f32(tmp,\ 1);}
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ kCnt\ =\ i\ \&\ 3;}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(kCnt\ >\ 0)}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ sum0\ =\ sum0\ +\ pG[i\ *\ n\ +\ k]\ *\ pG[(j\ +\ 0)\ *\ n\ +\ k];}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ sum1\ =\ sum1\ +\ pG[i\ *\ n\ +\ k]\ *\ pG[(j\ +\ 1)\ *\ n\ +\ k];}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ sum2\ =\ sum2\ +\ pG[i\ *\ n\ +\ k]\ *\ pG[(j\ +\ 2)\ *\ n\ +\ k];}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ sum3\ =\ sum3\ +\ pG[i\ *\ n\ +\ k]\ *\ pG[(j\ +\ 3)\ *\ n\ +\ k];}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCnt-\/-\/;}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ k++;}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 0)\ *\ n\ +\ i]\ -\/=\ sum0;}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 1)\ *\ n\ +\ i]\ -\/=\ sum1;}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 2)\ *\ n\ +\ i]\ -\/=\ sum2;}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ pG[(j\ +\ 3)\ *\ n\ +\ i]\ -\/=\ sum3;}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;\ j\ <\ n\ ;\ j++)}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ pG[j\ *\ n\ +\ i]\ =\ pA[j\ *\ n\ +\ i];}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ acc\ =\ vdupq\_n\_f32(0.0f);}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ kCnt\ =\ i\ >>\ 2;}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ k=0;}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(kCnt\ >\ 0)}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGi=vld1q\_f32(\&pG[i\ *\ n\ +\ k]);}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ vecGj=vld1q\_f32(\&pG[j\ *\ n\ +\ k]);}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \ acc\ =\ vfmaq\_f32(acc,\ vecGi,\ vecGj);}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCnt-\/-\/;}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \ k+=4;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \textcolor{preprocessor}{\#if\ defined(\_\_aarch64\_\_)}}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ sum\ =\ vpadds\_f32(vpadd\_f32(vget\_low\_f32(acc),\ vget\_high\_f32(acc)));}
+\DoxyCodeLine{00331\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ tmp\ =\ vpadd\_f32(vget\_low\_f32(acc),\ vget\_high\_f32(acc));}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ sum\ =\ vget\_lane\_f32(tmp,\ 0)\ +\ vget\_lane\_f32(tmp,\ 1);}
+\DoxyCodeLine{00334\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ kCnt\ =\ i\ \&\ 3;}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(kCnt\ >\ 0)}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ sum\ =\ sum\ +\ pG[i\ *\ n\ +\ k]\ *\ pG[(j\ +\ 0)\ *\ n\ +\ k];}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ kCnt-\/-\/;}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ k++;}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ pG[j\ *\ n\ +\ i]\ -\/=\ sum;}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pG[i\ *\ n\ +\ i]\ <=\ 0.0f)}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\_MATH\_DECOMPOSITION\_FAILURE}});}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ invSqrtVj\ =\ 1.0f/sqrtf(pG[i\ *\ n\ +\ i]);}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ SCALE\_COL\_F32(pDst,i,invSqrtVj,i);}
+\DoxyCodeLine{00356\ \ \ \ \ \}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00360\ \ \ \}}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ }
+\DoxyCodeLine{00363\ \ \ \textcolor{comment}{/*\ Return\ to\ application\ */}}
+\DoxyCodeLine{00364\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00365\ \}}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00368\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004}{arm\_mat\_cholesky\_f32}}(}
+\DoxyCodeLine{00369\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pSrc,}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *\ pDst)}
+\DoxyCodeLine{00371\ \{}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ status\ of\ matrix\ inverse\ */}}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \textcolor{preprocessor}{\#ifdef\ ARM\_MATH\_MATRIX\_CHECK}}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \ \ \textcolor{comment}{/*\ Check\ for\ matrix\ mismatch\ condition\ */}}
+\DoxyCodeLine{00379\ \ \ \textcolor{keywordflow}{if}\ ((pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ (pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}})\ ||}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ (pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}\ !=\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}})\ \ \ )}
+\DoxyCodeLine{00382\ \ \ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \textcolor{comment}{/*\ Set\ status\ as\ ARM\_MATH\_SIZE\_MISMATCH\ */}}
+\DoxyCodeLine{00384\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\_MATH\_SIZE\_MISMATCH}};}
+\DoxyCodeLine{00385\ \ \ \}}
+\DoxyCodeLine{00386\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#ifdef\ ARM\_MATH\_MATRIX\_CHECK\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00389\ }
+\DoxyCodeLine{00390\ \ \ \{}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordtype}{int}\ i,j,k;}
+\DoxyCodeLine{00392\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_a1bcf80ccdc2acc29198f1592ae300390}{numRows}};}
+\DoxyCodeLine{00393\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ invSqrtVj;}
+\DoxyCodeLine{00394\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *pA,*pG;}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \ \ pA\ =\ pSrc-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00397\ \ \ \ \ pG\ =\ pDst-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00398\ \ \ \ \ }
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keywordflow}{for}(i=0\ ;\ i\ <\ n\ ;\ i++)}
+\DoxyCodeLine{00401\ \ \ \ \ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(j=i\ ;\ j\ <\ n\ ;\ j++)}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ pG[j\ *\ n\ +\ i]\ =\ pA[j\ *\ n\ +\ i];}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(k=0;\ k\ <\ i\ ;\ k++)}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ pG[j\ *\ n\ +\ i]\ =\ pG[j\ *\ n\ +\ i]\ -\/\ pG[i\ *\ n\ +\ k]\ *\ pG[j\ *\ n\ +\ k];}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pG[i\ *\ n\ +\ i]\ <=\ 0.0f)}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\_MATH\_DECOMPOSITION\_FAILURE}});}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ invSqrtVj\ =\ 1.0f/sqrtf(pG[i\ *\ n\ +\ i]);}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ SCALE\_COL\_F32(pDst,i,invSqrtVj,i);}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ }
+\DoxyCodeLine{00420\ \ \ \ \ \}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ \}}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \ \ }
+\DoxyCodeLine{00427\ \ \ \textcolor{comment}{/*\ Return\ to\ application\ */}}
+\DoxyCodeLine{00428\ \ \ \textcolor{keywordflow}{return}\ (status);}
+\DoxyCodeLine{00429\ \}}
+\DoxyCodeLine{00430\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined(ARM\_MATH\_NEON)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00431\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00432\ }
+
+\end{DoxyCode}

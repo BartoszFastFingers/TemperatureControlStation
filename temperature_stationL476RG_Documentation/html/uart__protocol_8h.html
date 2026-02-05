@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Dokumentacja pliku Core/Inc/uart_protocol.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('uart__protocol_8h.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">Dokumentacja pliku uart_protocol.h</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Protokół UART dla komunikacji z PC/innym urządzeniem (komendy, odczyt temperatury, PWM).  
+<a href="#details">Więcej...</a></p>
+<div class="textblock"><code>#include &quot;main.h&quot;</code><br />
+<code>#include &quot;usart.h&quot;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+</div>
+<p><a href="uart__protocol_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Struktury danych</h2></td></tr>
+<tr class="memitem:UartProtocol_5Ft" id="r_UartProtocol_5Ft"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Struktura protokołu UART.  <a href="struct_uart_protocol__t.html#details">Więcej...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:a29c21478896e442b65f6f46268d0f8a7" id="r_a29c21478896e442b65f6f46268d0f8a7"><td class="memItemLeft"><a id="a29c21478896e442b65f6f46268d0f8a7" name="a29c21478896e442b65f6f46268d0f8a7"></a>
+#define&#160;</td><td class="memItemRight"><b>UART_PROTOCOL_HANDLE</b>&#160;&#160;&#160;huart2</td></tr>
+<tr class="memitem:a5bdd6772c246436bb14377095de79b31" id="r_a5bdd6772c246436bb14377095de79b31"><td class="memItemLeft"><a id="a5bdd6772c246436bb14377095de79b31" name="a5bdd6772c246436bb14377095de79b31"></a>
+#define&#160;</td><td class="memItemRight"><b>UART_RX_BUFFER_SIZE</b>&#160;&#160;&#160;128</td></tr>
+<tr class="memitem:a05f5d709605c6317c97e4974bec3402a" id="r_a05f5d709605c6317c97e4974bec3402a"><td class="memItemLeft"><a id="a05f5d709605c6317c97e4974bec3402a" name="a05f5d709605c6317c97e4974bec3402a"></a>
+#define&#160;</td><td class="memItemRight"><b>UART_TX_BUFFER_SIZE</b>&#160;&#160;&#160;128</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Wyliczenia</h2></td></tr>
+<tr class="memitem:add919f2f479f1e5ce37bc5a972e7bc4c" id="r_add919f2f479f1e5ce37bc5a972e7bc4c"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a> { <br />
+&#160;&#160;<a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc">CMD_NONE</a> = 0
+, <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0">CMD_PING</a>
+, <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa">CMD_SET_TEMP</a>
+, <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a">CMD_GET_STATUS</a>
+, <br />
+&#160;&#160;<a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287">CMD_START</a>
+, <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc">CMD_STOP</a>
+, <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee">CMD_SET_KP</a>
+, <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5">CMD_SET_KI</a>
+, <br />
+&#160;&#160;<a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4">CMD_SET_KD</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:add919f2f479f1e5ce37bc5a972e7bc4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista dostępnych komend UART.  <a href="#add919f2f479f1e5ce37bc5a972e7bc4c">Więcej...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a2d4f0a942a590f196fd1938653b66afa" id="r_a2d4f0a942a590f196fd1938653b66afa"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2d4f0a942a590f196fd1938653b66afa">UartProtocol_Init</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, UART_HandleTypeDef *huart)</td></tr>
+<tr class="memdesc:a2d4f0a942a590f196fd1938653b66afa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicjalizacja protokołu UART.  <br /></td></tr>
+<tr class="memitem:a831c58270ed17ca8eb212f15c978d6af" id="r_a831c58270ed17ca8eb212f15c978d6af"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a831c58270ed17ca8eb212f15c978d6af">UartProtocol_CRC8</a> (const uint8_t *data, uint16_t len)</td></tr>
+<tr class="memdesc:a831c58270ed17ca8eb212f15c978d6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Obliczenie CRC8 (polynomial 0x07).  <br /></td></tr>
+<tr class="memitem:a5822a9405798f726be1fc5599ec62b07" id="r_a5822a9405798f726be1fc5599ec62b07"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5822a9405798f726be1fc5599ec62b07">UartProtocol_SendData</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, float temp, float setpoint, uint16_t heater_pwm, uint16_t fan_pwm, uint32_t timestamp)</td></tr>
+<tr class="memdesc:a5822a9405798f726be1fc5599ec62b07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wysłanie danych pomiarowych.  <br /></td></tr>
+<tr class="memitem:a9889efbc1aea520f5391598c9cc376cd" id="r_a9889efbc1aea520f5391598c9cc376cd"><td class="memItemLeft"><a id="a9889efbc1aea520f5391598c9cc376cd" name="a9889efbc1aea520f5391598c9cc376cd"></a>
+void&#160;</td><td class="memItemRight"><b>UartProtocol_SendPong</b> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto)</td></tr>
+<tr class="memdesc:a9889efbc1aea520f5391598c9cc376cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wysłanie odpowiedzi PONG. <br /></td></tr>
+<tr class="memitem:a5d200d74cfd471744a7a6e0f5d483c29" id="r_a5d200d74cfd471744a7a6e0f5d483c29"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d200d74cfd471744a7a6e0f5d483c29">UartProtocol_SendAck</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, const char *cmd)</td></tr>
+<tr class="memdesc:a5d200d74cfd471744a7a6e0f5d483c29"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wysłanie potwierdzenia (ACK).  <br /></td></tr>
+<tr class="memitem:acc5c9ff2b950033f51e777da1797a19e" id="r_acc5c9ff2b950033f51e777da1797a19e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acc5c9ff2b950033f51e777da1797a19e">UartProtocol_SendNak</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, const char *error)</td></tr>
+<tr class="memdesc:acc5c9ff2b950033f51e777da1797a19e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wysłanie błędu (NAK).  <br /></td></tr>
+<tr class="memitem:af4660451142b88c9667023983c48e40b" id="r_af4660451142b88c9667023983c48e40b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af4660451142b88c9667023983c48e40b">UartProtocol_ReceiveByte</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto, uint8_t byte)</td></tr>
+<tr class="memdesc:af4660451142b88c9667023983c48e40b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Przetworzenie odebranego bajtu (wywoływane z przerwania).  <br /></td></tr>
+<tr class="memitem:a55c32246f566464d452b9cedc08e631a" id="r_a55c32246f566464d452b9cedc08e631a"><td class="memItemLeft"><a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a55c32246f566464d452b9cedc08e631a">UartProtocol_Parse</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto)</td></tr>
+<tr class="memdesc:a55c32246f566464d452b9cedc08e631a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parsowanie odebranej komendy (wywoływane z głównej pętli).  <br /></td></tr>
+<tr class="memitem:a2dd16492ef96e47733d20666fc19443e" id="r_a2dd16492ef96e47733d20666fc19443e"><td class="memItemLeft">float&#160;</td><td class="memItemRight"><a class="el" href="#a2dd16492ef96e47733d20666fc19443e">UartProtocol_GetArg</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto)</td></tr>
+<tr class="memdesc:a2dd16492ef96e47733d20666fc19443e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pobranie argumentu ostatniej komendy.  <br /></td></tr>
+<tr class="memitem:af9f317c0cf4c353b4c70219b92021b78" id="r_af9f317c0cf4c353b4c70219b92021b78"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af9f317c0cf4c353b4c70219b92021b78">UartProtocol_VerifyCRC</a> (<a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *proto)</td></tr>
+<tr class="memdesc:af9f317c0cf4c353b4c70219b92021b78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Weryfikacja CRC odebranej wiadomości.  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Opis szczegółowy</h2>
+<div class="textblock"><p>Protokół UART dla komunikacji z PC/innym urządzeniem (komendy, odczyt temperatury, PWM). </p>
+<p>Plik definiuje struktury, komendy i funkcje obsługujące protokół UART:</p><ul>
+<li>obsługa komend (PING, SET TEMP, START/STOP, PID),</li>
+<li>wysyłanie danych pomiarowych,</li>
+<li>obliczanie CRC8,</li>
+<li>parsowanie odebranych bajtów.</li>
+</ul>
+<dl class="section author"><dt>Autor</dt><dd>00ary </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>01-Feb-2026 </dd></dl>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Dokumentacja typów wyliczanych</h2>
+<a id="add919f2f479f1e5ce37bc5a972e7bc4c" name="add919f2f479f1e5ce37bc5a972e7bc4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add919f2f479f1e5ce37bc5a972e7bc4c">&#9670;&#160;</a></span>UartCommand_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lista dostępnych komend UART. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Wartości wyliczeń</th></tr><tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc" name="add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc"></a>CMD_NONE&#160;</td><td class="fielddoc"><p>Brak komendy </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0" name="add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0"></a>CMD_PING&#160;</td><td class="fielddoc"><p>$PING*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa" name="add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa"></a>CMD_SET_TEMP&#160;</td><td class="fielddoc"><p>$SETP,40.0*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a" name="add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a"></a>CMD_GET_STATUS&#160;</td><td class="fielddoc"><p>$STAT*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287" name="add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287"></a>CMD_START&#160;</td><td class="fielddoc"><p>$START*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc" name="add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc"></a>CMD_STOP&#160;</td><td class="fielddoc"><p>$STOP*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee" name="add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee"></a>CMD_SET_KP&#160;</td><td class="fielddoc"><p>$SEKP,10.5*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5" name="add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5"></a>CMD_SET_KI&#160;</td><td class="fielddoc"><p>$SEKI,0.5*XX </p>
+</td></tr>
+<tr><td class="fieldname"><a id="add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4" name="add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4"></a>CMD_SET_KD&#160;</td><td class="fielddoc"><p>$SEKD,0.0*XX </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentacja funkcji</h2>
+<a id="a831c58270ed17ca8eb212f15c978d6af" name="a831c58270ed17ca8eb212f15c978d6af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a831c58270ed17ca8eb212f15c978d6af">&#9670;&#160;</a></span>UartProtocol_CRC8()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t UartProtocol_CRC8 </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>len</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Obliczenie CRC8 (polynomial 0x07). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>Dane wejściowe </td></tr>
+    <tr><td class="paramname">len</td><td>Długość danych </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wartość CRC8 </dd></dl>
+
+</div>
+</div>
+<a id="a2dd16492ef96e47733d20666fc19443e" name="a2dd16492ef96e47733d20666fc19443e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dd16492ef96e47733d20666fc19443e">&#9670;&#160;</a></span>UartProtocol_GetArg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float UartProtocol_GetArg </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pobranie argumentu ostatniej komendy. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Argument jako float </dd></dl>
+
+</div>
+</div>
+<a id="a2d4f0a942a590f196fd1938653b66afa" name="a2d4f0a942a590f196fd1938653b66afa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d4f0a942a590f196fd1938653b66afa">&#9670;&#160;</a></span>UartProtocol_Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UartProtocol_Init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">UART_HandleTypeDef *</td>          <td class="paramname"><span class="paramname"><em>huart</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicjalizacja protokołu UART. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+    <tr><td class="paramname">huart</td><td>Uchwyt UART </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a55c32246f566464d452b9cedc08e631a" name="a55c32246f566464d452b9cedc08e631a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55c32246f566464d452b9cedc08e631a">&#9670;&#160;</a></span>UartProtocol_Parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#add919f2f479f1e5ce37bc5a972e7bc4c">UartCommand_t</a> UartProtocol_Parse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parsowanie odebranej komendy (wywoływane z głównej pętli). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Typ odebranej komendy (CMD_NONE jeśli brak) </dd></dl>
+
+</div>
+</div>
+<a id="af4660451142b88c9667023983c48e40b" name="af4660451142b88c9667023983c48e40b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4660451142b88c9667023983c48e40b">&#9670;&#160;</a></span>UartProtocol_ReceiveByte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UartProtocol_ReceiveByte </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>byte</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Przetworzenie odebranego bajtu (wywoływane z przerwania). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+    <tr><td class="paramname">byte</td><td>Odebrany bajt </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5d200d74cfd471744a7a6e0f5d483c29" name="a5d200d74cfd471744a7a6e0f5d483c29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d200d74cfd471744a7a6e0f5d483c29">&#9670;&#160;</a></span>UartProtocol_SendAck()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UartProtocol_SendAck </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>cmd</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wysłanie potwierdzenia (ACK). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+    <tr><td class="paramname">cmd</td><td>Komenda która została potwierdzona </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5822a9405798f726be1fc5599ec62b07" name="a5822a9405798f726be1fc5599ec62b07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5822a9405798f726be1fc5599ec62b07">&#9670;&#160;</a></span>UartProtocol_SendData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UartProtocol_SendData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>temp</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>setpoint</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>heater_pwm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>fan_pwm</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t</td>          <td class="paramname"><span class="paramname"><em>timestamp</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wysłanie danych pomiarowych. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+    <tr><td class="paramname">temp</td><td>Aktualna temperatura </td></tr>
+    <tr><td class="paramname">setpoint</td><td>Temperatura zadana </td></tr>
+    <tr><td class="paramname">heater_pwm</td><td>PWM grzałki </td></tr>
+    <tr><td class="paramname">fan_pwm</td><td>PWM wentylatora </td></tr>
+    <tr><td class="paramname">timestamp</td><td>Znacznik czasu [ms] </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acc5c9ff2b950033f51e777da1797a19e" name="acc5c9ff2b950033f51e777da1797a19e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5c9ff2b950033f51e777da1797a19e">&#9670;&#160;</a></span>UartProtocol_SendNak()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UartProtocol_SendNak </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>error</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wysłanie błędu (NAK). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+    <tr><td class="paramname">error</td><td>Kod błędu </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af9f317c0cf4c353b4c70219b92021b78" name="af9f317c0cf4c353b4c70219b92021b78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9f317c0cf4c353b4c70219b92021b78">&#9670;&#160;</a></span>UartProtocol_VerifyCRC()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool UartProtocol_VerifyCRC </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_uart_protocol__t.html">UartProtocol_t</a> *</td>          <td class="paramname"><span class="paramname"><em>proto</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Weryfikacja CRC odebranej wiadomości. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">proto</td><td>Wskaźnik na strukturę protokołu </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>true jeśli CRC poprawne </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Core</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="uart__protocol_8h.html">uart_protocol.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

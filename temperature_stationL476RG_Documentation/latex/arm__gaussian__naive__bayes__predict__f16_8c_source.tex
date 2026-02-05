@@ -1,0 +1,195 @@
+\doxysection{arm\+\_\+gaussian\+\_\+naive\+\_\+bayes\+\_\+predict\+\_\+f16.\+c}
+\hypertarget{arm__gaussian__naive__bayes__predict__f16_8c_source}{}\label{arm__gaussian__naive__bayes__predict__f16_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/BayesFunctions/arm\_gaussian\_naive\_bayes\_predict\_f16.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/BayesFunctions/arm\_gaussian\_naive\_bayes\_predict\_f16.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_naive\_gaussian\_bayes\_predict\_f16}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Naive\ Gaussian\ Bayesian\ Estimator}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/bayes\_functions\_f16.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#if\ defined(ARM\_FLOAT16\_SUPPORTED)}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <limits.h>}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVE\_FLOAT16)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#include\ "{}arm\_vec\_math\_f16.h"{}}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ ARM\_DSP\_ATTRIBUTE\ uint32\_t\ arm\_gaussian\_naive\_bayes\_predict\_f16(\textcolor{keyword}{const}\ arm\_gaussian\_naive\_bayes\_instance\_f16\ *S,\ }
+\DoxyCodeLine{00060\ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *\ in,\ }
+\DoxyCodeLine{00061\ \ \ \ float16\_t\ *pOutputProbabilities,}
+\DoxyCodeLine{00062\ \ \ \ float16\_t\ *pBufferB}
+\DoxyCodeLine{00063\ \ \ \ )}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ nbClass;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pTheta\ =\ S-\/>theta;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pSigma\ =\ S-\/>sigma;}
+\DoxyCodeLine{00068\ \ \ \ \ float16\_t\ \ \ \ \ \ *buffer\ =\ pOutputProbabilities;}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pIn\ =\ in;}
+\DoxyCodeLine{00070\ \ \ \ \ float16\_t\ \ \ \ \ \ \ result;}
+\DoxyCodeLine{00071\ \ \ \ \ f16x8\_t\ \ \ \ \ \ \ \ \ vsigma;}
+\DoxyCodeLine{00072\ \ \ \ \ \_Float16\ \ \ \ \ \ \ tmp;}
+\DoxyCodeLine{00073\ \ \ \ \ f16x8\_t\ \ \ \ \ \ \ \ \ vacc1,\ vacc2;}
+\DoxyCodeLine{00074\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ index;}
+\DoxyCodeLine{00075\ \ \ \ \ float16\_t\ \ \ \ \ \ \ *logclassPriors=pBufferB;}
+\DoxyCodeLine{00076\ \ \ \ \ float16\_t\ \ \ \ \ \ *pLogPrior\ =\ logclassPriors;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ arm\_vlog\_f16((float16\_t\ *)\ S-\/>classPriors,\ logclassPriors,\ S-\/>numberOfClasses);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ pTheta\ =\ S-\/>theta;}
+\DoxyCodeLine{00081\ \ \ \ \ pSigma\ =\ S-\/>sigma;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{for}\ (nbClass\ =\ 0;\ nbClass\ <\ S-\/>numberOfClasses;\ nbClass++)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ pIn\ =\ in;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ vacc1\ =\ vdupq\_n\_f16(0.0f16);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ vacc2\ =\ vdupq\_n\_f16(0.0f16);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ blkCnt\ =S-\/>vectorDimension\ >>\ 3;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)\ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ f16x8\_t\ \ \ \ \ \ \ \ \ vinvSigma,\ vtmp;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ vsigma\ =\ vaddq\_n\_f16(vld1q(pSigma),\ S-\/>epsilon);}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ vacc1\ =\ vaddq(vacc1,\ vlogq\_f16(vmulq\_n\_f16(vsigma,\ 2.0f16\ *\ (\_Float16)PI)));}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ vinvSigma\ =\ vrecip\_medprec\_f16(vsigma);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ vtmp\ =\ vsubq(vld1q(pIn),\ vld1q(pTheta));}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ squaring\ */}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ vtmp\ =\ vmulq(vtmp,\ vtmp);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ vacc2\ =\ vfmaq(vacc2,\ vtmp,\ vinvSigma);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ pIn\ +=\ 8;}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ pTheta\ +=\ 8;}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ pSigma\ +=\ 8;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ blkCnt\ =\ S-\/>vectorDimension\ \&\ 7;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (blkCnt\ >\ 0U)\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ mve\_pred16\_t\ \ \ \ p0\ =\ vctp16q(blkCnt);}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ f16x8\_t\ \ \ \ \ \ \ \ \ vinvSigma,\ vtmp;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ vsigma\ =\ vaddq\_n\_f16(vld1q(pSigma),\ S-\/>epsilon);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ vacc1\ =}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ vaddq\_m\_f16(vacc1,\ vacc1,\ vlogq\_f16(vmulq\_n\_f16(vsigma,\ 2.0f16\ *\ (\_Float16)PI)),\ p0);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ vinvSigma\ =\ vrecip\_medprec\_f16(vsigma);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ vtmp\ =\ vsubq(vld1q(pIn),\ vld1q(pTheta));}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ squaring\ */}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ vtmp\ =\ vmulq(vtmp,\ vtmp);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ vacc2\ =\ vfmaq\_m\_f16(vacc2,\ vtmp,\ vinvSigma,\ p0);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ pTheta\ +=\ blkCnt;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ pSigma\ +=\ blkCnt;}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ tmp\ =\ -\/0.5f16\ *\ (\_Float16)vecAddAcrossF16Mve(vacc1);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ tmp\ -\/=\ 0.5f16\ *\ (\_Float16)vecAddAcrossF16Mve(vacc2);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ *buffer\ =\ (\_Float16)tmp\ +\ (\_Float16)*pLogPrior++;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ buffer++;}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ arm\_max\_f16(pOutputProbabilities,\ S-\/>numberOfClasses,\ \&result,\ \&index);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}\ (index);}
+\DoxyCodeLine{00141\ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ ARM\_DSP\_ATTRIBUTE\ uint32\_t\ arm\_gaussian\_naive\_bayes\_predict\_f16(\textcolor{keyword}{const}\ arm\_gaussian\_naive\_bayes\_instance\_f16\ *S,\ }
+\DoxyCodeLine{00146\ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *\ in,\ }
+\DoxyCodeLine{00147\ \ \ \ float16\_t\ *pOutputProbabilities,}
+\DoxyCodeLine{00148\ \ \ \ float16\_t\ *pBufferB)}
+\DoxyCodeLine{00149\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ uint32\_t\ nbClass;}
+\DoxyCodeLine{00151\ \ \ \ \ uint32\_t\ nbDim;}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pPrior\ =\ S-\/>classPriors;}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pTheta\ =\ S-\/>theta;}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pSigma\ =\ S-\/>sigma;}
+\DoxyCodeLine{00155\ \ \ \ \ float16\_t\ *buffer\ =\ pOutputProbabilities;}
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{const}\ float16\_t\ *pIn=in;}
+\DoxyCodeLine{00157\ \ \ \ \ float16\_t\ result;}
+\DoxyCodeLine{00158\ \ \ \ \ \_Float16\ sigma;}
+\DoxyCodeLine{00159\ \ \ \ \ \_Float16\ tmp;}
+\DoxyCodeLine{00160\ \ \ \ \ \_Float16\ acc1,acc2;}
+\DoxyCodeLine{00161\ \ \ \ \ uint32\_t\ index;}
+\DoxyCodeLine{00162\ \ \ \ \ (void)pBufferB;}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ pTheta=S-\/>theta;}
+\DoxyCodeLine{00165\ \ \ \ \ pSigma=S-\/>sigma;}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{for}(nbClass\ =\ 0;\ nbClass\ <\ S-\/>numberOfClasses;\ nbClass++)}
+\DoxyCodeLine{00168\ \ \ \ \ \{}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ pIn\ =\ in;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ tmp\ =\ 0.0f16;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ acc1\ =\ 0.0f16;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ acc2\ =\ 0.0f16;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(nbDim\ =\ 0;\ nbDim\ <\ S-\/>vectorDimension;\ nbDim++)}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ sigma\ =\ (\_Float16)*pSigma\ +\ (\_Float16)S-\/>epsilon;}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ acc1\ +=\ (\_Float16)logf(2.0f\ *\ PI\ *\ (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}})sigma);}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ acc2\ +=\ ((\_Float16)*pIn\ -\/\ (\_Float16)*pTheta)\ *\ ((\_Float16)*pIn\ -\/\ (\_Float16)*pTheta)\ /\ (\_Float16)sigma;}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ pIn++;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ pTheta++;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ pSigma++;}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ tmp\ =\ -\/0.5f16\ *\ (\_Float16)acc1;}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ tmp\ -\/=\ 0.5f16\ *\ (\_Float16)acc2;}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ *buffer\ =\ (\_Float16)tmp\ +\ (\_Float16)logf((\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}})*pPrior++);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ buffer++;}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ arm\_max\_f16(pOutputProbabilities,S-\/>numberOfClasses,\&result,\&index);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordflow}{return}(index);}
+\DoxyCodeLine{00198\ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEF)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined(ARM\_FLOAT16\_SUPPORTED)\ */}\textcolor{preprocessor}{\ }}
+\DoxyCodeLine{00207\ }
+
+\end{DoxyCode}

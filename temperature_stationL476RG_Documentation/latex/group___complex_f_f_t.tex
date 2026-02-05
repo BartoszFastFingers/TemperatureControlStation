@@ -1,0 +1,155 @@
+\doxysubsection{Complex FFT Functions }
+\hypertarget{group___complex_f_f_t}{}\label{group___complex_f_f_t}\index{Complex FFT Functions@{Complex FFT Functions}}
+\doxysubsubsubsection*{Topics}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{group___c_f_f_t___c_i_f_f_t}{Complex FFT Tables}}
+\item 
+\doxymbox{\hyperlink{group___complex_f_f_t_f16}{Complex FFT F16}}
+\item 
+\doxymbox{\hyperlink{group___complex_f_f_t_f32}{Complex FFT F32}}
+\item 
+\doxymbox{\hyperlink{group___complex_f_f_t_f64}{Complex FFT F64}}
+\item 
+\doxymbox{\hyperlink{group___complex_f_f_t_q15}{Complex FFT Q15}}
+\item 
+\doxymbox{\hyperlink{group___complex_f_f_t_q31}{Complex FFT Q31}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+\begin{DoxyParagraph}{}
+The Fast Fourier Transform (FFT) is an efficient algorithm for computing the Discrete Fourier Transform (DFT). The FFT can be orders of magnitude faster than the DFT, especially for long lengths. The algorithms described in this section operate on complex data. A separate set of functions is devoted to handling of real sequences. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+There are separate algorithms for handling floating-\/point, Q15, and Q31 data types. The algorithms available for each data type are described next. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The FFT functions operate in-\/place. That is, the array holding the input data will also be used to hold the corresponding result. The input data is complex and contains {\ttfamily 2\texorpdfstring{$\ast$}{*}fft\+Len} interleaved values as shown below. 
+\begin{DoxyPre}\{real[0], imag[0], real[1], imag[1], ...\} \end{DoxyPre}
+ The FFT result will be contained in the same array and the frequency domain values will have the same interleaving.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Floating-\/point}
+The floating-\/point complex FFT uses a mixed-\/radix algorithm. Multiple radix-\/8 stages are performed along with a single radix-\/2 or radix-\/4 stage, as needed. The algorithm supports lengths of \+[16, 32, 64, ..., 4096]\+ and each length uses a different twiddle factor table. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The function uses the standard FFT definition and output values may grow by a factor of {\ttfamily fft\+Len} when computing the forward transform. The inverse transform includes a scale of {\ttfamily 1/\+fft\+Len} as part of the calculation and this matches the textbook definition of the inverse FFT. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+For the MVE version, the new arm\+\_\+cfft\+\_\+init\+\_\+f32 initialization function is {\bfseries{mandatory}}. {\bfseries{Compilation flags are available to include only the required tables for the needed FFTs.}} Other FFT versions can continue to be initialized as explained below. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+For not MVE versions, pre-\/initialized data structures containing twiddle factors and bit reversal tables are provided and defined in {\ttfamily \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}}. Include this header in your function and then pass one of the constant structures as an argument to arm\+\_\+cfft\+\_\+f32. For example:\+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+{\ttfamily arm\+\_\+cfft\+\_\+f32(arm\+\_\+cfft\+\_\+s\+R\+\_\+f32\+\_\+len64, p\+Src, 1, 1)} 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+computes a 64-\/point inverse complex FFT including bit reversal. The data structures are treated as constant data and not modified during the calculation. The same data structure can be reused for multiple transforms including mixing forward and inverse transforms. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Earlier releases of the library provided separate radix-\/2 and radix-\/4 algorithms that operated on floating-\/point data. These functions are still provided but are deprecated. The older functions are slower and less general than the new functions. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+An example of initialization of the constants for the arm\+\_\+cfft\+\_\+f32 function follows:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{structarm__cfft__instance__f32}{arm\_cfft\_instance\_f32}}\ *S;}
+\DoxyCodeLine{...}
+\DoxyCodeLine{switch\ (length)\ \{}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len16;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len32;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 64:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len64;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 128:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len128;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 256:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len256;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 512:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len512;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 1024:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len1024;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 2048:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len2048;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{case}\ 4096:}
+\DoxyCodeLine{\ \ \ \ S\ =\ \&arm\_cfft\_sR\_f32\_len4096;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The new arm\+\_\+cfft\+\_\+init\+\_\+f32 can also be used. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Q15 and Q31}
+The floating-\/point complex FFT uses a mixed-\/radix algorithm. Multiple radix-\/4 stages are performed along with a single radix-\/2 stage, as needed. The algorithm supports lengths of \+[16, 32, 64, ..., 4096]\+ and each length uses a different twiddle factor table. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The function uses the standard FFT definition and output values may grow by a factor of {\ttfamily fft\+Len} when computing the forward transform. The inverse transform includes a scale of {\ttfamily 1/\+fft\+Len} as part of the calculation and this matches the textbook definition of the inverse FFT. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Pre-\/initialized data structures containing twiddle factors and bit reversal tables are provided and defined in {\ttfamily \doxylink{arm__const__structs_8h_source}{arm\+\_\+const\+\_\+structs.\+h}}. Include this header in your function and then pass one of the constant structures as an argument to arm\+\_\+cfft\+\_\+q31. For example:\+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+{\ttfamily arm\+\_\+cfft\+\_\+q31(arm\+\_\+cfft\+\_\+s\+R\+\_\+q31\+\_\+len64, p\+Src, 1, 1)} 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+computes a 64-\/point inverse complex FFT including bit reversal. The data structures are treated as constant data and not modified during the calculation. The same data structure can be reused for multiple transforms including mixing forward and inverse transforms. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+Earlier releases of the library provided separate radix-\/2 and radix-\/4 algorithms that operated on floating-\/point data. These functions are still provided but are deprecated. The older functions are slower and less general than the new functions. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+An example of initialization of the constants for the arm\+\_\+cfft\+\_\+q31 function follows:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{structarm__cfft__instance__q31}{arm\_cfft\_instance\_q31}}\ *S;}
+\DoxyCodeLine{...}
+\DoxyCodeLine{\ \ \textcolor{keywordflow}{switch}\ (length)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len16;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 32:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len32;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 64:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len64;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 128:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len128;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 256:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len256;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 512:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len512;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 1024:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len1024;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 2048:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len2048;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{case}\ 4096:}
+\DoxyCodeLine{\ \ \ \ \ \ S\ =\ \&arm\_cfft\_sR\_q31\_len4096;}
+\DoxyCodeLine{\ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\ \ \}}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\input{group___c_f_f_t___c_i_f_f_t}
+\input{group___complex_f_f_t_f16}
+\input{group___complex_f_f_t_f32}
+\input{group___complex_f_f_t_f64}
+\input{group___complex_f_f_t_q15}
+\input{group___complex_f_f_t_q31}

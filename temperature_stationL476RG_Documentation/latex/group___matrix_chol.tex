@@ -1,0 +1,165 @@
+\doxysubsection{Cholesky and LDLT decompositions }
+\hypertarget{group___matrix_chol}{}\label{group___matrix_chol}\index{Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004}{arm\+\_\+mat\+\_\+cholesky\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point Cholesky decomposition of positive-\/definite matrix. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_chol_gaca40ff53d34a13d536875526b87ff588}{arm\+\_\+mat\+\_\+cholesky\+\_\+f64}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Dst)
+\begin{DoxyCompactList}\small\item\em Floating-\/point Cholesky decomposition of positive-\/definite matrix. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_chol_gae760a1cdf75f07172bb7ddd600af62f7}{arm\+\_\+mat\+\_\+ldlt\+\_\+f32}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}pl, \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}pd, uint16\+\_\+t \texorpdfstring{$\ast$}{*}pp)
+\begin{DoxyCompactList}\small\item\em Floating-\/point LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition of positive semi-\/definite matrix. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___matrix_chol_gae753cc1481d506b7d81f26902e14ac96}{arm\+\_\+mat\+\_\+ldlt\+\_\+f64}} (const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}pl, \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}pd, uint16\+\_\+t \texorpdfstring{$\ast$}{*}pp)
+\begin{DoxyCompactList}\small\item\em Floating-\/point LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition of positive semi-\/definite matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the Cholesky or LL\texorpdfstring{$^\wedge$}{\string^}t decomposition of a matrix.
+
+If the input matrix does not have a decomposition, then the algorithm terminates and returns error status ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE.
+
+\label{doc-func-members}
+\Hypertarget{group___matrix_chol_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004}\index{Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}!arm\_mat\_cholesky\_f32@{arm\_mat\_cholesky\_f32}}
+\index{arm\_mat\_cholesky\_f32@{arm\_mat\_cholesky\_f32}!Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_cholesky\_f32()}{arm\_mat\_cholesky\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_chol_ga88790ae0583afdbef5142dd38c43e004} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+cholesky\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point Cholesky decomposition of positive-\/definite matrix. 
+
+Floating-\/point Cholesky decomposition of Symmetric Positive Definite Matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the instance of the input floating-\/point matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the instance of the output floating-\/point matrix structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH, if the dimensions do not match. 
+
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE} :\+ Input matrix cannot be decomposed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+If the matrix is ill conditioned or only semi-\/definite, then it is better using the LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition. The decomposition of A is returning a lower triangular matrix L such that A = L L\texorpdfstring{$^\wedge$}{\string^}t
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The destination matrix should be set to 0 before calling the functions because the function may not overwrite all output elements. 
+\end{DoxyParagraph}
+\Hypertarget{group___matrix_chol_gaca40ff53d34a13d536875526b87ff588}\index{Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}!arm\_mat\_cholesky\_f64@{arm\_mat\_cholesky\_f64}}
+\index{arm\_mat\_cholesky\_f64@{arm\_mat\_cholesky\_f64}!Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_cholesky\_f64()}{arm\_mat\_cholesky\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_chol_gaca40ff53d34a13d536875526b87ff588} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+cholesky\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point Cholesky decomposition of positive-\/definite matrix. 
+
+Floating-\/point Cholesky decomposition of Symmetric Positive Definite Matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the instance of the input floating-\/point matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the instance of the output floating-\/point matrix structure. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH, if the dimensions do not match. 
+
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE} :\+ Input matrix cannot be decomposed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+If the matrix is ill conditioned or only semi-\/definite, then it is better using the LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition. The decomposition of A is returning a lower triangular matrix L such that A = L L\texorpdfstring{$^\wedge$}{\string^}t
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The destination matrix should be set to 0 before calling the functions because the function may not overwrite all output elements. 
+\end{DoxyParagraph}
+\Hypertarget{group___matrix_chol_gae760a1cdf75f07172bb7ddd600af62f7}\index{Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}!arm\_mat\_ldlt\_f32@{arm\_mat\_ldlt\_f32}}
+\index{arm\_mat\_ldlt\_f32@{arm\_mat\_ldlt\_f32}!Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_ldlt\_f32()}{arm\_mat\_ldlt\_f32()}}
+{\footnotesize\ttfamily \label{group___matrix_chol_gae760a1cdf75f07172bb7ddd600af62f7} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+ldlt\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{pl}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\+\_\+matrix\+\_\+instance\+\_\+f32}} \texorpdfstring{$\ast$}{*}}]{pd}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{pp}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition of positive semi-\/definite matrix. 
+
+Floating-\/point LDL decomposition of Symmetric Positive Semi-\/\+Definite Matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the instance of the input floating-\/point matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pl} & points to the instance of the output floating-\/point triangular matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pd} & points to the instance of the output floating-\/point diagonal matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pp} & points to the instance of the output floating-\/point permutation vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH, if the dimensions do not match. 
+
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE} :\+ Input matrix cannot be decomposed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+Computes the LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition of a matrix A such that P A P\texorpdfstring{$^\wedge$}{\string^}t = L D L\texorpdfstring{$^\wedge$}{\string^}t. 
+\end{DoxyParagraph}
+\Hypertarget{group___matrix_chol_gae753cc1481d506b7d81f26902e14ac96}\index{Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}!arm\_mat\_ldlt\_f64@{arm\_mat\_ldlt\_f64}}
+\index{arm\_mat\_ldlt\_f64@{arm\_mat\_ldlt\_f64}!Cholesky and LDLT decompositions@{Cholesky and LDLT decompositions}}
+\doxysubsubsubsection{\texorpdfstring{arm\_mat\_ldlt\_f64()}{arm\_mat\_ldlt\_f64()}}
+{\footnotesize\ttfamily \label{group___matrix_chol_gae753cc1481d506b7d81f26902e14ac96} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+mat\+\_\+ldlt\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{pl}{, }\item[{\doxymbox{\hyperlink{structarm__matrix__instance__f64}{arm\+\_\+matrix\+\_\+instance\+\_\+f64}} \texorpdfstring{$\ast$}{*}}]{pd}{, }\item[{uint16\+\_\+t \texorpdfstring{$\ast$}{*}}]{pp}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition of positive semi-\/definite matrix. 
+
+Floating-\/point LDL decomposition of Symmetric Positive Semi-\/\+Definite Matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the instance of the input floating-\/point matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pl} & points to the instance of the output floating-\/point triangular matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pd} & points to the instance of the output floating-\/point diagonal matrix structure. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em pp} & points to the instance of the output floating-\/point permutation vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The function returns ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH, if the dimensions do not match. 
+
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ Operation successful
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a7071b92f1f6bc3c5c312a237ea91105b}{ARM\+\_\+\+MATH\+\_\+\+SIZE\+\_\+\+MISMATCH} :\+ Matrix size check failed
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6af176673ca62a9fc570f0366808903a31}{ARM\+\_\+\+MATH\+\_\+\+DECOMPOSITION\+\_\+\+FAILURE} :\+ Input matrix cannot be decomposed 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\begin{DoxyParagraph}{}
+Computes the LDL\texorpdfstring{$^\wedge$}{\string^}t decomposition of a matrix A such that P A P\texorpdfstring{$^\wedge$}{\string^}t = L D L\texorpdfstring{$^\wedge$}{\string^}t. 
+\end{DoxyParagraph}

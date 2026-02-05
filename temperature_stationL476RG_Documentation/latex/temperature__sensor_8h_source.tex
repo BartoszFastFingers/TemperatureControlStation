@@ -1,0 +1,49 @@
+\doxysection{temperature\+\_\+sensor.\+h}
+\hypertarget{temperature__sensor_8h_source}{}\label{temperature__sensor_8h_source}\index{Core/Inc/temperature\_sensor.h@{Core/Inc/temperature\_sensor.h}}
+\doxymbox{\hyperlink{temperature__sensor_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#ifndef\ CORE\_INC\_TEMPERATURE\_SENSOR\_H\_}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ CORE\_INC\_TEMPERATURE\_SENSOR\_H\_}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}adc.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}arm\_math.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\doxymbox{\hyperlink{_s_m_a1__fir_8h}{SMA1\_fir.h}}"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ MAX\_TEMP\_SENSORS\ 2}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ arm\_fir\_instance\_f32\ \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t_a4ea56e400307ee6511dd43edb9e31353}{fir}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00033\ \ \ \ \ float32\_t\ \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t_ab3804d2dbcea4e3dc5312f5aec06c5b2}{state}}[\doxymbox{\hyperlink{_s_m_a1__fir_8h_a008898a303a3a3a631ee33a9cc83e77f}{SMA1\_NUM\_TAPS}}\ +\ \doxymbox{\hyperlink{_s_m_a1__fir_8h_a3ae01460c555625bf822ad3e657f97cc}{SMA1\_BLOCK\_SIZE}}\ -\/\ 1];\ }
+\DoxyCodeLine{00034\ \}\ \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t}{TempSensorHandle\_filter\_t}};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct}}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ ADC\_HandleTypeDef\ *\doxymbox{\hyperlink{struct_temp_sensor_handle__t_af982c0fe5d77061049c468b599100134}{hadc}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_temp_sensor_handle__t_aa55fc0ac5902d2f03ffebeba15c2cb6a}{sensor\_count}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \ \ \ \ uint16\_t\ *\doxymbox{\hyperlink{struct_temp_sensor_handle__t_a01775fb8fa2fbc2d84e64f5b8b8b8c8e}{adc\_buffer}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_temp_sensor_handle__t_a4363b65a393b0ca493fa20d6c1e244c2}{vref}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \doxymbox{\hyperlink{struct_temp_sensor_handle__filter__t}{TempSensorHandle\_filter\_t}}\ \doxymbox{\hyperlink{struct_temp_sensor_handle__t_ab9065f6f8317d5e7ccd0d6a14e1b3476}{filter}};\ \ \ \ }
+\DoxyCodeLine{00047\ \}\ \doxymbox{\hyperlink{struct_temp_sensor_handle__t}{TempSensorHandle\_t}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{temperature__sensor_8h_adf74bbba89cbb8de25680efd2a48d83f}{TempSensor\_Init}}(\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{TempSensorHandle\_t}}\ *htemp,}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ADC\_HandleTypeDef\ *hadc,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ sensor\_count,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t*\ adc\_buffer,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ vref);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{temperature__sensor_8h_ad6855126c666ac7efcbe695bbefa9d75}{TempSensor\_Start}}(\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{TempSensorHandle\_t}}\ *htemp);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{temperature__sensor_8h_a70b027296971f254b7da4673fca9c127}{TempSensor\_GetVoltage}}(\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{TempSensorHandle\_t}}\ *htemp,\ uint8\_t\ index);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00083\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{temperature__sensor_8h_a207977086eb2457992d963291ef21272}{TempSensor\_GetTemperature}}(\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{TempSensorHandle\_t}}\ *htemp,\ uint8\_t\ index);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{temperature__sensor_8h_a53d6890f65f8d8ada86c06d46f82a4bd}{TempSensor\_GetAverageTemperature}}(\doxymbox{\hyperlink{struct_temp_sensor_handle__t}{TempSensorHandle\_t}}\ *htemp);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CORE\_INC\_TEMPERATURE\_SENSOR\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

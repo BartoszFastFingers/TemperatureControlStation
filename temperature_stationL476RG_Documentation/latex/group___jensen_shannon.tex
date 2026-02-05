@@ -1,0 +1,41 @@
+\doxysection{Jensen\+Shannon }
+\hypertarget{group___jensen_shannon}{}\label{group___jensen_shannon}\index{JensenShannon@{JensenShannon}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___jensen_shannon_ga40dc08e40408a6d20294c8794f70265d}{arm\+\_\+jensenshannon\+\_\+distance\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}pA, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}pB, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Jensen-\/\+Shannon distance between two vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___jensen_shannon_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group___jensen_shannon_ga40dc08e40408a6d20294c8794f70265d}\index{JensenShannon@{JensenShannon}!arm\_jensenshannon\_distance\_f32@{arm\_jensenshannon\_distance\_f32}}
+\index{arm\_jensenshannon\_distance\_f32@{arm\_jensenshannon\_distance\_f32}!JensenShannon@{JensenShannon}}
+\doxysubsubsection{\texorpdfstring{arm\_jensenshannon\_distance\_f32()}{arm\_jensenshannon\_distance\_f32()}}
+{\footnotesize\ttfamily \label{group___jensen_shannon_ga40dc08e40408a6d20294c8794f70265d} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+jensenshannon\+\_\+distance\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{pA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{pB}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Jensen-\/\+Shannon distance between two vectors. 
+
+This function is assuming that elements of second vector are \texorpdfstring{$>$}{>} 0 and 0 only when the corresponding element of first vector is 0. Otherwise the result of the computation does not make sense and for speed reasons, the cases returning NaN or Infinity are not managed.
+
+When the function is computing x log (x /\+ y) with x == 0 and y == 0, it will compute the right result (0) but a division by zero will occur and should be ignored in client code.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pA} & First vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em pB} & Second vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & vector length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+distance 
+\end{DoxyReturn}

@@ -1,0 +1,94 @@
+\doxysection{arm\+\_\+mfcc\+\_\+instance\+\_\+q15 Struct Reference}
+\hypertarget{structarm__mfcc__instance__q15}{}\label{structarm__mfcc__instance__q15}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+
+
+Instance structure for the Q15 MFCC function.  
+
+
+
+
+{\ttfamily \+\#include $<$transform\+\_\+functions.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__q15_a2bca8826d8bccd175c29c47367bdef2b}{dct\+Coefs}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__q15_a8be8e70eb1e8f3ecf297c39d6bedafc9}{filter\+Coefs}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__q15_af4dfc8960dea69fe00bf6018eb70eb5a}{window\+Coefs}}
+\item 
+const uint32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__q15_a4bf2fc236988cf1e39f7b3efbd0a1797}{filter\+Pos}}
+\item 
+const uint32\+\_\+t \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__mfcc__instance__q15_a92fa17569af954a83e7d76d88693ecc6}{filter\+Lengths}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structarm__mfcc__instance__q15_a13e9ec26f0771670bc9e3802b8d774d3}{fft\+Len}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structarm__mfcc__instance__q15_a8ac2a63296ee4e08bb019bf75f66f7d0}{nb\+Mel\+Filters}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{structarm__mfcc__instance__q15_acfacbcf8d50f063823b8097880bc9485}{nb\+Dct\+Outputs}}
+\item 
+\Hypertarget{structarm__mfcc__instance__q15_ac625335e6a9c7ad9d658b148bb0d650a}\label{structarm__mfcc__instance__q15_ac625335e6a9c7ad9d658b148bb0d650a} 
+\doxymbox{\hyperlink{structarm__rfft__instance__q15}{arm\+\_\+rfft\+\_\+instance\+\_\+q15}} {\bfseries rfft}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q15 MFCC function. 
+
+\label{doc-variable-members}
+\Hypertarget{structarm__mfcc__instance__q15_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structarm__mfcc__instance__q15_a2bca8826d8bccd175c29c47367bdef2b}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!dctCoefs@{dctCoefs}}
+\index{dctCoefs@{dctCoefs}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{dctCoefs}{dctCoefs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_a2bca8826d8bccd175c29c47367bdef2b} 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} dct\+Coefs}
+
+Internal DCT coefficients \Hypertarget{structarm__mfcc__instance__q15_a13e9ec26f0771670bc9e3802b8d774d3}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!fftLen@{fftLen}}
+\index{fftLen@{fftLen}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{fftLen}{fftLen}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_a13e9ec26f0771670bc9e3802b8d774d3} 
+uint32\+\_\+t fft\+Len}
+
+FFT length \Hypertarget{structarm__mfcc__instance__q15_a8be8e70eb1e8f3ecf297c39d6bedafc9}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!filterCoefs@{filterCoefs}}
+\index{filterCoefs@{filterCoefs}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{filterCoefs}{filterCoefs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_a8be8e70eb1e8f3ecf297c39d6bedafc9} 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} filter\+Coefs}
+
+Internal Mel filter coefficients \Hypertarget{structarm__mfcc__instance__q15_a92fa17569af954a83e7d76d88693ecc6}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!filterLengths@{filterLengths}}
+\index{filterLengths@{filterLengths}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{filterLengths}{filterLengths}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_a92fa17569af954a83e7d76d88693ecc6} 
+const uint32\+\_\+t\texorpdfstring{$\ast$}{*} filter\+Lengths}
+
+Internal Mel filter lengths \Hypertarget{structarm__mfcc__instance__q15_a4bf2fc236988cf1e39f7b3efbd0a1797}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!filterPos@{filterPos}}
+\index{filterPos@{filterPos}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{filterPos}{filterPos}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_a4bf2fc236988cf1e39f7b3efbd0a1797} 
+const uint32\+\_\+t\texorpdfstring{$\ast$}{*} filter\+Pos}
+
+Internal Mel filter positions in spectrum \Hypertarget{structarm__mfcc__instance__q15_acfacbcf8d50f063823b8097880bc9485}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!nbDctOutputs@{nbDctOutputs}}
+\index{nbDctOutputs@{nbDctOutputs}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{nbDctOutputs}{nbDctOutputs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_acfacbcf8d50f063823b8097880bc9485} 
+uint32\+\_\+t nb\+Dct\+Outputs}
+
+Number of DCT outputs \Hypertarget{structarm__mfcc__instance__q15_a8ac2a63296ee4e08bb019bf75f66f7d0}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!nbMelFilters@{nbMelFilters}}
+\index{nbMelFilters@{nbMelFilters}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{nbMelFilters}{nbMelFilters}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_a8ac2a63296ee4e08bb019bf75f66f7d0} 
+uint32\+\_\+t nb\+Mel\+Filters}
+
+Number of Mel filters \Hypertarget{structarm__mfcc__instance__q15_af4dfc8960dea69fe00bf6018eb70eb5a}\index{arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}!windowCoefs@{windowCoefs}}
+\index{windowCoefs@{windowCoefs}!arm\_mfcc\_instance\_q15@{arm\_mfcc\_instance\_q15}}
+\doxysubsubsection{\texorpdfstring{windowCoefs}{windowCoefs}}
+{\footnotesize\ttfamily \label{structarm__mfcc__instance__q15_af4dfc8960dea69fe00bf6018eb70eb5a} 
+const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}\texorpdfstring{$\ast$}{*} window\+Coefs}
+
+Windowing coefficients 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Middlewares/\+\+Third\+\_\+\+Party/\+\+ARM\+\_\+\+CMSIS/\+\+Include/\+dsp/\+transform\+\_\+functions.\+h\end{DoxyCompactItemize}

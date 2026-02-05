@@ -1,0 +1,65 @@
+\doxysection{Kullback-\/\+Leibler }
+\hypertarget{group___kullback-_leibler}{}\label{group___kullback-_leibler}\index{Kullback-\/Leibler@{Kullback-\/Leibler}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___kullback-_leibler_ga6b89b591ea8a6186e4a54606368919ad}{arm\+\_\+kullback\+\_\+leibler\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Kullback-\/\+Leibler. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \doxymbox{\hyperlink{group___kullback-_leibler_ga4233fa79644605c28d7ebb87301f1b7a}{arm\+\_\+kullback\+\_\+leibler\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Kullback-\/\+Leibler. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___kullback-_leibler_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group___kullback-_leibler_ga6b89b591ea8a6186e4a54606368919ad}\index{Kullback-\/Leibler@{Kullback-\/Leibler}!arm\_kullback\_leibler\_f32@{arm\_kullback\_leibler\_f32}}
+\index{arm\_kullback\_leibler\_f32@{arm\_kullback\_leibler\_f32}!Kullback-\/Leibler@{Kullback-\/Leibler}}
+\doxysubsubsection{\texorpdfstring{arm\_kullback\_leibler\_f32()}{arm\_kullback\_leibler\_f32()}}
+{\footnotesize\ttfamily \label{group___kullback-_leibler_ga6b89b591ea8a6186e4a54606368919ad} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+kullback\+\_\+leibler\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Kullback-\/\+Leibler. 
+
+Distribution A may contain 0 with Neon version. Result will be right but some exception flags will be set.
+
+Distribution B must not contain 0 probability.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+SrcA} & points to an array of input values for probaility distribution A. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+SrcB} & points to an array of input values for probaility distribution B. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the input array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kullback-\/\+Leibler divergence D(A \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} B) 
+\end{DoxyReturn}
+\Hypertarget{group___kullback-_leibler_ga4233fa79644605c28d7ebb87301f1b7a}\index{Kullback-\/Leibler@{Kullback-\/Leibler}!arm\_kullback\_leibler\_f64@{arm\_kullback\_leibler\_f64}}
+\index{arm\_kullback\_leibler\_f64@{arm\_kullback\_leibler\_f64}!Kullback-\/Leibler@{Kullback-\/Leibler}}
+\doxysubsubsection{\texorpdfstring{arm\_kullback\_leibler\_f64()}{arm\_kullback\_leibler\_f64()}}
+{\footnotesize\ttfamily \label{group___kullback-_leibler_ga4233fa79644605c28d7ebb87301f1b7a} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} arm\+\_\+kullback\+\_\+leibler\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Kullback-\/\+Leibler. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+SrcA} & points to an array of input values for probaility distribution A. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+SrcB} & points to an array of input values for probaility distribution B. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the input array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kullback-\/\+Leibler divergence D(A \texorpdfstring{$\vert$}{|}\texorpdfstring{$\vert$}{|} B) 
+\end{DoxyReturn}

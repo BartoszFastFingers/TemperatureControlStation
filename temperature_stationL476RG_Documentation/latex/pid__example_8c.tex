@@ -1,0 +1,80 @@
+\doxysection{Components/\+\+Src/\+pid\+\_\+example.c File Reference}
+\hypertarget{pid__example_8c}{}\label{pid__example_8c}\index{Components/Src/pid\_example.c@{Components/Src/pid\_example.c}}
+
+
+Przykład użycia PID z interpolacją i CMSIS-\/\+DSP.  
+
+
+{\ttfamily \+\#include "{}pid\+\_\+lookup.\+h"{}}\newline
+{\ttfamily \+\#include "{}arm\+\_\+math.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{pid__example_8c_af954b68bbb88675895f708171956bfab}{Temperature\+\_\+\+Control\+\_\+\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Inicjalizacja systemu. \end{DoxyCompactList}\item 
+float \doxymbox{\hyperlink{pid__example_8c_aaebf3c30971f2d15dbdcd025ef33d8f3}{Temperature\+\_\+\+Control\+\_\+\+Update}} (float current\+\_\+temp)
+\begin{DoxyCompactList}\small\item\em Główna pętla regulacji (wywoływana co Ts = 0.\+5s). \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{pid__example_8c_ae7db9a0aeca973149ece62b383bfbc3d}{Temperature\+\_\+\+Control\+\_\+\+Set\+Target}} (float target\+\_\+temp)
+\begin{DoxyCompactList}\small\item\em Zmiana setpointu. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{pid__example_8c_a1253cbfe4f4d878bceaa1aad9f46c318}{Temperature\+\_\+\+Control\+\_\+\+Set\+Fan\+PWM}} (uint16\+\_\+t pwm)
+\begin{DoxyCompactList}\small\item\em Ustawienie PWM wentylatora (ręczne lub z innego regulatora). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Przykład użycia PID z interpolacją i CMSIS-\/\+DSP. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{pid__example_8c_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{pid__example_8c_af954b68bbb88675895f708171956bfab}\index{pid\_example.c@{pid\_example.c}!Temperature\_Control\_Init@{Temperature\_Control\_Init}}
+\index{Temperature\_Control\_Init@{Temperature\_Control\_Init}!pid\_example.c@{pid\_example.c}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_Init()}{Temperature\_Control\_Init()}}
+{\footnotesize\ttfamily \label{pid__example_8c_af954b68bbb88675895f708171956bfab} 
+void Temperature\+\_\+\+Control\+\_\+\+Init (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Inicjalizacja systemu. 
+
+Inicjalizacja regulatora temperatury. \Hypertarget{pid__example_8c_a1253cbfe4f4d878bceaa1aad9f46c318}\index{pid\_example.c@{pid\_example.c}!Temperature\_Control\_SetFanPWM@{Temperature\_Control\_SetFanPWM}}
+\index{Temperature\_Control\_SetFanPWM@{Temperature\_Control\_SetFanPWM}!pid\_example.c@{pid\_example.c}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_SetFanPWM()}{Temperature\_Control\_SetFanPWM()}}
+{\footnotesize\ttfamily \label{pid__example_8c_a1253cbfe4f4d878bceaa1aad9f46c318} 
+void Temperature\+\_\+\+Control\+\_\+\+Set\+Fan\+PWM (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{pwm}{}\end{DoxyParamCaption})}
+
+
+
+Ustawienie PWM wentylatora (ręczne lub z innego regulatora). 
+
+Ręczne ustawienie PWM wentylatora (override). \Hypertarget{pid__example_8c_ae7db9a0aeca973149ece62b383bfbc3d}\index{pid\_example.c@{pid\_example.c}!Temperature\_Control\_SetTarget@{Temperature\_Control\_SetTarget}}
+\index{Temperature\_Control\_SetTarget@{Temperature\_Control\_SetTarget}!pid\_example.c@{pid\_example.c}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_SetTarget()}{Temperature\_Control\_SetTarget()}}
+{\footnotesize\ttfamily \label{pid__example_8c_ae7db9a0aeca973149ece62b383bfbc3d} 
+void Temperature\+\_\+\+Control\+\_\+\+Set\+Target (\begin{DoxyParamCaption}\item[{float}]{target\+\_\+temp}{}\end{DoxyParamCaption})}
+
+
+
+Zmiana setpointu. 
+
+Ustawienie temperatury zadanej. \Hypertarget{pid__example_8c_aaebf3c30971f2d15dbdcd025ef33d8f3}\index{pid\_example.c@{pid\_example.c}!Temperature\_Control\_Update@{Temperature\_Control\_Update}}
+\index{Temperature\_Control\_Update@{Temperature\_Control\_Update}!pid\_example.c@{pid\_example.c}}
+\doxysubsubsection{\texorpdfstring{Temperature\_Control\_Update()}{Temperature\_Control\_Update()}}
+{\footnotesize\ttfamily \label{pid__example_8c_aaebf3c30971f2d15dbdcd025ef33d8f3} 
+float Temperature\+\_\+\+Control\+\_\+\+Update (\begin{DoxyParamCaption}\item[{float}]{current\+\_\+temp}{}\end{DoxyParamCaption})}
+
+
+
+Główna pętla regulacji (wywoływana co Ts = 0.\+5s). 
+
+Aktualizacja regulatora (wywoływać co 500ms).
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+temp} & Aktualna temperatura \+[°C]\+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Wyjście regulatora \+[0-\/999 PWM]\+ 
+\end{DoxyReturn}

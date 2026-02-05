@@ -1,0 +1,60 @@
+\doxysection{arm\+\_\+pid\+\_\+init\+\_\+f32.\+c}
+\hypertarget{arm__pid__init__f32_8c_source}{}\label{arm__pid__init__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/ControllerFunctions/arm\_pid\_init\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/ControllerFunctions/arm\_pid\_init\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_pid\_init\_f32.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Floating-\/point\ PID\ Control\ initialization\ function}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/controller\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___p_i_d_ga2d4e4aac5dd17c861388b799dc8d8b8f}{arm\_pid\_init\_f32}}(}
+\DoxyCodeLine{00051\ \ \ \doxymbox{\hyperlink{structarm__pid__instance__f32}{arm\_pid\_instance\_f32}}\ *\ S,}
+\DoxyCodeLine{00052\ \ \ int32\_t\ resetStateFlag)}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \textcolor{comment}{/*\ Derived\ coefficient\ A0\ */}}
+\DoxyCodeLine{00055\ \ \ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_afc2ed2bf70b7d9d84f49ee9ae7caa004}{A0}}\ =\ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_abe23f3e122ef5f55398fcf77c793c425}{Kp}}\ +\ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_ad1a1aa1c10a2dca201a3422f82198777}{Ki}}\ +\ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_ace6b9e405a991cbaf6b4c137ca0d51a3}{Kd}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{comment}{/*\ Derived\ coefficient\ A1\ */}}
+\DoxyCodeLine{00058\ \ \ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_a5e6785a3a5cf7b98f3bfc7b180d98273}{A1}}\ =\ (-\/S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_abe23f3e122ef5f55398fcf77c793c425}{Kp}})\ -\/\ ((\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}})\ 2.0f\ *\ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_ace6b9e405a991cbaf6b4c137ca0d51a3}{Kd}});}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{comment}{/*\ Derived\ coefficient\ A2\ */}}
+\DoxyCodeLine{00061\ \ \ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_a5b00947275caf079f351271bf41573fe}{A2}}\ =\ S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_ace6b9e405a991cbaf6b4c137ca0d51a3}{Kd}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{comment}{/*\ Check\ whether\ state\ needs\ reset\ or\ not\ */}}
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordflow}{if}\ (resetStateFlag)}
+\DoxyCodeLine{00065\ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{comment}{/*\ Reset\ state\ to\ zero,\ The\ size\ will\ be\ always\ 3\ samples\ */}}
+\DoxyCodeLine{00067\ \ \ \ \ memset(S-\/>\doxymbox{\hyperlink{structarm__pid__instance__f32_a473556ac6100fc188e77930d56f51062}{state}},\ 0,\ 3U\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}));}
+\DoxyCodeLine{00068\ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \}}
+\DoxyCodeLine{00071\ }
+
+\end{DoxyCode}

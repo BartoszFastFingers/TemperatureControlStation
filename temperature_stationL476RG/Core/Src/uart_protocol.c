@@ -47,7 +47,6 @@ static const uint8_t crc8_table[256] = {
     0xE6, 0xE1, 0xE8, 0xEF, 0xFA, 0xFD, 0xF4, 0xF3
 };
 
-/* ============ FUNKCJE POMOCNICZE ============ */
 
 static uint8_t hex_char_to_val(char c) {
     if (c >= '0' && c <= '9') return c - '0';
@@ -62,7 +61,6 @@ static void val_to_hex(uint8_t val, char *out) {
     out[1] = hex[val & 0x0F];
 }
 
-/* ============ FUNKCJE PUBLICZNE ============ */
 
 void UartProtocol_Init(UartProtocol_t *proto, UART_HandleTypeDef *huart) {
     proto->huart = huart;
@@ -93,20 +91,16 @@ void UartProtocol_SendData(UartProtocol_t *proto,
     char msg[100];
     char crc_hex[3] = {0};
 
-    // Formatuj wiadomość bez CRC
     int len = snprintf(msg, sizeof(msg),
                        "$DATA,%.2f,%.1f,%u,%u,%lu",
                        temp, setpoint, heater_pwm, fan_pwm, timestamp);
 
-    // Oblicz CRC (od $ do końca danych)
     uint8_t crc = UartProtocol_CRC8((uint8_t*)msg, len);
     val_to_hex(crc, crc_hex);
 
-    // Dodaj CRC i zakończenie
     snprintf(proto->tx_buffer, UART_TX_BUFFER_SIZE,
              "%s*%s\r\n", msg, crc_hex);
 
-    // Wyślij
     HAL_UART_Transmit(proto->huart, proto->tx_buffer,
                       strlen((char*)proto->tx_buffer), 100);
 }
@@ -151,12 +145,10 @@ void UartProtocol_SendNak(UartProtocol_t *proto, const char *error) {
 
 void UartProtocol_ReceiveByte(UartProtocol_t *proto, uint8_t byte) {
     if (byte == '$') {
-        // Początek nowej wiadomości
         proto->rx_index = 0;
         proto->rx_buffer[proto->rx_index++] = byte;
     }
     else if (byte == '\n') {
-        // Koniec wiadomości
         proto->rx_buffer[proto->rx_index] = '\0';
         proto->rx_complete = true;
     }
@@ -166,14 +158,11 @@ void UartProtocol_ReceiveByte(UartProtocol_t *proto, uint8_t byte) {
 }
 
 bool UartProtocol_VerifyCRC(UartProtocol_t *proto) {
-    // Znajdź pozycję '*'
     char *star = strchr((char*)proto->rx_buffer, '*');
     if (star == NULL) return false;
 
-    // Pobierz CRC z wiadomości
     uint8_t received_crc = (hex_char_to_val(star[1]) << 4) | hex_char_to_val(star[2]);
 
-    // Oblicz CRC danych (od $ do *)
     uint16_t data_len = star - (char*)proto->rx_buffer;
     uint8_t calculated_crc = UartProtocol_CRC8(proto->rx_buffer, data_len);
 
@@ -188,13 +177,11 @@ UartCommand_t UartProtocol_Parse(UartProtocol_t *proto) {
     proto->rx_complete = false;
     proto->last_command = CMD_NONE;
 
-    // Weryfikuj CRC
     if (!UartProtocol_VerifyCRC(proto)) {
         UartProtocol_SendNak(proto, "CRC");
         return CMD_NONE;
     }
 
-    // Parsuj komendę
     char *cmd = (char*)proto->rx_buffer;
 
     if (strncmp(cmd, "$PING", 5) == 0) {

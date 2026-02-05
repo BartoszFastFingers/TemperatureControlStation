@@ -1,0 +1,124 @@
+\doxysubsection{Complex-\/by-\/\+Complex Multiplication }
+\hypertarget{group___cmplx_by_cmplx_mult}{}\label{group___cmplx_by_cmplx_mult}\index{Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_ga8d82cf92ce4f920c8660804098071d9e}{arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Floating-\/point complex-\/by-\/complex multiplication. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_ga63c13cf06221e463ec6451cb8250fddb}{arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Floating-\/point complex-\/by-\/complex multiplication. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_ga60f5c2d9b6192b39394d6974f0bedf9e}{arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Q15 complex-\/by-\/complex multiplication. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___cmplx_by_cmplx_mult_gae7192ac48ea1e8b6494c40bfe5d71597}{arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Q31 complex-\/by-\/complex multiplication. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Multiplies a complex vector by another complex vector and generates a complex result. The data in the complex arrays is stored in an interleaved fashion (real, imag, real, imag, ...). The parameter {\ttfamily num\+Samples} represents the number of complex samples processed. The complex arrays have a total of {\ttfamily 2\texorpdfstring{$\ast$}{*}num\+Samples} real values.
+
+The underlying algorithm is used:\+
+
+
+\begin{DoxyPre}
+for (n = 0; n < numSamples; n++) \{
+    pDst[(2*n)+0] = pSrcA[(2*n)+0] * pSrcB[(2*n)+0] -\/ pSrcA[(2*n)+1] * pSrcB[(2*n)+1];
+    pDst[(2*n)+1] = pSrcA[(2*n)+0] * pSrcB[(2*n)+1] + pSrcA[(2*n)+1] * pSrcB[(2*n)+0];
+\}
+\end{DoxyPre}
+
+
+There are separate functions for floating-\/point, Q15, and Q31 data types.
+
+\label{doc-func-members}
+\Hypertarget{group___cmplx_by_cmplx_mult_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___cmplx_by_cmplx_mult_ga8d82cf92ce4f920c8660804098071d9e}\index{Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}!arm\_cmplx\_mult\_cmplx\_f32@{arm\_cmplx\_mult\_cmplx\_f32}}
+\index{arm\_cmplx\_mult\_cmplx\_f32@{arm\_cmplx\_mult\_cmplx\_f32}!Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mult\_cmplx\_f32()}{arm\_cmplx\_mult\_cmplx\_f32()}}
+{\footnotesize\ttfamily \label{group___cmplx_by_cmplx_mult_ga8d82cf92ce4f920c8660804098071d9e} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point complex-\/by-\/complex multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to second input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___cmplx_by_cmplx_mult_ga63c13cf06221e463ec6451cb8250fddb}\index{Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}!arm\_cmplx\_mult\_cmplx\_f64@{arm\_cmplx\_mult\_cmplx\_f64}}
+\index{arm\_cmplx\_mult\_cmplx\_f64@{arm\_cmplx\_mult\_cmplx\_f64}!Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mult\_cmplx\_f64()}{arm\_cmplx\_mult\_cmplx\_f64()}}
+{\footnotesize\ttfamily \label{group___cmplx_by_cmplx_mult_ga63c13cf06221e463ec6451cb8250fddb} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point complex-\/by-\/complex multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to second input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___cmplx_by_cmplx_mult_ga60f5c2d9b6192b39394d6974f0bedf9e}\index{Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}!arm\_cmplx\_mult\_cmplx\_q15@{arm\_cmplx\_mult\_cmplx\_q15}}
+\index{arm\_cmplx\_mult\_cmplx\_q15@{arm\_cmplx\_mult\_cmplx\_q15}!Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mult\_cmplx\_q15()}{arm\_cmplx\_mult\_cmplx\_q15()}}
+{\footnotesize\ttfamily \label{group___cmplx_by_cmplx_mult_ga60f5c2d9b6192b39394d6974f0bedf9e} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Q15 complex-\/by-\/complex multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to second input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function implements 1.\+15 by 1.\+15 multiplications and finally output is converted into 3.\+13 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___cmplx_by_cmplx_mult_gae7192ac48ea1e8b6494c40bfe5d71597}\index{Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}!arm\_cmplx\_mult\_cmplx\_q31@{arm\_cmplx\_mult\_cmplx\_q31}}
+\index{arm\_cmplx\_mult\_cmplx\_q31@{arm\_cmplx\_mult\_cmplx\_q31}!Complex-\/by-\/Complex Multiplication@{Complex-\/by-\/Complex Multiplication}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mult\_cmplx\_q31()}{arm\_cmplx\_mult\_cmplx\_q31()}}
+{\footnotesize\ttfamily \label{group___cmplx_by_cmplx_mult_gae7192ac48ea1e8b6494c40bfe5d71597} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mult\+\_\+cmplx\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Q31 complex-\/by-\/complex multiplication. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to second input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function implements 1.\+31 by 1.\+31 multiplications and finally output is converted into 3.\+29 format. Input down scaling is not required. 
+\end{DoxyParagraph}

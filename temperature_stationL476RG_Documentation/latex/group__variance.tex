@@ -1,0 +1,113 @@
+\doxysubsection{Variance }
+\hypertarget{group__variance}{}\label{group__variance}\index{Variance@{Variance}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__variance_ga0722d0193480cb94fed2cab426ef6b80}{arm\+\_\+var\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Variance of the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__variance_ga786f820dd4987e04be1e9401e921a3af}{arm\+\_\+var\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Variance of the elements of a floating-\/point vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__variance_ga17fccb151613826b060938e12a96a5d7}{arm\+\_\+var\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Variance of the elements of a Q15 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__variance_ga6816931fadc0d2ce9bb89c1df4788769}{arm\+\_\+var\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Result)
+\begin{DoxyCompactList}\small\item\em Variance of the elements of a Q31 vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Calculates the variance of the elements in the input vector. The underlying algorithm used is the direct method sometimes referred to as the two-\/pass method:\+
+
+
+\begin{DoxyPre}
+    Result = sum(element -\/ meanOfElements)^2) / numElement -\/ 1
+
+    meanOfElements = ( pSrc[0] * pSrc[0] + pSrc[1] * pSrc[1] + ... + pSrc[blockSize-\/1] ) / blockSize
+\end{DoxyPre}
+
+
+There are separate functions for floating point, Q31, and Q15 data types.
+
+\label{doc-func-members}
+\Hypertarget{group__variance_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__variance_ga0722d0193480cb94fed2cab426ef6b80}\index{Variance@{Variance}!arm\_var\_f32@{arm\_var\_f32}}
+\index{arm\_var\_f32@{arm\_var\_f32}!Variance@{Variance}}
+\doxysubsubsubsection{\texorpdfstring{arm\_var\_f32()}{arm\_var\_f32()}}
+{\footnotesize\ttfamily \label{group__variance_ga0722d0193480cb94fed2cab426ef6b80} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+var\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Variance of the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & variance value returned here \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__variance_ga786f820dd4987e04be1e9401e921a3af}\index{Variance@{Variance}!arm\_var\_f64@{arm\_var\_f64}}
+\index{arm\_var\_f64@{arm\_var\_f64}!Variance@{Variance}}
+\doxysubsubsubsection{\texorpdfstring{arm\_var\_f64()}{arm\_var\_f64()}}
+{\footnotesize\ttfamily \label{group__variance_ga786f820dd4987e04be1e9401e921a3af} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+var\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Variance of the elements of a floating-\/point vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & variance value returned here \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__variance_ga17fccb151613826b060938e12a96a5d7}\index{Variance@{Variance}!arm\_var\_q15@{arm\_var\_q15}}
+\index{arm\_var\_q15@{arm\_var\_q15}!Variance@{Variance}}
+\doxysubsubsubsection{\texorpdfstring{arm\_var\_q15()}{arm\_var\_q15()}}
+{\footnotesize\ttfamily \label{group__variance_ga17fccb151613826b060938e12a96a5d7} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+var\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Variance of the elements of a Q15 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & variance value returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using a 64-\/bit internal accumulator. The input is represented in 1.\+15 format. Intermediate multiplication yields a 2.\+30 format, and this result is added without saturation to a 64-\/bit accumulator in 34.\+30 format. With 33 guard bits in the accumulator, there is no risk of overflow, and the full precision of the intermediate multiplication is preserved. Finally, the 34.\+30 result is truncated to 34.\+15 format by discarding the lower 15 bits, and then saturated to yield a result in 1.\+15 format. 
+\end{DoxyParagraph}
+\Hypertarget{group__variance_ga6816931fadc0d2ce9bb89c1df4788769}\index{Variance@{Variance}!arm\_var\_q31@{arm\_var\_q31}}
+\index{arm\_var\_q31@{arm\_var\_q31}!Variance@{Variance}}
+\doxysubsubsubsection{\texorpdfstring{arm\_var\_q31()}{arm\_var\_q31()}}
+{\footnotesize\ttfamily \label{group__variance_ga6816931fadc0d2ce9bb89c1df4788769} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+var\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Result}{}\end{DoxyParamCaption})}
+
+
+
+Variance of the elements of a Q31 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Result} & variance value returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function is implemented using an internal 64-\/bit accumulator. The input is represented in 1.\+31 format, which is then downshifted by 8 bits which yields 1.\+23, and intermediate multiplication yields a 2.\+46 format. The accumulator maintains full precision of the intermediate multiplication results, and as a consequence has only 16 guard bits. There is no saturation on intermediate additions. If the accumulator overflows it wraps around and distorts the result. In order to avoid overflows completely the input signal must be scaled down by log2(block\+Size)-\/8 bits, as a total of block\+Size additions are performed internally. After division, internal variables should be Q18.\+46 Finally, the 18.\+46 accumulator is right shifted by 15 bits to yield a 1.\+31 format value. 
+\end{DoxyParagraph}

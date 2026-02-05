@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>temperature_stationL476RG_Documentation: Plik źródłowy Components/Inc/PID_controller.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+  <td id="projectalign">
+   <div id="projectname">temperature_stationL476RG_Documentation<span id="projectnumber">&#160;v0.0.1</span>
+   </div>
+   <div id="projectbrief">System sterowania temperaturą</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano za pomocą Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('_p_i_d__controller_8h_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">PID_controller.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_p_i_d__controller_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef COMPONENTS_INC_PID_CONTROLLER_H_</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#define COMPONENTS_INC_PID_CONTROLLER_H_</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="pid__lookup_8h.html">pid_lookup.h</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">extern</span> arm_pid_instance_f32 pid_heat;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">extern</span> arm_pid_instance_f32 pid_cool;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">void</span> <a class="code hl_function" href="_p_i_d__controller_8h.html#af954b68bbb88675895f708171956bfab">Temperature_Control_Init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">float</span> <a class="code hl_function" href="_p_i_d__controller_8h.html#aaebf3c30971f2d15dbdcd025ef33d8f3">Temperature_Control_Update</a>(<span class="keywordtype">float</span> current_temp);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keywordtype">void</span> <a class="code hl_function" href="_p_i_d__controller_8h.html#ae7db9a0aeca973149ece62b383bfbc3d">Temperature_Control_SetTarget</a>(<span class="keywordtype">float</span> target_temp);</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keywordtype">void</span> <a class="code hl_function" href="_p_i_d__controller_8h.html#a1253cbfe4f4d878bceaa1aad9f46c318">Temperature_Control_SetFanPWM</a>(uint16_t pwm);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>uint16_t <a class="code hl_function" href="_p_i_d__controller_8h.html#a5e8472f2a9154007c945ecc2db846335">Temperature_Control_GetHeaterPWM</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>uint16_t <a class="code hl_function" href="_p_i_d__controller_8h.html#aaa96ca99ed06c6bb6a3e189ab77e220b">Temperature_Control_GetFanPWM</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keywordtype">float</span> <a class="code hl_function" href="_p_i_d__controller_8h.html#acad27418364639a2d8e318ec29a88b32">Temperature_Control_GetSetpoint</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="preprocessor">#endif </span><span class="comment">/* COMPONENTS_INC_PID_CONTROLLER_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_a1253cbfe4f4d878bceaa1aad9f46c318"><div class="ttname"><a href="_p_i_d__controller_8h.html#a1253cbfe4f4d878bceaa1aad9f46c318">Temperature_Control_SetFanPWM</a></div><div class="ttdeci">void Temperature_Control_SetFanPWM(uint16_t pwm)</div><div class="ttdoc">Ręczne ustawienie PWM wentylatora (override).</div><div class="ttdef"><b>Definicja</b> PID_controller.c:105</div></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_a5e8472f2a9154007c945ecc2db846335"><div class="ttname"><a href="_p_i_d__controller_8h.html#a5e8472f2a9154007c945ecc2db846335">Temperature_Control_GetHeaterPWM</a></div><div class="ttdeci">uint16_t Temperature_Control_GetHeaterPWM(void)</div><div class="ttdoc">Pobierz aktualne PWM grzałki.</div><div class="ttdef"><b>Definicja</b> PID_controller.c:110</div></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_aaa96ca99ed06c6bb6a3e189ab77e220b"><div class="ttname"><a href="_p_i_d__controller_8h.html#aaa96ca99ed06c6bb6a3e189ab77e220b">Temperature_Control_GetFanPWM</a></div><div class="ttdeci">uint16_t Temperature_Control_GetFanPWM(void)</div><div class="ttdoc">Pobierz aktualne PWM wentylatora.</div><div class="ttdef"><b>Definicja</b> PID_controller.c:115</div></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_aaebf3c30971f2d15dbdcd025ef33d8f3"><div class="ttname"><a href="_p_i_d__controller_8h.html#aaebf3c30971f2d15dbdcd025ef33d8f3">Temperature_Control_Update</a></div><div class="ttdeci">float Temperature_Control_Update(float current_temp)</div><div class="ttdoc">Aktualizacja regulatora (wywoływać co 500ms).</div><div class="ttdef"><b>Definicja</b> PID_controller.c:35</div></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_acad27418364639a2d8e318ec29a88b32"><div class="ttname"><a href="_p_i_d__controller_8h.html#acad27418364639a2d8e318ec29a88b32">Temperature_Control_GetSetpoint</a></div><div class="ttdeci">float Temperature_Control_GetSetpoint(void)</div><div class="ttdoc">Pobierz aktualny setpoint.</div><div class="ttdef"><b>Definicja</b> PID_controller.c:120</div></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_ae7db9a0aeca973149ece62b383bfbc3d"><div class="ttname"><a href="_p_i_d__controller_8h.html#ae7db9a0aeca973149ece62b383bfbc3d">Temperature_Control_SetTarget</a></div><div class="ttdeci">void Temperature_Control_SetTarget(float target_temp)</div><div class="ttdoc">Ustawienie temperatury zadanej.</div><div class="ttdef"><b>Definicja</b> PID_controller.c:91</div></div>
+<div class="ttc" id="a_p_i_d__controller_8h_html_af954b68bbb88675895f708171956bfab"><div class="ttname"><a href="_p_i_d__controller_8h.html#af954b68bbb88675895f708171956bfab">Temperature_Control_Init</a></div><div class="ttdeci">void Temperature_Control_Init(void)</div><div class="ttdoc">Inicjalizacja regulatora temperatury.</div><div class="ttdef"><b>Definicja</b> PID_controller.c:25</div></div>
+<div class="ttc" id="apid__lookup_8h_html"><div class="ttname"><a href="pid__lookup_8h.html">pid_lookup.h</a></div><div class="ttdoc">Interpolacja parametrów PID z CMSIS-DSP 1.16.2.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>Components</b></li><li class="navelem"><b>Inc</b></li><li class="navelem"><a href="_p_i_d__controller_8h.html">PID_controller.h</a></li>
+    <li class="footer">Wygenerowano za pomocą <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.1 </li>
+  </ul>
+</div>
+</body>
+</html>

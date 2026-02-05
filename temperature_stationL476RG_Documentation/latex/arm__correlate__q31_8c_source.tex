@@ -1,0 +1,853 @@
+\doxysection{arm\+\_\+correlate\+\_\+q31.\+c}
+\hypertarget{arm__correlate__q31_8c_source}{}\label{arm__correlate__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_correlate\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/FilteringFunctions/arm\_correlate\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_correlate\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ Correlation\ of\ Q31\ sequences}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ "{}dsp/filtering\_functions.h"{}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#if\ defined(ARM\_MATH\_MVEI)\ \&\&\ !defined(ARM\_MATH\_AUTOVECTORIZE)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#include\ "{}arm\_helium\_utils.h"{}}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#include\ "{}arm\_vec\_filtering.h"{}}}
+\DoxyCodeLine{00064\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___corr_ga7c4580719c0616aa0bfd74b1138e7f01}{arm\_correlate\_q31}}(}
+\DoxyCodeLine{00065\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ uint32\_t\ srcALen,}
+\DoxyCodeLine{00067\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ uint32\_t\ srcBLen,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pDst)}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *pIn1\ =\ pSrcA;\ \ \ \ \ \textcolor{comment}{/*\ inputA\ pointer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *pIn2\ =\ pSrcB\ +\ (srcBLen\ -\/\ 1U);\ \ \ \ \textcolor{comment}{/*\ inputB\ pointer\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ \ \ \ \ *\ Loop\ to\ perform\ MAC\ operations\ according\ to\ correlation\ equation}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *pX;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *pY;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *pA;}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ \ \ \ *pB;}
+\DoxyCodeLine{00080\ \ \ \ \ int32\_t\ \ \ i\ =\ 0U,\ j\ =\ 0;\ \ \ \ \textcolor{comment}{/*\ loop\ counters\ */}}
+\DoxyCodeLine{00081\ \ \ \ \ int32\_t\ \ \ inv\ =\ 4;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reverse\ order\ flag\ */}}
+\DoxyCodeLine{00082\ \ \ \ \ uint32\_t\ \ tot\ =\ 0U;\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Length\ */}}
+\DoxyCodeLine{00083\ \ \ \ \ int32\_t\ \ \ block1,\ block2,\ block3;}
+\DoxyCodeLine{00084\ \ \ \ \ int32\_t\ \ \ incr;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ tot\ =\ ((srcALen\ +\ srcBLen)\ -\/\ 2U);}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (srcALen\ >\ srcBLen)}
+\DoxyCodeLine{00088\ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Calculating\ the\ number\ of\ zeros\ to\ be\ padded\ to\ the\ output}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ j\ =\ srcALen\ -\/\ srcBLen;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Initialize\ the\ pointer\ after\ zero\ padding}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ pDst\ +=\ j;}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (srcALen\ <\ srcBLen)}
+\DoxyCodeLine{00099\ \ \ \ \ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Initialization\ to\ inputB\ pointer}}
+\DoxyCodeLine{00102\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ pIn1\ =\ pSrcB;}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00105\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Initialization\ to\ the\ end\ of\ inputA\ pointer}}
+\DoxyCodeLine{00106\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ pIn2\ =\ pSrcA\ +\ (srcALen\ -\/\ 1U);}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Initialization\ of\ the\ pointer\ after\ zero\ padding}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ pDst\ =\ pDst\ +\ tot;}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Swapping\ the\ lengths}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ j\ =\ srcALen;}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ srcALen\ =\ srcBLen;}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ srcBLen\ =\ j;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00119\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ Setting\ the\ reverse\ flag}}
+\DoxyCodeLine{00120\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ inv\ =\ -\/4;}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ block1\ =\ srcBLen\ -\/\ 1;}
+\DoxyCodeLine{00126\ \ \ \ \ block2\ =\ srcALen\ -\/\ srcBLen\ +\ 1;}
+\DoxyCodeLine{00127\ \ \ \ \ block3\ =\ srcBLen\ -\/\ 1;}
+\DoxyCodeLine{00128\ \ \ \ \ pA\ =\ pIn1;}
+\DoxyCodeLine{00129\ \ \ \ \ pB\ =\ pIn2;}
+\DoxyCodeLine{00130\ \ \ \ \ incr\ =\ inv\ /\ 4;}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <=\ block1\ -\/\ 2;\ i\ +=\ 2)}
+\DoxyCodeLine{00133\ \ \ \ \ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ uint32\_t\ \ count\ =\ i\ +\ 1;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc0\ =\ 0LL;}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc1\ =\ 0LL;}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ compute\ 2\ accumulators\ per\ loop\ */}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ size\ is\ incrementing\ for\ second\ accumulator\ */}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Y\ pointer\ is\ decrementing\ for\ second\ accumulator\ */}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_DUAL\_DEC\_Y\_INC\_SIZE\_Q31(acc0,\ acc1,\ pX,\ pY,\ count);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc0;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc1;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ pB\ -\/=\ 2;}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ block1;\ i++)}
+\DoxyCodeLine{00152\ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ uint32\_t\ \ count\ =\ i\ +\ 1;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc\ =\ 0LL;}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_SINGLE\_Q31(acc,\ pX,\ pY,\ count);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ pB-\/-\/;}
+\DoxyCodeLine{00163\ \ \ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <=\ block2\ -\/\ 4;\ i\ +=\ 4)}
+\DoxyCodeLine{00166\ \ \ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc0\ =\ 0LL;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc1\ =\ 0LL;}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc2\ =\ 0LL;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc3\ =\ 0LL;}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ compute\ 4\ accumulators\ per\ loop\ */}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ size\ is\ fixed\ for\ all\ accumulators\ */}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ X\ pointer\ is\ incrementing\ for\ successive\ accumulators\ */}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_QUAD\_INC\_X\_FIXED\_SIZE\_Q31(acc0,\ acc1,\ acc2,\ acc3,\ pX,\ pY,\ srcBLen);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc0;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc1;}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc2;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc3;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ pA\ +=\ 4;}
+\DoxyCodeLine{00188\ \ \ \ \ \}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <=\ block2\ -\/\ 2;\ i\ +=\ 2)}
+\DoxyCodeLine{00191\ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc0\ =\ 0LL;}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc1\ =\ 0LL;}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ compute\ 2\ accumulators\ per\ loop\ */}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ size\ is\ fixed\ for\ all\ accumulators\ */}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ X\ pointer\ is\ incrementing\ for\ second\ accumulator\ */}}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_DUAL\_INC\_X\_FIXED\_SIZE\_Q31(acc0,\ acc1,\ pX,\ pY,\ srcBLen);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc0;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc1;}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ pA\ +=\ 2;}
+\DoxyCodeLine{00207\ \ \ \ \ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordflow}{if}\ (block2\ \&\ 1)}
+\DoxyCodeLine{00210\ \ \ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc\ =\ 0LL;}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_SINGLE\_Q31(acc,\ pX,\ pY,\ srcBLen);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ pA++;}
+\DoxyCodeLine{00220\ \ \ \ \ \}}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ block3\ -\/\ 1;\ i\ >\ 0;\ i\ -\/=\ 2)}
+\DoxyCodeLine{00223\ \ \ \ \ \{}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ uint32\_t\ \ count\ =\ (i\ +\ 1);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc0\ =\ 0LL;}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc1\ =\ 0LL;}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ compute\ 2\ accumulators\ per\ loop\ */}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ size\ is\ decrementing\ for\ second\ accumulator\ */}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ X\ pointer\ is\ incrementing\ for\ second\ accumulator\ */}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_DUAL\_INC\_X\_DEC\_SIZE\_Q31(acc0,\ acc1,\ pX,\ pY,\ count);}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc0;}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc1;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ pA\ +=\ 2;}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ >=\ 0;\ i-\/-\/)}
+\DoxyCodeLine{00244\ \ \ \ \ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ uint32\_t\ \ count\ =\ (i\ +\ 1);}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ int64\_t\ \ \ acc\ =\ 0LL;}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ pX\ =\ pA;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ pY\ =\ pB;}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ MVE\_INTR\_CORR\_SINGLE\_Q31(acc,\ pX,\ pY,\ count);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ *pDst\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ acc;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ pDst\ +=\ incr;}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ pA++;}
+\DoxyCodeLine{00255\ \ \ \ \ \}}
+\DoxyCodeLine{00256\ \}}
+\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00258\ ARM\_DSP\_ATTRIBUTE\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{group___corr_ga7c4580719c0616aa0bfd74b1138e7f01}{arm\_correlate\_q31}}(}
+\DoxyCodeLine{00259\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcA,}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ uint32\_t\ srcALen,}
+\DoxyCodeLine{00261\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pSrcB,}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ uint32\_t\ srcBLen,}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *\ pDst)}
+\DoxyCodeLine{00264\ \{}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#if\ (1)}}
+\DoxyCodeLine{00267\ \textcolor{comment}{//\#if\ !defined(ARM\_MATH\_CM0\_FAMILY)}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pIn1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ InputA\ pointer\ */}}
+\DoxyCodeLine{00270\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pIn2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ InputB\ pointer\ */}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pOut\ =\ pDst;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Output\ pointer\ */}}
+\DoxyCodeLine{00272\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *px;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Intermediate\ inputA\ pointer\ */}}
+\DoxyCodeLine{00273\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *py;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Intermediate\ inputB\ pointer\ */}}
+\DoxyCodeLine{00274\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pSrc1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Intermediate\ pointers\ */}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ sum;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulators\ */}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ uint32\_t\ blockSize1,\ blockSize2,\ blockSize3;\ \ \ \textcolor{comment}{/*\ Loop\ counters\ */}}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ uint32\_t\ j,\ k,\ count,\ blkCnt;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ counters\ */}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ uint32\_t\ outBlockSize;}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ int32\_t\ inc\ =\ 1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Destination\ address\ modifier\ */}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ acc0,\ acc1,\ acc2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulators\ */}}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ x0,\ x1,\ x2,\ c0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Temporary\ variables\ for\ holding\ input\ and\ coefficient\ values\ */}}
+\DoxyCodeLine{00284\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \textcolor{comment}{/*\ The\ algorithm\ implementation\ is\ based\ on\ the\ lengths\ of\ the\ inputs.\ */}}
+\DoxyCodeLine{00287\ \ \ \textcolor{comment}{/*\ srcB\ is\ always\ made\ to\ slide\ across\ srcA.\ */}}
+\DoxyCodeLine{00288\ \ \ \textcolor{comment}{/*\ So\ srcBLen\ is\ always\ considered\ as\ shorter\ or\ equal\ to\ srcALen\ */}}
+\DoxyCodeLine{00289\ \ \ \textcolor{comment}{/*\ But\ CORR(x,\ y)\ is\ reverse\ of\ CORR(y,\ x)\ */}}
+\DoxyCodeLine{00290\ \ \ \textcolor{comment}{/*\ So,\ when\ srcBLen\ >\ srcALen,\ output\ pointer\ is\ made\ to\ point\ to\ the\ end\ of\ the\ output\ buffer\ */}}
+\DoxyCodeLine{00291\ \ \ \textcolor{comment}{/*\ and\ the\ destination\ pointer\ modifier,\ inc\ is\ set\ to\ -\/1\ */}}
+\DoxyCodeLine{00292\ \ \ \textcolor{comment}{/*\ If\ srcALen\ >\ srcBLen,\ zero\ pad\ has\ to\ be\ done\ to\ srcB\ to\ make\ the\ two\ inputs\ of\ same\ length\ */}}
+\DoxyCodeLine{00293\ \ \ \textcolor{comment}{/*\ But\ to\ improve\ the\ performance,}}
+\DoxyCodeLine{00294\ \textcolor{comment}{\ \ \ *\ we\ include\ zeroes\ in\ the\ output\ instead\ of\ zero\ padding\ either\ of\ the\ the\ inputs*/}}
+\DoxyCodeLine{00295\ \ \ \textcolor{comment}{/*\ If\ srcALen\ >\ srcBLen,}}
+\DoxyCodeLine{00296\ \textcolor{comment}{\ \ \ *\ (srcALen\ -\/\ srcBLen)\ zeroes\ has\ to\ included\ in\ the\ starting\ of\ the\ output\ buffer\ */}}
+\DoxyCodeLine{00297\ \ \ \textcolor{comment}{/*\ If\ srcALen\ <\ srcBLen,}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ \ \ *\ (srcALen\ -\/\ srcBLen)\ zeroes\ has\ to\ included\ in\ the\ ending\ of\ the\ output\ buffer\ */}}
+\DoxyCodeLine{00299\ \ \ \textcolor{keywordflow}{if}\ (srcALen\ >=\ srcBLen)}
+\DoxyCodeLine{00300\ \ \ \{}
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{comment}{/*\ Initialization\ of\ inputA\ pointer\ */}}
+\DoxyCodeLine{00302\ \ \ \ \ pIn1\ =\ pSrcA;}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{comment}{/*\ Initialization\ of\ inputB\ pointer\ */}}
+\DoxyCodeLine{00305\ \ \ \ \ pIn2\ =\ pSrcB;}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{comment}{/*\ Number\ of\ output\ samples\ is\ calculated\ */}}
+\DoxyCodeLine{00308\ \ \ \ \ outBlockSize\ =\ (2U\ *\ srcALen)\ -\/\ 1U;}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \ \ \ \ \textcolor{comment}{/*\ When\ srcALen\ >\ srcBLen,\ zero\ padding\ is\ done\ to\ srcB}}
+\DoxyCodeLine{00311\ \textcolor{comment}{\ \ \ \ \ *\ to\ make\ their\ lengths\ equal.}}
+\DoxyCodeLine{00312\ \textcolor{comment}{\ \ \ \ \ *\ Instead,\ (outBlockSize\ -\/\ (srcALen\ +\ srcBLen\ -\/\ 1))}}
+\DoxyCodeLine{00313\ \textcolor{comment}{\ \ \ \ \ *\ number\ of\ output\ samples\ are\ made\ zero\ */}}
+\DoxyCodeLine{00314\ \ \ \ \ j\ =\ outBlockSize\ -\/\ (srcALen\ +\ (srcBLen\ -\/\ 1U));}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{comment}{/*\ Updating\ the\ pointer\ position\ to\ non\ zero\ value\ */}}
+\DoxyCodeLine{00317\ \ \ \ \ pOut\ +=\ j;}
+\DoxyCodeLine{00318\ \ \ \}}
+\DoxyCodeLine{00319\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00320\ \ \ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{comment}{/*\ Initialization\ of\ inputA\ pointer\ */}}
+\DoxyCodeLine{00322\ \ \ \ \ pIn1\ =\ pSrcB;}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{comment}{/*\ Initialization\ of\ inputB\ pointer\ */}}
+\DoxyCodeLine{00325\ \ \ \ \ pIn2\ =\ pSrcA;}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{comment}{/*\ srcBLen\ is\ always\ considered\ as\ shorter\ or\ equal\ to\ srcALen\ */}}
+\DoxyCodeLine{00328\ \ \ \ \ j\ =\ srcBLen;}
+\DoxyCodeLine{00329\ \ \ \ \ srcBLen\ =\ srcALen;}
+\DoxyCodeLine{00330\ \ \ \ \ srcALen\ =\ j;}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{comment}{/*\ CORR(x,\ y)\ =\ Reverse\ order(CORR(y,\ x))\ */}}
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{comment}{/*\ Hence\ set\ the\ destination\ pointer\ to\ point\ to\ the\ last\ output\ sample\ */}}
+\DoxyCodeLine{00334\ \ \ \ \ pOut\ =\ pDst\ +\ ((srcALen\ +\ srcBLen)\ -\/\ 2U);}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{comment}{/*\ Destination\ address\ modifier\ is\ set\ to\ -\/1\ */}}
+\DoxyCodeLine{00337\ \ \ \ \ inc\ =\ -\/1;}
+\DoxyCodeLine{00338\ \ \ \}}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \ \ \textcolor{comment}{/*\ The\ function\ is\ internally}}
+\DoxyCodeLine{00341\ \textcolor{comment}{\ \ \ *\ divided\ into\ three\ stages\ according\ to\ the\ number\ of\ multiplications\ that\ has\ to\ be}}
+\DoxyCodeLine{00342\ \textcolor{comment}{\ \ \ *\ taken\ place\ between\ inputA\ samples\ and\ inputB\ samples.\ In\ the\ first\ stage\ of\ the}}
+\DoxyCodeLine{00343\ \textcolor{comment}{\ \ \ *\ algorithm,\ the\ multiplications\ increase\ by\ one\ for\ every\ iteration.}}
+\DoxyCodeLine{00344\ \textcolor{comment}{\ \ \ *\ In\ the\ second\ stage\ of\ the\ algorithm,\ srcBLen\ number\ of\ multiplications\ are\ done.}}
+\DoxyCodeLine{00345\ \textcolor{comment}{\ \ \ *\ In\ the\ third\ stage\ of\ the\ algorithm,\ the\ multiplications\ decrease\ by\ one}}
+\DoxyCodeLine{00346\ \textcolor{comment}{\ \ \ *\ for\ every\ iteration.\ */}}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \textcolor{comment}{/*\ The\ algorithm\ is\ implemented\ in\ three\ stages.}}
+\DoxyCodeLine{00349\ \textcolor{comment}{\ \ \ \ \ The\ loop\ counters\ of\ each\ stage\ is\ initiated\ here.\ */}}
+\DoxyCodeLine{00350\ \ \ blockSize1\ =\ srcBLen\ -\/\ 1U;}
+\DoxyCodeLine{00351\ \ \ blockSize2\ =\ srcALen\ -\/\ (srcBLen\ -\/\ 1U);}
+\DoxyCodeLine{00352\ \ \ blockSize3\ =\ blockSize1;}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ *\ Initializations\ of\ stage1}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ \ \ \textcolor{comment}{/*\ sum\ =\ x[0]\ *\ y[srcBlen\ -\/\ 1]}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ *\ sum\ =\ x[0]\ *\ y[srcBlen\ -\/\ 2]\ +\ x[1]\ *\ y[srcBlen\ -\/\ 1]}}
+\DoxyCodeLine{00360\ \textcolor{comment}{\ \ \ *\ ....}}
+\DoxyCodeLine{00361\ \textcolor{comment}{\ \ \ *\ sum\ =\ x[0]\ *\ y[0]\ +\ x[1]\ *\ y[1]\ +...+\ x[srcBLen\ -\/\ 1]\ *\ y[srcBLen\ -\/\ 1]}}
+\DoxyCodeLine{00362\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \textcolor{comment}{/*\ In\ this\ stage\ the\ MAC\ operations\ are\ increased\ by\ 1\ for\ every\ iteration.}}
+\DoxyCodeLine{00365\ \textcolor{comment}{\ \ \ \ \ The\ count\ variable\ holds\ the\ number\ of\ MAC\ operations\ performed\ */}}
+\DoxyCodeLine{00366\ \ \ count\ =\ 1U;}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \textcolor{comment}{/*\ Working\ pointer\ of\ inputA\ */}}
+\DoxyCodeLine{00369\ \ \ px\ =\ pIn1;}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \textcolor{comment}{/*\ Working\ pointer\ of\ inputB\ */}}
+\DoxyCodeLine{00372\ \ \ pSrc1\ =\ pIn2\ +\ (srcBLen\ -\/\ 1U);}
+\DoxyCodeLine{00373\ \ \ py\ =\ pSrc1;}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ *\ Stage1\ process}}
+\DoxyCodeLine{00378\ \textcolor{comment}{\ \ \ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \ \ \textcolor{comment}{/*\ The\ first\ stage\ starts\ here\ */}}
+\DoxyCodeLine{00381\ \ \ \textcolor{keywordflow}{while}\ (blockSize1\ >\ 0U)}
+\DoxyCodeLine{00382\ \ \ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ is\ made\ zero\ for\ every\ iteration\ */}}
+\DoxyCodeLine{00384\ \ \ \ \ sum\ =\ 0;}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00389\ \ \ \ \ k\ =\ count\ >>\ 2U;}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00392\ \ \ \ \ \{}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \textcolor{comment}{/*\ x[0]\ *\ y[srcBLen\ -\/\ 4]\ */}}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ (*py++);}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \textcolor{comment}{/*\ x[1]\ *\ y[srcBLen\ -\/\ 3]\ */}}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ (*py++);}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \textcolor{comment}{/*\ x[2]\ *\ y[srcBLen\ -\/\ 2]\ */}}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ (*py++);}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \textcolor{comment}{/*\ x[3]\ *\ y[srcBLen\ -\/\ 1]\ */}}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ (*py++);}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00407\ \ \ \ \ \}}
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00409\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00410\ \ \ \ \ k\ =\ count\ \%\ 0x4U;}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ k\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00415\ \ \ \ \ k\ =\ count;}
+\DoxyCodeLine{00416\ }
+\DoxyCodeLine{00417\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00420\ \ \ \ \ \{}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \textcolor{comment}{/*\ x[0]\ *\ y[srcBLen\ -\/\ 1]\ */}}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ (*py++);}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00427\ \ \ \ \ \}}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ result\ in\ the\ accumulator\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00430\ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (sum\ >>\ 31);}
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ is\ updated\ according\ to\ the\ address\ modifier,\ inc\ */}}
+\DoxyCodeLine{00432\ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ inputA\ and\ inputB\ pointers\ for\ next\ MAC\ calculation\ */}}
+\DoxyCodeLine{00435\ \ \ \ \ py\ =\ pSrc1\ -\/\ count;}
+\DoxyCodeLine{00436\ \ \ \ \ px\ =\ pIn1;}
+\DoxyCodeLine{00437\ }
+\DoxyCodeLine{00438\ \ \ \ \ \textcolor{comment}{/*\ Increment\ MAC\ count\ */}}
+\DoxyCodeLine{00439\ \ \ \ \ count++;}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00442\ \ \ \ \ blockSize1-\/-\/;}
+\DoxyCodeLine{00443\ \ \ \}}
+\DoxyCodeLine{00444\ }
+\DoxyCodeLine{00445\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00446\ \textcolor{comment}{\ \ \ *\ Initializations\ of\ stage2}}
+\DoxyCodeLine{00447\ \textcolor{comment}{\ \ \ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00449\ \ \ \textcolor{comment}{/*\ sum\ =\ x[0]\ *\ y[0]\ +\ x[1]\ *\ y[1]\ +...+\ x[srcBLen-\/1]\ *\ y[srcBLen-\/1]}}
+\DoxyCodeLine{00450\ \textcolor{comment}{\ \ \ *\ sum\ =\ x[1]\ *\ y[0]\ +\ x[2]\ *\ y[1]\ +...+\ x[srcBLen]\ *\ y[srcBLen-\/1]}}
+\DoxyCodeLine{00451\ \textcolor{comment}{\ \ \ *\ ....}}
+\DoxyCodeLine{00452\ \textcolor{comment}{\ \ \ *\ sum\ =\ x[srcALen-\/srcBLen-\/2]\ *\ y[0]\ +\ x[srcALen-\/srcBLen-\/1]\ *\ y[1]\ +...+\ x[srcALen-\/1]\ *\ y[srcBLen-\/1]}}
+\DoxyCodeLine{00453\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00454\ }
+\DoxyCodeLine{00455\ \ \ \textcolor{comment}{/*\ Working\ pointer\ of\ inputA\ */}}
+\DoxyCodeLine{00456\ \ \ px\ =\ pIn1;}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00458\ \ \ \textcolor{comment}{/*\ Working\ pointer\ of\ inputB\ */}}
+\DoxyCodeLine{00459\ \ \ py\ =\ pIn2;}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \ \ \textcolor{comment}{/*\ count\ is\ index\ by\ which\ the\ pointer\ pIn1\ to\ be\ incremented\ */}}
+\DoxyCodeLine{00462\ \ \ count\ =\ 0U;}
+\DoxyCodeLine{00463\ }
+\DoxyCodeLine{00464\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00465\ \textcolor{comment}{\ \ \ *\ Stage2\ process}}
+\DoxyCodeLine{00466\ \textcolor{comment}{\ \ \ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00467\ }
+\DoxyCodeLine{00468\ \ \ \textcolor{comment}{/*\ Stage2\ depends\ on\ srcBLen\ as\ in\ this\ stage\ srcBLen\ number\ of\ MACS\ are\ performed.}}
+\DoxyCodeLine{00469\ \textcolor{comment}{\ \ \ *\ So,\ to\ loop\ unroll\ over\ blockSize2,}}
+\DoxyCodeLine{00470\ \textcolor{comment}{\ \ \ *\ srcBLen\ should\ be\ greater\ than\ or\ equal\ to\ 4\ */}}
+\DoxyCodeLine{00471\ \ \ \textcolor{keywordflow}{if}\ (srcBLen\ >=\ 4U)}
+\DoxyCodeLine{00472\ \ \ \{}
+\DoxyCodeLine{00473\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unroll\ by\ 3\ */}}
+\DoxyCodeLine{00476\ \ \ \ \ blkCnt\ =\ blockSize2\ /\ 3;}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00479\ \ \ \ \ \{}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \textcolor{comment}{/*\ Set\ all\ accumulators\ to\ zero\ */}}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ acc0\ =\ 0;}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ acc1\ =\ 0;}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ acc2\ =\ 0;}
+\DoxyCodeLine{00484\ }
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \textcolor{comment}{/*\ read\ x[0],\ x[1]\ samples\ */}}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ x0\ =\ *px++;}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ x1\ =\ *px++;}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \textcolor{comment}{/*\ Apply\ loop\ unrolling\ and\ compute\ 3\ MACs\ simultaneously.\ */}}
+\DoxyCodeLine{00490\ \ \ \ \ \ \ k\ =\ srcBLen\ /\ 3;}
+\DoxyCodeLine{00491\ }
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \textcolor{comment}{/*\ First\ part\ of\ the\ processing\ with\ loop\ unrolling.\ \ Compute\ 3\ MACs\ at\ a\ time.}}
+\DoxyCodeLine{00493\ \textcolor{comment}{\ \ \ \ \ \ \ **\ a\ second\ loop\ below\ computes\ MACs\ for\ the\ remaining\ 1\ to\ 2\ samples.\ */}}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ y[0]\ sample\ */}}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ c0\ =\ *(py);}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ x[2]\ sample\ */}}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ x2\ =\ *(px);}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc0\ +=\ \ x[0]\ *\ y[0]\ */}}
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ acc0\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x0\ *\ c0);}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc1\ +=\ \ x[1]\ *\ y[0]\ */}}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ acc1\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x1\ *\ c0);}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc2\ +=\ \ x[2]\ *\ y[0]\ */}}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ acc2\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x2\ *\ c0);}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ y[1]\ sample\ */}}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ \ \ c0\ =\ *(py\ +\ 1U);}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ x[3]\ sample\ */}}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \ \ x0\ =\ *(px\ +\ 1U);}
+\DoxyCodeLine{00513\ }
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc0\ +=\ \ x[1]\ *\ y[1]\ */}}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ acc0\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x1\ *\ c0);}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc1\ +=\ \ x[2]\ *\ y[1]\ */}}
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ acc1\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x2\ *\ c0);}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc2\ +=\ \ x[3]\ *\ y[1]\ */}}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ acc2\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x0\ *\ c0);}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ y[2]\ sample\ */}}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ c0\ =\ *(py\ +\ 2U);}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ x[4]\ sample\ */}}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ x1\ =\ *(px\ +\ 2U);}
+\DoxyCodeLine{00526\ }
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc0\ +=\ \ x[2]\ *\ y[2]\ */}}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ acc0\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x2\ *\ c0);}
+\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc1\ +=\ \ x[3]\ *\ y[2]\ */}}
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ acc1\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x0\ *\ c0);}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc2\ +=\ \ x[4]\ *\ y[2]\ */}}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ acc2\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x1\ *\ c0);}
+\DoxyCodeLine{00534\ }
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ update\ scratch\ pointers\ */}}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ px\ +=\ 3U;}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ py\ +=\ 3U;}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{while}\ (-\/-\/k);}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \textcolor{comment}{/*\ If\ the\ srcBLen\ is\ not\ a\ multiple\ of\ 3,\ compute\ any\ remaining\ MACs\ here.}}
+\DoxyCodeLine{00542\ \textcolor{comment}{\ \ \ \ \ \ \ **\ No\ loop\ unrolling\ is\ used.\ */}}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ k\ =\ srcBLen\ -\/\ (3\ *\ (srcBLen\ /\ 3));}
+\DoxyCodeLine{00544\ }
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ y[4]\ sample\ */}}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ c0\ =\ *(py++);}
+\DoxyCodeLine{00549\ }
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Read\ x[7]\ sample\ */}}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ x2\ =\ *(px++);}
+\DoxyCodeLine{00552\ }
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulates\ */}}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc0\ +=\ \ x[4]\ *\ y[4]\ */}}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ acc0\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x0\ *\ c0);}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc1\ +=\ \ x[5]\ *\ y[4]\ */}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ acc1\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x1\ *\ c0);}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ acc2\ +=\ \ x[6]\ *\ y[4]\ */}}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ acc2\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ x2\ *\ c0);}
+\DoxyCodeLine{00560\ }
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reuse\ the\ present\ samples\ for\ the\ next\ MAC\ */}}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ x0\ =\ x1;}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ x1\ =\ x2;}
+\DoxyCodeLine{00564\ }
+\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00568\ }
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ result\ in\ the\ accumulator\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (acc0\ >>\ 31);}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ is\ updated\ according\ to\ the\ address\ modifier,\ inc\ */}}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00574\ \ \ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (acc1\ >>\ 31);}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00576\ }
+\DoxyCodeLine{00577\ \ \ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (acc2\ >>\ 31);}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00579\ }
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \textcolor{comment}{/*\ Increment\ the\ pointer\ pIn1\ index,\ count\ by\ 3\ */}}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ count\ +=\ 3U;}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ inputA\ and\ inputB\ pointers\ for\ next\ MAC\ calculation\ */}}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ px\ =\ pIn1\ +\ count;}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ py\ =\ pIn2;}
+\DoxyCodeLine{00586\ }
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00589\ \ \ \ \ \}}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00591\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00592\ \ \ \ \ blkCnt\ =\ blockSize2\ -\/\ 3\ *\ (blockSize2\ /\ 3);}
+\DoxyCodeLine{00593\ }
+\DoxyCodeLine{00594\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00595\ }
+\DoxyCodeLine{00596\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00597\ \ \ \ \ blkCnt\ =\ blockSize2;}
+\DoxyCodeLine{00598\ }
+\DoxyCodeLine{00599\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00602\ \ \ \ \ \{}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ is\ made\ zero\ for\ every\ iteration\ */}}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ sum\ =\ 0;}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00606\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ k\ =\ srcBLen\ >>\ 2U;}
+\DoxyCodeLine{00610\ }
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulates\ */}}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00622\ }
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ k\ =\ srcBLen\ \%\ 0x4U;}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ k\ =\ srcBLen;}
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00631\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00632\ }
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00637\ }
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ the\ loop\ counter\ */}}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00641\ }
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ result\ in\ the\ accumulator\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (sum\ >>\ 31);}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ is\ updated\ according\ to\ the\ address\ modifier,\ inc\ */}}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00646\ }
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \textcolor{comment}{/*\ Increment\ MAC\ count\ */}}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00649\ }
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ inputA\ and\ inputB\ pointers\ for\ next\ MAC\ calculation\ */}}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ px\ =\ pIn1\ +\ count;}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ py\ =\ pIn2;}
+\DoxyCodeLine{00653\ }
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00656\ \ \ \ \ \}}
+\DoxyCodeLine{00657\ \ \ \}}
+\DoxyCodeLine{00658\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00659\ \ \ \{}
+\DoxyCodeLine{00660\ \ \ \ \ \textcolor{comment}{/*\ If\ the\ srcBLen\ is\ not\ a\ multiple\ of\ 4,}}
+\DoxyCodeLine{00661\ \textcolor{comment}{\ \ \ \ \ *\ the\ blockSize2\ loop\ cannot\ be\ unrolled\ by\ 4\ */}}
+\DoxyCodeLine{00662\ \ \ \ \ blkCnt\ =\ blockSize2;}
+\DoxyCodeLine{00663\ }
+\DoxyCodeLine{00664\ \ \ \ \ \textcolor{keywordflow}{while}\ (blkCnt\ >\ 0U)}
+\DoxyCodeLine{00665\ \ \ \ \ \{}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ is\ made\ zero\ for\ every\ iteration\ */}}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ sum\ =\ 0;}
+\DoxyCodeLine{00668\ }
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \textcolor{comment}{/*\ srcBLen\ number\ of\ MACS\ should\ be\ performed\ */}}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ k\ =\ srcBLen;}
+\DoxyCodeLine{00671\ }
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00675\ \ \ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00676\ }
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ the\ loop\ counter\ */}}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00680\ }
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ result\ in\ the\ accumulator\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00682\ \ \ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (sum\ >>\ 31);}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ is\ updated\ according\ to\ the\ address\ modifier,\ inc\ */}}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00685\ }
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \textcolor{comment}{/*\ Increment\ MAC\ count\ */}}
+\DoxyCodeLine{00687\ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00688\ }
+\DoxyCodeLine{00689\ \ \ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ inputA\ and\ inputB\ pointers\ for\ next\ MAC\ calculation\ */}}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ px\ =\ pIn1\ +\ count;}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ py\ =\ pIn2;}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ blkCnt-\/-\/;}
+\DoxyCodeLine{00695\ \ \ \ \ \}}
+\DoxyCodeLine{00696\ \ \ \}}
+\DoxyCodeLine{00697\ }
+\DoxyCodeLine{00698\ }
+\DoxyCodeLine{00699\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00700\ \textcolor{comment}{\ \ \ *\ Initializations\ of\ stage3}}
+\DoxyCodeLine{00701\ \textcolor{comment}{\ \ \ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00702\ }
+\DoxyCodeLine{00703\ \ \ \textcolor{comment}{/*\ sum\ +=\ x[srcALen-\/srcBLen+1]\ *\ y[0]\ +\ x[srcALen-\/srcBLen+2]\ *\ y[1]\ +...+\ x[srcALen-\/1]\ *\ y[srcBLen-\/1]}}
+\DoxyCodeLine{00704\ \textcolor{comment}{\ \ \ *\ sum\ +=\ x[srcALen-\/srcBLen+2]\ *\ y[0]\ +\ x[srcALen-\/srcBLen+3]\ *\ y[1]\ +...+\ x[srcALen-\/1]\ *\ y[srcBLen-\/1]}}
+\DoxyCodeLine{00705\ \textcolor{comment}{\ \ \ *\ ....}}
+\DoxyCodeLine{00706\ \textcolor{comment}{\ \ \ *\ sum\ +=\ \ x[srcALen-\/2]\ *\ y[0]\ +\ x[srcALen-\/1]\ *\ y[1]}}
+\DoxyCodeLine{00707\ \textcolor{comment}{\ \ \ *\ sum\ +=\ \ x[srcALen-\/1]\ *\ y[0]}}
+\DoxyCodeLine{00708\ \textcolor{comment}{\ \ \ */}}
+\DoxyCodeLine{00709\ }
+\DoxyCodeLine{00710\ \ \ \textcolor{comment}{/*\ In\ this\ stage\ the\ MAC\ operations\ are\ decreased\ by\ 1\ for\ every\ iteration.}}
+\DoxyCodeLine{00711\ \textcolor{comment}{\ \ \ \ \ The\ count\ variable\ holds\ the\ number\ of\ MAC\ operations\ performed\ */}}
+\DoxyCodeLine{00712\ \ \ count\ =\ srcBLen\ -\/\ 1U;}
+\DoxyCodeLine{00713\ }
+\DoxyCodeLine{00714\ \ \ \textcolor{comment}{/*\ Working\ pointer\ of\ inputA\ */}}
+\DoxyCodeLine{00715\ \ \ pSrc1\ =\ pIn1\ +\ (srcALen\ -\/\ (srcBLen\ -\/\ 1U));}
+\DoxyCodeLine{00716\ \ \ px\ =\ pSrc1;}
+\DoxyCodeLine{00717\ }
+\DoxyCodeLine{00718\ \ \ \textcolor{comment}{/*\ Working\ pointer\ of\ inputB\ */}}
+\DoxyCodeLine{00719\ \ \ py\ =\ pIn2;}
+\DoxyCodeLine{00720\ }
+\DoxyCodeLine{00721\ \ \ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00722\ \textcolor{comment}{\ \ \ *\ Stage3\ process}}
+\DoxyCodeLine{00723\ \textcolor{comment}{\ \ \ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/*/}}
+\DoxyCodeLine{00724\ }
+\DoxyCodeLine{00725\ \ \ \textcolor{keywordflow}{while}\ (blockSize3\ >\ 0U)}
+\DoxyCodeLine{00726\ \ \ \{}
+\DoxyCodeLine{00727\ \ \ \ \ \textcolor{comment}{/*\ Accumulator\ is\ made\ zero\ for\ every\ iteration\ */}}
+\DoxyCodeLine{00728\ \ \ \ \ sum\ =\ 0;}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00730\ \textcolor{preprocessor}{\#if\ defined\ (ARM\_MATH\_LOOPUNROLL)}}
+\DoxyCodeLine{00731\ }
+\DoxyCodeLine{00732\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ 4\ outputs\ at\ a\ time\ */}}
+\DoxyCodeLine{00733\ \ \ \ \ k\ =\ count\ >>\ 2U;}
+\DoxyCodeLine{00734\ }
+\DoxyCodeLine{00735\ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00736\ \ \ \ \ \{}
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \textcolor{comment}{/*\ sum\ +=\ x[srcALen\ -\/\ srcBLen\ +\ 4]\ *\ y[3]\ */}}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00740\ }
+\DoxyCodeLine{00741\ \ \ \ \ \ \ \textcolor{comment}{/*\ sum\ +=\ x[srcALen\ -\/\ srcBLen\ +\ 3]\ *\ y[2]\ */}}
+\DoxyCodeLine{00742\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00743\ }
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \textcolor{comment}{/*\ sum\ +=\ x[srcALen\ -\/\ srcBLen\ +\ 2]\ *\ y[1]\ */}}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00746\ }
+\DoxyCodeLine{00747\ \ \ \ \ \ \ \textcolor{comment}{/*\ sum\ +=\ x[srcALen\ -\/\ srcBLen\ +\ 1]\ *\ y[0]\ */}}
+\DoxyCodeLine{00748\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00749\ }
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00752\ \ \ \ \ \}}
+\DoxyCodeLine{00753\ }
+\DoxyCodeLine{00754\ \ \ \ \ \textcolor{comment}{/*\ Loop\ unrolling:\ Compute\ remaining\ outputs\ */}}
+\DoxyCodeLine{00755\ \ \ \ \ k\ =\ count\ \%\ 0x4U;}
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00757\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00758\ }
+\DoxyCodeLine{00759\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ blkCnt\ with\ number\ of\ samples\ */}}
+\DoxyCodeLine{00760\ \ \ \ \ k\ =\ count;}
+\DoxyCodeLine{00761\ }
+\DoxyCodeLine{00762\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ defined\ (ARM\_MATH\_LOOPUNROLL)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00763\ }
+\DoxyCodeLine{00764\ \ \ \ \ \textcolor{keywordflow}{while}\ (k\ >\ 0U)}
+\DoxyCodeLine{00765\ \ \ \ \ \{}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \textcolor{comment}{/*\ Perform\ the\ multiply-\/accumulate\ */}}
+\DoxyCodeLine{00767\ \ \ \ \ \ \ sum\ +=\ (\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ *px++\ *\ *py++;}
+\DoxyCodeLine{00768\ }
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00770\ \ \ \ \ \ \ k-\/-\/;}
+\DoxyCodeLine{00771\ \ \ \ \ \}}
+\DoxyCodeLine{00772\ }
+\DoxyCodeLine{00773\ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ result\ in\ the\ accumulator\ in\ the\ destination\ buffer.\ */}}
+\DoxyCodeLine{00774\ \ \ \ \ *pOut\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (sum\ >>\ 31);}
+\DoxyCodeLine{00775\ \ \ \ \ \textcolor{comment}{/*\ Destination\ pointer\ is\ updated\ according\ to\ the\ address\ modifier,\ inc\ */}}
+\DoxyCodeLine{00776\ \ \ \ \ pOut\ +=\ inc;}
+\DoxyCodeLine{00777\ }
+\DoxyCodeLine{00778\ \ \ \ \ \textcolor{comment}{/*\ Update\ the\ inputA\ and\ inputB\ pointers\ for\ next\ MAC\ calculation\ */}}
+\DoxyCodeLine{00779\ \ \ \ \ px\ =\ ++pSrc1;}
+\DoxyCodeLine{00780\ \ \ \ \ py\ =\ pIn2;}
+\DoxyCodeLine{00781\ }
+\DoxyCodeLine{00782\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ MAC\ count\ */}}
+\DoxyCodeLine{00783\ \ \ \ \ count-\/-\/;}
+\DoxyCodeLine{00784\ }
+\DoxyCodeLine{00785\ \ \ \ \ \textcolor{comment}{/*\ Decrement\ loop\ counter\ */}}
+\DoxyCodeLine{00786\ \ \ \ \ blockSize3-\/-\/;}
+\DoxyCodeLine{00787\ \ \ \}}
+\DoxyCodeLine{00788\ }
+\DoxyCodeLine{00789\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00790\ \textcolor{comment}{/*\ alternate\ version\ for\ CM0\_FAMILY\ */}}
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00792\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pIn1\ =\ pSrcA;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ InputA\ pointer\ */}}
+\DoxyCodeLine{00793\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pIn2\ =\ pSrcB\ +\ (srcBLen\ -\/\ 1U);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ InputB\ pointer\ */}}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ sum;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Accumulators\ */}}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ uint32\_t\ i\ =\ 0U,\ j;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Loop\ counters\ */}}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ uint32\_t\ inv\ =\ 0U;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Reverse\ order\ flag\ */}}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ uint32\_t\ tot\ =\ 0U;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Length\ */}}
+\DoxyCodeLine{00798\ }
+\DoxyCodeLine{00799\ \ \ \textcolor{comment}{/*\ The\ algorithm\ implementation\ is\ based\ on\ the\ lengths\ of\ the\ inputs.\ */}}
+\DoxyCodeLine{00800\ \ \ \textcolor{comment}{/*\ srcB\ is\ always\ made\ to\ slide\ across\ srcA.\ */}}
+\DoxyCodeLine{00801\ \ \ \textcolor{comment}{/*\ So\ srcBLen\ is\ always\ considered\ as\ shorter\ or\ equal\ to\ srcALen\ */}}
+\DoxyCodeLine{00802\ \ \ \textcolor{comment}{/*\ But\ CORR(x,\ y)\ is\ reverse\ of\ CORR(y,\ x)\ */}}
+\DoxyCodeLine{00803\ \ \ \textcolor{comment}{/*\ So,\ when\ srcBLen\ >\ srcALen,\ output\ pointer\ is\ made\ to\ point\ to\ the\ end\ of\ the\ output\ buffer\ */}}
+\DoxyCodeLine{00804\ \ \ \textcolor{comment}{/*\ and\ a\ varaible,\ inv\ is\ set\ to\ 1\ */}}
+\DoxyCodeLine{00805\ \ \ \textcolor{comment}{/*\ If\ lengths\ are\ not\ equal\ then\ zero\ pad\ has\ to\ be\ done\ to\ \ make\ the\ two}}
+\DoxyCodeLine{00806\ \textcolor{comment}{\ \ \ *\ inputs\ of\ same\ length.\ But\ to\ improve\ the\ performance,\ we\ include\ zeroes}}
+\DoxyCodeLine{00807\ \textcolor{comment}{\ \ \ *\ in\ the\ output\ instead\ of\ zero\ padding\ either\ of\ the\ the\ inputs*/}}
+\DoxyCodeLine{00808\ \ \ \textcolor{comment}{/*\ If\ srcALen\ >\ srcBLen,\ (srcALen\ -\/\ srcBLen)\ zeroes\ has\ to\ included\ in\ the}}
+\DoxyCodeLine{00809\ \textcolor{comment}{\ \ \ *\ starting\ of\ the\ output\ buffer\ */}}
+\DoxyCodeLine{00810\ \ \ \textcolor{comment}{/*\ If\ srcALen\ <\ srcBLen,\ (srcALen\ -\/\ srcBLen)\ zeroes\ has\ to\ included\ in\ the}}
+\DoxyCodeLine{00811\ \textcolor{comment}{\ \ \ *\ ending\ of\ the\ output\ buffer\ */}}
+\DoxyCodeLine{00812\ \ \ \textcolor{comment}{/*\ Once\ the\ zero\ padding\ is\ done\ the\ remaining\ of\ the\ output\ is\ calcualted}}
+\DoxyCodeLine{00813\ \textcolor{comment}{\ \ \ *\ using\ correlation\ but\ with\ the\ shorter\ signal\ time\ shifted.\ */}}
+\DoxyCodeLine{00814\ }
+\DoxyCodeLine{00815\ \ \ \textcolor{comment}{/*\ Calculate\ the\ length\ of\ the\ remaining\ sequence\ */}}
+\DoxyCodeLine{00816\ \ \ tot\ =\ ((srcALen\ +\ srcBLen)\ -\/\ 2U);}
+\DoxyCodeLine{00817\ }
+\DoxyCodeLine{00818\ \ \ \textcolor{keywordflow}{if}\ (srcALen\ >\ srcBLen)}
+\DoxyCodeLine{00819\ \ \ \{}
+\DoxyCodeLine{00820\ \ \ \ \ \textcolor{comment}{/*\ Calculating\ the\ number\ of\ zeros\ to\ be\ padded\ to\ the\ output\ */}}
+\DoxyCodeLine{00821\ \ \ \ \ j\ =\ srcALen\ -\/\ srcBLen;}
+\DoxyCodeLine{00822\ }
+\DoxyCodeLine{00823\ \ \ \ \ \textcolor{comment}{/*\ Initialise\ the\ pointer\ after\ zero\ padding\ */}}
+\DoxyCodeLine{00824\ \ \ \ \ pDst\ +=\ j;}
+\DoxyCodeLine{00825\ \ \ \}}
+\DoxyCodeLine{00826\ }
+\DoxyCodeLine{00827\ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (srcALen\ <\ srcBLen)}
+\DoxyCodeLine{00828\ \ \ \{}
+\DoxyCodeLine{00829\ \ \ \ \ \textcolor{comment}{/*\ Initialization\ to\ inputB\ pointer\ */}}
+\DoxyCodeLine{00830\ \ \ \ \ pIn1\ =\ pSrcB;}
+\DoxyCodeLine{00831\ }
+\DoxyCodeLine{00832\ \ \ \ \ \textcolor{comment}{/*\ Initialization\ to\ the\ end\ of\ inputA\ pointer\ */}}
+\DoxyCodeLine{00833\ \ \ \ \ pIn2\ =\ pSrcA\ +\ (srcALen\ -\/\ 1U);}
+\DoxyCodeLine{00834\ }
+\DoxyCodeLine{00835\ \ \ \ \ \textcolor{comment}{/*\ Initialisation\ of\ the\ pointer\ after\ zero\ padding\ */}}
+\DoxyCodeLine{00836\ \ \ \ \ pDst\ =\ pDst\ +\ tot;}
+\DoxyCodeLine{00837\ }
+\DoxyCodeLine{00838\ \ \ \ \ \textcolor{comment}{/*\ Swapping\ the\ lengths\ */}}
+\DoxyCodeLine{00839\ \ \ \ \ j\ =\ srcALen;}
+\DoxyCodeLine{00840\ \ \ \ \ srcALen\ =\ srcBLen;}
+\DoxyCodeLine{00841\ \ \ \ \ srcBLen\ =\ j;}
+\DoxyCodeLine{00842\ }
+\DoxyCodeLine{00843\ \ \ \ \ \textcolor{comment}{/*\ Setting\ the\ reverse\ flag\ */}}
+\DoxyCodeLine{00844\ \ \ \ \ inv\ =\ 1;}
+\DoxyCodeLine{00845\ \ \ \}}
+\DoxyCodeLine{00846\ }
+\DoxyCodeLine{00847\ \ \ \textcolor{comment}{/*\ Loop\ to\ calculate\ correlation\ for\ output\ length\ number\ of\ times\ */}}
+\DoxyCodeLine{00848\ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0U;\ i\ <=\ tot;\ i++)}
+\DoxyCodeLine{00849\ \ \ \{}
+\DoxyCodeLine{00850\ \ \ \ \ \textcolor{comment}{/*\ Initialize\ sum\ with\ zero\ to\ carry\ out\ MAC\ operations\ */}}
+\DoxyCodeLine{00851\ \ \ \ \ sum\ =\ 0;}
+\DoxyCodeLine{00852\ }
+\DoxyCodeLine{00853\ \ \ \ \ \textcolor{comment}{/*\ Loop\ to\ perform\ MAC\ operations\ according\ to\ correlation\ equation\ */}}
+\DoxyCodeLine{00854\ \ \ \ \ \textcolor{keywordflow}{for}\ (j\ =\ 0U;\ j\ <=\ i;\ j++)}
+\DoxyCodeLine{00855\ \ \ \ \ \{}
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \textcolor{comment}{/*\ Check\ the\ array\ limitations\ */}}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (((i\ -\/\ j)\ <\ srcBLen)\ \&\&\ (j\ <\ srcALen))}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ z[i]\ +=\ x[i-\/j]\ *\ y[j]\ */}}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ sum\ +=\ ((\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}})\ pIn1[j]\ *\ pIn2[-\/((int32\_t)\ i\ -\/\ (int32\_t)\ j)]);}
+\DoxyCodeLine{00861\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00862\ \ \ \ \ \}}
+\DoxyCodeLine{00863\ }
+\DoxyCodeLine{00864\ \ \ \ \ \textcolor{comment}{/*\ Store\ the\ output\ in\ the\ destination\ buffer\ */}}
+\DoxyCodeLine{00865\ \ \ \ \ \textcolor{keywordflow}{if}\ (inv\ ==\ 1)}
+\DoxyCodeLine{00866\ \ \ \ \ \ \ *pDst-\/-\/\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (sum\ >>\ 31U);}
+\DoxyCodeLine{00867\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00868\ \ \ \ \ \ \ *pDst++\ =\ (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}})\ (sum\ >>\ 31U);}
+\DoxyCodeLine{00869\ \ \ \}}
+\DoxyCodeLine{00870\ }
+\DoxyCodeLine{00871\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \#if\ !defined(ARM\_MATH\_CM0\_FAMILY)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00872\ }
+\DoxyCodeLine{00873\ \}}
+\DoxyCodeLine{00874\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ defined(ARM\_MATH\_MVEI)\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00875\ }
+
+\end{DoxyCode}

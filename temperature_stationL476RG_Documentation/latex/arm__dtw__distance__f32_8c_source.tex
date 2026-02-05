@@ -1,0 +1,118 @@
+\doxysection{arm\+\_\+dtw\+\_\+distance\+\_\+f32.\+c}
+\hypertarget{arm__dtw__distance__f32_8c_source}{}\label{arm__dtw__distance__f32_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/DistanceFunctions/arm\_dtw\_distance\_f32.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/DistanceFunctions/arm\_dtw\_distance\_f32.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_braycurtis\_distance\_f32.c}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *\ Description:\ \ Bray-\/Curtis\ distance\ between\ two\ vectors}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 23\ April\ 2021}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.9.0}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00012\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ "{}dsp/distance\_functions.h"{}}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_utils.h"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ <limits.h>}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#define\ E(MAT,R,C)\ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ (*((MAT)-\/>pData\ +\ (MAT)-\/>numCols*(R)\ +\ (C)))}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ WIN(R,C)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ ((pWindow\ ==\ NULL)\ ?\ 1\ :\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ ((*((pWindow)-\/>pData\ +\ (pWindow)-\/>numCols*(R)\ +\ (C)))==1))}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00086\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___d_t_w_ga71fe7bc7aed8ae64e4d61ae6c30e2d9e}{arm\_dtw\_distance\_f32}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *pDistance,}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__matrix__instance__q7}{arm\_matrix\_instance\_q7}}\ *pWindow,}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__f32}{arm\_matrix\_instance\_f32}}\ *pDTW,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *distance)}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ queryLength\ =\ pDistance\ -\/>\ numRows;}
+\DoxyCodeLine{00092\ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ templateLength\ =\ pDistance\ -\/>\ numCols;}
+\DoxyCodeLine{00093\ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ result;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\_t}}\ *temp\ =\ pDTW-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}};}
+\DoxyCodeLine{00096\ \ \ \ \textcolor{keywordflow}{for}(uint32\_t\ q=0\ ;\ q\ <\ queryLength;\ q++)}
+\DoxyCodeLine{00097\ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \textcolor{keywordflow}{for}(uint32\_t\ t=\ 0;\ t\ <\ templateLength;\ t++)}
+\DoxyCodeLine{00099\ \ \ \ \ \ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ *temp++\ =\ F32\_MAX;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \}}
+\DoxyCodeLine{00102\ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ pDTW-\/>\doxymbox{\hyperlink{structarm__matrix__instance__f32_af5c3a2f15c98850cdcfbe6f87e5ac5df}{pData}}[0]\ =\ E(pDistance,0,0);}
+\DoxyCodeLine{00105\ \ \ \ \textcolor{keywordflow}{for}(uint32\_t\ q\ =\ 1;\ q\ <\ queryLength;\ q++)}
+\DoxyCodeLine{00106\ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!WIN(q,0))}
+\DoxyCodeLine{00108\ \ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ E(pDTW,q,0)\ =\ E(pDTW,q-\/1,0)\ +\ E(pDistance,q,0);}
+\DoxyCodeLine{00112\ \ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \textcolor{keywordflow}{for}(uint32\_t\ t\ =\ 1;\ t\ <\ templateLength;\ t++)}
+\DoxyCodeLine{00115\ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!WIN(0,t))}
+\DoxyCodeLine{00117\ \ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00119\ \ \ \ \ \ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ E(pDTW,0,t)\ =\ E(pDTW,0,t-\/1)\ +\ E(pDistance,0,t);}
+\DoxyCodeLine{00121\ \ \ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \textcolor{keywordflow}{for}(uint32\_t\ q\ =\ 1;\ q\ <\ queryLength;\ q++)}
+\DoxyCodeLine{00125\ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \textcolor{keywordflow}{for}(uint32\_t\ t\ =\ 1;\ t\ <\ templateLength;\ t++)}
+\DoxyCodeLine{00127\ \ \ \ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!WIN(q,t))}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ E(pDTW,q,t)\ =\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ MIN(E(pDTW,q-\/1,t-\/1)\ +\ 2.0f\ *\ E(pDistance,q,t),}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ MIN(E(pDTW,q,t-\/1)\ \ \ +\ \ \ \ \ \ \ \ E(pDistance,q,t),}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ E(pDTW,q-\/1,t)\ \ \ +\ \ \ \ \ \ \ \ E(pDistance,q,t)));}
+\DoxyCodeLine{00136\ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \textcolor{keywordflow}{if}\ (E(pDTW,queryLength-\/1,templateLength-\/1)\ ==\ F32\_MAX)}
+\DoxyCodeLine{00140\ \ \ \ \{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\_MATH\_ARGUMENT\_ERROR}});}
+\DoxyCodeLine{00142\ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ result\ =\ E(pDTW,queryLength-\/1,templateLength-\/1);}
+\DoxyCodeLine{00145\ \ \ \ result\ =\ result\ /\ (queryLength\ +\ templateLength);}
+\DoxyCodeLine{00146\ \ \ \ *distance\ =\ result;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \textcolor{keywordflow}{return}(\doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}});}
+\DoxyCodeLine{00149\ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00154\ }
+
+\end{DoxyCode}

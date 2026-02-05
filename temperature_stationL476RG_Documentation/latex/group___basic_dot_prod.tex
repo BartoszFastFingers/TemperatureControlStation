@@ -1,0 +1,145 @@
+\doxysubsection{Vector Dot Product }
+\hypertarget{group___basic_dot_prod}{}\label{group___basic_dot_prod}\index{Vector Dot Product@{Vector Dot Product}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_dot_prod_ga5cd4a5a3d43a2ae38abe154f3dd457db}{arm\+\_\+dot\+\_\+prod\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Dot product of floating-\/point vectors. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_dot_prod_ga60a08c10a5d28c1ad8a8ae92289d47f2}{arm\+\_\+dot\+\_\+prod\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Dot product of floating-\/point vectors. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_dot_prod_ga6d321f586004b6ce5171498f38b434bb}{arm\+\_\+dot\+\_\+prod\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Dot product of Q15 vectors. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_dot_prod_gacbce445c18e8e9a31507b78cab0ce2ea}{arm\+\_\+dot\+\_\+prod\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Dot product of Q31 vectors. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___basic_dot_prod_ga85cbc59234f39bb4bb688ae43677830c}{arm\+\_\+dot\+\_\+prod\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcA, const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+SrcB, uint32\+\_\+t block\+Size, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}result)
+\begin{DoxyCompactList}\small\item\em Dot product of Q7 vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the dot product of two vectors. The vectors are multiplied element-\/by-\/element and then summed.
+
+
+\begin{DoxyPre}
+    sum = pSrcA[0]*pSrcB[0] + pSrcA[1]*pSrcB[1] + ... + pSrcA[blockSize-\/1]*pSrcB[blockSize-\/1]
+\end{DoxyPre}
+
+
+There are separate functions for floating-\/point, Q7, Q15, and Q31 data types.
+
+\label{doc-func-members}
+\Hypertarget{group___basic_dot_prod_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___basic_dot_prod_ga5cd4a5a3d43a2ae38abe154f3dd457db}\index{Vector Dot Product@{Vector Dot Product}!arm\_dot\_prod\_f32@{arm\_dot\_prod\_f32}}
+\index{arm\_dot\_prod\_f32@{arm\_dot\_prod\_f32}!Vector Dot Product@{Vector Dot Product}}
+\doxysubsubsubsection{\texorpdfstring{arm\_dot\_prod\_f32()}{arm\_dot\_prod\_f32()}}
+{\footnotesize\ttfamily \label{group___basic_dot_prod_ga5cd4a5a3d43a2ae38abe154f3dd457db} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dot\+\_\+prod\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Dot product of floating-\/point vectors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em result} & output result returned here. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_dot_prod_ga60a08c10a5d28c1ad8a8ae92289d47f2}\index{Vector Dot Product@{Vector Dot Product}!arm\_dot\_prod\_f64@{arm\_dot\_prod\_f64}}
+\index{arm\_dot\_prod\_f64@{arm\_dot\_prod\_f64}!Vector Dot Product@{Vector Dot Product}}
+\doxysubsubsubsection{\texorpdfstring{arm\_dot\_prod\_f64()}{arm\_dot\_prod\_f64()}}
+{\footnotesize\ttfamily \label{group___basic_dot_prod_ga60a08c10a5d28c1ad8a8ae92289d47f2} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dot\+\_\+prod\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Dot product of floating-\/point vectors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em result} & output result returned here. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group___basic_dot_prod_ga6d321f586004b6ce5171498f38b434bb}\index{Vector Dot Product@{Vector Dot Product}!arm\_dot\_prod\_q15@{arm\_dot\_prod\_q15}}
+\index{arm\_dot\_prod\_q15@{arm\_dot\_prod\_q15}!Vector Dot Product@{Vector Dot Product}}
+\doxysubsubsubsection{\texorpdfstring{arm\_dot\_prod\_q15()}{arm\_dot\_prod\_q15()}}
+{\footnotesize\ttfamily \label{group___basic_dot_prod_ga6d321f586004b6ce5171498f38b434bb} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dot\+\_\+prod\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Dot product of Q15 vectors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em result} & output result returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The intermediate multiplications are in 1.\+15 x 1.\+15 = 2.\+30 format and these results are added to a 64-\/bit accumulator in 34.\+30 format. Nonsaturating additions are used and given that there are 33 guard bits in the accumulator there is no risk of overflow. The return result is in 34.\+30 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___basic_dot_prod_gacbce445c18e8e9a31507b78cab0ce2ea}\index{Vector Dot Product@{Vector Dot Product}!arm\_dot\_prod\_q31@{arm\_dot\_prod\_q31}}
+\index{arm\_dot\_prod\_q31@{arm\_dot\_prod\_q31}!Vector Dot Product@{Vector Dot Product}}
+\doxysubsubsubsection{\texorpdfstring{arm\_dot\_prod\_q31()}{arm\_dot\_prod\_q31()}}
+{\footnotesize\ttfamily \label{group___basic_dot_prod_gacbce445c18e8e9a31507b78cab0ce2ea} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dot\+\_\+prod\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Dot product of Q31 vectors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input vector. \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector. \\
+\hline
+\doxymbox{\texttt{out}}  & {\em result} & output result returned here.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The intermediate multiplications are in 1.\+31 x 1.\+31 = 2.\+62 format and these are truncated to 2.\+48 format by discarding the lower 14 bits. The 2.\+48 result is then added without saturation to a 64-\/bit accumulator in 16.\+48 format. There are 15 guard bits in the accumulator and there is no risk of overflow as long as the length of the vectors is less than 2\texorpdfstring{$^\wedge$}{\string^}16 elements. The return result is in 16.\+48 format. 
+\end{DoxyParagraph}
+\Hypertarget{group___basic_dot_prod_ga85cbc59234f39bb4bb688ae43677830c}\index{Vector Dot Product@{Vector Dot Product}!arm\_dot\_prod\_q7@{arm\_dot\_prod\_q7}}
+\index{arm\_dot\_prod\_q7@{arm\_dot\_prod\_q7}!Vector Dot Product@{Vector Dot Product}}
+\doxysubsubsubsection{\texorpdfstring{arm\_dot\_prod\_q7()}{arm\_dot\_prod\_q7()}}
+{\footnotesize\ttfamily \label{group___basic_dot_prod_ga85cbc59234f39bb4bb688ae43677830c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+dot\+\_\+prod\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+SrcB}{, }\item[{uint32\+\_\+t}]{block\+Size}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Dot product of Q7 vectors. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+SrcA} & points to the first input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em p\+SrcB} & points to the second input vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em result} & output result returned here\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The intermediate multiplications are in 1.\+7 x 1.\+7 = 2.\+14 format and these results are added to an accumulator in 18.\+14 format. Nonsaturating additions are used and there is no danger of wrap around as long as the vectors are less than 2\texorpdfstring{$^\wedge$}{\string^}18 elements long. The return result is in 18.\+14 format. 
+\end{DoxyParagraph}

@@ -1,8 +1,8 @@
-/*
- * PID_controller.h
- *
- *  Created on: 1 __lut__ 2026
- *      Author: 00ary
+/**
+ * @file PID_controller.h
+ * @brief Regulator PID temperatury
+ * @author 00ary
+ * @date 2026-02-01
  */
 
 #ifndef COMPONENTS_INC_PID_CONTROLLER_H_

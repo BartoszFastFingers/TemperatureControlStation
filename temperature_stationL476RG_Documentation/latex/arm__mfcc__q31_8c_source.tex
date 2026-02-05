@@ -1,0 +1,176 @@
+\doxysection{arm\+\_\+mfcc\+\_\+q31.\+c}
+\hypertarget{arm__mfcc__q31_8c_source}{}\label{arm__mfcc__q31_8c_source}\index{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_mfcc\_q31.c@{Middlewares/Third\_Party/ARM\_CMSIS/Source/TransformFunctions/arm\_mfcc\_q31.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00002\ \textcolor{comment}{\ *\ Project:\ \ \ \ \ \ CMSIS\ DSP\ Library}}
+\DoxyCodeLine{00003\ \textcolor{comment}{\ *\ Title:\ \ \ \ \ \ \ \ arm\_mfcc\_q31.c}}
+\DoxyCodeLine{00004\ \textcolor{comment}{\ *\ Description:\ \ MFCC\ function\ for\ the\ q31\ version}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ \$Date:\ \ \ \ \ \ \ \ 07\ September\ 2021}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ \$Revision:\ \ \ \ V1.10.0}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ *\ Target\ Processor:\ Cortex-\/M\ and\ Cortex-\/A\ cores}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00011\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ Copyright\ (C)\ 2010-\/2021\ ARM\ Limited\ or\ its\ affiliates.\ All\ rights\ reserved.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ SPDX-\/License-\/Identifier:\ Apache-\/2.0}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ Licensed\ under\ the\ Apache\ License,\ Version\ 2.0\ (the\ License);\ you\ may}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ not\ use\ this\ file\ except\ in\ compliance\ with\ the\ License.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ You\ may\ obtain\ a\ copy\ of\ the\ License\ at}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ *\ www.apache.org/licenses/LICENSE-\/2.0}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ *\ Unless\ required\ by\ applicable\ law\ or\ agreed\ to\ in\ writing,\ software}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ distributed\ under\ the\ License\ is\ distributed\ on\ an\ AS\ IS\ BASIS,\ WITHOUT}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ WARRANTIES\ OR\ CONDITIONS\ OF\ ANY\ KIND,\ either\ express\ or\ implied.}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ See\ the\ License\ for\ the\ specific\ language\ governing\ permissions\ and}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *\ limitations\ under\ the\ License.}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#include\ "{}dsp/transform\_functions.h"{}}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#include\ "{}dsp/statistics\_functions.h"{}}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#include\ "{}dsp/basic\_math\_functions.h"{}}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#include\ "{}dsp/complex\_math\_functions.h"{}}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ "{}dsp/fast\_math\_functions.h"{}}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#include\ "{}dsp/matrix\_functions.h"{}}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{/*\ Constants\ for\ Q31\ implementation\ */}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#define\ LOG2TOLOG\_Q31\ 0x02C5C860}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ MICRO\_Q31\ 0x08637BD0}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ SHIFT\_MELFILTER\_SATURATION\_Q31\ 10}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ ARM\_DSP\_ATTRIBUTE\ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ \doxymbox{\hyperlink{group___m_f_c_c_q31_ga926b07b636de79952fc06ecaa23916e3}{arm\_mfcc\_q31}}(}
+\DoxyCodeLine{00076\ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structarm__mfcc__instance__q31}{arm\_mfcc\_instance\_q31}}\ *\ S,}
+\DoxyCodeLine{00077\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pSrc,}
+\DoxyCodeLine{00078\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pDst,}
+\DoxyCodeLine{00079\ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pTmp}
+\DoxyCodeLine{00080\ \ \ )}
+\DoxyCodeLine{00081\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ m;}
+\DoxyCodeLine{00083\ \ \ \ \ uint32\_t\ index;}
+\DoxyCodeLine{00084\ \ \ \ \ uint32\_t\ fftShift=0;}
+\DoxyCodeLine{00085\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ logExponent;}
+\DoxyCodeLine{00086\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5aea1cb12fc02d9d44c8abf217eaa5c6}{q63\_t}}\ result;}
+\DoxyCodeLine{00087\ \ \ \ \ \doxymbox{\hyperlink{structarm__matrix__instance__q31}{arm\_matrix\_instance\_q31}}\ pDctMat;}
+\DoxyCodeLine{00088\ \ \ \ \ uint32\_t\ i;}
+\DoxyCodeLine{00089\ \ \ \ \ uint32\_t\ coefsPos;}
+\DoxyCodeLine{00090\ \ \ \ \ uint32\_t\ filterLimit;}
+\DoxyCodeLine{00091\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ *pTmp2=(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)pTmp;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\_status}}\ status\ =\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}};}
+\DoxyCodeLine{00094\ \ \ \ \ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ q31}}
+\DoxyCodeLine{00096\ \ \ \ \ \doxymbox{\hyperlink{group___abs_max_ga64ffa2c03ee759961896fc4b7aa73044}{arm\_absmax\_q31}}(pSrc,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a13e9ec26f0771670bc9e3802b8d774d3}{fftLen}},\&m,\&index);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{if}\ ((m\ !=\ 0)\ \&\&\ (m\ !=\ 0x7FFFFFFF))}
+\DoxyCodeLine{00099\ \ \ \ \ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}\ quotient;}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ int16\_t\ shift;}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ status\ =\ \doxymbox{\hyperlink{group__divide_gaf02c0a420ea315dba5d0d4a7274b53c2}{arm\_divide\_q31}}(0x7FFFFFFF,m,\&quotient,\&shift);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ !=\ \doxymbox{\hyperlink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\_MATH\_SUCCESS}})}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \doxymbox{\hyperlink{group___basic_scale_gaa70c0ee242db427c0b2491a48a1680b8}{arm\_scale\_q31}}(pSrc,quotient,shift,pSrc,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a13e9ec26f0771670bc9e3802b8d774d3}{fftLen}});}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ q31}}
+\DoxyCodeLine{00114\ \ \ \ \ \doxymbox{\hyperlink{group___basic_mult_ga836a7712ea2d5dc7060904ac9c6f2eea}{arm\_mult\_q31}}(pSrc,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a1fc91e7ce8c2582d9e142ff25ca3c8ca}{windowCoefs}},\ pSrc,\ S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a13e9ec26f0771670bc9e3802b8d774d3}{fftLen}});}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{/*\ Compute\ spectrum\ magnitude\ }}
+\DoxyCodeLine{00118\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00119\ \ \ \ \ fftShift\ =\ 31\ -\/\ \_\_CLZ(S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a13e9ec26f0771670bc9e3802b8d774d3}{fftLen}});}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\#if\ defined(ARM\_MFCC\_CFFT\_BASED)}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{/*\ some\ HW\ accelerator\ for\ CMSIS-\/DSP\ used\ in\ some\ boards}}
+\DoxyCodeLine{00122\ \textcolor{comment}{\ \ \ \ \ \ \ are\ only\ providing\ acceleration\ for\ CFFT.}}
+\DoxyCodeLine{00123\ \textcolor{comment}{\ \ \ \ \ \ \ With\ ARM\_MFCC\_CFFT\_BASED\ enabled,\ CFFT\ is\ used\ and\ the\ MFCC}}
+\DoxyCodeLine{00124\ \textcolor{comment}{\ \ \ \ \ \ \ will\ be\ accelerated\ on\ those\ boards.}}
+\DoxyCodeLine{00125\ \textcolor{comment}{\ }}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ \ \ \ The\ default\ is\ to\ use\ RFFT}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{/*\ Convert\ from\ real\ to\ complex\ */}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;\ i\ <\ S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a13e9ec26f0771670bc9e3802b8d774d3}{fftLen}}\ ;\ i++)}
+\DoxyCodeLine{00130\ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ pTmp2[2*i]\ =\ pSrc[i];}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ pTmp2[2*i+1]\ =\ 0;}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \doxymbox{\hyperlink{group___complex_f_f_t_q31_gacf4cbd5fcba232d7793ee45072f5be5f}{arm\_cfft\_q31}}(\&(S-\/>cfft),pTmp2,0,1);}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{comment}{/*\ Default\ RFFT\ based\ implementation\ */}}
+\DoxyCodeLine{00137\ \ \ \ \ \doxymbox{\hyperlink{group___real_f_f_t_q31_gab442c4577719725b0aae3ea2f2dfc6e9}{arm\_rfft\_q31}}(\&(S-\/>rfft),pSrc,pTmp2);}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00139\ \ \ \ \ filterLimit\ =\ 1\ +\ (S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a13e9ec26f0771670bc9e3802b8d774d3}{fftLen}}\ >>\ 1);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//\ q31\ -\/\ fftShift}}
+\DoxyCodeLine{00143\ \ \ \ \ \doxymbox{\hyperlink{group__cmplx__mag_ga3b3e06e7d513f4681e02d57760e2d88f}{arm\_cmplx\_mag\_q31}}(pTmp2,pSrc,filterLimit);}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{comment}{//\ q30\ -\/\ fftShift}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{/*\ Apply\ MEL\ filters\ */}}
+\DoxyCodeLine{00148\ \ \ \ \ coefsPos\ =\ 0;}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordflow}{for}(i=0;\ i<S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a8ac2a63296ee4e08bb019bf75f66f7d0}{nbMelFilters}};\ i++)}
+\DoxyCodeLine{00150\ \ \ \ \ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \doxymbox{\hyperlink{group___basic_dot_prod_gacbce445c18e8e9a31507b78cab0ce2ea}{arm\_dot\_prod\_q31}}(pSrc+S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a4bf2fc236988cf1e39f7b3efbd0a1797}{filterPos}}[i],}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \&(S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a60390d32129e3b390a6b249223168b63}{filterCoefs}}[coefsPos]),}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a92fa17569af954a83e7d76d88693ecc6}{filterLengths}}[i],}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \&result);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ coefsPos\ +=\ S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a92fa17569af954a83e7d76d88693ecc6}{filterLengths}}[i];}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \textcolor{comment}{//\ q16.48\ -\/\ fftShift}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ result\ +=\ MICRO\_Q31;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ result\ >>=\ (SHIFT\_MELFILTER\_SATURATION\_Q31\ +\ 18);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \textcolor{comment}{//\ q16.29\ -\/\ fftShift\ -\/\ satShift}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ pTmp[i]\ =\ \_\_SSAT(result,31)\ ;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordflow}{if}\ ((m\ !=\ 0)\ \&\&\ (m\ !=\ 0x7FFFFFFF))}
+\DoxyCodeLine{00168\ \ \ \ \ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \doxymbox{\hyperlink{group___basic_scale_gaa70c0ee242db427c0b2491a48a1680b8}{arm\_scale\_q31}}(pTmp,m,0,pTmp,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a8ac2a63296ee4e08bb019bf75f66f7d0}{nbMelFilters}});}
+\DoxyCodeLine{00170\ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{//\ q16.29\ -\/\ fftShift\ -\/\ satShift}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{comment}{/*\ Compute\ the\ log\ */}}
+\DoxyCodeLine{00174\ \ \ \ \ \doxymbox{\hyperlink{group__vlog_ga37f2b40add8f03c90f8f669db70ebfb3}{arm\_vlog\_q31}}(pTmp,pTmp,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a8ac2a63296ee4e08bb019bf75f66f7d0}{nbMelFilters}});}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//\ q5.26}}
+\DoxyCodeLine{00178\ \ \ \ }
+\DoxyCodeLine{00179\ \ \ \ \ logExponent\ =\ fftShift\ +\ 2\ +\ SHIFT\_MELFILTER\_SATURATION\_Q31;}
+\DoxyCodeLine{00180\ \ \ \ \ logExponent\ =\ logExponent\ *\ LOG2TOLOG\_Q31;}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{comment}{//\ q5.26}}
+\DoxyCodeLine{00184\ \ \ \ \ \doxymbox{\hyperlink{group___basic_offset_ga4f84333df62f2e987f6b1b04ce768b8f}{arm\_offset\_q31}}(pTmp,logExponent,pTmp,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a8ac2a63296ee4e08bb019bf75f66f7d0}{nbMelFilters}});}
+\DoxyCodeLine{00185\ \ \ \ \ \doxymbox{\hyperlink{group___basic_shift_gab14305f692e3e2741f3a114a61944628}{arm\_shift\_q31}}(pTmp,-\/3,pTmp,S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a8ac2a63296ee4e08bb019bf75f66f7d0}{nbMelFilters}});}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{comment}{//\ q8.23}}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ pDctMat.\doxymbox{\hyperlink{structarm__matrix__instance__q31_a1bcf80ccdc2acc29198f1592ae300390}{numRows}}=S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_acfacbcf8d50f063823b8097880bc9485}{nbDctOutputs}};}
+\DoxyCodeLine{00191\ \ \ \ \ pDctMat.\doxymbox{\hyperlink{structarm__matrix__instance__q31_a4bb5ec0d13eb4c9cf887aa8366a44117}{numCols}}=S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_a8ac2a63296ee4e08bb019bf75f66f7d0}{nbMelFilters}};}
+\DoxyCodeLine{00192\ \ \ \ \ pDctMat.\doxymbox{\hyperlink{structarm__matrix__instance__q31_ad296f76577326ff280726323536eed6d}{pData}}=(\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t}}*)S-\/>\doxymbox{\hyperlink{structarm__mfcc__instance__q31_adb2eef6a7ff4b4c20143a902612f915e}{dctCoefs}};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \doxymbox{\hyperlink{group___matrix_vect_mult_ga13b69ec7eeaf7850500375eb7408b4a7}{arm\_mat\_vec\_mult\_q31}}(\&pDctMat,\ pTmp,\ pDst);}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordflow}{return}(status);}
+\DoxyCodeLine{00197\ \}}
+\DoxyCodeLine{00198\ }
+
+\end{DoxyCode}

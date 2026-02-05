@@ -1,0 +1,79 @@
+\doxysubsubsection{Hamming window function (42.\+7 dB) }
+\hypertarget{group___window_h_a_m_m_i_n_g}{}\label{group___window_h_a_m_m_i_n_g}\index{Hamming window function (42.7 dB)@{Hamming window function (42.7 dB)}}
+\doxysubsubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___window_h_a_m_m_i_n_g_ga842e47323085cc87b9a1be3528057735}{arm\+\_\+hamming\+\_\+f32}} (\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Hamming window generating function (f32). \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group___window_h_a_m_m_i_n_g_ga07039e24ae06eef5034395262533b950}{arm\+\_\+hamming\+\_\+f64}} (\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Hamming window generating function (f64). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___window_h_a_m_m_i_n_g_doc-func-members}
+\doxysubsubsubsection{Function Documentation}
+\Hypertarget{group___window_h_a_m_m_i_n_g_ga842e47323085cc87b9a1be3528057735}\index{Hamming window function (42.7 dB)@{Hamming window function (42.7 dB)}!arm\_hamming\_f32@{arm\_hamming\_f32}}
+\index{arm\_hamming\_f32@{arm\_hamming\_f32}!Hamming window function (42.7 dB)@{Hamming window function (42.7 dB)}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_hamming\_f32()}{arm\_hamming\_f32()}}
+{\footnotesize\ttfamily \label{group___window_h_a_m_m_i_n_g_ga842e47323085cc87b9a1be3528057735} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+hamming\+\_\+f32 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Hamming window generating function (f32). 
+
+Hamming window (float).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output generated window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Parameters of the window}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+\SetCell{r}Peak sidelobe level  &\SetCell{r}42.\+7 dB  \\
+\SetCell{r}Normalized equivalent noise bandwidth  &\SetCell{r}1.\+3628 bins  \\
+\SetCell{r}3 dB bandwidth  &\SetCell{r}1.\+3008 bins  \\
+\SetCell{r}Flatness  &\SetCell{r}-\/1.\+7514 dB  \\
+\SetCell{r}Recommended overlap  &\SetCell{r}50 \%  \\
+\end{DoxyTable}
+\Hypertarget{group___window_h_a_m_m_i_n_g_ga07039e24ae06eef5034395262533b950}\index{Hamming window function (42.7 dB)@{Hamming window function (42.7 dB)}!arm\_hamming\_f64@{arm\_hamming\_f64}}
+\index{arm\_hamming\_f64@{arm\_hamming\_f64}!Hamming window function (42.7 dB)@{Hamming window function (42.7 dB)}}
+\doxysubsubsubsubsection{\texorpdfstring{arm\_hamming\_f64()}{arm\_hamming\_f64()}}
+{\footnotesize\ttfamily \label{group___window_h_a_m_m_i_n_g_ga07039e24ae06eef5034395262533b950} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+hamming\+\_\+f64 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Hamming window generating function (f64). 
+
+Hamming window (double).
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the output generated window \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in the window\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Parameters of the window}
+
+\end{DoxyParagraph}
+
+\begin{DoxyTable}{2}{}{}{1}
+\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Parameter  &\SetCell{r,bg=\tableheadbgcolor,font=\bfseries}Value  \\
+\SetCell{r}Peak sidelobe level  &\SetCell{r}42.\+7 dB  \\
+\SetCell{r}Normalized equivalent noise bandwidth  &\SetCell{r}1.\+3628 bins  \\
+\SetCell{r}3 dB bandwidth  &\SetCell{r}1.\+3008 bins  \\
+\SetCell{r}Flatness  &\SetCell{r}-\/1.\+7514 dB  \\
+\SetCell{r}Recommended overlap  &\SetCell{r}50 \%  \\
+\end{DoxyTable}

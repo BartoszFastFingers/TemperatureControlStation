@@ -1,0 +1,91 @@
+\doxysection{Dokumentacja struktury Uart\+Protocol\+\_\+t}
+\hypertarget{struct_uart_protocol__t}{}\label{struct_uart_protocol__t}\index{UartProtocol\_t@{UartProtocol\_t}}
+
+
+Struktura protokołu UART.  
+
+
+
+
+{\ttfamily \+\#include $<$uart\+\_\+protocol.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+UART\+\_\+\+Handle\+Type\+Def \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_uart_protocol__t_a1ed7dab212fde0a3a4600d33399c67b6}{huart}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_uart_protocol__t_ab84155a3d2305e59a6fb6f3d3791c5c7}{rx\+\_\+buffer}} \+[UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE]\+
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{struct_uart_protocol__t_a988968c6b1632f9d4f6495ecee2637af}{rx\+\_\+index}}
+\item 
+bool \doxymbox{\hyperlink{struct_uart_protocol__t_adce096d92c984f1a29ccbf9e39637a32}{rx\+\_\+complete}}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{struct_uart_protocol__t_ab89d038143f0aa00291e71359700143d}{tx\+\_\+buffer}} \+[UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE]\+
+\item 
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{Uart\+Command\+\_\+t}} \doxymbox{\hyperlink{struct_uart_protocol__t_af67745864eca4102e2b7a7fc4043904c}{last\+\_\+command}}
+\item 
+float \doxymbox{\hyperlink{struct_uart_protocol__t_afe171074bb73207a41f3eaa186d9966a}{command\+\_\+arg}}
+\item 
+bool \doxymbox{\hyperlink{struct_uart_protocol__t_a36f7b6be7108281af77939ceaec42fd6}{running}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura protokołu UART. 
+
+\label{doc-variable-members}
+\Hypertarget{struct_uart_protocol__t_doc-variable-members}
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_uart_protocol__t_afe171074bb73207a41f3eaa186d9966a}\index{UartProtocol\_t@{UartProtocol\_t}!command\_arg@{command\_arg}}
+\index{command\_arg@{command\_arg}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{command\_arg}{command\_arg}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_afe171074bb73207a41f3eaa186d9966a} 
+float command\+\_\+arg}
+
+Argument komendy \Hypertarget{struct_uart_protocol__t_a1ed7dab212fde0a3a4600d33399c67b6}\index{UartProtocol\_t@{UartProtocol\_t}!huart@{huart}}
+\index{huart@{huart}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{huart}{huart}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_a1ed7dab212fde0a3a4600d33399c67b6} 
+UART\+\_\+\+Handle\+Type\+Def\texorpdfstring{$\ast$}{*} huart}
+
+Wskaźnik do UART \Hypertarget{struct_uart_protocol__t_af67745864eca4102e2b7a7fc4043904c}\index{UartProtocol\_t@{UartProtocol\_t}!last\_command@{last\_command}}
+\index{last\_command@{last\_command}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{last\_command}{last\_command}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_af67745864eca4102e2b7a7fc4043904c} 
+\doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{Uart\+Command\+\_\+t}} last\+\_\+command}
+
+Ostatnia odebrana komenda \Hypertarget{struct_uart_protocol__t_a36f7b6be7108281af77939ceaec42fd6}\index{UartProtocol\_t@{UartProtocol\_t}!running@{running}}
+\index{running@{running}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{running}{running}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_a36f7b6be7108281af77939ceaec42fd6} 
+bool running}
+
+Flaga stanu systemu \Hypertarget{struct_uart_protocol__t_ab84155a3d2305e59a6fb6f3d3791c5c7}\index{UartProtocol\_t@{UartProtocol\_t}!rx\_buffer@{rx\_buffer}}
+\index{rx\_buffer@{rx\_buffer}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{rx\_buffer}{rx\_buffer}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_ab84155a3d2305e59a6fb6f3d3791c5c7} 
+uint8\+\_\+t rx\+\_\+buffer\+[UART\+\_\+\+RX\+\_\+\+BUFFER\+\_\+\+SIZE]\+}
+
+Bufor przychodzący \Hypertarget{struct_uart_protocol__t_adce096d92c984f1a29ccbf9e39637a32}\index{UartProtocol\_t@{UartProtocol\_t}!rx\_complete@{rx\_complete}}
+\index{rx\_complete@{rx\_complete}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{rx\_complete}{rx\_complete}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_adce096d92c984f1a29ccbf9e39637a32} 
+bool rx\+\_\+complete}
+
+Flaga zakończenia odbioru \Hypertarget{struct_uart_protocol__t_a988968c6b1632f9d4f6495ecee2637af}\index{UartProtocol\_t@{UartProtocol\_t}!rx\_index@{rx\_index}}
+\index{rx\_index@{rx\_index}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{rx\_index}{rx\_index}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_a988968c6b1632f9d4f6495ecee2637af} 
+uint16\+\_\+t rx\+\_\+index}
+
+Indeks w buforze RX \Hypertarget{struct_uart_protocol__t_ab89d038143f0aa00291e71359700143d}\index{UartProtocol\_t@{UartProtocol\_t}!tx\_buffer@{tx\_buffer}}
+\index{tx\_buffer@{tx\_buffer}!UartProtocol\_t@{UartProtocol\_t}}
+\doxysubsubsection{\texorpdfstring{tx\_buffer}{tx\_buffer}}
+{\footnotesize\ttfamily \label{struct_uart_protocol__t_ab89d038143f0aa00291e71359700143d} 
+uint8\+\_\+t tx\+\_\+buffer\+[UART\+\_\+\+TX\+\_\+\+BUFFER\+\_\+\+SIZE]\+}
+
+Bufor nadawczy 
+
+Dokumentacja dla tej struktury została wygenerowana z pliku:\+\begin{DoxyCompactItemize}
+\item 
+Core/\+\+Inc/\+\doxymbox{\hyperlink{uart__protocol_8h}{uart\+\_\+protocol.\+h}}\end{DoxyCompactItemize}

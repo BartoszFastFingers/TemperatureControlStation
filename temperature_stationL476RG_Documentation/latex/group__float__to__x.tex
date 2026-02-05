@@ -1,0 +1,146 @@
+\doxysubsection{Convert 32-\/bit floating point value }
+\hypertarget{group__float__to__x}{}\label{group__float__to__x}\index{Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__float__to__x_gaf42978930142f39b7f5e561715752427}{arm\+\_\+float\+\_\+to\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Converts the elements of the floating-\/point vector to f64 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__float__to__x_ga0f768c53789ff6955888bf5de1cc9c2f}{arm\+\_\+float\+\_\+to\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Converts the elements of the floating-\/point vector to Q15 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__float__to__x_ga7c4bb054f57a52b41d099c0f06ad7a8c}{arm\+\_\+float\+\_\+to\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Converts the elements of the floating-\/point vector to Q31 vector. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__float__to__x_ga584f42599eda84f553b933dd8ec7fcff}{arm\+\_\+float\+\_\+to\+\_\+q7}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Converts the elements of the floating-\/point vector to Q7 vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group__float__to__x_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__float__to__x_gaf42978930142f39b7f5e561715752427}\index{Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}!arm\_float\_to\_f64@{arm\_float\_to\_f64}}
+\index{arm\_float\_to\_f64@{arm\_float\_to\_f64}!Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}}
+\doxysubsubsubsection{\texorpdfstring{arm\_float\_to\_f64()}{arm\_float\_to\_f64()}}
+{\footnotesize\ttfamily \label{group__float__to__x_gaf42978930142f39b7f5e561715752427} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+float\+\_\+to\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Converts the elements of the floating-\/point vector to f64 vector. 
+
+Converts the elements of the floating-\/point vector to 64 bit floating-\/point vector.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the f32 input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the f64 output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__float__to__x_ga0f768c53789ff6955888bf5de1cc9c2f}\index{Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}!arm\_float\_to\_q15@{arm\_float\_to\_q15}}
+\index{arm\_float\_to\_q15@{arm\_float\_to\_q15}!Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}}
+\doxysubsubsubsection{\texorpdfstring{arm\_float\_to\_q15()}{arm\_float\_to\_q15()}}
+{\footnotesize\ttfamily \label{group__float__to__x_ga0f768c53789ff6955888bf5de1cc9c2f} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+float\+\_\+to\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Converts the elements of the floating-\/point vector to Q15 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the floating-\/point input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the Q15 output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The equation used for the conversion process is:\+ 
+\begin{DoxyPre}
+    pDst[n] = (\doxylink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\_t})(pSrc[n] * 32768);   0 <= n < blockSize.
+\end{DoxyPre}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. Results outside of the allowable Q15 range \+[0x8000 0x7\+FFF]\+ are saturated.
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+In order to apply rounding, the library should be rebuilt with the ROUNDING macro defined in the preprocessor section of project options. 
+\end{DoxyNote}
+\Hypertarget{group__float__to__x_ga7c4bb054f57a52b41d099c0f06ad7a8c}\index{Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}!arm\_float\_to\_q31@{arm\_float\_to\_q31}}
+\index{arm\_float\_to\_q31@{arm\_float\_to\_q31}!Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}}
+\doxysubsubsubsection{\texorpdfstring{arm\_float\_to\_q31()}{arm\_float\_to\_q31()}}
+{\footnotesize\ttfamily \label{group__float__to__x_ga7c4bb054f57a52b41d099c0f06ad7a8c} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+float\+\_\+to\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Converts the elements of the floating-\/point vector to Q31 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to the floating-\/point input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to the Q31 output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Details}
+The equation used for the conversion process is:\+ 
+\begin{DoxyPre}
+    pDst[n] = (\doxylink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\_t})(pSrc[n] * 2147483648);   0 <= n < blockSize.
+\end{DoxyPre}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function uses saturating arithmetic. Results outside of the allowable Q31 range\+[0x80000000 0x7\+FFFFFFF]\+ are saturated.
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+In order to apply rounding, the library should be rebuilt with the ROUNDING macro defined in the preprocessor section of project options.
+
+If the input float values are very big (2\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}32) then the function won\textquotesingle{}t be able to saturate to the right values. If you expect very big float values in the input array then you should force those values to +1 or -\/1 before calling this function. For reasonable float values (\texorpdfstring{$<$}{<} 2\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}32), the function will saturate correctly. 
+\end{DoxyNote}
+\Hypertarget{group__float__to__x_ga584f42599eda84f553b933dd8ec7fcff}\index{Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}!arm\_float\_to\_q7@{arm\_float\_to\_q7}}
+\index{arm\_float\_to\_q7@{arm\_float\_to\_q7}!Convert 32-\/bit floating point value@{Convert 32-\/bit floating point value}}
+\doxysubsubsubsection{\texorpdfstring{arm\_float\_to\_q7()}{arm\_float\_to\_q7()}}
+{\footnotesize\ttfamily \label{group__float__to__x_ga584f42599eda84f553b933dd8ec7fcff} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+float\+\_\+to\+\_\+q7 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Converts the elements of the floating-\/point vector to Q7 vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}p\+Src} & points to the floating-\/point input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em \texorpdfstring{$\ast$}{*}p\+Dst} & points to the Q7 output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & length of the input vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Description:\+}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The equation used for the conversion process is:\+ 
+\begin{DoxyPre}
+    pDst[n] = (\doxylink{group__generic_types_gae541b6f232c305361e9b416fc9eed263}{q7\_t})(pSrc[n] * 128);   0 <= n < blockSize.
+ \end{DoxyPre}
+ 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior:\+}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{}
+The function uses saturating arithmetic. Results outside of the allowable Q7 range \+[0x80 0x7F]\+ will be saturated. 
+\end{DoxyParagraph}
+\begin{DoxyNote}{Note}
+In order to apply rounding, the library should be rebuilt with the ROUNDING macro defined in the preprocessor section of project options. 
+\end{DoxyNote}

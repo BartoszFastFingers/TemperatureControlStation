@@ -1,0 +1,71 @@
+\doxysection{Dokumentacja pliku Components/\+\+Inc/\+pid\+\_\+lookup.h}
+\hypertarget{pid__lookup_8h}{}\label{pid__lookup_8h}\index{Components/Inc/pid\_lookup.h@{Components/Inc/pid\_lookup.h}}
+
+
+Interpolacja parametrów PID z CMSIS-\/\+DSP 1.\+16.\+2.  
+
+
+{\ttfamily \+\#include "{}arm\+\_\+math.\+h"{}}\newline
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{pid__lookup_8h_a807975bad2d36ce331edbc0c87dfcfce}\label{pid__lookup_8h_a807975bad2d36ce331edbc0c87dfcfce} 
+\+\#define {\bfseries NUM\+\_\+\+OPERATING\+\_\+\+POINTS}~3
+\item 
+\Hypertarget{pid__lookup_8h_a291c37d8ca168fd08535be9b05f14fe9}\label{pid__lookup_8h_a291c37d8ca168fd08535be9b05f14fe9} 
+\+\#define {\bfseries IDW\+\_\+\+POWER}~2.\+0f
+\item 
+\Hypertarget{pid__lookup_8h_ab48b36751bce1bcde7588ebf0620a4d1}\label{pid__lookup_8h_ab48b36751bce1bcde7588ebf0620a4d1} 
+\+\#define {\bfseries PID\+\_\+\+SAMPLE\+\_\+\+TIME\+\_\+S}~1.\+0f
+\item 
+\Hypertarget{pid__lookup_8h_a391fa1e490bd712720989b58fa0d9904}\label{pid__lookup_8h_a391fa1e490bd712720989b58fa0d9904} 
+\+\#define {\bfseries PWM\+\_\+\+MAX}~999
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{pid__lookup_8h_ada274dba31454c7704f40636cb9d3bc4}{PID\+\_\+\+Interpolate}} (uint16\+\_\+t heater\+\_\+pwm, uint16\+\_\+t fan\+\_\+pwm, arm\+\_\+pid\+\_\+instance\+\_\+f32 \texorpdfstring{$\ast$}{*}pid, uint8\+\_\+t reset\+\_\+state)
+\begin{DoxyCompactList}\small\item\em Interpoluje parametry PID i aktualizuje instancję CMSIS-\/\+DSP. \end{DoxyCompactList}\item 
+\Hypertarget{pid__lookup_8h_afaa51912936d5f9b4e86e793fe90c92a}\label{pid__lookup_8h_afaa51912936d5f9b4e86e793fe90c92a} 
+void {\bfseries PID\+\_\+\+Init} (uint16\+\_\+t heater\+\_\+pwm, uint16\+\_\+t fan\+\_\+pwm, arm\+\_\+pid\+\_\+instance\+\_\+f32 \texorpdfstring{$\ast$}{*}pid)
+\begin{DoxyCompactList}\small\item\em Inicjalizuje PID dla danego punktu pracy. \end{DoxyCompactList}\item 
+\Hypertarget{pid__lookup_8h_ae01268ecad1c353e831bc2a6083ad767}\label{pid__lookup_8h_ae01268ecad1c353e831bc2a6083ad767} 
+void {\bfseries PID\+\_\+\+Get\+Nearest} (uint16\+\_\+t heater\+\_\+pwm, uint16\+\_\+t fan\+\_\+pwm, arm\+\_\+pid\+\_\+instance\+\_\+f32 \texorpdfstring{$\ast$}{*}pid)
+\begin{DoxyCompactList}\small\item\em Zwraca parametry dla najbliższego punktu (bez interpolacji). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Interpolacja parametrów PID z CMSIS-\/\+DSP 1.\+16.\+2. 
+
+\begin{DoxyNote}{Nota}
+Wygenerowano automatycznie przez MATLAB 
+\end{DoxyNote}
+\begin{DoxyDate}{Data}
+2026-\/02-\/01 03:\+03 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{pid__lookup_8h_doc-func-members}
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{pid__lookup_8h_ada274dba31454c7704f40636cb9d3bc4}\index{pid\_lookup.h@{pid\_lookup.h}!PID\_Interpolate@{PID\_Interpolate}}
+\index{PID\_Interpolate@{PID\_Interpolate}!pid\_lookup.h@{pid\_lookup.h}}
+\doxysubsubsection{\texorpdfstring{PID\_Interpolate()}{PID\_Interpolate()}}
+{\footnotesize\ttfamily \label{pid__lookup_8h_ada274dba31454c7704f40636cb9d3bc4} 
+void PID\+\_\+\+Interpolate (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{heater\+\_\+pwm}{, }\item[{uint16\+\_\+t}]{fan\+\_\+pwm}{, }\item[{arm\+\_\+pid\+\_\+instance\+\_\+f32 \texorpdfstring{$\ast$}{*}}]{pid}{, }\item[{uint8\+\_\+t}]{reset\+\_\+state}{}\end{DoxyParamCaption})}
+
+
+
+Interpoluje parametry PID i aktualizuje instancję CMSIS-\/\+DSP. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em heater\+\_\+pwm} & Wartość PWM grzałki \+[0-\/999]\+ \\
+\hline
+{\em fan\+\_\+pwm} & Wartość PWM wentylatora \+[0-\/999]\+ \\
+\hline
+{\em pid} & Wskaźnik na instancję arm\+\_\+pid\+\_\+instance\+\_\+f32 \\
+\hline
+{\em reset\+\_\+state} & Czy zresetować stan całkowania (1=tak, 0=nie) \\
+\hline
+\end{DoxyParams}

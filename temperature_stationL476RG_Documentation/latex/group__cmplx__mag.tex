@@ -1,0 +1,141 @@
+\doxysubsection{Complex Magnitude }
+\hypertarget{group__cmplx__mag}{}\label{group__cmplx__mag}\index{Complex Magnitude@{Complex Magnitude}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__cmplx__mag_ga0a85ce170660e5e46fc387ab718be8ca}{arm\+\_\+cmplx\+\_\+mag\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Floating-\/point complex magnitude. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__cmplx__mag_gafb89f5a9c9ab2cbfd21bcb8f86b47c07}{arm\+\_\+cmplx\+\_\+mag\+\_\+f64}} (const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Floating-\/point complex magnitude. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__cmplx__mag_ga78ba2ffd717b0430952d4c23132e1656}{arm\+\_\+cmplx\+\_\+mag\+\_\+fast\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Q15 complex magnitude. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__cmplx__mag_ga83166a483dbb0c9578a576822204c099}{arm\+\_\+cmplx\+\_\+mag\+\_\+q15}} (const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Q15 complex magnitude. \end{DoxyCompactList}\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void \doxymbox{\hyperlink{group__cmplx__mag_ga3b3e06e7d513f4681e02d57760e2d88f}{arm\+\_\+cmplx\+\_\+mag\+\_\+q31}} (const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Src, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Dst, uint32\+\_\+t num\+Samples)
+\begin{DoxyCompactList}\small\item\em Q31 complex magnitude. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the magnitude of the elements of a complex data vector.
+
+The {\ttfamily p\+Src} points to the source data and {\ttfamily p\+Dst} points to the where the result should be written. {\ttfamily num\+Samples} specifies the number of complex samples in the input array and the data is stored in an interleaved fashion (real, imag, real, imag, ...). The input array has a total of {\ttfamily 2\texorpdfstring{$\ast$}{*}num\+Samples} values; the output array has a total of {\ttfamily num\+Samples} values.
+
+The underlying algorithm is used:\+
+
+
+\begin{DoxyPre}
+for (n = 0; n < numSamples; n++) \{
+    pDst[n] = sqrt(pSrc[(2*n)+0]^2 + pSrc[(2*n)+1]^2);
+\}
+\end{DoxyPre}
+
+
+There are separate functions for floating-\/point, Q15, and Q31 data types.
+
+\label{doc-func-members}
+\Hypertarget{group__cmplx__mag_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group__cmplx__mag_ga0a85ce170660e5e46fc387ab718be8ca}\index{Complex Magnitude@{Complex Magnitude}!arm\_cmplx\_mag\_f32@{arm\_cmplx\_mag\_f32}}
+\index{arm\_cmplx\_mag\_f32@{arm\_cmplx\_mag\_f32}!Complex Magnitude@{Complex Magnitude}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mag\_f32()}{arm\_cmplx\_mag\_f32()}}
+{\footnotesize\ttfamily \label{group__cmplx__mag_ga0a85ce170660e5e46fc387ab718be8ca} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mag\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point complex magnitude. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__cmplx__mag_gafb89f5a9c9ab2cbfd21bcb8f86b47c07}\index{Complex Magnitude@{Complex Magnitude}!arm\_cmplx\_mag\_f64@{arm\_cmplx\_mag\_f64}}
+\index{arm\_cmplx\_mag\_f64@{arm\_cmplx\_mag\_f64}!Complex Magnitude@{Complex Magnitude}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mag\_f64()}{arm\_cmplx\_mag\_f64()}}
+{\footnotesize\ttfamily \label{group__cmplx__mag_gafb89f5a9c9ab2cbfd21bcb8f86b47c07} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mag\+\_\+f64 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gac55f3ae81b5bc9053760baacf57e47f4}{float64\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point complex magnitude. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__cmplx__mag_ga78ba2ffd717b0430952d4c23132e1656}\index{Complex Magnitude@{Complex Magnitude}!arm\_cmplx\_mag\_fast\_q15@{arm\_cmplx\_mag\_fast\_q15}}
+\index{arm\_cmplx\_mag\_fast\_q15@{arm\_cmplx\_mag\_fast\_q15}!Complex Magnitude@{Complex Magnitude}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mag\_fast\_q15()}{arm\_cmplx\_mag\_fast\_q15()}}
+{\footnotesize\ttfamily \label{group__cmplx__mag_ga78ba2ffd717b0430952d4c23132e1656} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mag\+\_\+fast\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Q15 complex magnitude. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function implements 1.\+15 by 1.\+15 multiplications and finally output is converted into 2.\+14 format. Fast functions are less accurate. This function will tend to clamp to 0 the too small values. So sqrt(x\texorpdfstring{$\ast$}{*}x) = x will not always be true. 
+\end{DoxyParagraph}
+\Hypertarget{group__cmplx__mag_ga83166a483dbb0c9578a576822204c099}\index{Complex Magnitude@{Complex Magnitude}!arm\_cmplx\_mag\_q15@{arm\_cmplx\_mag\_q15}}
+\index{arm\_cmplx\_mag\_q15@{arm\_cmplx\_mag\_q15}!Complex Magnitude@{Complex Magnitude}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mag\_q15()}{arm\_cmplx\_mag\_q15()}}
+{\footnotesize\ttfamily \label{group__cmplx__mag_ga83166a483dbb0c9578a576822204c099} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mag\+\_\+q15 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Q15 complex magnitude. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function implements 1.\+15 by 1.\+15 multiplications and finally output is converted into 2.\+14 format. 
+\end{DoxyParagraph}
+\Hypertarget{group__cmplx__mag_ga3b3e06e7d513f4681e02d57760e2d88f}\index{Complex Magnitude@{Complex Magnitude}!arm\_cmplx\_mag\_q31@{arm\_cmplx\_mag\_q31}}
+\index{arm\_cmplx\_mag\_q31@{arm\_cmplx\_mag\_q31}!Complex Magnitude@{Complex Magnitude}}
+\doxysubsubsubsection{\texorpdfstring{arm\_cmplx\_mag\_q31()}{arm\_cmplx\_mag\_q31()}}
+{\footnotesize\ttfamily \label{group__cmplx__mag_ga3b3e06e7d513f4681e02d57760e2d88f} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE void arm\+\_\+cmplx\+\_\+mag\+\_\+q31 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Src}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Dst}{, }\item[{uint32\+\_\+t}]{num\+Samples}{}\end{DoxyParamCaption})}
+
+
+
+Q31 complex magnitude. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em p\+Src} & points to input vector \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Dst} & points to output vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em num\+Samples} & number of samples in each vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyParagraph}{Scaling and Overflow Behavior}
+The function implements 1.\+31 by 1.\+31 multiplications and finally output is converted into 2.\+30 format. Input down scaling is not required. 
+\end{DoxyParagraph}

@@ -1,0 +1,100 @@
+\doxysubsection{Square Root }
+\hypertarget{group___s_q_r_t}{}\label{group___s_q_r_t}\index{Square Root@{Square Root}}
+\doxysubsubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___s_q_r_t_gaa37d8b017ef0c8d356dc98fd78e2d96b}{arm\+\_\+sqrt\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} in, \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out)
+\begin{DoxyCompactList}\small\item\em Floating-\/point square root function. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___s_q_r_t_gaacd275254298002ba3ee3c997e93a5ea}{arm\+\_\+sqrt\+\_\+q31}} (\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} in, \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out)
+\begin{DoxyCompactList}\small\item\em Q31 square root function. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} \doxymbox{\hyperlink{group___s_q_r_t_ga8320c575ba3979be2420362dc43554be}{arm\+\_\+sqrt\+\_\+q15}} (\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} in, \doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}p\+Out)
+\begin{DoxyCompactList}\small\item\em Q15 square root function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Computes the square root of a number. There are separate functions for Q15, Q31, and floating-\/point data types. The square root function is computed using the Newton-\/\+Raphson algorithm. This is an iterative algorithm of the form:\+ 
+\begin{DoxyPre}
+     x1 = x0 -\/ f(x0)/f'(x0)
+\end{DoxyPre}
+ where {\ttfamily x1} is the current estimate, {\ttfamily x0} is the previous estimate, and {\ttfamily f\textquotesingle{}(x0)} is the derivative of {\ttfamily f()} evaluated at {\ttfamily x0}. For the square root function, the algorithm reduces to:\+ 
+\begin{DoxyPre}
+    x0 = in/2                         [initial guess]
+    x1 = 1/2 * ( x0 + in / x0)        [each iteration]
+\end{DoxyPre}
+
+
+\label{doc-func-members}
+\Hypertarget{group___s_q_r_t_doc-func-members}
+\doxysubsubsection{Function Documentation}
+\Hypertarget{group___s_q_r_t_gaa37d8b017ef0c8d356dc98fd78e2d96b}\index{Square Root@{Square Root}!arm\_sqrt\_f32@{arm\_sqrt\_f32}}
+\index{arm\_sqrt\_f32@{arm\_sqrt\_f32}!Square Root@{Square Root}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sqrt\_f32()}{arm\_sqrt\_f32()}}
+{\footnotesize\ttfamily \label{group___s_q_r_t_gaa37d8b017ef0c8d356dc98fd78e2d96b} 
+\+\_\+\+\_\+\+STATIC\+\_\+\+FORCEINLINE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+sqrt\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}}}]{in}{, }\item[{\doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out}{}\end{DoxyParamCaption})}
+
+
+
+Floating-\/point square root function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em in} & input value \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out} & square root of input value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ input value is positive
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ input value is negative; \texorpdfstring{$\ast$}{*}p\+Out is set to 0 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___s_q_r_t_ga8320c575ba3979be2420362dc43554be}\index{Square Root@{Square Root}!arm\_sqrt\_q15@{arm\_sqrt\_q15}}
+\index{arm\_sqrt\_q15@{arm\_sqrt\_q15}!Square Root@{Square Root}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sqrt\_q15()}{arm\_sqrt\_q15()}}
+{\footnotesize\ttfamily \label{group___s_q_r_t_ga8320c575ba3979be2420362dc43554be} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+sqrt\+\_\+q15 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}}}]{in}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gab5a8fb21a5b3b983d5f54f31614052ea}{q15\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out}{}\end{DoxyParamCaption})}
+
+
+
+Q15 square root function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em in} & input value. The range of the input value is \+[0 +1) or 0x0000 to 0x7\+FFF \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out} & points to square root of input value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ input value is positive
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ input value is negative; \texorpdfstring{$\ast$}{*}p\+Out is set to 0 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\Hypertarget{group___s_q_r_t_gaacd275254298002ba3ee3c997e93a5ea}\index{Square Root@{Square Root}!arm\_sqrt\_q31@{arm\_sqrt\_q31}}
+\index{arm\_sqrt\_q31@{arm\_sqrt\_q31}!Square Root@{Square Root}}
+\doxysubsubsubsection{\texorpdfstring{arm\_sqrt\_q31()}{arm\_sqrt\_q31()}}
+{\footnotesize\ttfamily \label{group___s_q_r_t_gaacd275254298002ba3ee3c997e93a5ea} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga5e459c6409dfcd2927bb8a57491d7cf6}{arm\+\_\+status}} arm\+\_\+sqrt\+\_\+q31 (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}}]{in}{, }\item[{\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{p\+Out}{}\end{DoxyParamCaption})}
+
+
+
+Q31 square root function. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em in} & input value. The range of the input value is \+[0 +1) or 0x00000000 to 0x7\+FFFFFFF \\
+\hline
+\doxymbox{\texttt{out}}  & {\em p\+Out} & points to square root of input value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+execution status
+\begin{DoxyItemize}
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a9f8b2a10bd827fb4600e77d455902eb0}{ARM\+\_\+\+MATH\+\_\+\+SUCCESS} :\+ input value is positive
+\item \doxylink{group__generic_types_gga5e459c6409dfcd2927bb8a57491d7cf6a74897e18d4b8f62b12a7d8a01dd2bb35}{ARM\+\_\+\+MATH\+\_\+\+ARGUMENT\+\_\+\+ERROR} :\+ input value is negative; \texorpdfstring{$\ast$}{*}p\+Out is set to 0 
+\end{DoxyItemize}
+\end{DoxyReturn}

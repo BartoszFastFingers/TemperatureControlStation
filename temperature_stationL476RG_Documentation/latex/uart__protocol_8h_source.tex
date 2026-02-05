@@ -1,0 +1,77 @@
+\doxysection{uart\+\_\+protocol.\+h}
+\hypertarget{uart__protocol_8h_source}{}\label{uart__protocol_8h_source}\index{Core/Inc/uart\_protocol.h@{Core/Inc/uart\_protocol.h}}
+\doxymbox{\hyperlink{uart__protocol_8h}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ CORE\_INC\_UART\_PROTOCOL\_H\_}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ CORE\_INC\_UART\_PROTOCOL\_H\_}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}main.h"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}usart.h"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ UART\_PROTOCOL\_HANDLE\ \ \ \ huart2}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#define\ UART\_RX\_BUFFER\_SIZE\ \ \ \ \ 128}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ UART\_TX\_BUFFER\_SIZE\ \ \ \ \ 128}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca93c1ce1fac89139d9f4df4b6db21b1cc}{CMD\_NONE}}\ =\ 0,\ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1c0aa24c3612e77ea1a5ca1b82388da0}{CMD\_PING}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca277e4fa696b4b78459568c778827aefa}{CMD\_SET\_TEMP}},\ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caa9f5e1d3fa7a48a053cb78acdf95e57a}{CMD\_GET\_STATUS}},\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4caf2e188a52388c10d5e2f48ca37b28287}{CMD\_START}},\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00039\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca1e0ceff2d6f13742786f42dac58149bc}{CMD\_STOP}},\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00040\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca51c5fc91b01a6b9138b9df8a3fd956ee}{CMD\_SET\_KP}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00041\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4cae705f66eec72216629ddd39364d949a5}{CMD\_SET\_KI}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00042\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4ca83dc4b9ef96d41462c4f4ab7968372f4}{CMD\_SET\_KD}},\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00043\ \}\ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{UartCommand\_t}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00049\ \ \ \ \ UART\_HandleTypeDef\ *\doxymbox{\hyperlink{struct_uart_protocol__t_a1ed7dab212fde0a3a4600d33399c67b6}{huart}};\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{comment}{//\ Bufor\ odbiorczy}}
+\DoxyCodeLine{00052\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_uart_protocol__t_ab84155a3d2305e59a6fb6f3d3791c5c7}{rx\_buffer}}[UART\_RX\_BUFFER\_SIZE];\ }
+\DoxyCodeLine{00053\ \ \ \ \ uint16\_t\ \doxymbox{\hyperlink{struct_uart_protocol__t_a988968c6b1632f9d4f6495ecee2637af}{rx\_index}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_uart_protocol__t_adce096d92c984f1a29ccbf9e39637a32}{rx\_complete}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Bufor\ nadawczy}}
+\DoxyCodeLine{00057\ \ \ \ \ uint8\_t\ \doxymbox{\hyperlink{struct_uart_protocol__t_ab89d038143f0aa00291e71359700143d}{tx\_buffer}}[UART\_TX\_BUFFER\_SIZE];\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Parsowana\ komenda}}
+\DoxyCodeLine{00060\ \ \ \ \ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{UartCommand\_t}}\ \doxymbox{\hyperlink{struct_uart_protocol__t_af67745864eca4102e2b7a7fc4043904c}{last\_command}};\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{struct_uart_protocol__t_afe171074bb73207a41f3eaa186d9966a}{command\_arg}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ Status}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{struct_uart_protocol__t_a36f7b6be7108281af77939ceaec42fd6}{running}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \}\ \doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{comment}{/*\ =====================\ FUNKCJE\ =====================\ */}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{uart__protocol_8h_a2d4f0a942a590f196fd1938653b66afa}{UartProtocol\_Init}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto,\ UART\_HandleTypeDef\ *huart);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00082\ uint8\_t\ \doxymbox{\hyperlink{uart__protocol_8h_a831c58270ed17ca8eb212f15c978d6af}{UartProtocol\_CRC8}}(\textcolor{keyword}{const}\ uint8\_t\ *data,\ uint16\_t\ len);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{uart__protocol_8h_a5822a9405798f726be1fc5599ec62b07}{UartProtocol\_SendData}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto,}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ temp,\ \textcolor{keywordtype}{float}\ setpoint,}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint16\_t\ heater\_pwm,\ uint16\_t\ fan\_pwm,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ timestamp);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{uart__protocol_8h_a9889efbc1aea520f5391598c9cc376cd}{UartProtocol\_SendPong}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{uart__protocol_8h_a5d200d74cfd471744a7a6e0f5d483c29}{UartProtocol\_SendAck}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *cmd);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{uart__protocol_8h_acc5c9ff2b950033f51e777da1797a19e}{UartProtocol\_SendNak}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *error);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00122\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{uart__protocol_8h_af4660451142b88c9667023983c48e40b}{UartProtocol\_ReceiveByte}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto,\ uint8\_t\ \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00129\ \doxymbox{\hyperlink{uart__protocol_8h_add919f2f479f1e5ce37bc5a972e7bc4c}{UartCommand\_t}}\ \doxymbox{\hyperlink{uart__protocol_8h_a55c32246f566464d452b9cedc08e631a}{UartProtocol\_Parse}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00136\ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{uart__protocol_8h_a2dd16492ef96e47733d20666fc19443e}{UartProtocol\_GetArg}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00143\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{uart__protocol_8h_af9f317c0cf4c353b4c70219b92021b78}{UartProtocol\_VerifyCRC}}(\doxymbox{\hyperlink{struct_uart_protocol__t}{UartProtocol\_t}}\ *proto);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ CORE\_INC\_UART\_PROTOCOL\_H\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

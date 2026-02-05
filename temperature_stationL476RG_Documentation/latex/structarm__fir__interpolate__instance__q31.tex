@@ -1,0 +1,59 @@
+\doxysection{arm\+\_\+fir\+\_\+interpolate\+\_\+instance\+\_\+q31 Struct Reference}
+\hypertarget{structarm__fir__interpolate__instance__q31}{}\label{structarm__fir__interpolate__instance__q31}\index{arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}}
+
+
+Instance structure for the Q31 FIR interpolator.  
+
+
+
+
+{\ttfamily \+\#include $<$filtering\+\_\+functions.\+h$>$}
+
+\doxysubsubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{structarm__fir__interpolate__instance__q31_aee73cc056696e504430c53eaa9c58cf0}{L}}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{structarm__fir__interpolate__instance__q31_a8f92bb07e0812f94679438cdf412b26a}{phase\+Length}}
+\item 
+const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__fir__interpolate__instance__q31_a80e7fdf4747dbda8eadb2663fb4be317}{p\+Coeffs}}
+\item 
+\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structarm__fir__interpolate__instance__q31_adee4ba3ee8869865af7d8fa08ca913d6}{p\+State}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Instance structure for the Q31 FIR interpolator. 
+
+\label{doc-variable-members}
+\Hypertarget{structarm__fir__interpolate__instance__q31_doc-variable-members}
+\doxysubsection{Field Documentation}
+\Hypertarget{structarm__fir__interpolate__instance__q31_aee73cc056696e504430c53eaa9c58cf0}\index{arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}!L@{L}}
+\index{L@{L}!arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{L}{L}}
+{\footnotesize\ttfamily \label{structarm__fir__interpolate__instance__q31_aee73cc056696e504430c53eaa9c58cf0} 
+uint8\+\_\+t L}
+
+upsample factor. \Hypertarget{structarm__fir__interpolate__instance__q31_a80e7fdf4747dbda8eadb2663fb4be317}\index{arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}!pCoeffs@{pCoeffs}}
+\index{pCoeffs@{pCoeffs}!arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pCoeffs}{pCoeffs}}
+{\footnotesize\ttfamily \label{structarm__fir__interpolate__instance__q31_a80e7fdf4747dbda8eadb2663fb4be317} 
+const \doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} p\+Coeffs}
+
+points to the coefficient array. The array is of length L\texorpdfstring{$\ast$}{*}phase\+Length. \Hypertarget{structarm__fir__interpolate__instance__q31_a8f92bb07e0812f94679438cdf412b26a}\index{arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}!phaseLength@{phaseLength}}
+\index{phaseLength@{phaseLength}!arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{phaseLength}{phaseLength}}
+{\footnotesize\ttfamily \label{structarm__fir__interpolate__instance__q31_a8f92bb07e0812f94679438cdf412b26a} 
+uint16\+\_\+t phase\+Length}
+
+length of each polyphase filter component. \Hypertarget{structarm__fir__interpolate__instance__q31_adee4ba3ee8869865af7d8fa08ca913d6}\index{arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}!pState@{pState}}
+\index{pState@{pState}!arm\_fir\_interpolate\_instance\_q31@{arm\_fir\_interpolate\_instance\_q31}}
+\doxysubsubsection{\texorpdfstring{pState}{pState}}
+{\footnotesize\ttfamily \label{structarm__fir__interpolate__instance__q31_adee4ba3ee8869865af7d8fa08ca913d6} 
+\doxymbox{\hyperlink{group__generic_types_gadc89a3547f5324b7b3b95adec3806bc0}{q31\+\_\+t}}\texorpdfstring{$\ast$}{*} p\+State}
+
+points to the state variable array. The array is of length block\+Size+phase\+Length-\/1. 
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Middlewares/\+\+Third\+\_\+\+Party/\+\+ARM\+\_\+\+CMSIS/\+\+Include/\+dsp/\+filtering\+\_\+functions.\+h\end{DoxyCompactItemize}

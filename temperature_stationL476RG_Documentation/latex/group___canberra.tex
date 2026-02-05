@@ -1,0 +1,39 @@
+\doxysection{Canberra }
+\hypertarget{group___canberra}{}\label{group___canberra}\index{Canberra@{Canberra}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \doxymbox{\hyperlink{group___canberra_ga64da4789a64e31519218697266c66ac5}{arm\+\_\+canberra\+\_\+distance\+\_\+f32}} (const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}pA, const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}pB, uint32\+\_\+t block\+Size)
+\begin{DoxyCompactList}\small\item\em Canberra distance between two vectors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+\label{doc-func-members}
+\Hypertarget{group___canberra_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{group___canberra_ga64da4789a64e31519218697266c66ac5}\index{Canberra@{Canberra}!arm\_canberra\_distance\_f32@{arm\_canberra\_distance\_f32}}
+\index{arm\_canberra\_distance\_f32@{arm\_canberra\_distance\_f32}!Canberra@{Canberra}}
+\doxysubsubsection{\texorpdfstring{arm\_canberra\_distance\_f32()}{arm\_canberra\_distance\_f32()}}
+{\footnotesize\ttfamily \label{group___canberra_ga64da4789a64e31519218697266c66ac5} 
+ARM\+\_\+\+DSP\+\_\+\+ATTRIBUTE \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} arm\+\_\+canberra\+\_\+distance\+\_\+f32 (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{pA}{, }\item[{const \doxymbox{\hyperlink{group__generic_types_ga4611b605e45ab401f02cab15c5e38715}{float32\+\_\+t}} \texorpdfstring{$\ast$}{*}}]{pB}{, }\item[{uint32\+\_\+t}]{block\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Canberra distance between two vectors. 
+
+This function may divide by zero when samples pA\+[i]\+ and pB\+[i]\+ are both zero. The result of the computation will be correct. So the division per zero may be ignored.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em pA} & First vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em pB} & Second vector \\
+\hline
+\doxymbox{\texttt{in}}  & {\em block\+Size} & vector length \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+distance 
+\end{DoxyReturn}
