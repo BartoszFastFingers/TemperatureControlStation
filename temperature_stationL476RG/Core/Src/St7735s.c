@@ -10,7 +10,6 @@
 #include <string.h>
 #include <stdio.h>
 
-/* ============ KOMENDY ST7735 ============ */
 
 #define ST7735_NOP      0x00
 #define ST7735_SWRESET  0x01
@@ -41,7 +40,6 @@
 #define ST7735_GMCTRP1  0xE0
 #define ST7735_GMCTRN1  0xE1
 
-/* ============ CZCIONKA 5x7 ============ */
 
 static const uint8_t font5x7[] = {
     0x00, 0x00, 0x00, 0x00, 0x00, // (space)
@@ -142,7 +140,6 @@ static const uint8_t font5x7[] = {
     0x08, 0x1C, 0x2A, 0x08, 0x08, // <-
 };
 
-/* ============ FUNKCJE POMOCNICZE ============ */
 
 static inline void ST7735_Select(void) {
     HAL_GPIO_WritePin(ST7735_CS_PORT, ST7735_CS_PIN, GPIO_PIN_RESET);
@@ -185,7 +182,6 @@ static void ST7735_WriteData8(ST7735_Handle_t *hst7735, uint8_t data) {
 static void ST7735_SetAddressWindow(ST7735_Handle_t *hst7735,
                                     uint16_t x0, uint16_t y0,
                                     uint16_t x1, uint16_t y1) {
-    // Column address
     ST7735_WriteCommand(hst7735, ST7735_CASET);
     uint8_t data[] = {
         0x00, (uint8_t)(x0 + ST7735_XSTART),
@@ -193,17 +189,14 @@ static void ST7735_SetAddressWindow(ST7735_Handle_t *hst7735,
     };
     ST7735_WriteData(hst7735, data, 4);
 
-    // Row address
     ST7735_WriteCommand(hst7735, ST7735_RASET);
     data[1] = y0 + ST7735_YSTART;
     data[3] = y1 + ST7735_YSTART;
     ST7735_WriteData(hst7735, data, 4);
 
-    // Write to RAM
     ST7735_WriteCommand(hst7735, ST7735_RAMWR);
 }
 
-/* ============ FUNKCJE PUBLICZNE ============ */
 
 void ST7735_Init(ST7735_Handle_t *hst7735, SPI_HandleTypeDef *hspi) {
     hst7735->hspi = hspi;
@@ -214,15 +207,12 @@ void ST7735_Init(ST7735_Handle_t *hst7735, SPI_HandleTypeDef *hspi) {
     ST7735_Reset();
     ST7735_Select();
 
-    // Software reset
     ST7735_WriteCommand(hst7735, ST7735_SWRESET);
     HAL_Delay(150);
 
-    // Sleep out
     ST7735_WriteCommand(hst7735, ST7735_SLPOUT);
     HAL_Delay(500);
 
-    // Frame rate control
     ST7735_WriteCommand(hst7735, ST7735_FRMCTR1);
     uint8_t frmctr[] = {0x01, 0x2C, 0x2D};
     ST7735_WriteData(hst7735, frmctr, 3);
@@ -235,11 +225,9 @@ void ST7735_Init(ST7735_Handle_t *hst7735, SPI_HandleTypeDef *hspi) {
     uint8_t frmctr2[] = {0x01, 0x2C, 0x2D};
     ST7735_WriteData(hst7735, frmctr2, 3);
 
-    // Inversion control
     ST7735_WriteCommand(hst7735, ST7735_INVCTR);
     ST7735_WriteData8(hst7735, 0x07);
 
-    // Power control
     ST7735_WriteCommand(hst7735, ST7735_PWCTR1);
     uint8_t pwctr1[] = {0xA2, 0x02, 0x84};
     ST7735_WriteData(hst7735, pwctr1, 3);
@@ -259,22 +247,17 @@ void ST7735_Init(ST7735_Handle_t *hst7735, SPI_HandleTypeDef *hspi) {
     uint8_t pwctr5[] = {0x8A, 0xEE};
     ST7735_WriteData(hst7735, pwctr5, 2);
 
-    // VCOM
     ST7735_WriteCommand(hst7735, ST7735_VMCTR1);
     ST7735_WriteData8(hst7735, 0x0E);
 
-    // Inversion off
     ST7735_WriteCommand(hst7735, ST7735_INVOFF);
 
-    // Memory access control (rotation)
     ST7735_WriteCommand(hst7735, ST7735_MADCTL);
     ST7735_WriteData8(hst7735, 0x00);  // Normal orientation
 
-    // Color mode: 16-bit RGB565
     ST7735_WriteCommand(hst7735, ST7735_COLMOD);
     ST7735_WriteData8(hst7735, 0x05);
 
-    // Gamma
     ST7735_WriteCommand(hst7735, ST7735_GMCTRP1);
     uint8_t gamma_p[] = {0x02, 0x1C, 0x07, 0x12, 0x37, 0x32, 0x29, 0x2D,
                          0x29, 0x25, 0x2B, 0x39, 0x00, 0x01, 0x03, 0x10};
@@ -285,17 +268,14 @@ void ST7735_Init(ST7735_Handle_t *hst7735, SPI_HandleTypeDef *hspi) {
                          0x2E, 0x2E, 0x37, 0x3F, 0x00, 0x00, 0x02, 0x10};
     ST7735_WriteData(hst7735, gamma_n, 16);
 
-    // Normal display on
     ST7735_WriteCommand(hst7735, ST7735_NORON);
     HAL_Delay(10);
 
-    // Display on
     ST7735_WriteCommand(hst7735, ST7735_DISPON);
     HAL_Delay(100);
 
     ST7735_Unselect();
 
-    // Clear screen
     ST7735_FillScreen(hst7735, ST7735_BLACK);
 }
 
@@ -373,7 +353,6 @@ void ST7735_DrawChar(ST7735_Handle_t *hst7735, uint16_t x, uint16_t y,
         }
     }
 
-    // Space between characters
     if (bg != color) {
         if (size == 1) {
             ST7735_DrawVLine(hst7735, x + 5, y, 8, bg);
@@ -412,7 +391,6 @@ uint16_t ST7735_RGB(uint8_t r, uint8_t g, uint8_t b) {
 }
 
 uint16_t ST7735_TempColor(float temp, float min_temp, float max_temp) {
-    // Normalizuj do 0-1
     float ratio = (temp - min_temp) / (max_temp - min_temp);
     if (ratio < 0) ratio = 0;
     if (ratio > 1) ratio = 1;
@@ -420,13 +398,11 @@ uint16_t ST7735_TempColor(float temp, float min_temp, float max_temp) {
     uint8_t r, g, b;
 
     if (ratio < 0.5f) {
-        // Niebieski -> Zielony
         float t = ratio * 2;
         r = 0;
         g = (uint8_t)(255 * t);
         b = (uint8_t)(255 * (1 - t));
     } else {
-        // Zielony -> Czerwony
         float t = (ratio - 0.5f) * 2;
         r = (uint8_t)(255 * t);
         g = (uint8_t)(255 * (1 - t));
@@ -439,13 +415,10 @@ uint16_t ST7735_TempColor(float temp, float min_temp, float max_temp) {
 void ST7735_DrawProgressBar(ST7735_Handle_t *hst7735, uint16_t x, uint16_t y,
                             uint16_t w, uint16_t h, uint16_t value, uint16_t max_value,
                             uint16_t bar_color, uint16_t bg_color) {
-    // Ramka
     ST7735_DrawRect(hst7735, x, y, w, h, ST7735_WHITE);
 
-    // Tło
     ST7735_FillRect(hst7735, x + 1, y + 1, w - 2, h - 2, bg_color);
 
-    // Wypełnienie
     uint16_t fill_w = ((uint32_t)(w - 2) * value) / max_value;
     if (fill_w > 0) {
         ST7735_FillRect(hst7735, x + 1, y + 1, fill_w, h - 2, bar_color);
@@ -456,27 +429,21 @@ void ST7735_ShowTemperature(ST7735_Handle_t *hst7735, float temp, float setpoint
                             uint16_t heater_pwm, uint16_t fan_pwm) {
     char buf[32];
 
-    // Tytuł
     ST7735_DrawString(hst7735, 10, 5, "TEMP CONTROL", ST7735_CYAN, ST7735_BLACK, 1);
 
-    // Linia oddzielająca
     ST7735_DrawHLine(hst7735, 0, 18, ST7735_WIDTH, ST7735_GRAY);
 
-    // Aktualna temperatura - duża czcionka
     uint16_t temp_color = ST7735_TempColor(temp, 20, 50);
     snprintf(buf, sizeof(buf), "%.1f", temp);
     ST7735_DrawString(hst7735, 20, 30, buf, temp_color, ST7735_BLACK, 3);
     ST7735_DrawString(hst7735, 95, 30, "C", temp_color, ST7735_BLACK, 2);
 
-    // Symbol stopnia
     ST7735_DrawRect(hst7735, 89, 30, 4, 4, temp_color);
 
-    // Setpoint
     ST7735_DrawString(hst7735, 10, 60, "SET:", ST7735_GRAY, ST7735_BLACK, 1);
     snprintf(buf, sizeof(buf), "%.1f C", setpoint);
     ST7735_DrawString(hst7735, 40, 60, buf, ST7735_WHITE, ST7735_BLACK, 1);
 
-    // Error
     float error = setpoint - temp;
     ST7735_DrawString(hst7735, 10, 75, "ERR:", ST7735_GRAY, ST7735_BLACK, 1);
     snprintf(buf, sizeof(buf), "%+.2f", error);
@@ -484,18 +451,14 @@ void ST7735_ShowTemperature(ST7735_Handle_t *hst7735, float temp, float setpoint
     if (error > -0.5f && error < 0.5f) err_color = ST7735_GREEN;
     ST7735_DrawString(hst7735, 40, 75, buf, err_color, ST7735_BLACK, 1);
 
-    // Linia oddzielająca
     ST7735_DrawHLine(hst7735, 0, 90, ST7735_WIDTH, ST7735_GRAY);
 
-    // Heater
     ST7735_DrawString(hst7735, 5, 100, "HEAT:", ST7735_ORANGE, ST7735_BLACK, 1);
     ST7735_DrawProgressBar(hst7735, 40, 98, 80, 12, heater_pwm, 999, ST7735_RED, ST7735_DARKGRAY);
 
-    // Fan
     ST7735_DrawString(hst7735, 5, 118, "FAN:", ST7735_CYAN, ST7735_BLACK, 1);
     ST7735_DrawProgressBar(hst7735, 40, 116, 80, 12, fan_pwm, 999, ST7735_BLUE, ST7735_DARKGRAY);
 
-    // PWM values
     snprintf(buf, sizeof(buf), "%3d", heater_pwm);
     ST7735_DrawString(hst7735, 5, 135, "H:", ST7735_GRAY, ST7735_BLACK, 1);
     ST7735_DrawString(hst7735, 20, 135, buf, ST7735_WHITE, ST7735_BLACK, 1);

@@ -4,7 +4,7 @@ clc;
 portName = 'COM9';  
 baudRate = 115200;  
 
-time_duration_of_test = 15 *60;  
+time_duration_of_test = 10 *60;  
 ts = 0.5;                      
 
 outputFolder = 'data';
